@@ -44,7 +44,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 
 		// compute vote
 		register_rest_route($this->namespace, '/polls/vote', array(
-			'methods'	=> WP_REST_Server::CREATABLE,
+			'methods'	=> WP_REST_Server::ALLMETHODS,
 			'callback'	=> array($this, 'vote'),
 			'permittion_callback' => function($req) {
 				return true;
@@ -128,22 +128,41 @@ class OnyxPollsApi extends WP_REST_Controller {
 		if (get_post_status($poll_id) != 'publish' || get_post_type($poll_id) != 'onyxpolls') {
 			return new WP_Error('error', 'Enquete inválida', array('status' => 200));
 		}
+		if ($_COOKIE["onyx_poll_cookie_$poll_id"] == 1) {
+			$response = array(
+				"code"		=> "not_allowed",
+				"poll"		=> $poll_id,
+				"message"	=> "Você já votou nesta enquete.",
+				"voted" 		=> false,
+				"data"		=> ["status" => 200]
+			);
+		} else {
+			// update vote fields
+			$add_vote = array(
+				"votes" => $poll_answers[$poll_choice]['votes']+1
+			);
+			$row		= update_row($this->fields['poll_answers'], $poll_choice+1, $add_vote, $poll_id);
+			$total	= update_field($this->fields['poll_total'], $poll_total+1, $poll_id);
 
-		// update vote fields
-		$add_vote = array(
-			"votes" => $poll_answers[$poll_choice]['votes']+1
-		);
-		$row		= update_row($this->fields['poll_answers'], $poll_choice+1, $add_vote, $poll_id);
-		$total	= update_field($this->fields['poll_total'], $poll_total+1, $poll_id);
+			// set cookies
+			// limit = 1 (free vote)
+			// limit = 2 (per device/no expires)
+			$poll_limit_vote = get_field($this->fields['poll_limit_vote'], $poll_id);
+			if ($poll_limit_vote != 1) {
+				$poll_cookie_time = ($poll_limit_vote == 2) ? $poll_limit_vote = strtotime('+1 year') : (60 * $poll_limit_vote);
+				setcookie("onyx_poll_cookie_$poll_id", '1', time() + $poll_cookie_time, "/");
+			}
 
-		// return reponse
-		$response = array(
-			"code"		=> ($row && $total) ? "success" : 'error',
-			"poll"		=> $poll_id,
-			"message"	=> ($row && $total) ? $this->messages->success : $this->messages->error,
-			"voted" 		=> ($row && $total) ? true : false,
-			"data"		=> ["status" => 200]
-		);
+			// return reponse
+			$response = array(
+				"code"		=> ($row && $total) ? "success" : 'error',
+				"poll"		=> $poll_id,
+				"message"	=> ($row && $total) ? $this->messages->success : $this->messages->error,
+				"voted" 		=> ($row && $total) ? true : false,
+				"data"		=> ["status" => 200]
+			);
+		}
+
 		$response += $this->poll_data($poll_id);
 		return new WP_REST_Response($response, 200);
 	}
