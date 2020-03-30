@@ -24,11 +24,11 @@ class OnyxPollsApi extends WP_REST_Controller {
 			'poll_expired'				=> 'onyx_poll_expired'
 		);
 		$this->message = array(
-			'success'	=> __('Seu voto foi realizado com sucesso.', 'onyx-poll'),
-			'error'		=> __('Erro na votação, tente novamente.', 'onyx-poll'),
+			'success'	=> __('Seu voto foi realizado com sucesso', 'onyx-poll'),
+			'error'		=> __('Erro na votação, tente novamente', 'onyx-poll'),
 			'invalid'	=> __('Parâmetros de votação da enquete inválidos', 'onyx-poll'),
-			'no_exist'	=> __('Enquete inexistente', 'onyx-poll'),
-			'no_allowed'=> __('Você já votou nesta enquete.', 'onyx-poll'),
+			'no_exist'	=> __('Enquete inexistente ou expirada', 'onyx-poll'),
+			'no_allowed'=> __('Você já votou nesta enquete', 'onyx-poll'),
 			'no_polls'	=> __('Nenhuma enquete encontrada', 'onyx-poll')
 		);
 	}
@@ -123,12 +123,13 @@ class OnyxPollsApi extends WP_REST_Controller {
 		$poll_choice	= (int) $req['choice'];
 		$poll_answers	= get_field($this->field['poll_answers'], $poll_id);
 		$poll_total		= get_field($this->field['poll_total'], $poll_id);
+		$poll_expired	= get_field($this->field['poll_expired'], $poll_id);
 
 		// validate params from req
 		if (!is_numeric($poll_id) || !isset($poll_choice) || empty($poll_answers[$poll_choice])) {
 			return new WP_Error('error', $this->message['invalid'], array('status' => 200));
 		}
-		if (get_post_status($poll_id) != 'publish' || get_post_type($poll_id) != 'onyxpolls') {
+		if ($poll_expired || get_post_type($poll_id) != 'onyxpolls') {
 			return new WP_Error('error', $this->message['no_exist'], array('status' => 200));
 		}
 		if ($_COOKIE["onyx_poll_cookie_$poll_id"] == 1) {
