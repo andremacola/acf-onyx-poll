@@ -225,6 +225,25 @@
             "return_format": "value",
             "ajax": 0,
             "placeholder": ""
+        },
+        {
+            "key": "field_5e81c48f36a8f",
+            "label": "Expirada",
+            "name": "onyx_poll_expired",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -244,5 +263,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585555495
+    "modified": 1585562785
 }

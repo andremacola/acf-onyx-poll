@@ -20,7 +20,8 @@ class OnyxPollsApi extends WP_REST_Controller {
 			'poll_end'					=> 'onyx_poll_end',
 			'poll_total'				=> 'onyx_poll_total',
 			'poll_show_results'		=> 'onyx_poll_show_results',
-			'poll_results'				=> 'onyx_poll_results'
+			'poll_results'				=> 'onyx_poll_results',
+			'poll_expired'				=> 'onyx_poll_expired'
 		);
 		$this->message = array(
 			'success'	=> __('Seu voto foi realizado com sucesso.', 'onyx-poll'),
@@ -77,7 +78,6 @@ class OnyxPollsApi extends WP_REST_Controller {
 
 		$poll_args['p'] = (!empty($req['id'])) ? $req['id'] : null;
 
-
 		if (!empty($req['modal'])) {
 			$poll_args['meta_query'] = array(
 				array(
@@ -94,8 +94,8 @@ class OnyxPollsApi extends WP_REST_Controller {
 
 				$poll['id']				= get_the_ID();
 				$poll['title']			= get_the_title();
-				$poll['limit_votes']	= get_field($this->field['poll_limit_vote']);
-				$poll += $this->poll_data($poll['id']);
+				$poll['limit_vote']	= get_field($this->field['poll_limit_vote']);
+				$poll						= array_merge($poll, $this->poll_data($poll['id']));
 
 				// return response based on founded posts count
 				if ($poll_query->found_posts == 1) {
@@ -150,11 +150,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 			// set cookies
 			// limit = 1 (free vote)
 			// limit = 2 (per device/no expires)
-			$poll_limit_vote = get_field($this->field['poll_limit_vote'], $poll_id);
-			if ($poll_limit_vote != 1) {
-				$poll_cookie_time = ($poll_limit_vote == 2) ? $poll_limit_vote = strtotime('+1 year') : (60 * $poll_limit_vote);
-				setcookie("onyx_poll_cookie_$poll_id", '1', time() + $poll_cookie_time, "/");
-			}
+			$this->setcookie($poll_id);
 
 			// return reponse
 			$response = array(
@@ -193,8 +189,9 @@ class OnyxPollsApi extends WP_REST_Controller {
 		if ($query->have_posts()) {
 			$response = $query->posts;
 			foreach ($query->posts as $post) {
-				$post = array("ID" => $post, 'post_status' => 'draft');
-				wp_update_post($post);
+				// $post = array("ID" => $post, 'post_status' => 'draft');
+				// wp_update_post($post);
+				update_field($this->field['poll_expired'], 1, $post);
 			}
 		} else {
 			$response = null;
@@ -212,6 +209,10 @@ class OnyxPollsApi extends WP_REST_Controller {
 		// format result
 		$type = get_field($this->field['poll_results'], $poll_id);
 		$total = get_field($this->field['poll_total'], $poll_id);
+
+		$response['expired'] = get_field($this->field['poll_expired'], $poll_id);
+		$response['expired'] = $response['expired'] ? $response['expired'] : false;
+
 		if ($show_results = get_field($this->field['poll_show_results'], $poll_id)) {
 			$response['results']['type'] = $type;
 			$response['results']['total'] = $total;
@@ -232,6 +233,18 @@ class OnyxPollsApi extends WP_REST_Controller {
 		}
 
 		return $response;
+	}
+
+	/**
+	 * Create cookie for the expiration user time
+	 * @param int $poll_id required
+	 */
+	public function setcookie($poll_id) {
+		$poll_limit_vote = get_field($this->field['poll_limit_vote'], $poll_id);
+		if ($poll_limit_vote != 1) {
+			$poll_cookie_time = ($poll_limit_vote == 2) ? $poll_limit_vote = strtotime('+1 year') : (60 * $poll_limit_vote);
+			setcookie("onyx_poll_cookie_$poll_id", '1', time() + $poll_cookie_time, "/");
+		}
 	}
 
 }
