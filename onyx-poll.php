@@ -2,7 +2,7 @@
 /*
 Plugin Name: Onyx Poll
 Version: 1.0
-Description: Create polls
+Description: Create polls with ACF PRO
 Author: André Machado
 Author URI: https://macola.com.br
 Plugin URI: https://macola.com.br
@@ -57,6 +57,20 @@ Class OnyxPoll {
 		add_filter('acf/settings/load_json', function($paths) {
 			$paths[] = __DIR__ . '/acf';
 			return $paths;
+		});
+
+		// Verify if Advanced Custom Fields PRO is activated
+		add_action('admin_init', function() {
+			if (is_admin() && current_user_can('activate_plugins') && !is_plugin_active('advanced-custom-fields-pro/acf.php')) {
+				add_action('admin_notices', function() {
+					$notice = __('Desculpe, mas o Onyx Poll requer o que ACF PRO esteja instalado e ativo.');
+					echo "<div class='error'><p>$notice</p></div>";
+				});
+				deactivate_plugins(plugin_basename( __FILE__ ));
+				if (isset($_GET['activate'])) {
+					unset($_GET['activate']);
+				}
+		    }
 		});
 
 		if(is_admin()) {
