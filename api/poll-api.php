@@ -177,11 +177,17 @@ class OnyxPollsApi extends WP_REST_Controller {
 			"posts_per_page"		=> 5,
 			"fields"					=> 'ids',
 			"meta_query"			=> array(
+				"relation"			=> "AND",
 				array(
 					"key"				=> $this->field['poll_end'],
 					"value"			=> $today,
 					"compare"		=> "<=",
 					"type"			=> "DATETIME"
+				),
+				array(
+					"key"				=> $this->field['poll_expired'],
+					"value"			=> 1,
+					"compare"		=> "!="
 				)
 			)
 		]);
