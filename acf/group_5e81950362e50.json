@@ -4,14 +4,14 @@
     "fields": [
         {
             "key": "field_5e81954eb8b44",
-            "label": "Intervalo da Modal",
+            "label": "Intervalo da Modal para Votação",
             "name": "onyx_poll_modal_time",
             "type": "select",
-            "instructions": "Periodicidade que a modal da enquete aparece para o usuário. Caso o visitante ja tenha votado, a modal não aparecerá mais",
+            "instructions": "Periodicidade que a modal da enquete aparece para o usuário.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -31,6 +31,25 @@
             "return_format": "value",
             "ajax": 0,
             "placeholder": ""
+        },
+        {
+            "key": "field_5e81c96326aab",
+            "label": "Usar CSS do plugin",
+            "name": "onyx_poll_css",
+            "type": "true_false",
+            "instructions": "Para utilizar seu próprio CSS, desmarque esta opção",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -50,5 +69,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585551050
+    "modified": 1585564257
 }
