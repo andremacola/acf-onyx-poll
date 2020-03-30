@@ -1,0 +1,54 @@
+{
+    "key": "group_5e81950362e50",
+    "title": "Onyx Poll Settings",
+    "fields": [
+        {
+            "key": "field_5e81954eb8b44",
+            "label": "Intervalo da Modal",
+            "name": "onyx_poll_modal_time",
+            "type": "select",
+            "instructions": "Periodicidade que a modal da enquete aparece para o usuário. Caso o visitante ja tenha votado, a modal não aparecerá mais",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "A cada 1 hora",
+                "2": "A cada 2 horas",
+                "3": "A cada 3 horas",
+                "4": "A cada 4 horas",
+                "5": "A cada 5 horas",
+                "12": "A cada 12 horas",
+                "24": "A cada 24 horas"
+            },
+            "default_value": [],
+            "allow_null": 1,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "onyx-poll-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1585551050
+}

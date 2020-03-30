@@ -1,0 +1,16 @@
+{
+  "name": "onyx/onyx-poll",
+  "description": "",
+  "keywords": ["wordpress", "plugin", "onyx", "poll"],
+  "homepage": "https://github.com/andremacola/onyx-poll",
+  "authors": [
+    {
+      "name": "ONYX POLL",
+      "homepage": "https://macola.com.br/"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.6"
+  }
+}
