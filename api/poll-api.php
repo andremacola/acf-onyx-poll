@@ -212,7 +212,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 	 * Return poll data after voting
 	 * @param int $poll_id required
 	 */
-	public function poll_data($poll_id) {
+	protected function poll_data($poll_id) {
 		// format result
 		$type = get_field($this->field['poll_results'], $poll_id);
 		$total = get_field($this->field['poll_total'], $poll_id);
@@ -246,7 +246,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 	 * Create cookie for the expiration user time
 	 * @param int $poll_id required
 	 */
-	public function setcookie($poll_id) {
+	protected function setcookie($poll_id) {
 		$poll_limit_vote = get_field($this->field['poll_limit_vote'], $poll_id);
 		if ($poll_limit_vote != 1) {
 			$poll_cookie_time = ($poll_limit_vote == 2) ? $poll_limit_vote = strtotime('+1 year') : (60 * $poll_limit_vote);
