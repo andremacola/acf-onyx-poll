@@ -6,7 +6,7 @@ Description: Create polls with ACF PRO
 Author: André Machado
 Author URI: https://macola.com.br
 Plugin URI: https://macola.com.br
-Requires PHP: 5.4
+Requires PHP: 7.2
 Text Domain: onyx-poll
 Domain Path: /languages/
 */
@@ -18,7 +18,7 @@ if (!defined( 'ABSPATH')) {
 
 if(!class_exists('OnyxPoll')):
 
-Class OnyxPoll {
+Class OnyxPollsInit {
 
 	var $version = "1.0";
 
@@ -26,9 +26,6 @@ Class OnyxPoll {
 	 * __construct
 	 *
 	 * A dummy constructor to ensure Onyx Poll is only setup once.
-	 *
-	 * @date	30/03/20
-	 * @since	1.0
 	 *
 	 * @param	void
 	 * @return	void
@@ -38,12 +35,58 @@ Class OnyxPoll {
 	}
 
 	/**
+	 * Add elements on footer in some conditionals
+	 */
+	public function add_footer_elements() {
+		if ($poll = OnyxPolls::has_polls(true)) {
+			echo "<div id='onyx-poll-$poll' class='onyx-poll onyx-poll-modal' data-poll='$poll'></div>";
+		}
+	}
+
+	/**
+	 * Enqueue assets
+	 */
+	public function add_assets() {
+		// Include scripts on front end
+		if (!is_admin() && OnyxPolls::has_polls()) {
+			$js  = $this->get_asset_vars('assets/js/onyx-poll.min.js');
+			$css = $this->get_asset_vars('assets/css/onyx-poll.min.css');
+
+			wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
+			wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
+		}
+	}
+
+	/**
+	 * Get asset variables for enqueue
+	 * @param string $path required
+	 */
+	public function get_asset_vars($path = null) {
+		if ($path) {
+			$a = new stdClass();
+			$a->path = $path;
+			$a->url  = plugins_url($path, __FILE__);
+			$a->ver  = filemtime(plugin_dir_path(__FILE__) . $path);
+			return $a;
+		}
+		return false;
+	}
+
+	/**
+	 * Extract shortcode
+	 * Just a simple shortcode method
+	 */
+	public function shortcode($atts) {
+		extract(shortcode_atts(array(
+			'id' => '',
+		), $atts));
+		return "<div id='onyx-poll-$id' class='onyx-poll onyx-poll-widget' data-poll='$id'></div>";
+	}
+
+	/**
 	 * initialize
 	 *
 	 * Sets up the Onyx Poll plugin.
-	 *
-	 * @date	30/03/20
-	 * @since	1.0
 	 *
 	 * @param	void
 	 * @return	void
@@ -79,40 +122,20 @@ Class OnyxPoll {
 			require_once(__DIR__ . '/admin/poll-type.php');
 		}
 
+		// Load Helper Methods
+		require_once(__DIR__ . '/classes/poll-helpers.php');
+
 		// Create REST API for Onyx Poll
 		require_once(__DIR__ . '/api/poll-api.php');
 
 		// Enqueue scripts and styles
 		add_action('wp_enqueue_scripts', array($this, 'add_assets'));
-	}
 
-	/**
-	 * Enqueue assets
-	 */
-	function add_assets() {
-		// Include scripts on front end
-		if (!is_admin()) {
-			$js  = $this->get_asset_vars("assets/js/onyx-poll.min.js");
-			$css = $this->get_asset_vars("assets/js/onyx-poll.min.js");
+		// Add footer html elements
+		add_action('wp_footer', array($this, 'add_footer_elements'), 1);
 
-			wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
-			wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
-		}
-	}
-
-	/**
-	 * Get asset variables for enqueue
-	 * @param string $path required
-	 */
-	function get_asset_vars($path = null) {
-		if ($path) {
-			$a = new stdClass();
-			$a->path = $path;
-			$a->url  = plugins_url($path, __FILE__);
-			$a->ver  = filemtime(plugin_dir_path(__FILE__) . $path);
-			return $a;
-		}
-		return false;
+		// Add onyx poll shortcode
+		add_shortcode("onyx-poll", array($this, 'shortcode'));
 	}
 
 }
@@ -120,7 +143,7 @@ Class OnyxPoll {
 /**
  * Instantiate Onyx Poll
  */
-$onyx_poll = new OnyxPoll();
+$onyx_poll = new OnyxPollsInit();
 $onyx_poll->initialize();
 
 endif; // class_exists check

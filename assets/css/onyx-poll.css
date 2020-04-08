@@ -1,3 +1,8 @@
-body {
-	background: red;
+.onyx-poll *, .onyx-poll *::before, .onyx-poll *::after {
+	-webkit-box-sizing: inherit;
+	box-sizing: inherit;
+}
+
+.onyx-poll {
+	background-color: red !important;
 }

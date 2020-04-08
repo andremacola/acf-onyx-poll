@@ -5,7 +5,7 @@
 
 */
 
-class OnyxCptPolls {
+class OnyxPollsCpt {
 
 	/**
 	 * Constructor
@@ -90,6 +90,6 @@ class OnyxCptPolls {
 /**
  * Instantiate Onyx Poll Admin
  */
-$onyx_poll_admin = new OnyxCptPolls();
+$onyx_poll_admin = new OnyxPollsCpt();
 
 ?>

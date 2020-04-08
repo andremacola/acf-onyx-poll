@@ -51,6 +51,16 @@
 		"oF": 3,
 		"oS": 3
 		},
+	"/assets/css/onyx-poll.min.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/assets/css/onyx-poll.min-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"/assets/js/app.js": {
 		"bF": 0,
 		"ft": 64,
@@ -72,6 +82,14 @@
 		"oF": 0,
 		"sC": 3,
 		"tS": 0
+		},
+	"/classes/poll-helpers.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/classes/poll-helpers.php",
+		"oF": 0
 		},
 	"/composer.json": {
 		"ft": 524288,
@@ -128,7 +146,7 @@
 "projectSettings": {
 	"abortBuildOnError": 1,
 	"allowInjectionReloads": 1,
-	"alwaysUseExternalServer": 0,
+	"alwaysUseExternalServer": 1,
 	"animateCSSInjections": 1,
 	"autoBuildNewItems": 1,
 	"autoprefixerEnableIEGrid": 0,
@@ -1621,7 +1639,7 @@
 			}
 		},
 	"esLintSourceType": 0,
-	"externalServerAddress": "http://localhost:8888",
+	"externalServerAddress": "http://site.onyx.local",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
 	"jsCheckerReservedNamesString": "",
