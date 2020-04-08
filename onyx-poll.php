@@ -79,8 +79,9 @@ Class OnyxPollsInit {
 	public function shortcode($atts) {
 		extract(shortcode_atts(array(
 			'id' => '',
+			'class' => ''
 		), $atts));
-		return "<div id='onyx-poll-$id' class='onyx-poll onyx-poll-widget' data-poll='$id'></div>";
+		return "<div id='onyx-poll-$id' class='onyx-poll onyx-poll-widget $class' data-poll='$id'></div>";
 	}
 
 	/**
