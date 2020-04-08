@@ -20,6 +20,8 @@ if(!class_exists('OnyxPoll')):
 
 Class OnyxPoll {
 
+	var $version = "1.0";
+
 	/**
 	 * __construct
 	 *
@@ -47,7 +49,6 @@ Class OnyxPoll {
 	 * @return	void
 	 */
 	function initialize() {
-
 		// Change ACF Local JSON save location to /acf folder inside this plugin
 		add_filter('acf/settings/save_json', function() {
 			return __DIR__ . '/acf';
@@ -78,9 +79,40 @@ Class OnyxPoll {
 			require_once(__DIR__ . '/admin/poll-type.php');
 		}
 
-		// Create REST API for
+		// Create REST API for Onyx Poll
 		require_once(__DIR__ . '/api/poll-api.php');
 
+		// Enqueue scripts and styles
+		add_action('wp_enqueue_scripts', array($this, 'add_assets'));
+	}
+
+	/**
+	 * Enqueue assets
+	 */
+	function add_assets() {
+		// Include scripts on front end
+		if (!is_admin()) {
+			$js  = $this->get_asset_vars("assets/js/onyx-poll.min.js");
+			$css = $this->get_asset_vars("assets/js/onyx-poll.min.js");
+
+			wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
+			wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
+		}
+	}
+
+	/**
+	 * Get asset variables for enqueue
+	 * @param string $path required
+	 */
+	function get_asset_vars($path = null) {
+		if ($path) {
+			$a = new stdClass();
+			$a->path = $path;
+			$a->url  = plugins_url($path, __FILE__);
+			$a->ver  = filemtime(plugin_dir_path(__FILE__) . $path);
+			return $a;
+		}
+		return false;
 	}
 
 }
