@@ -62,7 +62,7 @@
 		"oS": 3
 		},
 	"/assets/js/app.js": {
-		"bF": 0,
+		"bF": 4,
 		"ft": 64,
 		"ma": 0,
 		"mi": 1,
@@ -80,6 +80,17 @@
 		"oA": 0,
 		"oAP": "/assets/js/onyx-poll.min-min.js",
 		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
+	"/assets/js/promisse-polyfill.min.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "/assets/js/promisse-polyfill.min-min.js",
+		"oF": 1,
 		"sC": 3,
 		"tS": 0
 		},
@@ -131,7 +142,7 @@
 "projectAttributes": {
 	"creationDate": 607843153.30908406,
 	"displayValue": "onyx-poll",
-	"displayValueWasSetByUser": 0,
+	"displayValueWasSetByUser": 1,
 	"iconImageName": "brackets-glace",
 	"iconImageWasSetByUser": 0
 	},

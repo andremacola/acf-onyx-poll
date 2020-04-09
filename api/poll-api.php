@@ -72,13 +72,14 @@ class OnyxPollsApi extends WP_REST_Controller {
 	public function list($req) {
 
 		$poll_args = array(
-			"post_type"       => "onyxpolls",
-			"posts_per_page"  => 10
+			'post_type'       => 'onyxpolls',
+			'posts_per_page'  => 10
 		);
 
 		$poll_args['p'] = (!empty($req['id'])) ? $req['id'] : null;
 
 		if (!empty($req['modal'])) {
+			$poll_args['posts_per_page'] = 1;
 			$poll_args['meta_query'] = array(
 				array(
 					'key'   => $this->field['poll_modal'],
@@ -230,7 +231,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 			while (have_rows($this->field['poll_answers'], $poll_id)):
 				the_row();
 				$index = get_row_index();
-				$response['answers']["$index"] = array(
+				$response['answers'][$index] = array(
 					"image"   => get_sub_field('image'),
 					"answer"  => get_sub_field('answer'),
 					"votes"   => (in_array($type, array(2,3)) && $show_results) ? get_sub_field('votes') : false,

@@ -39,7 +39,7 @@ Class OnyxPollsInit {
 	 */
 	public function add_footer_elements() {
 		if ($poll = OnyxPolls::has_polls(true)) {
-			echo "<div id='onyx-poll-$poll' class='onyx-poll onyx-poll-modal' data-poll='$poll'></div>";
+			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal' data-poll='$poll'></div>";
 		}
 	}
 
@@ -54,6 +54,12 @@ Class OnyxPollsInit {
 
 			wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
 			wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
+
+			wp_localize_script('acf-onyx-poll', 'onyxpoll',
+				array( 
+					'apiurl' => rest_url()
+				)
+			);
 		}
 	}
 
