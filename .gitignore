@@ -1,0 +1,28 @@
+# OS generated files #
+######################
+*.Trashes
+*.DS_Store
+*[Tt]humbs.db
+Icon?
+._*
+desktop.ini
+
+# development
+######################
+.codekit-cache
+.idea
+.dropbox
+.codekit-cache
+*.env
+node_modules/
+bower_components/
+
+# ftp/sftp
+######################
+.ftpconfig
+sftp.json
+sftp-config.json
+
+# composer
+######################
+./vendor/

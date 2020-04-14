@@ -1,11 +1,11 @@
 {
-  "name": "onyx/onyx-poll",
+  "name": "onyx/acf-onyx-poll",
   "description": "",
   "keywords": ["wordpress", "plugin", "onyx", "poll"],
   "homepage": "https://github.com/andremacola/onyx-poll",
   "authors": [
     {
-      "name": "ONYX POLL",
+      "name": "ACF ONYX POLL",
       "homepage": "https://macola.com.br/"
     }
   ],

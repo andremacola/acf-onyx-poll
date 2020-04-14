@@ -1,0 +1,5 @@
+*.php
+*.html
+*.min.js
+**/node_modules/**
+**/vendor/**

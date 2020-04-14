@@ -1,0 +1,13 @@
+{
+	"name": "acf-onyx-poll",
+	"version": "1.0",
+	"description": "Just a basic plugin for polls based on regular wordpress and acf (advanced custom fields) functionalities",
+	"main": "./assets/js/app.js",
+	"repository": "git@github.com:andremacola/onyx-poll.git",
+	"author": "Andre Macola <andremacola@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"@wordpress/eslint-plugin": "^4.1.0",
+		"eslint": "^6.8.0"
+	}
+}

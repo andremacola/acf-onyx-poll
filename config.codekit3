@@ -9,6 +9,49 @@
 	],
 "creatorBuild": "32001",
 "files": {
+	"/.editorconfig": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/.editorconfig",
+		"oF": 0
+		},
+	"/.eslintignore": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/.eslintignore",
+		"oF": 1
+		},
+	"/.eslintrc.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "/.eslintrc-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/.gitignore": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/.gitignore",
+		"oF": 1
+		},
+	"/.prettierrc": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/.prettierrc",
+		"oF": 1
+		},
 	"/acf/group_5e7d2e8ddec98.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -72,6 +115,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/assets/js/bling.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/assets/js/bling-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/assets/js/onyx-poll.min.js": {
 		"bF": 0,
 		"ft": 64,
@@ -106,7 +160,7 @@
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/composer-min.json",
-		"oF": 0,
+		"oF": 1,
 		"oO": 0,
 		"oS": 1
 		},
@@ -118,6 +172,12 @@
 		"oAP": "/index.php",
 		"oF": 0
 		},
+	"/node_modules": {
+		"ft": 65536,
+		"oA": 2,
+		"oAP": "/build/node_modules",
+		"oF": 0
+		},
 	"/onyx-poll.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -126,13 +186,29 @@
 		"oAP": "/onyx-poll.php",
 		"oF": 0
 		},
+	"/package.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/package-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/readme.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/readme.txt",
-		"oF": 0
+		"oF": 1
+		},
+	"/yarn.lock": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/yarn.lock",
+		"oF": 1
 		}
 	},
 "hooks": [

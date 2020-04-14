@@ -1,6 +1,6 @@
 === WordPress Plugin Template ===
 Contributors: andremacola
-Tags: wordpress, plugin, onyx-poll, poll
+Tags: wordpress, plugin, acf-onyx-poll, onyx, poll
 Requires at least: 4.7.0
 Tested up to: 5.4
 Requires PHP: 7.2

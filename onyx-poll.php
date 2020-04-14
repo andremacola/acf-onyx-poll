@@ -1,13 +1,13 @@
 <?php
 /*
-Plugin Name: Onyx Poll
+Plugin Name: ACF Onyx Poll
 Version: 1.0
 Description: Create polls with ACF PRO
 Author: André Machado
 Author URI: https://macola.com.br
 Plugin URI: https://macola.com.br
 Requires PHP: 7.2
-Text Domain: onyx-poll
+Text Domain: acf-onyx-poll
 Domain Path: /languages/
 */
 
@@ -25,7 +25,7 @@ Class OnyxPollsInit {
 	/**
 	 * __construct
 	 *
-	 * A dummy constructor to ensure Onyx Poll is only setup once.
+	 * A dummy constructor to ensure Acf Onyx Poll is only setup once.
 	 *
 	 * @param	void
 	 * @return	void
@@ -57,7 +57,14 @@ Class OnyxPollsInit {
 
 			wp_localize_script('acf-onyx-poll', 'onyxpoll',
 				array( 
-					'apiurl' => rest_url()
+					'apiurl' => rest_url(),
+					'labels' => array(
+						'vote'    => __('Votar', 'acf-onyx-poll'),
+						'view'    => __('Ver resultado', 'acf-onyx-poll'),
+						'total'   => __('Total de votos', 'acf-onyx-poll'),
+						'success' => __('Votação realizada com sucesso.', 'acf-onyx-poll'),
+						'error'   => __('Erro na votação, tente novamante.', 'acf-onyx-poll')
+					)
 				)
 			);
 		}

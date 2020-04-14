@@ -68,6 +68,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 	/**
 	 * List 10 latest polls
 	 * @param int $req['poll_id'] poll ID optional
+	 * @param boolean $req['modal'] optional
 	 */
 	public function list($req) {
 
@@ -230,8 +231,8 @@ class OnyxPollsApi extends WP_REST_Controller {
 		if (have_rows($this->field['poll_answers'], $poll_id)) {
 			while (have_rows($this->field['poll_answers'], $poll_id)):
 				the_row();
-				$index = get_row_index();
-				$response['answers'][$index] = array(
+				$response['answers'][] = array(
+					"option"  => get_row_index(),
 					"image"   => get_sub_field('image'),
 					"answer"  => get_sub_field('answer'),
 					"votes"   => (in_array($type, array(2,3)) && $show_results) ? get_sub_field('votes') : false,
