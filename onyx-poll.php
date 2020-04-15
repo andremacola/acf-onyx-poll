@@ -50,13 +50,15 @@ Class OnyxPollsInit {
 		// Include scripts on front end
 		if (!is_admin() && OnyxPolls::has_polls()) {
 			$js  = $this->get_asset_vars('assets/js/onyx-poll.min.js');
-			$css = $this->get_asset_vars('assets/css/onyx-poll.min.css');
-
 			wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
-			wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
+
+			if (get_field('onyx_poll_css', 'options')) {
+				$css = $this->get_asset_vars('assets/css/onyx-poll.min.css');
+				wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
+			}
 
 			wp_localize_script('acf-onyx-poll', 'onyxpoll',
-				array( 
+				array(
 					'apiurl' => rest_url(),
 					'labels' => array(
 						'vote'    => __('Votar', 'acf-onyx-poll'),

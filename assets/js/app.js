@@ -60,7 +60,7 @@ class onyxPoll {
 
 			xhr.onload = function() {
 				if (this.status >= 200 && this.status < 400) {
-					resolve(JSON.parse(this.response)[0]);
+					resolve(JSON.parse(this.response));
 				} else {
 					reject('Poll cannot be loaded.');
 				}

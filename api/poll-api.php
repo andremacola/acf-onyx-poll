@@ -73,8 +73,10 @@ class OnyxPollsApi extends WP_REST_Controller {
 	public function list($req) {
 
 		$poll_args = array(
-			'post_type'       => 'onyxpolls',
-			'posts_per_page'  => 10
+			'post_type'        => 'onyxpolls',
+			'posts_per_page'   => 10,
+			'suppress_filters' => true,
+			'no_found_rows'    => true
 		);
 
 		$poll_args['p'] = (!empty($req['id'])) ? $req['id'] : null;
@@ -100,7 +102,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 				$poll                = array_merge($poll, $this->poll_data($poll['id']));
 
 				// return response based on founded posts count
-				if ($poll_query->found_posts == 1) {
+				if (count($poll_query->posts) == 1) {
 					$response = $poll;
 				} else {
 					$response[] = $poll;
