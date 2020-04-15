@@ -146,6 +146,9 @@ class onyxPoll {
 			pollChoices.appendChild(choiceEl);
 		}
 
+		// show modal
+		modalEl.classList.add('active');
+
 		// add event handlers
 		this.eventHandlers();
 	}

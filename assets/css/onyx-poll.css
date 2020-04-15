@@ -27,8 +27,10 @@
 	border: 1px solid var(--borderColor);
 	border-radius: var(--modalBorderRadius);
 	box-shadow: var(--boxShadow);
+	opacity: 0;
 }
 .onyx-poll.active {
+	opacity: 1;
 	pointer-events: all;
 }
 
@@ -233,7 +235,6 @@
 
 
 /* VIEW RESULTS */
-
 .onyx-poll.view .onyx-poll-choices li {
 	cursor: auto;
 }
