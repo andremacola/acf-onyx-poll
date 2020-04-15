@@ -141,7 +141,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 		if ($_COOKIE["onyx_poll_cookie_$poll_id"] && $poll_limit != 1) {
 			$response = array(
 				"code"     => "not_allowed",
-				"poll"     => $poll_id,
+				"id"       => $poll_id,
 				"message"  => $this->message['no_allowed'],
 				"voted"    => false,
 				"data"     => ["status" => 200]
@@ -241,7 +241,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 					"image"   => get_sub_field('image'),
 					"answer"  => get_sub_field('answer'),
 					"votes"   => (in_array($type, array(2,3)) && $show_results) ? get_sub_field('votes') : false,
-					"percent" => (in_array($type, array(1,3)) && $show_results) ? get_sub_field('votes') * 100 / $total : false
+					"percent" => get_sub_field('votes') * 100 / $total
 				);
 			endwhile;
 		}

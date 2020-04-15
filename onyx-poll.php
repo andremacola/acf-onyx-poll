@@ -49,7 +49,8 @@ Class OnyxPollsInit {
 	public function add_assets() {
 		// Include scripts on front end
 		if (!is_admin() && OnyxPolls::has_polls()) {
-			$js  = $this->get_asset_vars('assets/js/onyx-poll.min.js');
+			// $js = $this->get_asset_vars('assets/js/onyx-poll.min.js');
+			$js = $this->get_asset_vars('assets/js/app.js');
 			wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
 
 			if (get_field('onyx_poll_css', 'options')) {
@@ -61,7 +62,8 @@ Class OnyxPollsInit {
 				array(
 					'apiurl' => rest_url(),
 					'labels' => array(
-						'vote'    => __('Votar', 'acf-onyx-poll'),
+						'vote'    => __('Votar na enquete', 'acf-onyx-poll'),
+						'votes'   => __('votos', 'acf-onyx-poll'),
 						'view'    => __('Ver resultado', 'acf-onyx-poll'),
 						'total'   => __('Total de votos', 'acf-onyx-poll'),
 						'success' => __('Votação realizada com sucesso.', 'acf-onyx-poll'),
