@@ -147,7 +147,7 @@ class onyxPoll {
 		}
 
 		// show modal
-		modalEl.classList.add('active');
+		modalEl.classList.add('show');
 
 		// add event handlers
 		this.eventHandlers();
@@ -239,6 +239,7 @@ class onyxPoll {
 		for (let i = 0; i < els.choices.length; i++) {
 			const choice = els.choices[i];
 			choice.addEventListener('click', this.submitVote);
+			choice.classList.remove('choosed');
 			choice.style.removeProperty('--choicePercentage');
 			choice.style.removeProperty('--choiceResult');
 		}

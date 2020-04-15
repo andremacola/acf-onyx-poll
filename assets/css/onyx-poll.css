@@ -29,8 +29,10 @@
 	box-shadow: var(--boxShadow);
 	opacity: 0;
 }
-.onyx-poll.active {
+.onyx-poll.show {
 	opacity: 1;
+}
+.onyx-poll.active {
 	pointer-events: all;
 }
 
