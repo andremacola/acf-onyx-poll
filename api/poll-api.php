@@ -154,11 +154,6 @@ class OnyxPollsApi extends WP_REST_Controller {
 			$row   = update_row($this->field['poll_answers'], $poll_choice, $add_vote, $poll_id);
 			$total = update_field($this->field['poll_total'], $poll_total+1, $poll_id);
 
-			// set cookies
-			// limit = 1 (free vote)
-			// limit = 2 (per device/no expires)
-			$this->setcookie($poll_id, $poll_choice);
-
 			// return reponse
 			$response = array(
 				"code"     => ($row && $total) ? "success" : 'error',
@@ -169,6 +164,11 @@ class OnyxPollsApi extends WP_REST_Controller {
 				"data"     => ["status" => 200]
 			);
 		}
+
+		// set cookies
+		// limit = 1 (free vote)
+		// limit = 2 (per device/no expires)
+		$this->setcookie($poll_id, $poll_choice);
 
 		$response += $this->poll_data($poll_id);
 		return new WP_REST_Response($response, 200);
@@ -255,10 +255,10 @@ class OnyxPollsApi extends WP_REST_Controller {
 	 */
 	protected function setcookie($poll_id, $poll_choice) {
 		$poll_limit_vote = get_field($this->field['poll_limit_vote'], $poll_id);
-		if ($poll_limit_vote != 1) {
+		// if ($poll_limit_vote != 1) {
 			$poll_cookie_time = ($poll_limit_vote == 2) ? $poll_limit_vote = strtotime('+1 year') : (60 * $poll_limit_vote);
 			setcookie("onyx_poll_cookie_$poll_id", $poll_choice, time() + $poll_cookie_time, "/");
-		}
+		// }
 	}
 
 }
