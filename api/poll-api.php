@@ -120,6 +120,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 	 * Compute vote
 	 * @param int $req['poll'] poll ID required
 	 * @param int $req['choice'] poll answer choice required
+	 * @todo: [$poll_choice - 1] is just a temp fix. maybe acf/settings/row_index_offset filter?
 	 */
 	public function vote($req) {
 		// params vars
@@ -128,15 +129,16 @@ class OnyxPollsApi extends WP_REST_Controller {
 		$poll_answers  = get_field($this->field['poll_answers'], $poll_id);
 		$poll_total    = get_field($this->field['poll_total'], $poll_id);
 		$poll_expired  = get_field($this->field['poll_expired'], $poll_id);
+		$poll_limit    = get_field($this->field['poll_limit_vote'], $poll_id);
 
 		// validate params from req
-		if (!is_numeric($poll_id) || !isset($poll_choice) || empty($poll_answers[$poll_choice])) {
+		if (!is_numeric($poll_id) || !isset($poll_choice) || empty($poll_answers[$poll_choice - 1])) {
 			return new WP_Error('error', $this->message['invalid'], array('status' => 200));
 		}
 		if ($poll_expired || get_post_type($poll_id) != 'onyxpolls') {
 			return new WP_Error('error', $this->message['no_exist'], array('status' => 200));
 		}
-		if ($_COOKIE["onyx_poll_cookie_$poll_id"] == 1) {
+		if ($_COOKIE["onyx_poll_cookie_$poll_id"] == 1 && $poll_limit != 1) {
 			$response = array(
 				"code"     => "not_allowed",
 				"poll"     => $poll_id,
@@ -147,21 +149,22 @@ class OnyxPollsApi extends WP_REST_Controller {
 		} else {
 			// update vote fields
 			$add_vote = array(
-				"votes" => $poll_answers[$poll_choice]['votes']+1
+				"votes" => $poll_answers[$poll_choice - 1]['votes']+1
 			);
-			$row   = update_row($this->field['poll_answers'], $poll_choice+1, $add_vote, $poll_id);
+			$row   = update_row($this->field['poll_answers'], $poll_choice, $add_vote, $poll_id);
 			$total = update_field($this->field['poll_total'], $poll_total+1, $poll_id);
 
 			// set cookies
 			// limit = 1 (free vote)
 			// limit = 2 (per device/no expires)
-			$this->setcookie($poll_id);
+			$this->setcookie($poll_id, $poll_choice);
 
 			// return reponse
 			$response = array(
 				"code"     => ($row && $total) ? "success" : 'error',
 				"poll"     => $poll_id,
-				"message"  => ($row && $total) ? $this->message->success : $this->message->error,
+				"choice"   => $poll_choice,
+				"message"  => ($row && $total) ? $this->message['success'] : $this->message['error'],
 				"voted"    => ($row && $total) ? true : false,
 				"data"     => ["status" => 200]
 			);
@@ -250,11 +253,11 @@ class OnyxPollsApi extends WP_REST_Controller {
 	 * Create cookie for the expiration user time
 	 * @param int $poll_id required
 	 */
-	protected function setcookie($poll_id) {
+	protected function setcookie($poll_id, $poll_choice) {
 		$poll_limit_vote = get_field($this->field['poll_limit_vote'], $poll_id);
 		if ($poll_limit_vote != 1) {
 			$poll_cookie_time = ($poll_limit_vote == 2) ? $poll_limit_vote = strtotime('+1 year') : (60 * $poll_limit_vote);
-			setcookie("onyx_poll_cookie_$poll_id", '1', time() + $poll_cookie_time, "/");
+			setcookie("onyx_poll_cookie_$poll_id", $poll_choice, time() + $poll_cookie_time, "/");
 		}
 	}
 

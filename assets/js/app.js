@@ -136,7 +136,6 @@ class onyxPoll {
 
 	handleVoteEvent(choices) {
 		const self = this;
-		const messageEl = document.getElementById(this.messageEl);
 		for (let i = 0; i < choices.length; i++) {
 			choices[i].addEventListener('click', function() {
 				const parent = this.parentNode.parentNode.parentNode;
@@ -144,8 +143,8 @@ class onyxPoll {
 				self.requestVote(this)
 					.then(function(response) {
 						console.log(response);
-						messageEl.classList.remove('error');
-						messageEl.classList.add('success');
+						self.togglePollActivation(parent, true);
+						self.handleMessage(response.message, 'success');
 					})
 					.catch(function() {
 						self.togglePollActivation(parent, true);
