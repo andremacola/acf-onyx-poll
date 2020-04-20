@@ -10,7 +10,8 @@ module.exports = {
 	},
 	"globals": {
 		wp: true,
-		onyxpoll: true
+		onyxpoll: true,
+		onyxGetCookie: true
 	},
 	"rules": {
 		"quotes": [

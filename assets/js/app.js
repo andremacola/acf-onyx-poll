@@ -1,69 +1,61 @@
-// import './promisse-polyfill.min-min'
-
-function onyxGetCookie(cname) {
-	var name = cname + '=';
-	var decodedCookie = decodeURIComponent(document.cookie);
-	var ca = decodedCookie.split(';');
-	for (var i = 0; i < ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0) == ' ') {
-			c = c.substring(1);
-		}
-		if (c.indexOf(name) == 0) {
-			return c.substring(name.length, c.length);
-		}
-	}
-	return '';
-}
-
-class onyxPoll {
+class onyxAcfPoll {
 	constructor() {
-		self = this;
-		this.pollParent = 'onyx-poll';
-		this.modalEl = 'onyx-poll-modal';
-		this.loader = 'onyx-poll-loader';
-		this.closeButton = 'onyx-poll-close';
-		this.viewButton = 'onyx-poll-view';
-		this.voteButton = 'onyx-poll-vote';
-		this.choicesEl = 'onyx-poll-choice';
-		this.messageEl = 'onyx-poll-message';
-		this.totalEl = 'onyx-poll-total';
-		this.listChoicesEl = 'onyx-poll-choices';
-		this.pollWrapper = 'onyx-poll-wrapper';
-		this.footerEl = 'onyx-poll-footer';
-		this.pollQuestion = 'onyx-poll-question';
-		this.results = null;
-	}
+		self = this; // bad pratice? whatever ¯\_(ツ)_/¯
+		this.response = null;
+		this.prefix = 'onyx-poll';
+		this.element = {
+			modal: document.getElementById('onyx-poll-modal'),
+		};
+		this.name = {
+			parent: this.prefix,
+			modal: `${this.prefix}-modal`,
+			wrapper: `${this.prefix}-wrapper`,
+			question: `${this.prefix}-question`,
+			list: `${this.prefix}-choices`,
+			choice: `${this.prefix}-choice`,
+			footer: `${this.prefix}-footer`,
 
-	eventHandlers() {
-		const poll = {
-			parent: document.querySelector(`.${this.pollParent}`),
-			modal: document.querySelector(`.${this.modalEl}`),
-			loader: document.querySelector(`.${this.loader}`),
-			closeButton: document.querySelector(`.${this.closeButton}`),
-			viewButton: document.querySelector(`.${this.viewButton}`),
-			voteButton: document.querySelector(`.${this.voteButton}`),
-			choices: document.querySelectorAll(`.${this.choicesEl}`),
-			totalEl: document.querySelector(`.${this.totalEl} span`),
+			message: `${this.prefix}-message`,
+			total: `${this.prefix}-total`,
+
+			voteButton: `${this.prefix}-vote`,
+			viewButton: `${this.prefix}-view`,
+			closeButton: `${this.prefix}-close`,
+
+			loader: `${this.prefix}-loader`,
 		};
 
-		// close modal poll
-		poll.closeButton.onclick = () => poll.modal.remove();
-
-		// view poll results button and vote poll button (back from results)
-		if (typeof this.results.results != 'undefined') {
-			poll.viewButton.onclick = () => this.showResults(poll);
-			poll.voteButton.onclick = () => this.showPoll(poll);
-		}
-
-		// vote poll
-		this.handleVoteEvent(poll);
+		this.submitVote = this.submitVote.bind(this);
 	}
 
-	requestVote(choiceEl) {
+	prepareModal() {
+		if (typeof onyxPollModal !== 'undefined') {
+			this.requestModal()
+				.then((data) => this.renderModalTemplate(data, this.element.modal))
+				.catch((error) => console.warn(error));
+		}
+	}
+
+	requestModal() {
+		return new Promise((resolve, reject) => {
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', `${onyxpoll.apiurl}onyx/polls/list/?modal=1`);
+			xhr.send(null);
+			xhr.onload = function() {
+				if (this.status >= 200 && this.status < 400) {
+					self.response = JSON.parse(this.response);
+					resolve(self.response);
+				} else {
+					reject('Poll cannot be loaded.');
+				}
+			};
+		});
+	}
+
+	requestVote(choice) {
 		const voteOptions = {
-			choice: choiceEl.getAttribute('data-choice'),
-			poll: choiceEl.getAttribute('data-poll'),
+			choice: choice.getAttribute('data-choice'),
+			poll: choice.getAttribute('data-poll'),
 		};
 		return new Promise((resolve, reject) => {
 			const xhr = new XMLHttpRequest();
@@ -82,104 +74,150 @@ class onyxPoll {
 		});
 	}
 
-	requestModal() {
-		return new Promise((resolve, reject) => {
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', `${onyxpoll.apiurl}onyx/polls/list/?modal=1`);
-			xhr.send(null);
-			xhr.onload = function() {
-				if (this.status >= 200 && this.status < 400) {
-					self.results = JSON.parse(this.response);
-					resolve(self.results);
-				} else {
-					reject('Poll cannot be loaded.');
-				}
-			};
-		});
-	}
-
-	prepareModal() {
-		const modalEl = document.getElementById(`${this.modalEl}`);
-		if (modalEl != null) {
-			this.requestModal()
-				.then((data) => this.renderModal(data, modalEl))
-				.catch((error) => console.warn(error));
-		}
-	}
-
-	renderModal(data, modalEl) {
+	renderModalTemplate(data, modal) {
 		// poll template
-		modalEl.innerHTML = `
-			<div id='${this.pollWrapper}-${data.id}' class="${this.pollWrapper}">
-				<p class='${this.pollQuestion}'>${data.title}</p>
-				<ul class='${this.listChoicesEl}'></ul>
-				<div class="${this.footerEl}">
-					<p class='${this.messageEl}'></p>
+		modal.innerHTML = `
+			<div id='${this.name.wrapper}-${data.id}' class="${this.name.wrapper}">
+				<p class='${this.name.question}'>${data.title}</p>
+				<ul class='${this.name.list}'></ul>
+				<div class="${this.name.footer}">
+					<p class='${this.name.message}'></p>
 					${data.results ? `
-						<p class='${this.totalEl}'>
+						<p class='${this.name.total}'>
 							<strong>${onyxpoll.labels.total}: </strong>
 							<span></span>
 						</p>
 					` : ``}
 				</div>
 			</div>
-			<span class="${this.loader}"><span class="spinner"></span></span>
-			<span class="${this.closeButton}"></span>
+			<span class="${this.name.loader}"><span class="spinner"></span></span>
+			<span class="${this.name.closeButton}"></span>
 		`;
 
 		// add view results option
-		const pollFooter = document.querySelector(`.${this.footerEl}`);
+		this.element.footer = document.querySelector(`.${this.name.footer}`);
 		if (typeof data.results != 'undefined') {
-			pollFooter.innerHTML += `
-				<a href="#" class="onyx-poll-ft-btn ${this.voteButton}">${onyxpoll.labels.vote}</a>
-				<a href="#" class="onyx-poll-ft-btn ${this.viewButton}">${onyxpoll.labels.view}</a>`;
+			this.element.footer.innerHTML += `
+				<a href="#" class="onyx-poll-ft-btn ${this.name.voteButton}">${onyxpoll.labels.vote}</a>
+				<a href="#" class="onyx-poll-ft-btn ${this.name.viewButton}">${onyxpoll.labels.view}</a>`;
 		}
 
 		// add poll choices
-		const pollChoices = document.querySelector(`.${this.listChoicesEl}`);
+		this.element.list = document.querySelector(`.${this.name.list}`);
 		for (const choice of data.answers) {
 			const choiceEl = document.createElement('li');
 			choiceEl.setAttribute('data-choice', choice.option);
 			choiceEl.setAttribute('data-poll', data.id);
-			choiceEl.className = this.choicesEl;
+			choiceEl.className = this.name.choice;
 			choiceEl.textContent = choice.answer;
-			pollChoices.appendChild(choiceEl);
+			this.element.list.appendChild(choiceEl);
 		}
 
 		// show modal
-		modalEl.classList.add('show');
+		this.element.modal.classList.add('show');
 
 		// add event handlers
 		this.eventHandlers();
 	}
 
-	submitVote() {
-		const parent = this.parentNode.parentNode.parentNode;
-		self.togglePollActivation(parent, false);
-		self.requestVote(this)
+	eventHandlers() {
+		this.element.parent = document.querySelector(`.${this.name.parent}`);
+		this.element.choices = document.querySelectorAll(`.${this.name.choice}`);
+		this.element.message = document.querySelector(`.${this.name.message}`);
+		this.element.total = document.querySelector(`.${this.name.total} span`);
+		this.element.voteButton = document.querySelector(`.${this.name.voteButton}`);
+		this.element.viewButton = document.querySelector(`.${this.name.viewButton}`);
+		this.element.closeButton = document.querySelector(`.${this.name.closeButton}`);
+		this.element.loader = document.querySelector(`.${this.name.loader}`);
+
+		// close modal poll
+		this.element.closeButton.onclick = () => this.element.modal.remove();
+
+		// view poll results button and vote poll button (back from results)
+		if (typeof this.response.results != 'undefined') {
+			this.element.viewButton.onclick = () => this.showResults();
+			this.element.voteButton.onclick = () => this.showPoll();
+		}
+
+		// vote events on poll choices
+		for (let i = 0; i < this.element.choices.length; i++) {
+			this.element.choices[i].addEventListener('click', this.submitVote);
+		}
+	}
+
+	submitVote(event) {
+		const parent = event.target.parentNode.parentNode.parentNode;
+		this.togglePollLoader(parent, false);
+		this.requestVote(event.target)
 			.then(function(response) {
-				self.togglePollActivation(parent, true);
-				self.handleMessage(response.message, response.code);
+				this.togglePollLoader(parent, true);
+				this.handleMessage(response.message, response.code);
 				parent.classList.add('voted');
 
 				if (response.code == 'success') {
-					this.classList.add('choosed');
+					event.target.classList.add('choosed');
 				}
 
-				// improve this block;
+				// remove list options if no results option is marked;
 				if (typeof response.results != 'undefined') {
-					document.querySelector(`.${self.viewButton}`).click();
+					this.element.viewButton.click();
 				} else {
-					document.querySelector(`.${self.listChoicesEl}`).remove();
+					this.element.list.remove();
 				}
 			}.bind(this))
 			.catch(function() {
-				self.togglePollActivation(parent, true);
-				self.handleMessage(onyxpoll.labels.error, 'error');
-			});
+				this.togglePollLoader(parent, true);
+				this.handleMessage(onyxpoll.labels.error, 'error');
+			}.bind(this));
 	}
 
-	togglePollActivation(element, active = true) {
+	showResults() {
+		const res = this.response;
+		this.element.parent.classList.add('view');
+		this.element.total.textContent = res.results.total;
+
+		const choosedChoice = this.getCookie(`onyx_poll_cookie_${res.id}`);
+		if (choosedChoice) {
+			document.querySelector(`li[data-choice="${choosedChoice}"]`).classList.add('choosed');
+		}
+
+		for (let i = 0; i < this.element.choices.length; i++) {
+			const choice = this.element.choices[i];
+			const votes = res.answers[i].votes;
+			const percent = res.answers[i].percent.toFixed(2) + '%';
+			let result = `${votes} ${onyxpoll.labels.votes} / ${percent}`;
+
+			if (this.response.results.type == 2) {
+				result = `${votes} ${onyxpoll.labels.votes}`;
+			} else if (this.response.results.type == 1) {
+				result = `${percent}`;
+			}
+
+			choice.removeEventListener('click', this.submitVote);
+			choice.style.setProperty('--choicePercentage', `${percent}`);
+			choice.style.setProperty('--choiceResult', `"${result}"`);
+		}
+	}
+
+	showPoll() {
+		this.element.parent.classList.remove('view');
+		for (let i = 0; i < this.element.choices.length; i++) {
+			const choice = this.element.choices[i];
+			choice.addEventListener('click', this.submitVote);
+			choice.classList.remove('choosed');
+			choice.style.removeProperty('--choicePercentage');
+			choice.style.removeProperty('--choiceResult');
+		}
+	}
+
+	handleMessage(message, code) {
+		const e = this.element.message;
+		e.classList.remove('error', 'success', 'warn', 'not_allowed');
+		e.classList.add(code);
+		e.textContent = message;
+	}
+
+	togglePollLoader(element, active = true) {
 		let removeClass, addClass;
 		if (active) {
 			removeClass = 'loading';
@@ -192,60 +230,22 @@ class onyxPoll {
 		element.classList.add(addClass);
 	}
 
-	handleMessage(message, code) {
-		const messageEl = document.querySelector(`.${this.messageEl}`);
-		messageEl.classList.remove('error', 'success', 'warn', 'not_allowed');
-		messageEl.classList.add(code);
-		messageEl.textContent = message;
-	}
-
-	handleVoteEvent(poll) {
-		const choices = poll.choices;
-		for (let i = 0; i < choices.length; i++) {
-			choices[i].addEventListener('click', this.submitVote);
-		}
-	}
-
-	showResults(els) {
-		const res = this.results;
-		els.parent.classList.add('view');
-		els.totalEl.textContent = res.results.total;
-
-		const choosedChoice = onyxGetCookie(`onyx_poll_cookie_${res.id}`);
-		if (choosedChoice) {
-			document.querySelector(`li[data-choice="${choosedChoice}"]`).classList.add('choosed');
-		}
-
-		for (let i = 0; i < els.choices.length; i++) {
-			const choice = els.choices[i];
-			const votes = res.answers[i].votes;
-			const percent = res.answers[i].percent.toFixed(2) + '%';
-			let result = `${votes} ${onyxpoll.labels.votes} / ${percent}`;
-
-			if (this.results.results.type == 2) {
-				result = `${votes} ${onyxpoll.labels.votes}`;
-			} else if (this.results.results.type == 1) {
-				result = `${percent}`;
+	getCookie(cname) {
+		var name = cname + '=';
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
 			}
-
-			choice.removeEventListener('click', this.submitVote);
-			choice.style.setProperty('--choicePercentage', `${percent}`);
-			choice.style.setProperty('--choiceResult', `"${result}"`);
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
 		}
-	}
-
-	showPoll(els) {
-		els.parent.classList.remove('view');
-		for (let i = 0; i < els.choices.length; i++) {
-			const choice = els.choices[i];
-			choice.addEventListener('click', this.submitVote);
-			choice.classList.remove('choosed');
-			choice.style.removeProperty('--choicePercentage');
-			choice.style.removeProperty('--choiceResult');
-		}
+		return '';
 	}
 }
 
-var modal = new onyxPoll();
-modal.prepareModal();
-
+const onyxPoll = new onyxAcfPoll();
+onyxPoll.prepareModal();

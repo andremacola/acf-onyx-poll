@@ -40,6 +40,7 @@ Class OnyxPollsInit {
 	public function add_footer_elements() {
 		if ($poll = OnyxPolls::has_polls(true)) {
 			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal active' data-poll='$poll'></div>";
+			echo "<script>var onyxPollModal = true;</script>";
 		}
 	}
 
