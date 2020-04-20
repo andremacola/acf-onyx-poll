@@ -3,9 +3,7 @@ class onyxAcfPoll {
 		self = this; // bad pratice? whatever ¯\_(ツ)_/¯
 		this.response = null;
 		this.prefix = 'onyx-poll';
-		this.element = {
-			modal: document.getElementById('onyx-poll-modal'),
-		};
+		this.element = {};
 		this.name = {
 			parent: this.prefix,
 			modal: `${this.prefix}-modal`,
@@ -30,6 +28,7 @@ class onyxAcfPoll {
 
 	prepareModal() {
 		if (typeof onyxPollModal !== 'undefined') {
+			this.element.modal = document.getElementById('onyx-poll-modal');
 			this.requestModal()
 				.then((data) => this.renderModalTemplate(data, this.element.modal))
 				.catch((error) => console.warn(error));
