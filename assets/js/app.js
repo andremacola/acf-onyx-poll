@@ -227,7 +227,7 @@ class onyxAcfPoll {
 		poll.classList.remove('view');
 
 		const choices = poll.querySelectorAll(`.${this.name.choice}`);
-		choices.forEach((choice, i) => {
+		choices.forEach((choice) => {
 			choice.addEventListener('click', this.submitVote);
 			choice.classList.remove('choosed');
 			choice.style.removeProperty('--choicePercentage');
