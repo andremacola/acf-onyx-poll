@@ -17,6 +17,7 @@ Plugin for polls based on regular wordpress and acf (advanced custom fields) fun
 - [x] Disable all plugin CSS and use your own
 - [ ] Support for images (is coming)
 - [ ] Better Datatables on wordpress post type (is comming)
+- [ ] English Translation
 - [ ] Documentation/Wiki for users and developers
 
 ## BROWSER SUPPORT
