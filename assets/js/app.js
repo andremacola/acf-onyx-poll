@@ -35,7 +35,7 @@ class onyxAcfPoll {
 	preparePolls() {
 		const promisses = [];
 
-		if (this.mpoll) {
+		if (this.mpoll && ! this.getCookie('onyx_poll_modal')) {
 			promisses.push(this.requestPoll(this.mpoll.getAttribute('data-poll'))
 				.then((data) => this.renderTemplate(data, this.mpoll))
 				.catch((error) => console.log(error)));
