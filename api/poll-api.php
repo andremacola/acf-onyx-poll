@@ -241,7 +241,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 					"image"   => get_sub_field('image'),
 					"answer"  => get_sub_field('answer'),
 					"votes"   => (in_array($type, array(2,3)) && $show_results) ? get_sub_field('votes') : false,
-					"percent" => get_sub_field('votes') * 100 / $total
+					"percent" => ($total >= 1) ? get_sub_field('votes') * 100 / $total : "0"
 				);
 			endwhile;
 		}

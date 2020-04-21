@@ -52,6 +52,14 @@
 		"oAP": "/.prettierrc",
 		"oF": 1
 		},
+	"/.vscode/sftp.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/.vscode/sftp-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/acf/group_5e7d2e8ddec98.json": {
 		"ft": 524288,
 		"oA": 1,
