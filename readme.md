@@ -29,7 +29,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## OBSERVATIONS
 
-- I don't support Internet Explorer Browser and all PR's related will be rejected. One of the goals of this plugin is to be js/css lightweight.
+- I don't support Internet Explorer Browser and all PR's related will be rejected. One of the goals of this plugin is to be js/css lightweight and jQuery free.
 
 - ACF Onyx Poll uses [acf-json](https://www.advancedcustomfields.com/resources/local-json/) functionalities. So maybe it's better to syncronize the fields within ACF PRO settings. For now the only way to translate the ACF Field Labels is renaming in ACF settings or json file **(RENAME ONLY THE LABEL: STRING)**
 
