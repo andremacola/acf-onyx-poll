@@ -205,7 +205,8 @@ class onyxAcfPoll {
 		const choices = poll.querySelectorAll(`.${this.name.choice}`);
 		choices.forEach((choice, i) => {
 			const votes = res.answers[i].votes;
-			const percent = res.answers[i].percent.toFixed(2) + '%';
+			const percentFull = res.answers[i].percent;
+			const percent = (percentFull >= 1) ? percentFull.toFixed(2) + '%' : '0%';
 
 			let result = `${votes} ${onyxpoll.labels.votes} / ${percent}`;
 			if (res.type == 2) {
