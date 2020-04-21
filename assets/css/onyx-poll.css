@@ -17,9 +17,11 @@
 	--choicePercentage: 100%;
 	--choiceResult: "";
 
+	position: relative;
 	pointer-events: none;
 	background: #FFF;
 	padding: 20px 30px 20px 20px;
+	opacity: 0;
 
 	border: 1px solid #eaeaea;
 	border-radius: 4px;
@@ -27,7 +29,6 @@
 	border: 1px solid var(--borderColor);
 	border-radius: var(--modalBorderRadius);
 	box-shadow: var(--boxShadow);
-	opacity: 0;
 }
 .onyx-poll.show {
 	opacity: 1;
@@ -134,6 +135,9 @@
 	overflow: hidden;
 	display: flex;
 }
+.onyx-poll-choices li span {
+	position: relative;
+}
 .onyx-poll-choices li:last-child {
 	margin-bottom: 0;
 }
@@ -193,7 +197,7 @@
 	left: 50%;
 	transform: translate3d(-50%, -50%, 0) scale(.5);
 	opacity: 0;
-	transiton: all 300ms ease;
+	transition: all 300ms ease;
 	pointer-events: none;;
 }
 .onyx-poll-loader .spinner,
@@ -202,7 +206,7 @@
 	width: 10em;
 	height: 10em;
 }
-.onyx-poll-loader  .spinner{
+.onyx-poll-loader  .spinner {
 	position: relative;
 	display: block;
 	font-size: 10px;
@@ -234,7 +238,6 @@
 		transform: rotate(360deg);
 	}
 }
-
 
 /* VIEW RESULTS */
 .onyx-poll.view .onyx-poll-choices li {
@@ -277,7 +280,12 @@
 	background-color: #f5f5f5;
 	background-color: var(--choiceHoverBG);
 
-	z-index: -1;
+	/* z-index: -1; */
 	transition: all 100ms ease;
 	transform: translate3d(-100%, 0, 0);
+}
+
+/* WIDGET */
+.onyx-poll-widget {
+	box-shadow: none;
 }

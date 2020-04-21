@@ -126,6 +126,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/assets/js/closest-polyfill.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 1,
+		"oAP": "/assets/js/closest-polyfill-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/assets/js/onyx-poll.min.js": {
 		"bF": 0,
 		"ft": 64,
