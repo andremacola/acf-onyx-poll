@@ -4,6 +4,7 @@
 }
 
 .onyx-poll {
+	--pollWidgetWidth: 400px;
 	--borderColor: #dbe9f5;
 	--boxShadow: 0 4px 12px 6px rgba(31,70,88,0.04);
 	--modalBorderRadius: 4px;
@@ -288,4 +289,21 @@
 /* WIDGET */
 .onyx-poll-widget {
 	box-shadow: none;
+	width: 100%;
+	max-width: var(--pollWidgetWidth);
+}
+
+.onyx-poll-widget.left {
+	float: left;
+	margin: 0 1em 1em 0;
+}
+
+.onyx-poll-widget.right {
+	float: right;
+	margin: 0 0 1em 1em;
+}
+
+.onyx-poll-widget.full {
+	max-width: 100%;
+	margin: 1em 0 1em 0;
 }

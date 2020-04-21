@@ -7,6 +7,7 @@ Plugin for polls based on regular wordpress and acf (advanced custom fields) fun
 
 ## FEATURES
 
+- [x] Include poll with a shortcode [onyx-poll id=XX class="left|right|full"]
 - [x] Multiple polls per page
 - [x] Show poll in a modal
 - [x] Limit vote by device or time
@@ -17,6 +18,7 @@ Plugin for polls based on regular wordpress and acf (advanced custom fields) fun
 - [x] Disable all plugin CSS and use your own
 - [ ] Support for images (is coming)
 - [ ] Better Datatables on wordpress post type (is comming)
+- [ ] Custom Gutemberg Block
 - [ ] English Translation
 - [ ] Documentation/Wiki for users and developers
 
