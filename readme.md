@@ -25,6 +25,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [ ] Custom Gutemberg Block
 - [ ] English Translation (especially for ACF fields)
 - [ ] Email notification when poll is expired (considering)
+- [ ] Select multiple options to vote (considering)
 - [ ] Documentation/Wiki for users and developers
 
 ## OBSERVATIONS
