@@ -150,7 +150,9 @@ Class OnyxPollsInit {
 		require_once(__DIR__ . '/api/poll-api.php');
 
 		// Enqueue scripts and styles
-		add_action('wp_enqueue_scripts', array($this, 'add_assets'));
+		if (!(function_exists('is_amp_endpoint') && is_amp_endpoint())) {
+			add_action('wp_enqueue_scripts', array($this, 'add_assets'));
+		}
 
 		// Add footer html elements
 		add_action('wp_footer', array($this, 'add_footer_elements'), 1);

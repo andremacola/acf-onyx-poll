@@ -60,6 +60,14 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/.vscode/stubs.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/.vscode/stubs.php",
+		"oF": 0
+		},
 	"/acf/group_5e7d2e8ddec98.json": {
 		"ft": 524288,
 		"oA": 1,
