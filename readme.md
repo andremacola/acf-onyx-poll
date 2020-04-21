@@ -9,7 +9,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## FEATURES
 
-- [x] Include poll with a shortcode [onyx-poll id=XX class="left|right|full"]
+- [x] Include poll with a shortcode `[onyx-poll id=XX class="left|right|full"]`
 - [x] One click to vote
 - [x] Multiple polls per page
 - [x] Show poll in a modal
@@ -57,6 +57,10 @@ You can do some customization by overriding some CSS variables inside your css f
 	--loaderBG: #a3caec;
 }
 ```
+
+Maybe you will have to set the `font-family` and `font-size` for some elements to match your theme style.
+
+If you need a more advanced attributes, the CSS source is located on `assets/css/onyx-poll.css`. You can use as a guide but **never** override the original files.
 
 ## BROWSER SUPPORT
 
