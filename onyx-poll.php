@@ -38,7 +38,7 @@ Class OnyxPollsInit {
 	 * Add elements on footer in some conditionals
 	 */
 	public function add_footer_elements() {
-		if ($poll = OnyxPolls::has_polls(true)) {
+		if ($poll = OnyxPolls::has_polls(true) && !$this->is_amp()) {
 			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal active' data-poll='$poll'></div>";
 			echo "<script>var onyxPollModal = true;</script>";
 		}
@@ -150,7 +150,7 @@ Class OnyxPollsInit {
 		require_once(__DIR__ . '/api/poll-api.php');
 
 		// Enqueue scripts and styles
-		if (!(function_exists('is_amp_endpoint') && is_amp_endpoint())) {
+		if (!$this->is_amp()) {
 			add_action('wp_enqueue_scripts', array($this, 'add_assets'));
 		}
 
@@ -159,6 +159,10 @@ Class OnyxPollsInit {
 
 		// Add onyx poll shortcode
 		add_shortcode("onyx-poll", array($this, 'shortcode'));
+	}
+
+	public function is_amp() {
+		return function_exists('is_amp_endpoint') && is_amp_endpoint();
 	}
 
 }
