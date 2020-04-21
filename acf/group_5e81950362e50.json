@@ -34,10 +34,10 @@
         },
         {
             "key": "field_5e81c96326aab",
-            "label": "Usar CSS do plugin",
+            "label": "Usar CSS próprio",
             "name": "onyx_poll_css",
             "type": "true_false",
-            "instructions": "Para utilizar seu próprio CSS, desmarque esta opção",
+            "instructions": "Para utilizar seu próprio CSS e desabilitar os estilos padrões do plugin, marque esta opção",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -46,7 +46,7 @@
                 "id": ""
             },
             "message": "",
-            "default_value": 1,
+            "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -69,5 +69,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1585564257
+    "modified": 1587495627
 }

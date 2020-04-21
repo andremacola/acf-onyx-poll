@@ -50,12 +50,11 @@ Class OnyxPollsInit {
 	 */
 	public function add_assets() {
 		// Include scripts on front end
-		if (!is_admin() && OnyxPolls::has_polls()) {
+		if (!is_admin() && OnyxPolls::has_polls() && !$this->is_amp()) {
 			$js = $this->get_asset_vars('assets/js/onyx-poll.min.js');
-			// $js = $this->get_asset_vars('assets/js/app.js');
 			wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
 
-			if (get_field('onyx_poll_css', 'options')) {
+			if (!get_field('onyx_poll_css', 'options')) {
 				$css = $this->get_asset_vars('assets/css/onyx-poll.min.css');
 				wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
 			}
@@ -151,9 +150,7 @@ Class OnyxPollsInit {
 		require_once(__DIR__ . '/api/poll-api.php');
 
 		// Enqueue scripts and styles
-		if (!$this->is_amp()) {
-			add_action('wp_enqueue_scripts', array($this, 'add_assets'));
-		}
+		add_action('wp_enqueue_scripts', array($this, 'add_assets'));
 
 		// Add footer html elements
 		add_action('wp_footer', array($this, 'add_footer_elements'), 1);

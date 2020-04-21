@@ -5,7 +5,8 @@ class onyxAcfPoll {
 		self = this; // bad pratice? whatever ¯\_(ツ)_/¯
 		this.response = [];
 		this.prefix = 'onyx-poll';
-		this.polls = document.querySelectorAll(`.onyx-poll`);
+		this.mpoll = document.querySelector(`#onyx-poll-modal`);
+		this.polls = document.querySelectorAll(`.onyx-poll-widget`);
 		this.element = {};
 		this.name = {
 			parent: this.prefix,
@@ -28,12 +29,18 @@ class onyxAcfPoll {
 		};
 
 		this.submitVote = this.submitVote.bind(this);
-		// this.prepareModal();
 		this.preparePolls();
 	}
 
 	preparePolls() {
 		const promisses = [];
+
+		if (this.mpoll) {
+			promisses.push(this.requestPoll(this.mpoll.getAttribute('data-poll'))
+				.then((data) => this.renderTemplate(data, this.mpoll))
+				.catch((error) => console.log(error)));
+		}
+
 		this.polls.forEach((poll) => {
 			promisses.push(this.requestPoll(poll.getAttribute('data-poll'))
 				.then((data) => this.renderTemplate(data, poll))
@@ -134,14 +141,16 @@ class onyxAcfPoll {
 			this.element.modal = document.getElementById(this.name.modal);
 			this.element.modal.classList.add('show');
 			this.element.closeButton.onclick = () => {
-				this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
+				if (onyxpoll.modaltime >= 1) {
+					console.log('cookie created');
+					this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
+				}
 				this.element.modal.remove();
 			};
 		}
 
 		// view poll results button and vote poll button (back from results)
-		const pollID = true;
-		if (typeof pollID != 'undefined') {
+		if (this.element.viewButton) {
 			for (let i = 0; i < this.element.viewButton.length; i++) {
 				this.element.viewButton[i].onclick = () => this.showResults();
 				this.element.voteButton[i].onclick = () => this.showPoll();
@@ -169,10 +178,10 @@ class onyxAcfPoll {
 					t.classList.add('choosed');
 				}
 
-				// set cookie if vote is from a modal
-				if (poll.id === this.name.modal) {
-					this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
-				}
+				// set cookie for modal time if vote is from a modal
+				// if (poll.id === this.name.modal) {
+				// 	this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
+				// }
 
 				// remove list options if no results option is marked;
 				if (typeof response.results != 'undefined') {
