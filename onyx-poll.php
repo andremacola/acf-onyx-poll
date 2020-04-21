@@ -38,7 +38,8 @@ Class OnyxPollsInit {
 	 * Add elements on footer in some conditionals
 	 */
 	public function add_footer_elements() {
-		if ($poll = OnyxPolls::has_polls(true) && !$this->is_amp()) {
+		$poll = OnyxPolls::has_polls(true);
+		if ($poll && !$this->is_amp()) {
 			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal active' data-poll='$poll'></div>";
 			echo "<script>var onyxPollModal = true;</script>";
 		}
