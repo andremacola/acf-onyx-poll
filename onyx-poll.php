@@ -62,7 +62,8 @@ Class OnyxPollsInit {
 
 			wp_localize_script('acf-onyx-poll', 'onyxpoll',
 				array(
-					'apiurl' => rest_url(),
+					'apiurl'    => rest_url(),
+					'modaltime' => get_field('onyx_poll_modal_time', 'options'),
 					'labels' => array(
 						'vote'    => __('Votar na enquete', 'acf-onyx-poll'),
 						'votes'   => __('votos', 'acf-onyx-poll'),

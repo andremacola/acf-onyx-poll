@@ -130,10 +130,13 @@ class onyxAcfPoll {
 		this.element.closeButton = document.querySelector(`.${this.name.closeButton}`);
 
 		// show / close modal poll
-		if (typeof onyxPollModal !== 'undefined') {
+		if (typeof onyxPollModal !== 'undefined' && ! this.getCookie('onyx_poll_modal')) {
 			this.element.modal = document.getElementById(this.name.modal);
 			this.element.modal.classList.add('show');
-			this.element.closeButton.onclick = () => this.element.modal.remove();
+			this.element.closeButton.onclick = () => {
+				this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
+				this.element.modal.remove();
+			};
 		}
 
 		// view poll results button and vote poll button (back from results)
@@ -164,6 +167,11 @@ class onyxAcfPoll {
 
 				if (response.code == 'success') {
 					t.classList.add('choosed');
+				}
+
+				// set cookie if vote is from a modal
+				if (poll.id === this.name.modal) {
+					this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
 				}
 
 				// remove list options if no results option is marked;
@@ -261,6 +269,18 @@ class onyxAcfPoll {
 			}
 		}
 		return '';
+	}
+
+	createCookie(name, value, hours) {
+		var expires;
+		if (hours) {
+			var now = new Date();
+			now.setTime(now.getTime() + (hours * 60 * 60 * 1000));
+			expires = '; expires=' + now.toUTCString();
+		} else {
+			expires = '';
+		}
+		document.cookie = name + '=' + value + expires + '; path=/';
 	}
 }
 
