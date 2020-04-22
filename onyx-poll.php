@@ -16,7 +16,7 @@ if (!defined( 'ABSPATH')) {
 	exit;
 }
 
-if(!class_exists('OnyxPoll')):
+if(!class_exists('OnyxPollsInit')):
 
 Class OnyxPollsInit {
 
@@ -112,7 +112,7 @@ Class OnyxPollsInit {
 	 * @param	void
 	 * @return	void
 	 */
-	function initialize() {
+	 public function initialize() {
 		// Change ACF Local JSON save location to /acf folder inside this plugin
 		// add_filter('acf/settings/save_json', function() {
 		// 	return __DIR__ . '/acf';

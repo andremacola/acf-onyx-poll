@@ -2,7 +2,6 @@ import './closest-polyfill';
 
 class onyxAcfPoll {
 	constructor() {
-		self = this; // bad pratice? whatever ¯\_(ツ)_/¯
 		this.response = [];
 		this.prefix = 'onyx-poll';
 		this.mpoll = document.querySelector(`#onyx-poll-modal`);
@@ -41,17 +40,23 @@ class onyxAcfPoll {
 				.catch((error) => console.log(error)));
 		}
 
-		this.polls.forEach((poll) => {
-			promisses.push(this.requestPoll(poll.getAttribute('data-poll'))
-				.then((data) => this.renderTemplate(data, poll))
-				.catch((error) => console.log(error)));
-		});
-		Promise.all(promisses).then(() => this.eventHandlers());
+		if (this.polls) {
+			this.polls.forEach((poll) => {
+				promisses.push(this.requestPoll(poll.getAttribute('data-poll'))
+					.then((data) => this.renderTemplate(data, poll))
+					.catch((error) => console.log(error)));
+			});
+		}
+
+		if (this.mpoll || this.poll) {
+			Promise.all(promisses).then(() => this.eventHandlers());
+		}
 	}
 
 	requestPoll(pollID) {
 		const getUrl = (pollID) ? `${onyxpoll.apiurl}onyx/polls/list/?id=${pollID}` : `${onyxpoll.apiurl}onyx/polls/list/?modal=1`;
 		return new Promise((resolve, reject) => {
+			const self = this;
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', getUrl);
 			xhr.send(null);
@@ -73,6 +78,7 @@ class onyxAcfPoll {
 			poll: choice.getAttribute('data-poll'),
 		};
 		return new Promise((resolve, reject) => {
+			const self = this;
 			const xhr = new XMLHttpRequest();
 			xhr.open('POST', `${onyxpoll.apiurl}onyx/polls/vote`);
 			xhr.setRequestHeader('Content-Type', 'application/json');
