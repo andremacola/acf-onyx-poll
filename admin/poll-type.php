@@ -11,8 +11,8 @@ class OnyxPollsCpt {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->name    = __('Enquete', 'acf-onyx-poll');
-		$this->namep   = __('Enquetes', 'acf-onyx-poll');
+		$this->name    = __('Poll', 'acf-onyx-poll');
+		$this->namep   = __('Polls', 'acf-onyx-poll');
 		$this->cap     = 'onyxpoll';
 		$this->caps    = 'onyxpolls';
 		$this->slug    = 'onyxpolls';
@@ -30,23 +30,23 @@ class OnyxPollsCpt {
 		$labels = array(
 			'name'               => $this->namep,
 			'singular_name'      => $this->name,
-			'all_items'          => __('Todas as enquetes', 'acf-onyx-poll'),
-			'add_new'            => __('Adicionar nova', 'acf-onyx-poll'),
-			'add_new_item'       => __('Adicionar nova enquete', 'acf-onyx-poll'),
-			'edit_item'          => __('Editar enquete', 'acf-onyx-poll'),
-			'new_item'           => __('Adicionar enquete', 'acf-onyx-poll'),
-			'view_item'          => __('Ver enquete', 'acf-onyx-poll'),
-			'search_items'       => __('Buscar enquete', 'acf-onyx-poll'),
-			'not_found'          => __('Nenhuma enquete encontrada', 'acf-onyx-poll'),
-			'not_found_in_trash' => __('Nenhuma enquete encontrada na lixeira', 'acf-onyx-poll'),
-			'parent_item_colon'  => __('Enquete pai', 'acf-onyx-poll'),
+			'all_items'          => __('All polls', 'acf-onyx-poll'),
+			'add_new'            => __('Add new', 'acf-onyx-poll'),
+			'add_new_item'       => __('Add new poll', 'acf-onyx-poll'),
+			'edit_item'          => __('Edit poll', 'acf-onyx-poll'),
+			'new_item'           => __('Add poll', 'acf-onyx-poll'),
+			'view_item'          => __('View poll', 'acf-onyx-poll'),
+			'search_items'       => __('Search poll', 'acf-onyx-poll'),
+			'not_found'          => __('No polls found', 'acf-onyx-poll'),
+			'not_found_in_trash' => __('No poll found in trash', 'acf-onyx-poll'),
+			'parent_item_colon'  => __('Poll father', 'acf-onyx-poll'),
 			'menu_name'          => $this->namep
 		);
 
 		$args = array(
 			'labels'              => $labels,
 			'hierarchical'        => false,
-			'description'         => __('Inclusão de novas enquetes', 'acf-onyx-poll'),
+			'description'         => __('Add new polls', 'acf-onyx-poll'),
 			'supports'            => array('title'),
 			'public'              => false,
 			'show_ui'             => true,
@@ -74,8 +74,8 @@ class OnyxPollsCpt {
 	public function register_config_admin() {
 		if(function_exists('acf_add_options_page')) {
 			$options = acf_add_options_page(array(
-				'page_title'  => __('Configurações das Enquetes', 'acf-onyx-poll'),
-				'menu_title'  => __('Configurações', 'acf-onyx-poll'),
+				'page_title'  => __('Poll Settings', 'acf-onyx-poll'),
+				'menu_title'  => __('Settings', 'acf-onyx-poll'),
 				'menu_slug'   => 'onyx-poll-settings',
 				'capability'  => 'edit_posts',
 				'parent_slug' => 'edit.php?post_type=' . $this->slug,

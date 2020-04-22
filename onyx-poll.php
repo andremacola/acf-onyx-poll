@@ -64,12 +64,12 @@ Class OnyxPollsInit {
 					'apiurl'    => rest_url(),
 					'modaltime' => get_field('onyx_poll_modal_time', 'options'),
 					'labels' => array(
-						'vote'    => __('Votar na enquete', 'acf-onyx-poll'),
-						'votes'   => __('votos', 'acf-onyx-poll'),
-						'view'    => __('Ver resultado', 'acf-onyx-poll'),
-						'total'   => __('Total de votos', 'acf-onyx-poll'),
-						'success' => __('Votação realizada com sucesso.', 'acf-onyx-poll'),
-						'error'   => __('Erro na votação, tente novamante.', 'acf-onyx-poll')
+						'vote'    => __('Vote', 'acf-onyx-poll'),
+						'votes'   => __('votes', 'acf-onyx-poll'),
+						'view'    => __('Views result', 'acf-onyx-poll'),
+						'total'   => __('Total votes', 'acf-onyx-poll'),
+						'success' => __('Vote was submitted successfully.', 'acf-onyx-poll'),
+						'error'   => __('Poll vote error, try again.', 'acf-onyx-poll')
 					)
 				)
 			);
@@ -119,28 +119,40 @@ Class OnyxPollsInit {
 		// });
 
 		// Include the /acf folder in the places to look for ACF Local JSON files
-		add_filter('acf/settings/load_json', function($paths) {
-			$paths[] = __DIR__ . '/acf';
-			return $paths;
-		});
+		// add_filter('acf/settings/load_json', function($paths) {
+		// 	$paths[] = __DIR__ . '/acf';
+		// 	return $paths;
+		// });
+
+		// Load text domain language
+		load_plugin_textdomain(
+			'acf-onyx-poll',
+			false,
+			dirname(plugin_basename(__FILE__)) . '/languages'
+		);
 
 		// Verify if Advanced Custom Fields PRO is activated
 		add_action('admin_init', function() {
 			if (is_admin() && current_user_can('activate_plugins') && !is_plugin_active('advanced-custom-fields-pro/acf.php')) {
 				add_action('admin_notices', function() {
-					$notice = __('Desculpe, mas o Onyx Poll requer o que ACF PRO esteja instalado e ativo.');
+					$notice = __('Desculpe, mas o ACF Onyx Poll requer o que ACF PRO esteja instalado e ativo.');
 					echo "<div class='error'><p>$notice</p></div>";
 				});
-				deactivate_plugins(plugin_basename( __FILE__ ));
+				deactivate_plugins(plugin_basename(__FILE__));
 				if (isset($_GET['activate'])) {
 					unset($_GET['activate']);
 				}
 		    }
 		});
 
+		// Load ACF fields
+		add_action('acf/init', function() {
+			require(__DIR__ . '/acf/fields.php');
+		});
+
 		if(is_admin()) {
 			// Create Poll Post Type
-			require_once(__DIR__ . '/admin/poll-type.php');
+			require_once(__DIR__ . '/admin/poll-type.php');			
 		}
 
 		// Load Helper Methods

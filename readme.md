@@ -20,10 +20,10 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [x] Show/Hide results
 - [x] Customize css with css variables
 - [x] Disable all plugin CSS and use your own
+- [x] Translations support
 - [ ] Support for images (is coming)
 - [ ] Better Datatables on wordpress post type (is comming)
 - [ ] Custom Gutemberg Block
-- [ ] English Translation (especially for ACF fields)
 - [ ] Email notification when poll is expired (considering)
 - [ ] Select multiple options to vote (considering)
 - [ ] Documentation/Wiki for users and developers

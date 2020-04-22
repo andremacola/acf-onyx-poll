@@ -4,10 +4,10 @@
     "fields": [
         {
             "key": "field_5e81954eb8b44",
-            "label": "Intervalo da Modal para Votação",
+            "label": "Modal Interval for Voting",
             "name": "onyx_poll_modal_time",
             "type": "select",
-            "instructions": "Periodicidade que a modal da enquete aparece para o usuário.",
+            "instructions": "Periodicity that the poll modal appears to the user.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,13 +16,13 @@
                 "id": ""
             },
             "choices": {
-                "1": "A cada 1 hora",
-                "2": "A cada 2 horas",
-                "3": "A cada 3 horas",
-                "4": "A cada 4 horas",
-                "5": "A cada 5 horas",
-                "12": "A cada 12 horas",
-                "24": "A cada 24 horas"
+                "1": "Every 1 hour",
+                "2": "Every 2 hour",
+                "3": "Every 3 hour",
+                "4": "Every 4 hour",
+                "5": "Every 5 hour",
+                "12": "Every 12 hour",
+                "24": "Every 24 hour"
             },
             "default_value": [],
             "allow_null": 1,
@@ -34,10 +34,10 @@
         },
         {
             "key": "field_5e81c96326aab",
-            "label": "Usar CSS próprio",
+            "label": "Use own CSS",
             "name": "onyx_poll_css",
             "type": "true_false",
-            "instructions": "Para utilizar seu próprio CSS e desabilitar os estilos padrões do plugin, marque esta opção",
+            "instructions": "To use your own CSS and disable the default plugin styles, check this option",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {

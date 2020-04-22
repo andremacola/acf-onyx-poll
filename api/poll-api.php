@@ -24,12 +24,12 @@ class OnyxPollsApi extends WP_REST_Controller {
 			'poll_expired'      => 'onyx_poll_expired'
 		);
 		$this->message = array(
-			'success'    => __('Seu voto foi realizado com sucesso', 'onyx-poll'),
-			'error'      => __('Erro na votação, tente novamente', 'onyx-poll'),
-			'invalid'    => __('Parâmetros de votação da enquete inválidos', 'onyx-poll'),
-			'no_exist'   => __('Enquete inexistente ou expirada', 'onyx-poll'),
-			'no_allowed' => __('Você já votou nesta enquete', 'onyx-poll'),
-			'no_polls'   => __('Nenhuma enquete encontrada', 'onyx-poll')
+			'success'    => __('Vote was submitted successfully', 'acf-onyx-poll'),
+			'error'      => __('Poll vote error, try again', 'acf-onyx-poll'),
+			'invalid'    => __('Invalid poll parameters', 'acf-onyx-poll'),
+			'no_exist'   => __('Non-existent or expired poll', 'acf-onyx-poll'),
+			'no_allowed' => __('You have already voted in this poll', 'acf-onyx-poll'),
+			'no_polls'   => __('No polls found', 'acf-onyx-poll')
 		);
 	}
 

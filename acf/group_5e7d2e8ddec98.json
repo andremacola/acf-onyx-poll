@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_5e7d2f3504edc",
-            "label": "Respostas",
+            "label": "Answers",
             "name": "onyx_poll_answers",
             "type": "repeater",
             "instructions": "",
@@ -23,7 +23,7 @@
             "sub_fields": [
                 {
                     "key": "field_5e7d3ded5af23",
-                    "label": "Imagem",
+                    "label": "Image",
                     "name": "image",
                     "type": "image",
                     "instructions": "",
@@ -47,7 +47,7 @@
                 },
                 {
                     "key": "field_5e7d2f4904edd",
-                    "label": "Resposta",
+                    "label": "Answer",
                     "name": "answer",
                     "type": "text",
                     "instructions": "",
@@ -66,7 +66,7 @@
                 },
                 {
                     "key": "field_5e7d2f6204ede",
-                    "label": "Votos",
+                    "label": "Votes",
                     "name": "votes",
                     "type": "number",
                     "instructions": "",
@@ -89,7 +89,7 @@
         },
         {
             "key": "field_5e7d3710c640f",
-            "label": "Modal da Enquete",
+            "label": "Poll Modal",
             "name": "onyx_poll_modal",
             "type": "true_false",
             "instructions": "",
@@ -108,7 +108,7 @@
         },
         {
             "key": "field_5e7d3352bab6a",
-            "label": "Limitar votação",
+            "label": "Limit voting",
             "name": "onyx_poll_limit_vote",
             "type": "select",
             "instructions": "",
@@ -120,16 +120,16 @@
                 "id": ""
             },
             "choices": {
-                "1": "Voto Livre",
-                "2": "Por dispositivo",
-                "30": "A cada 30 minutos",
-                "60": "A cada 1 hora",
-                "120": "A cada 2 horas",
-                "180": "A cada 3 horas",
-                "240": "A cada 4 horas",
-                "300": "A cada 5 horas",
-                "720": "A cada 12 horas",
-                "1440": "A cada 24 horas"
+                "1": "Free Vote",
+                "2": "Per device",
+                "30": "Every 30 minutes",
+                "60": "Every 1 hour",
+                "120": "Every 2 hours",
+                "180": "Every 3 hours",
+                "240": "Every 4 hours",
+                "300": "Every 5 hours",
+                "720": "Every 12 hours",
+                "1440": "Every 24 hours"
             },
             "default_value": [
                 1
@@ -143,7 +143,7 @@
         },
         {
             "key": "field_5e7d329ff86b4",
-            "label": "Fim da Enquete",
+            "label": "End of Poll",
             "name": "onyx_poll_end",
             "type": "date_time_picker",
             "instructions": "",
@@ -160,7 +160,7 @@
         },
         {
             "key": "field_5e7d3261e0a48",
-            "label": "Total de votos",
+            "label": "Total votes",
             "name": "onyx_poll_total",
             "type": "number",
             "instructions": "",
@@ -181,7 +181,7 @@
         },
         {
             "key": "field_5e7d39d093c70",
-            "label": "Mostrar Resultados",
+            "label": "Show Results",
             "name": "onyx_poll_show_results",
             "type": "true_false",
             "instructions": "",
@@ -200,7 +200,7 @@
         },
         {
             "key": "field_5e7d3a19c7c98",
-            "label": "Resultados",
+            "label": "Results",
             "name": "onyx_poll_results",
             "type": "select",
             "instructions": "",
@@ -212,9 +212,9 @@
                 "id": ""
             },
             "choices": {
-                "1": "Mostrar em porcentagem",
-                "2": "Mostrar em números",
-                "3": "Mostrar ambos"
+                "1": "Show in percentage",
+                "2": "Show in numbers",
+                "3": "Show both"
             },
             "default_value": [
                 1
@@ -228,7 +228,7 @@
         },
         {
             "key": "field_5e81c48f36a8f",
-            "label": "Expirada",
+            "label": "Expired",
             "name": "onyx_poll_expired",
             "type": "true_false",
             "instructions": "",

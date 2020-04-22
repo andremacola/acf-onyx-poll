@@ -5,4 +5,9 @@
  */
 function is_amp_endpoint() {}
 
+/**
+ * Add ACF custom settings page
+ */
+function acf_add_options_page() {}
+
 ?>

@@ -13,9 +13,9 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/.editorconfig",
-		"oF": 0
+		"oF": 1
 		},
 	"/.eslintignore": {
 		"cB": 0,
@@ -66,6 +66,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/.vscode/stubs.php",
+		"oF": 0
+		},
+	"/acf/fields.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/acf/fields.php",
 		"oF": 0
 		},
 	"/acf/group_5e7d2e8ddec98.json": {
@@ -198,6 +206,30 @@
 		"oA": 1,
 		"oAP": "/index.php",
 		"oF": 0
+		},
+	"/languages/acf-onyx-poll-pt_BR.mo": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/languages/acf-onyx-poll-pt_BR.mo",
+		"oF": 1
+		},
+	"/languages/acf-onyx-poll-pt_BR.po": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/languages/acf-onyx-poll-pt_BR.po",
+		"oF": 1
+		},
+	"/languages/acf-onyx-poll.pot": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/languages/acf-onyx-poll.pot",
+		"oF": 1
 		},
 	"/node_modules": {
 		"ft": 65536,
