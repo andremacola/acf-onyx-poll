@@ -26,7 +26,7 @@
 
 	border: 1px solid #eaeaea;
 	border-radius: 4px;
-	box-shadow: 0 0 12px 6px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 0 12px 6px rgba(0, 0, 0, 0.1);
 	border: 1px solid var(--borderColor);
 	border-radius: var(--modalBorderRadius);
 	box-shadow: var(--boxShadow);
