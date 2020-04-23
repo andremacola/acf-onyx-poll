@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF Onyx Poll 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2020-04-22T19:55:11+00:00\n"
-"PO-Revision-Date: 2020-04-22 16:55-0300\n"
+"POT-Creation-Date: 2020-04-23T05:13:25+00:00\n"
+"PO-Revision-Date: 2020-04-23 02:15-0300\n"
 "Last-Translator: \n"
 "Language-Team: ONYX\n"
 "Language: pt_BR\n"
@@ -45,7 +45,7 @@ msgstr "Imagem"
 msgid "Answer"
 msgstr "Resposta"
 
-#: acf/fields.php:73
+#: acf/fields.php:73 admin/poll-type.php:99
 msgid "Votes"
 msgstr "Votos"
 
@@ -156,57 +156,73 @@ msgstr "Enquete"
 msgid "Polls"
 msgstr "Enquetes"
 
-#: admin/poll-type.php:33
+#: admin/poll-type.php:37
 msgid "All polls"
 msgstr "Todas as enquetes"
 
-#: admin/poll-type.php:34
+#: admin/poll-type.php:38
 msgid "Add new"
 msgstr "Adicionar nova"
 
-#: admin/poll-type.php:35
+#: admin/poll-type.php:39
 msgid "Add new poll"
 msgstr "Adicionar nova enquete"
 
-#: admin/poll-type.php:36
+#: admin/poll-type.php:40
 msgid "Edit poll"
 msgstr "Editar enquete"
 
-#: admin/poll-type.php:37
+#: admin/poll-type.php:41
 msgid "Add poll"
 msgstr "Adicionar enquete"
 
-#: admin/poll-type.php:38
+#: admin/poll-type.php:42
 msgid "View poll"
 msgstr "Ver enquete"
 
-#: admin/poll-type.php:39
+#: admin/poll-type.php:43
 msgid "Search poll"
 msgstr "Buscar enquete"
 
-#: admin/poll-type.php:40 api/poll-api.php:32
+#: admin/poll-type.php:44 api/poll-api.php:32
 msgid "No polls found"
 msgstr "Nenhuma enquete encontrada"
 
-#: admin/poll-type.php:41
+#: admin/poll-type.php:45
 msgid "No poll found in trash"
 msgstr "Nenhuma enquete encontrada na lixeira"
 
-#: admin/poll-type.php:42
+#: admin/poll-type.php:46
 msgid "Poll father"
 msgstr "Enquete pai"
 
-#: admin/poll-type.php:49
+#: admin/poll-type.php:53
 msgid "Add new polls"
 msgstr "Inclusão de novas enquetes"
 
-#: admin/poll-type.php:77
+#: admin/poll-type.php:81
 msgid "Poll Settings"
 msgstr "Configurações das Enquetes"
 
-#: admin/poll-type.php:78
+#: admin/poll-type.php:82
 msgid "Settings"
 msgstr "Configurações"
+
+#: admin/poll-type.php:98
+msgid "ID"
+msgstr "ID"
+
+#: admin/poll-type.php:100
+msgid "Modal"
+msgstr "Modal"
+
+#: admin/poll-type.php:101
+msgid "Status"
+msgstr "Status"
+
+#: admin/poll-type.php:102
+msgid "End date"
+msgstr "Expiração"
 
 #: api/poll-api.php:27
 msgid "Vote was submitted successfully"

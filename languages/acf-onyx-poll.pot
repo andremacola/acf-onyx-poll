@@ -9,9 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-04-22T19:55:11+00:00\n"
+"POT-Creation-Date: 2020-04-23T05:13:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.3.0\n"
+"X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: acf-onyx-poll\n"
 
 #. Plugin Name of the plugin
@@ -44,6 +44,7 @@ msgid "Answer"
 msgstr ""
 
 #: acf/fields.php:73
+#: admin/poll-type.php:99
 msgid "Votes"
 msgstr ""
 
@@ -159,57 +160,73 @@ msgstr ""
 msgid "Polls"
 msgstr ""
 
-#: admin/poll-type.php:33
+#: admin/poll-type.php:37
 msgid "All polls"
 msgstr ""
 
-#: admin/poll-type.php:34
+#: admin/poll-type.php:38
 msgid "Add new"
 msgstr ""
 
-#: admin/poll-type.php:35
+#: admin/poll-type.php:39
 msgid "Add new poll"
 msgstr ""
 
-#: admin/poll-type.php:36
+#: admin/poll-type.php:40
 msgid "Edit poll"
 msgstr ""
 
-#: admin/poll-type.php:37
+#: admin/poll-type.php:41
 msgid "Add poll"
 msgstr ""
 
-#: admin/poll-type.php:38
+#: admin/poll-type.php:42
 msgid "View poll"
 msgstr ""
 
-#: admin/poll-type.php:39
+#: admin/poll-type.php:43
 msgid "Search poll"
 msgstr ""
 
-#: admin/poll-type.php:40
+#: admin/poll-type.php:44
 #: api/poll-api.php:32
 msgid "No polls found"
 msgstr ""
 
-#: admin/poll-type.php:41
+#: admin/poll-type.php:45
 msgid "No poll found in trash"
 msgstr ""
 
-#: admin/poll-type.php:42
+#: admin/poll-type.php:46
 msgid "Poll father"
 msgstr ""
 
-#: admin/poll-type.php:49
+#: admin/poll-type.php:53
 msgid "Add new polls"
 msgstr ""
 
-#: admin/poll-type.php:77
+#: admin/poll-type.php:81
 msgid "Poll Settings"
 msgstr ""
 
-#: admin/poll-type.php:78
+#: admin/poll-type.php:82
 msgid "Settings"
+msgstr ""
+
+#: admin/poll-type.php:98
+msgid "ID"
+msgstr ""
+
+#: admin/poll-type.php:100
+msgid "Modal"
+msgstr ""
+
+#: admin/poll-type.php:101
+msgid "Status"
+msgstr ""
+
+#: admin/poll-type.php:102
+msgid "End date"
 msgstr ""
 
 #: api/poll-api.php:27
