@@ -6,7 +6,7 @@
 .onyx-poll {
 	--pollWidgetWidth: 400px;
 	--borderColor: #dbe9f5;
-	--boxShadow: 0 4px 12px 6px rgba(31,70,88,0.04);
+	--boxShadow: 0 4px 12px 6px rgba(31,70,88,0.1);
 	--modalBorderRadius: 4px;
 	--questionColor: #333;
 	--choiceColor: #333;
