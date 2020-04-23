@@ -185,7 +185,7 @@ class onyxAcfPoll {
 				}
 
 				// set cookie for modal time if vote is from a modal
-				if (poll.id === this.name.modal) {
+				if (poll.id === this.name.modal && onyxpoll.modaltime >= 1) {
 					this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
 				}
 
