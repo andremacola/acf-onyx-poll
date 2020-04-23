@@ -178,40 +178,8 @@ class OnyxPollsApi extends WP_REST_Controller {
 	* Update poll status when expire
 	*/
 	public function expire() {
-		$today = date_i18n('Y-m-d H:i:s');
-		$query = new WP_Query([
-			"post_type"         => "onyxpolls",
-			"no_found_rows"     => true,
-			"posts_per_page"    => 5,
-			"fields"            => 'ids',
-			"meta_query"        => array(
-				"relation"    => "AND",
-				array(
-					"key"      => $this->field['poll_end'],
-					"value"    => $today,
-					"compare"  => "<=",
-					"type"     => "DATETIME"
-				),
-				array(
-					"key"      => $this->field['poll_expired'],
-					"value"    => 1,
-					"compare"  => "!="
-				)
-			)
-		]);
-
-		if ($query->have_posts()) {
-			$response = $query->posts;
-			foreach ($query->posts as $post) {
-				// $post = array("ID" => $post, 'post_status' => 'draft');
-				// wp_update_post($post);
-				update_field($this->field['poll_expired'], 1, $post);
-			}
-		} else {
-			$response = null;
-		}
-
-		$header_code = ($query) ? 200 : 204;
+		$response = OnyxPolls::expire_polls();
+		$header_code = ($response) ? 200 : 204;
 		return new WP_REST_Response($response, $header_code);
 	}
 

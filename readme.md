@@ -36,9 +36,11 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 - ACF Onyx Poll [register fields via php](https://www.advancedcustomfields.com/resources/register-fields-via-php/) to be able to use Wordpress translation functions for field labels. So you won't be able to view/edit the fields inside ACF Custom Fields Settings.
 
-- To enable **CRON** you need to manually set your host cronjob to get *https://domain.tld/wp-json/onyx/polls/cron* endpoint.
+- To enable a better/faster **CRON** you need to manually set your host cronjob to get *https://domain.tld/wp-json/onyx/polls/cron* endpoint or disable WP-Cron `define('DISABLE_WP_CRON', true);` inside your wp-config and manually create the cron in your host/server
 
-	- To run every hour set the cron: `0 * * * * wget -q -O - https://domain.tld/wp-json/onyx/polls/cron`
+	- **Option 1**: To run every hour set the cron: <br> `0 * * * * wget -q -O - https://domain.tld/wp-json/onyx/polls/cron > /dev/null 2>&1`
+
+	- **Option 2**: if you disable the default WP-Cron: <br> `0 * * * * wget -q -O - https://domain.com/wp-cron.php?doing_wp_cron > /dev/null 2>&1`
 
 ## CSS Customizations
 

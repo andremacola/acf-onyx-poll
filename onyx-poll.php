@@ -181,6 +181,20 @@ Class OnyxPollsInit {
 
 		// Add onyx poll shortcode
 		add_shortcode("onyx-poll", array($this, 'shortcode'));
+
+		// Define cron event for expired polls
+		add_action('onyx-poll-cron',  array($this, 'cron_job'));
+		register_activation_hook(__FILE__, function() {
+			wp_schedule_event(time(), 'hourly', 'onyx-poll-cron');
+		});
+		register_deactivation_hook(__FILE__, function() {
+			wp_clear_scheduled_hook('onyx-poll-cron');
+		});
+
+	}
+
+	public function cron_job() {
+		OnyxPolls::expire_polls();
 	}
 
 	public function is_amp() {
