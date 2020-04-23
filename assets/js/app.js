@@ -185,9 +185,9 @@ class onyxAcfPoll {
 				}
 
 				// set cookie for modal time if vote is from a modal
-				// if (poll.id === this.name.modal) {
-				// 	this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
-				// }
+				if (poll.id === this.name.modal) {
+					this.createCookie('onyx_poll_modal', 1, onyxpoll.modaltime);
+				}
 
 				// remove list options if no results option is marked;
 				if (typeof response.results != 'undefined') {
