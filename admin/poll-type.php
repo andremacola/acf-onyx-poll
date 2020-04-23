@@ -21,6 +21,10 @@ class OnyxPollsCpt {
 		$this->namep_l = strtolower($this->namep);
 		add_action('init', array($this, 'register_cpt'));
 		add_action('init', array($this, 'register_config_admin'));
+		add_filter("manage_{$this->slug}_posts_columns", array($this, 'manage_columns'));
+		add_action("manage_{$this->slug}_posts_custom_column", array($this, 'custom_columns'), 10, 2);
+		add_filter("manage_edit-{$this->slug}_sortable_columns", array($this, 'sortable_columns'));
+		add_action('pre_get_posts', array($this, 'orderby_columns'));
 	}
 
 	/**
@@ -69,7 +73,7 @@ class OnyxPollsCpt {
 	}
 
 	/**
-	 * Register Post Type
+	 * Create settings page
 	 */
 	public function register_config_admin() {
 		if(function_exists('acf_add_options_page')) {
@@ -82,6 +86,86 @@ class OnyxPollsCpt {
 				'redirect'    => false
 			));
 		}
+	}
+
+	/**
+	 * Customize admin columns
+	 */
+	public function manage_columns($columns) {
+		$date = $columns['date'];
+		unset($columns['author']);
+		unset($columns['date']);
+		$columns['id'] = __('ID', 'acf-onyx-poll');
+		$columns['votes'] = __('Votes', 'acf-onyx-poll');
+		$columns['modal'] = __('Modal', 'acf-onyx-poll');
+		$columns['status'] = __('Status', 'acf-onyx-poll');
+		$columns['end'] = __('End date', 'acf-onyx-poll');
+		$columns['date'] = $date;
+		return $columns;
+	}
+
+	/**
+	 * Edit columns output
+	 */
+	public function custom_columns($column, $post_id) {
+		switch($column) {
+			case 'id':
+				echo "$post_id";
+				break;
+			case 'votes':
+				echo get_field('onyx_poll_total', $post_id);
+				break;
+			case 'modal':
+				$modal  = get_field('onyx_poll_modal', $post_id);
+				$status = ($modal) ? "<span class='green' title='Yes'>✔</span>" : "<span class='red' title='No'>✘</span>";
+				echo $status;
+				break;
+			case 'status':
+				$expired = get_field('onyx_poll_expired', $post_id);
+				$status  = (!$expired) ? "<span class='green' title='Published'>✔</span>" : "<span class='red' title='expired'>✘</span>";
+				echo $status;
+				break;
+			case 'end':
+				$date = get_field('onyx_poll_end', $post_id);
+				$date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+				$date = $date->format('d/m/Y');
+				echo "$date";
+				break;
+		}
+	}
+
+	/**
+	 * Sort custom columns
+	 */
+	public function sortable_columns($columns) {
+		$columns['id']    = 'id';
+		$columns['votes'] = 'votes';
+		$columns['modal'] = 'modal';
+		$columns['status'] = 'status';
+		return $columns;
+	}
+
+	/**
+	 * Sort query columns
+	 */
+	public function orderby_columns($query) {
+		if(!is_admin())
+			return;
+
+		$orderby = $query->get('orderby');
+
+		if ('id' == $orderby) {
+			$query->set('orderby', 'ID');
+  		} else if ('votes' == $orderby) {
+			$query->set('meta_key', 'onyx_poll_total');
+			$query->set('orderby', 'meta_value_num');
+  		} else if ('modal' == $orderby) {
+			$query->set('meta_key', 'onyx_poll_modal');
+			$query->set('orderby', 'meta_value_num');
+  		} else if ('status' == $orderby) {
+			$query->set('meta_key', 'onyx_poll_expired');
+			$query->set('orderby', 'meta_value_num');
+  		}
 	}
 
 }

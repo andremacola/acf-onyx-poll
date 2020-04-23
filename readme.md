@@ -3,7 +3,7 @@
 
 > This is an **alpha version** and is not available in Wordpress Repository. Will be soon
 
-Plugin for polls based on regular wordpress and acf (advanced custom fields) functionalities using **WP REST API** and ***Javascript*** methods. Fell free to submit a Pull Request.
+Plugin for polls based on regular Wordpress and acf (advanced custom fields) functionalities using **WP REST API** and ***Javascript*** methods. Fell free to submit a Pull Request.
 
 This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
@@ -20,9 +20,9 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [x] Show/Hide results
 - [x] Customize css with css variables
 - [x] Disable all plugin CSS and use your own
+- [x] Custom columns on Wordpress data table admin area
 - [x] Translations support
 - [ ] Support for images (is coming)
-- [ ] Better Datatables on wordpress post type (is comming)
 - [ ] Custom Gutemberg Block
 - [ ] Email notification when poll is expired (considering)
 - [ ] Select multiple options to vote (considering)
@@ -32,9 +32,9 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 - I don't support Internet Explorer Browser and all PR's related will be rejected. One of the goals of this plugin is to be js/css lightweight and jQuery free.
 
-- ACF Onyx Poll uses [acf-json](https://www.advancedcustomfields.com/resources/local-json/) functionalities. So maybe it's better to syncronize the fields within ACF PRO settings. For now the only way to translate the ACF Field Labels is renaming in ACF settings or json file **(RENAME ONLY THE LABEL: STRING)**
+<!-- - ACF Onyx Poll uses [acf-json](https://www.advancedcustomfields.com/resources/local-json/) functionalities. So maybe it's better to syncronize the fields within ACF PRO settings. For now the only way to translate the ACF Field Labels is renaming in ACF settings or json file **(RENAME ONLY THE LABEL: STRING)** -->
 
-- The rest of the translation can be done with .po .mo files.
+- ACF Onyx Poll [register fields via php](https://www.advancedcustomfields.com/resources/register-fields-via-php/) to be able to use Wordpress translation functions for field labels. So you won't be able to view/edit the fields inside ACF Custom Fields Settings.
 
 - To enable **CRON** you need to manually set your host cronjob to get *https://domain.tld/wp-json/onyx/polls/cron* endpoint.
 
