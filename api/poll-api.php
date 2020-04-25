@@ -133,10 +133,10 @@ class OnyxPollsApi extends WP_REST_Controller {
 
 		// validate params from req
 		if (!is_numeric($poll_id) || !isset($poll_choice) || empty($poll_answers[$poll_choice - 1])) {
-			return new WP_Error('error', $this->message['invalid'], array('status' => 200));
+			return new WP_Error('error', $this->message['invalid'], array('status' => 400));
 		}
 		if ($poll_expired || get_post_type($poll_id) != 'onyxpolls') {
-			return new WP_Error('error', $this->message['no_exist'], array('status' => 200));
+			return new WP_Error('error', $this->message['no_exist'], array('status' => 400));
 		}
 		if ($_COOKIE["onyx_poll_cookie_$poll_id"] && $poll_limit != 1) {
 			$response = array(

@@ -14,6 +14,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [x] Works with cache plugins
 - [x] Multiple polls per page
 - [x] Show poll in a modal
+- [x] Show poll results on widget after expired
 - [x] Limit vote by device or time
 - [x] Poll activation/expiration schedule
 - [x] Results in percentage, numbers or both
@@ -22,11 +23,15 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [x] Disable all plugin CSS and use your own
 - [x] Custom columns on Wordpress data table admin area
 - [x] Translations support
+
+## TO DO
+
 - [ ] Support for images (is coming)
 - [ ] Custom Gutemberg Block
 - [ ] Email notification when poll is expired (considering)
 - [ ] Select multiple options to vote (considering)
 - [ ] Documentation/Wiki for users and developers
+- [ ] Javascript Refactoring for better code view and maintenance
 
 ## OBSERVATIONS
 

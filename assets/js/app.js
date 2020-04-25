@@ -105,12 +105,12 @@ class onyxAcfPoll {
 			xhr.send(JSON.stringify(voteOptions));
 
 			xhr.onload = function() {
+				const json = JSON.parse(this.response);
+				self.response[json.poll] = json;
 				if (this.status >= 200 && this.status < 400) {
-					const json = JSON.parse(this.response);
-					self.response[json.poll] = json;
 					resolve(json);
 				} else {
-					reject('Voting not completed.');
+					reject(json);
 				}
 			};
 		});
@@ -218,9 +218,10 @@ class onyxAcfPoll {
 				}
 			}.bind(this))
 			.catch(function(err) {
-				console.warn(err);
+				console.warn(err.message);
+				poll.classList.add('voted');
 				this.togglePollLoader(poll, true);
-				this.handleMessage(poll, onyxpoll.labels.error, 'error');
+				this.handleMessage(poll, err.message, 'error');
 			}.bind(this));
 	}
 
