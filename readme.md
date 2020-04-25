@@ -30,6 +30,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [ ] Custom Gutemberg Block
 - [ ] Inject javascript only if current page has a poll
 - [ ] Documentation/Wiki for users and developers
+- [ ] Integration with Google reCaptcha
 - [ ] Email notification when poll is expired (considering)
 - [ ] Support for AMP Pages (considering)
 - [ ] Select multiple options to vote (considering)
