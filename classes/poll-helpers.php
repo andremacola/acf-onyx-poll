@@ -56,26 +56,31 @@ Class OnyxPolls {
 	/**
 	 * Verify if has active polls
 	 * 
-	 * @param bool $modal optional
+	 * @param bool $noexpired optional
+	 * @param bool $onlymodal optional
 	 * @return $post->ID
 	 */
-	public static function has_polls($modal = false) {
+	public static function has_polls($noexpired = false, $onlymodal = false) {
 		$args = [
 			'post_type'         => 'onyxpolls',
 			'no_found_rows'     => true,
 			'suppress_filters'  => true,
 			'posts_per_page'    => 1,
 			'fields'            => 'ids',
-			'meta_query'        => array(
+			'meta_query'        => array()
+		];
+
+		if ($noexpired) {
+			$args['meta_query'][] = array(
 				array(
-					'key'     => 'onyx_poll_expired',
+					'key'   => 'onyx_poll_expired',
 					'value'   => '1',
 					'compare' => '!='
 				)
-			)
-		];
+			);
+		}
 
-		if (!empty($modal)) {
+		if ($onlymodal) {
 			$args['meta_query'][] = array(
 				array(
 					'key'   => 'onyx_poll_modal',
@@ -83,6 +88,8 @@ Class OnyxPolls {
 				)
 			);
 		}
+
+		
 
 		$query = new WP_Query($args);
 		return ($query->have_posts()) ? $query->posts[0] : false;

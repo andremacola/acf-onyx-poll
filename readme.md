@@ -26,12 +26,14 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## TO DO
 
-- [ ] Support for images (is coming)
+- [ ] Support for images
 - [ ] Custom Gutemberg Block
-- [ ] Email notification when poll is expired (considering)
-- [ ] Select multiple options to vote (considering)
+- [ ] Inject javascript only if current page has a poll
 - [ ] Documentation/Wiki for users and developers
-- [ ] Javascript Refactoring for better code view and maintenance
+- [ ] Email notification when poll is expired (considering)
+- [ ] Support for AMP Pages (considering)
+- [ ] Select multiple options to vote (considering)
+- [ ] Javascript Refactoring for better code view and maintenance (after first release)
 
 ## OBSERVATIONS
 
