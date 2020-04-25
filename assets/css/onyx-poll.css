@@ -182,7 +182,8 @@
 .onyx-poll-message.success { color: #155724; }
 .onyx-poll-message.error { color: #FF554E; }
 .onyx-poll-message.warn,
-.onyx-poll-message.not_allowed { color: #856404; }
+.onyx-poll-message.not_allowed,
+.onyx-poll-invalid { color: #856404; }
 
 
 /* LOADER */

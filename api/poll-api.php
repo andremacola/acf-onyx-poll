@@ -29,7 +29,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 			'invalid'    => __('Invalid poll parameters', 'acf-onyx-poll'),
 			'no_exist'   => __('Non-existent or expired poll', 'acf-onyx-poll'),
 			'no_allowed' => __('You have already voted in this poll', 'acf-onyx-poll'),
-			'no_polls'   => __('No polls found', 'acf-onyx-poll')
+			'no_polls'   => __('No polls founded with ID ', 'acf-onyx-poll')
 		);
 	}
 
@@ -110,7 +110,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 
 			endwhile;
 		} else {
-			return new WP_Error('error', $this->message['no_polls'], array('status' => 200));
+			return new WP_Error('error', $this->message['no_polls'] . $req['id'], array('status' => 200));
 		}
 
 		return new WP_REST_Response($response, 200);

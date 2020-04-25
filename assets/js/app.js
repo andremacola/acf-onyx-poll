@@ -25,6 +25,7 @@ class onyxAcfPoll {
 			closeButton: `${this.prefix}-close`,
 
 			loader: `${this.prefix}-loader`,
+			events: false,
 		};
 
 		this.submitVote = this.submitVote.bind(this);
@@ -36,26 +37,45 @@ class onyxAcfPoll {
 
 		if (this.mpoll && ! this.getCookie('onyx_poll_modal')) {
 			promisses.push(this.requestPoll(this.mpoll.getAttribute('data-poll'))
-				.then((data) => this.renderTemplate(data, this.mpoll))
+				.then((data) => {
+					if (data.code !== 'error') {
+						this.events = this.renderTemplate(data, this.mpoll);
+					} else {
+						this.mpoll = this.mpoll.remove();
+						console.log(`Warn Modal: ${data.message}`);
+					}
+				})
 				.catch((error) => console.log(error)));
 		}
 
-		if (this.polls) {
+		if (this.polls.length >= 1) {
 			this.polls.forEach((poll) => {
 				promisses.push(this.requestPoll(poll.getAttribute('data-poll'))
-					.then((data) => this.renderTemplate(data, poll))
+					.then((data) => {
+						if (data.code !== 'error') {
+							this.events = this.renderTemplate(data, poll);
+						} else {
+							console.log(`Warn: ${data.message}`);
+						}
+					})
 					.catch((error) => console.log(error)));
 			});
 		}
 
-		if (this.mpoll || this.poll) {
-			Promise.all(promisses).then(() => this.eventHandlers());
-		}
+		Promise.all(promisses).then(() => {
+			if (this.events) {
+				this.eventHandlers();
+			}
+		});
 	}
 
 	requestPoll(pollID) {
-		const getUrl = (pollID) ? `${onyxpoll.apiurl}onyx/polls/list/?id=${pollID}` : `${onyxpoll.apiurl}onyx/polls/list/?modal=1`;
+		const getUrl = `${onyxpoll.apiurl}onyx/polls/list/?id=${pollID}`;
 		return new Promise((resolve, reject) => {
+			if (! pollID) {
+				reject('requestPoll: Empty or invalid poll ID.');
+			}
+
 			const self = this;
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', getUrl);
@@ -133,19 +153,20 @@ class onyxAcfPoll {
 
 			poll.list.appendChild(choiceEl);
 		});
+
+		return true;
 	}
 
 	eventHandlers() {
 		this.element.choices = document.querySelectorAll(`.${this.name.choice}`);
-		this.element.message = document.querySelector(`.${this.name.message}`);
 		this.element.voteButton = document.querySelectorAll(`.${this.name.voteButton}`);
 		this.element.viewButton = document.querySelectorAll(`.${this.name.viewButton}`);
 		this.element.closeButton = document.querySelector(`.${this.name.closeButton}`);
 
 		// show / close modal poll
-		if (typeof onyxPollModal !== 'undefined' && ! this.getCookie('onyx_poll_modal')) {
+		if (this.mpoll && ! this.getCookie('onyx_poll_modal')) {
 			this.element.modal = document.getElementById(this.name.modal);
-			this.element.modal.classList.add('show');
+			this.element.modal.classList.add('active', 'show');
 			this.element.closeButton.onclick = () => {
 				if (onyxpoll.modaltime >= 1) {
 					console.log('cookie created');
@@ -177,7 +198,7 @@ class onyxAcfPoll {
 		this.requestVote(t)
 			.then(function(response) {
 				this.togglePollLoader(poll, true);
-				this.handleMessage(response.message, response.code);
+				this.handleMessage(poll, response.message, response.code);
 				poll.classList.add('voted');
 
 				if (response.code == 'success') {
@@ -199,7 +220,7 @@ class onyxAcfPoll {
 			.catch(function(err) {
 				console.warn(err);
 				this.togglePollLoader(poll, true);
-				this.handleMessage(onyxpoll.labels.error, 'error');
+				this.handleMessage(poll, onyxpoll.labels.error, 'error');
 			}.bind(this));
 	}
 
@@ -251,14 +272,14 @@ class onyxAcfPoll {
 		});
 	}
 
-	handleMessage(message, code) {
-		const e = this.element.message;
+	handleMessage(poll, message, code) {
+		const e = poll.querySelector(`.${this.name.message}`);
 		e.classList.remove('error', 'success', 'warn', 'not_allowed');
 		e.classList.add(code);
 		e.textContent = message;
 	}
 
-	togglePollLoader(element, active = true) {
+	togglePollLoader(poll, active = true) {
 		let removeClass, addClass;
 		if (active) {
 			removeClass = 'loading';
@@ -267,8 +288,8 @@ class onyxAcfPoll {
 			removeClass = 'active';
 			addClass = 'loading';
 		}
-		element.classList.remove(removeClass);
-		element.classList.add(addClass);
+		poll.classList.remove(removeClass);
+		poll.classList.add(addClass);
 	}
 
 	getCookie(cname) {

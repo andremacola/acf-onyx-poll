@@ -40,8 +40,7 @@ Class OnyxPollsInit {
 	public function add_footer_elements() {
 		$poll = OnyxPolls::has_polls(true);
 		if ($poll && !$this->is_amp()) {
-			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal active' data-poll='$poll'></div>";
-			echo "<script>var onyxPollModal = true;</script>";
+			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal' data-poll='$poll'></div>";
 		}
 	}
 
@@ -112,7 +111,14 @@ Class OnyxPollsInit {
 			'class' => 'left',
 			'style' => ''
 		), $atts));
-		return "<div id='onyx-poll-$id' class='onyx-poll onyx-poll-widget active show $class' style='$style' data-poll='$id'></div>";
+
+		if (OnyxPolls::has_poll($id)) {
+			$html = "<div id='onyx-poll-$id' class='onyx-poll onyx-poll-widget active show $class' style='$style' data-poll='$id'></div>";
+		} else {
+			$html = "<div id='onyx-poll-null' class='onyx-poll onyx-poll-widget show onyx-poll-invalid'>". __('Invalid poll ID') ."</div>";
+		}
+
+		return $html;
 	}
 
 	/**
