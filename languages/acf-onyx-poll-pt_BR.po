@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF Onyx Poll 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2020-04-23T05:13:25+00:00\n"
-"PO-Revision-Date: 2020-04-23 02:15-0300\n"
+"POT-Creation-Date: 2020-04-26T03:35:44+00:00\n"
+"PO-Revision-Date: 2020-04-26 00:38-0300\n"
 "Last-Translator: \n"
 "Language-Team: ONYX\n"
 "Language: pt_BR\n"
@@ -101,7 +101,7 @@ msgstr "A cada 24 horas"
 msgid "End of Poll"
 msgstr "Fim da Enquete"
 
-#: acf/fields.php:167 onyx-poll.php:70
+#: acf/fields.php:167 onyx-poll.php:69
 msgid "Total votes"
 msgstr "Total de votos"
 
@@ -184,7 +184,7 @@ msgstr "Ver enquete"
 msgid "Search poll"
 msgstr "Buscar enquete"
 
-#: admin/poll-type.php:44 api/poll-api.php:32
+#: admin/poll-type.php:44
 msgid "No polls found"
 msgstr "Nenhuma enquete encontrada"
 
@@ -244,22 +244,26 @@ msgstr "Enquete inexistente ou expirada"
 msgid "You have already voted in this poll"
 msgstr "Você já votou nesta enquete"
 
-#: onyx-poll.php:67
+#: api/poll-api.php:32
+msgid "No polls founded with ID "
+msgstr "Nenhuma enquete com ID "
+
+#: onyx-poll.php:66
 msgid "Vote"
 msgstr "Votar"
 
-#: onyx-poll.php:68
+#: onyx-poll.php:67
 msgid "votes"
 msgstr "votos"
 
-#: onyx-poll.php:69
+#: onyx-poll.php:68
 msgid "Views result"
 msgstr "Ver resultado"
 
-#: onyx-poll.php:71
+#: onyx-poll.php:70
 msgid "Vote was submitted successfully."
 msgstr "Seu voto foi realizado com sucesso."
 
-#: onyx-poll.php:72
+#: onyx-poll.php:71
 msgid "Poll vote error, try again."
 msgstr "Erro na votação, tente novamente."
