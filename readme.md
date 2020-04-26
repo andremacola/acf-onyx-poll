@@ -7,6 +7,16 @@ Plugin for polls based on regular Wordpress and acf (advanced custom fields) fun
 
 This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
+## SCREENSHOTS
+
+![Admin List Table](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen1.png "Admin List Table")
+
+![Admin Edit Screen](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen2.png "Admin Edit Screen")
+
+![Poll Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen3.png "Poll Example")
+
+![Results Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen3.png "Results Example")
+
 ## FEATURES
 
 - [x] Include poll with a shortcode `[onyx-poll id=XX class="left|right|full"]`
