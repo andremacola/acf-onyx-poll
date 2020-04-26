@@ -15,6 +15,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [x] Multiple polls per page
 - [x] Show poll in a modal
 - [x] Show poll results on widget after expired
+- [x] Highlight choosed choice in results area
 - [x] Limit vote by device or time
 - [x] Poll activation/expiration schedule
 - [x] Results in percentage, numbers or both
