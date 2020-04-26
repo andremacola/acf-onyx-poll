@@ -39,9 +39,9 @@ Class OnyxPollsInit {
 	 */
 	public function add_footer_elements() {
 		$poll = OnyxPolls::has_polls(true, true);
-		if ($poll && !$this->is_amp()) {
-			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal' data-poll='$poll'></div>";
-		}
+		// if ($poll && !$this->is_amp()) {
+			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal' data-poll='79'></div>";
+		// }
 	}
 
 	/**

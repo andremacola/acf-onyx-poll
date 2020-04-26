@@ -117,6 +117,8 @@ class onyxAcfPoll {
 	}
 
 	renderTemplate(data, poll) {
+		const cookieLimit = this.getCookie(`onyx_poll_limit_${data.id}`);
+
 		// poll template
 		poll.innerHTML = `
 			<div id='${this.name.wrapper}-${data.id}' class="${this.name.wrapper}">
@@ -130,7 +132,7 @@ class onyxAcfPoll {
 							<span></span>
 						</p>
 					` : ``}
-					${typeof data.results != 'undefined' ? `
+					${(typeof data.results != 'undefined' && ! data.expired && ! cookieLimit) ? `
 						<a href="#" class="onyx-poll-ft-btn ${this.name.voteButton}">${onyxpoll.labels.vote}</a>
 						<a href="#" class="onyx-poll-ft-btn ${this.name.viewButton}">${onyxpoll.labels.view}</a>
 					` : ``}
@@ -148,11 +150,16 @@ class onyxAcfPoll {
 			const choiceEl = document.createElement('li');
 			choiceEl.setAttribute('data-choice', choice.option);
 			choiceEl.setAttribute('data-poll', data.id);
-			choiceEl.className = this.name.choice;
 			choiceEl.innerHTML = `<span>${choice.answer}</span>`;
-
+			if (! data.expired && ! cookieLimit) {
+				choiceEl.className = this.name.choice;
+			}
 			poll.list.appendChild(choiceEl);
 		});
+
+		if (data.expired || cookieLimit) {
+			this.showResults(false, poll);
+		}
 
 		return true;
 	}
@@ -179,7 +186,7 @@ class onyxAcfPoll {
 		// view poll results button and vote poll button (back from results)
 		if (this.element.viewButton) {
 			for (let i = 0; i < this.element.viewButton.length; i++) {
-				this.element.viewButton[i].onclick = () => this.showResults();
+				this.element.viewButton[i].onclick = () => this.showResults(event, false);
 				this.element.voteButton[i].onclick = () => this.showPoll();
 			}
 		}
@@ -225,21 +232,19 @@ class onyxAcfPoll {
 			}.bind(this));
 	}
 
-	showResults() {
-		event.preventDefault();
-		const t = event.target;
-		const poll = t.closest(`.${this.name.parent}`);
+	showResults(event, poll) {
+		poll = (event) ? event.target.closest(`.${this.name.parent}`) : poll;
 		const res = this.response[poll.getAttribute('data-poll')];
 
 		poll.classList.add('view');
 		poll.querySelector(`.${this.name.total} span`).textContent = res.results.total;
 
-		const choosedChoice = this.getCookie(`onyx_poll_cookie_${res.id}`);
+		const choosedChoice = this.getCookie(`onyx_poll_choice_${res.id}`);
 		if (choosedChoice) {
 			poll.querySelector(`li[data-choice="${choosedChoice}"]`).classList.add('choosed');
 		}
 
-		const choices = poll.querySelectorAll(`.${this.name.choice}`);
+		const choices = poll.querySelectorAll(`.${this.name.list} li`);
 		choices.forEach((choice, i) => {
 			const votes = res.answers[i].votes;
 			const percentFull = res.answers[i].percent;

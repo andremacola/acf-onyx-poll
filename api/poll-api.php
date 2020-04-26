@@ -14,14 +14,14 @@ class OnyxPollsApi extends WP_REST_Controller {
 	public function __construct() {
 		$this->namespace = 'onyx';
 		$this->field = array(
-			'poll_answers'      => 'onyx_poll_answers',
-			'poll_modal'        => 'onyx_poll_modal',
-			'poll_limit_vote'   => 'onyx_poll_limit_vote',
-			'poll_end'          => 'onyx_poll_end',
-			'poll_total'        => 'onyx_poll_total',
-			'poll_show_results' => 'onyx_poll_show_results',
-			'poll_results'      => 'onyx_poll_results',
-			'poll_expired'      => 'onyx_poll_expired'
+			'answers'      => 'onyx_poll_answers',
+			'modal'        => 'onyx_poll_modal',
+			'limit_vote'   => 'onyx_poll_limit_vote',
+			'end'          => 'onyx_poll_end',
+			'total'        => 'onyx_poll_total',
+			'show_results' => 'onyx_poll_show_results',
+			'results'      => 'onyx_poll_results',
+			'expired'      => 'onyx_poll_expired'
 		);
 		$this->message = array(
 			'success'    => __('Vote was submitted successfully', 'acf-onyx-poll'),
@@ -85,7 +85,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 			$poll_args['posts_per_page'] = 1;
 			$poll_args['meta_query'] = array(
 				array(
-					'key'   => $this->field['poll_modal'],
+					'key'   => $this->field['modal'],
 					'value' => "1"
 				)
 			);
@@ -98,7 +98,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 
 				$poll['id']          = get_the_ID();
 				$poll['title']       = get_the_title();
-				$poll['limit_vote']  = get_field($this->field['poll_limit_vote']);
+				$poll['limit_vote']  = get_field($this->field['limit_vote']);
 				$poll                = array_merge($poll, $this->poll_data($poll['id']));
 
 				// return response based on founded posts count
@@ -126,10 +126,10 @@ class OnyxPollsApi extends WP_REST_Controller {
 		// params vars
 		$poll_id       = $req['poll'];
 		$poll_choice   = (int) $req['choice'];
-		$poll_answers  = get_field($this->field['poll_answers'], $poll_id);
-		$poll_total    = get_field($this->field['poll_total'], $poll_id);
-		$poll_expired  = get_field($this->field['poll_expired'], $poll_id);
-		$poll_limit    = get_field($this->field['poll_limit_vote'], $poll_id);
+		$poll_answers  = get_field($this->field['answers'], $poll_id);
+		$poll_total    = get_field($this->field['total'], $poll_id);
+		$poll_expired  = get_field($this->field['expired'], $poll_id);
+		$poll_limit    = get_field($this->field['limit_vote'], $poll_id);
 
 		// validate params from req
 		if (!is_numeric($poll_id) || !isset($poll_choice) || empty($poll_answers[$poll_choice - 1])) {
@@ -151,8 +151,8 @@ class OnyxPollsApi extends WP_REST_Controller {
 			$add_vote = array(
 				"votes" => $poll_answers[$poll_choice - 1]['votes']+1
 			);
-			$row   = update_row($this->field['poll_answers'], $poll_choice, $add_vote, $poll_id);
-			$total = update_field($this->field['poll_total'], $poll_total+1, $poll_id);
+			$row   = update_row($this->field['answers'], $poll_choice, $add_vote, $poll_id);
+			$total = update_field($this->field['total'], $poll_total+1, $poll_id);
 
 			// set cookies
 			// limit = 1 (free vote)
@@ -189,20 +189,24 @@ class OnyxPollsApi extends WP_REST_Controller {
 	 */
 	protected function poll_data($poll_id) {
 		// format result
-		$type = get_field($this->field['poll_results'], $poll_id);
-		$total = get_field($this->field['poll_total'], $poll_id);
+		$type = get_field($this->field['results'], $poll_id);
+		$total = get_field($this->field['total'], $poll_id);
 
-		$response['expired'] = get_field($this->field['poll_expired'], $poll_id);
+		$response['expired'] = get_field($this->field['expired'], $poll_id);
 		$response['expired'] = $response['expired'] ? $response['expired'] : false;
 
-		if ($show_results = get_field($this->field['poll_show_results'], $poll_id)) {
+		// @FIX: need better code here
+		// All expired polls need to return the results info even show results is false
+		$is_expired = $response['expired'];
+		$show_results = $is_expired ? $is_expired : get_field($this->field['show_results'], $poll_id);
+		if ($show_results) {
 			$response['results']['type'] = $type;
 			$response['results']['total'] = $total;
 		}
 
 		// format answers
-		if (have_rows($this->field['poll_answers'], $poll_id)) {
-			while (have_rows($this->field['poll_answers'], $poll_id)):
+		if (have_rows($this->field['answers'], $poll_id)) {
+			while (have_rows($this->field['answers'], $poll_id)):
 				the_row();
 				$response['answers'][] = array(
 					"option"  => get_row_index(),
@@ -222,11 +226,12 @@ class OnyxPollsApi extends WP_REST_Controller {
 	 * @param int $poll_id required
 	 */
 	protected function setcookie($poll_id, $poll_choice) {
-		$poll_limit_vote = get_field($this->field['poll_limit_vote'], $poll_id);
-		// if ($poll_limit_vote != 1) {
-			$poll_cookie_time = ($poll_limit_vote == 2) ? $poll_limit_vote = strtotime('+1 year') : (60 * $poll_limit_vote);
-			setcookie("onyx_poll_cookie_$poll_id", $poll_choice, time() + $poll_cookie_time, "/");
-		// }
+		$poll_limit_vote = get_field($this->field['limit_vote'], $poll_id);
+		$poll_limit_time = ($poll_limit_vote == 2) ? strtotime('+1 year') : (60 * $poll_limit_vote);
+		setcookie("onyx_poll_choice_$poll_id", $poll_choice, time() + strtotime('+1 year'), "/");
+		if ($poll_limit_vote != 1) {
+			setcookie("onyx_poll_limit_$poll_id", $poll_choice, time() + $poll_limit_time, "/");
+		}
 	}
 
 }

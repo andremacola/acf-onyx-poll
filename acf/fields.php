@@ -197,7 +197,7 @@ acf_add_local_field_group(array(
 				'id' => '',
 			),
 			'message' => '',
-			'default_value' => 0,
+			'default_value' => 1,
 			'ui' => 1,
 			'ui_on_text' => '',
 			'ui_off_text' => '',
@@ -221,7 +221,7 @@ acf_add_local_field_group(array(
 				3 => __('Show both', 'acf-onyx-poll'),
 			),
 			'default_value' => array(
-				0 => 1,
+				0 => 3,
 			),
 			'allow_null' => 0,
 			'multiple' => 0,
