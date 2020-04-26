@@ -15,7 +15,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ![Poll Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen3.png "Poll Example")
 
-![Results Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen3.png "Results Example")
+![Results Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen4.png "Results Example")
 
 ## FEATURES
 
