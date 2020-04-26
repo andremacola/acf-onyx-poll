@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-04-23T05:13:25+00:00\n"
+"POT-Creation-Date: 2020-04-26T03:35:44+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: acf-onyx-poll\n"
@@ -108,7 +108,7 @@ msgid "End of Poll"
 msgstr ""
 
 #: acf/fields.php:167
-#: onyx-poll.php:70
+#: onyx-poll.php:69
 msgid "Total votes"
 msgstr ""
 
@@ -189,7 +189,6 @@ msgid "Search poll"
 msgstr ""
 
 #: admin/poll-type.php:44
-#: api/poll-api.php:32
 msgid "No polls found"
 msgstr ""
 
@@ -249,22 +248,26 @@ msgstr ""
 msgid "You have already voted in this poll"
 msgstr ""
 
-#: onyx-poll.php:67
+#: api/poll-api.php:32
+msgid "No polls founded with ID "
+msgstr ""
+
+#: onyx-poll.php:66
 msgid "Vote"
 msgstr ""
 
-#: onyx-poll.php:68
+#: onyx-poll.php:67
 msgid "votes"
 msgstr ""
 
-#: onyx-poll.php:69
+#: onyx-poll.php:68
 msgid "Views result"
 msgstr ""
 
-#: onyx-poll.php:71
+#: onyx-poll.php:70
 msgid "Vote was submitted successfully."
 msgstr ""
 
-#: onyx-poll.php:72
+#: onyx-poll.php:71
 msgid "Poll vote error, try again."
 msgstr ""
