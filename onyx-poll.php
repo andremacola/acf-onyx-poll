@@ -180,12 +180,12 @@ Class OnyxPollsInit {
 		// Create REST API for Onyx Poll
 		require_once(__DIR__ . '/api/poll-api.php');
 
-		// Enqueue scripts and styles
-		add_action('wp_enqueue_scripts', array($this, 'add_assets'));
-		add_action('admin_head', array($this, 'admin_styles'));
-
 		// Add footer html elements
 		add_action('wp_footer', array($this, 'add_footer_elements'), 1);
+
+		// Enqueue scripts and styles
+		add_action('wp_footer', array($this, 'add_assets'));
+		add_action('admin_head', array($this, 'admin_styles'));
 
 		// Add onyx poll shortcode
 		add_shortcode("onyx-poll", array($this, 'shortcode'));
