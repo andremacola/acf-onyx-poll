@@ -19,7 +19,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## FEATURES
 
-- [x] Include poll with a shortcode `[onyx-poll id=XX class="left|right|full"]`
+- [x] Include poll with a shortcode (ommit the ID to get the latest poll) `[onyx-poll id=XX class="left|right|full"]`
 - [x] One click to vote
 - [x] Works with cache plugins
 - [x] Multiple polls per page
