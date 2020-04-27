@@ -235,6 +235,9 @@ class onyxAcfPoll {
 	}
 
 	showResults(event, poll) {
+		if (event) {
+			event.preventDefault();
+		}
 		poll = (event) ? event.target.closest(`.${this.name.parent}`) : poll;
 		const res = this.response[poll.getAttribute('data-poll')];
 
