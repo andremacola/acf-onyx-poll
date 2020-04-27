@@ -176,7 +176,7 @@
 
 /* message / total */
 .onyx-poll-message,
-.onyx-poll-total { font-size: 13px; display: none; }
+.onyx-poll-total { font-size: 13px; display: none; margin: 0; }
 .onyx-poll.voted .onyx-poll-message { display: block; }
 .onyx-poll.view .onyx-poll-total { display: block; }
 .onyx-poll-message.success { color: #155724; }

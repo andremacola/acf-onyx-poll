@@ -148,6 +148,17 @@
 		"oF": 0,
 		"oS": 3
 		},
+	"/assets/images/screen1.png": {
+		"ft": 32768,
+		"iS": 33296,
+		"oA": 0,
+		"oAP": "/assets/images/screen1.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"/assets/images/screen2.png": {
 		"ft": 32768,
 		"iS": 143318,

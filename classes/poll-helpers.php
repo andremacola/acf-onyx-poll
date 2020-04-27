@@ -102,16 +102,15 @@ Class OnyxPolls {
 	 */
 	public static function has_poll($id = false) {
 
-		if(!$id) return false;
-
-		$args = [
+		$args = array(
 			'post_type'         => 'onyxpolls',
 			'no_found_rows'     => true,
 			'suppress_filters'  => true,
 			'posts_per_page'    => 1,
-			'fields'            => 'ids',
-			'p'                 => (int) $id
-		];
+			'fields'            => 'ids'
+		);
+
+		if($id) $args['p'] = (int) $id;
 
 		$query = new WP_Query($args);
 		return ($query->have_posts()) ? $query->posts[0] : false;

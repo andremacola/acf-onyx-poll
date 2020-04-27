@@ -39,9 +39,9 @@ Class OnyxPollsInit {
 	 */
 	public function add_footer_elements() {
 		$poll = OnyxPolls::has_polls(true, true);
-		// if ($poll && !$this->is_amp()) {
-			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal' data-poll='79'></div>";
-		// }
+		if ($poll && !$this->is_amp()) {
+			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal' data-poll='$poll'></div>";
+		}
 	}
 
 	/**
@@ -112,8 +112,10 @@ Class OnyxPollsInit {
 			'style' => ''
 		), $atts));
 
-		if (OnyxPolls::has_poll($id)) {
-			$html = "<div id='onyx-poll-$id' class='onyx-poll onyx-poll-widget active show $class' style='$style' data-poll='$id'></div>";
+		$poll = OnyxPolls::has_poll($id);
+
+		if ($poll) {
+			$html = "<div id='onyx-poll-$poll' class='onyx-poll onyx-poll-widget active show $class' style='$style' data-poll='$poll'></div>";
 		} else {
 			$html = "<div id='onyx-poll-null' class='onyx-poll onyx-poll-widget show onyx-poll-invalid'>". __('Invalid poll ID') ."</div>";
 		}

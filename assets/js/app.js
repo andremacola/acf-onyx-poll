@@ -56,6 +56,8 @@ class onyxAcfPoll {
 							this.events = this.renderTemplate(data, poll);
 						} else {
 							console.log(`Warn: ${data.message}`);
+							poll.classList.add('onyx-poll-invalid'); // temp
+							poll.innerHTML = `${data.message}`; // temp
 						}
 					})
 					.catch((error) => console.log(error)));
