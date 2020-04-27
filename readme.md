@@ -1,9 +1,10 @@
 # ACF ONYX POLL
 
-
 > This is an **alpha version** and is not available in Wordpress Repository. Will be soon
 
 Plugin for polls based on regular Wordpress and acf (advanced custom fields) functionalities using **WP REST API** and ***Javascript*** methods. Fell free to submit a Pull Request.
+
+The main goal of ACF Onyx Poll is to be **totally free, lightweight and simple**. No fancy, colorful and polluted options or donate screens.
 
 This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
@@ -37,8 +38,10 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## TO DO
 
+- [ ] Native widget for sidebar
 - [ ] Support for images
 - [ ] Custom Gutemberg Block
+- [ ] Multiple style options
 - [ ] Inject javascript only if current page has a poll
 - [ ] Documentation/Wiki for users and developers
 - [ ] Integration with Google reCaptcha
@@ -50,8 +53,6 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 ## OBSERVATIONS
 
 - I don't support Internet Explorer Browser and all PR's related will be rejected. One of the goals of this plugin is to be js/css lightweight and jQuery free.
-
-<!-- - ACF Onyx Poll uses [acf-json](https://www.advancedcustomfields.com/resources/local-json/) functionalities. So maybe it's better to syncronize the fields within ACF PRO settings. For now the only way to translate the ACF Field Labels is renaming in ACF settings or json file **(RENAME ONLY THE LABEL: STRING)** -->
 
 - ACF Onyx Poll [register fields via php](https://www.advancedcustomfields.com/resources/register-fields-via-php/) to be able to use Wordpress translation functions for field labels. So you won't be able to view/edit the fields inside ACF Custom Fields Settings.
 
@@ -84,6 +85,14 @@ You can do some customization by overriding some CSS variables inside your css f
 Maybe you will have to set the `font-family` and `font-size` for some elements to match your theme style.
 
 If you need a more advanced attributes, the CSS source is located on `assets/css/onyx-poll.css`. You can use as a guide but **never** override the original files.
+
+## DATABASE, USER DATA AND LOGS
+
+At the database side, ACF Onyx Poll uses the default ACF/Wordpress structure to store data (the meta fields). Nothing to worry about here.
+
+For privacy, ACF Onyx Poll **does not store** any user data like ip address, usernames etc...
+
+The only things the plugin saves in the user's browser is some cookies to check the user choice for specific poll, if the modal was previously showed/closed and a timer. You can check the cookies by looking for `onyx_poll_limit_XX, onyx_poll_modal and onyx_poll_choice_XX`.
 
 ## BROWSER SUPPORT
 
