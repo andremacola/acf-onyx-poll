@@ -21,7 +21,8 @@ class OnyxPollsApi extends WP_REST_Controller {
 			'total'        => 'onyx_poll_total',
 			'show_results' => 'onyx_poll_show_results',
 			'results'      => 'onyx_poll_results',
-			'expired'      => 'onyx_poll_expired'
+			'expired'      => 'onyx_poll_expired',
+			'has_image'    => 'onyx_poll_images',
 		);
 		$this->message = array(
 			'success'    => __('Vote was submitted successfully', 'acf-onyx-poll'),
@@ -138,7 +139,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 		if ($poll_expired || get_post_type($poll_id) != 'onyxpolls') {
 			return new WP_Error('error', $this->message['no_exist'], array('status' => 400));
 		}
-		if ($_COOKIE["onyx_poll_cookie_$poll_id"] && $poll_limit != 1) {
+		if ($_COOKIE["onyx_poll_limit_$poll_id"] && $poll_limit != 1) {
 			$response = array(
 				"code"     => "not_allowed",
 				"id"       => $poll_id,
@@ -188,6 +189,9 @@ class OnyxPollsApi extends WP_REST_Controller {
 	 * @param int $poll_id required
 	 */
 	protected function poll_data($poll_id) {
+		// has image
+		$response['has_image'] = get_field($this->field['has_image'], $poll_id);
+
 		// format result
 		$type = get_field($this->field['results'], $poll_id);
 		$total = get_field($this->field['total'], $poll_id);
@@ -208,9 +212,10 @@ class OnyxPollsApi extends WP_REST_Controller {
 		if (have_rows($this->field['answers'], $poll_id)) {
 			while (have_rows($this->field['answers'], $poll_id)):
 				the_row();
+				$image_id = get_sub_field('image');
 				$response['answers'][] = array(
 					"option"  => get_row_index(),
-					"image"   => get_sub_field('image'),
+					"image"   => ($response['has_image']) ? wp_get_attachment_image_url($image_id) : false,
 					"answer"  => get_sub_field('answer'),
 					"votes"   => (in_array($type, array(2,3)) && $show_results) ? get_sub_field('votes') : false,
 					"percent" => ($total >= 1) ? get_sub_field('votes') * 100 / $total : "0"

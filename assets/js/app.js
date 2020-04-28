@@ -152,9 +152,11 @@ class onyxAcfPoll {
 			const choiceEl = document.createElement('li');
 			choiceEl.setAttribute('data-choice', choice.option);
 			choiceEl.setAttribute('data-poll', data.id);
-			choiceEl.innerHTML = `<span>${choice.answer}</span>`;
+			choiceEl.innerHTML = `
+				${data.has_image ? `<span class='image'><img loading='lazy' src='${choice.image}'></span>` : ``}
+				<span class='answer'>${choice.answer}</span>`;
 			if (! data.expired && ! cookieLimit) {
-				choiceEl.className = this.name.choice;
+				choiceEl.className = this.name.choice; // enable onclick event
 			}
 			poll.list.appendChild(choiceEl);
 		});

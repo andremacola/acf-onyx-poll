@@ -38,10 +38,10 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## TO DO
 
-- [ ] Native widget for sidebar
 - [ ] Support for images
-- [ ] Custom Gutemberg Block
+- [ ] Native widget for sidebar
 - [ ] Multiple style options
+- [ ] Custom Gutemberg Block
 - [ ] Inject javascript only if current page has a poll
 - [ ] Documentation/Wiki for users and developers
 - [ ] Integration with Google reCaptcha
@@ -74,6 +74,7 @@ You can do some customization by overriding some CSS variables inside your css f
 	--modalBorderRadius: 4px;
 	--questionColor: #333;
 	--choiceColor: #333;
+	--buttonColor: #333;
 	--choiceHoverBG: #f5f5f5;
 	--choiceBorderRadius: 100px;
 	--closeBorderRadius: 100px;

@@ -10,6 +10,7 @@
 	--modalBorderRadius: 4px;
 	--questionColor: #333;
 	--choiceColor: #333;
+	--buttonColor: #333;
 	--choiceHoverBG: #f5f5f5;
 	--choiceBorderRadius: 100px;
 	--closeBorderRadius: 100px;
@@ -136,6 +137,15 @@
 	margin: 0 0 10px 0;
 	overflow: hidden;
 	display: flex;
+	align-items: center;
+}
+.onyx-poll-choices li .image {
+	border-radius: 100px;
+	overflow: hidden;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin: 0 10px 0 0;
 }
 .onyx-poll-choices li span {
 	position: relative;
@@ -163,10 +173,13 @@
 .onyx-poll-ft-btn {
 	font-size: 13px;
 	margin-left: auto;
+
+	color: #333;
+	color: var(--buttonColor);
 }
 .onyx-poll-ft-btn:hover {
 	color: #333;
-	color: var(--questionColor);
+	color: var(--buttonColor);
 
 	text-shadow: 0px 0px 1px currentColor;
 }
