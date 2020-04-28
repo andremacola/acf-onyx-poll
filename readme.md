@@ -24,6 +24,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [x] One click to vote
 - [x] Works with cache plugins
 - [x] Multiple polls per page
+- [x] Support for images
 - [x] Show poll in a modal
 - [x] Show poll results on widget after expired
 - [x] Highlight choosed choice in results area
@@ -38,7 +39,6 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## TO DO
 
-- [ ] Support for images
 - [ ] Native widget for sidebar
 - [ ] Multiple style options
 - [ ] Custom Gutemberg Block
