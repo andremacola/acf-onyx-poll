@@ -329,7 +329,7 @@
 
 	.onyx-poll-widget.full {
 		max-width: 100%;
-		margin: 1em 0 1em 0;
+		margin: 1em auto 1em auto;
 	}
 
 }
