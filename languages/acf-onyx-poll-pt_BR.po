@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF Onyx Poll 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2020-04-26T03:35:44+00:00\n"
-"PO-Revision-Date: 2020-04-26 00:38-0300\n"
+"POT-Creation-Date: 2020-05-22T16:07:09+00:00\n"
+"PO-Revision-Date: 2020-05-22 13:07-0300\n"
 "Last-Translator: \n"
 "Language-Team: ONYX\n"
 "Language: pt_BR\n"
@@ -41,107 +41,111 @@ msgstr "Respostas"
 msgid "Image"
 msgstr "Imagem"
 
-#: acf/fields.php:54
+#: acf/fields.php:62
 msgid "Answer"
 msgstr "Resposta"
 
-#: acf/fields.php:73 admin/poll-type.php:99
+#: acf/fields.php:81 admin/poll-type.php:99
 msgid "Votes"
 msgstr "Votos"
 
-#: acf/fields.php:96
-msgid "Poll Modal"
-msgstr "Modal da Enquete"
-
-#: acf/fields.php:115
+#: acf/fields.php:104
 msgid "Limit voting"
 msgstr "Limitar votação"
 
-#: acf/fields.php:127
+#: acf/fields.php:116
 msgid "Free Vote"
 msgstr "Voto Livre"
 
-#: acf/fields.php:128
+#: acf/fields.php:117
 msgid "Per device"
 msgstr "Por dispositivo"
 
-#: acf/fields.php:129
+#: acf/fields.php:118
 msgid "Every 30 minutes"
 msgstr "A cada 30 minutos"
 
-#: acf/fields.php:130 acf/fields.php:290
+#: acf/fields.php:119 acf/fields.php:317
 msgid "Every 1 hour"
 msgstr "A cada 1 hora"
 
-#: acf/fields.php:131 acf/fields.php:291
+#: acf/fields.php:120 acf/fields.php:318
 msgid "Every 2 hours"
 msgstr "A cada 2 horas"
 
-#: acf/fields.php:132 acf/fields.php:292
+#: acf/fields.php:121 acf/fields.php:319
 msgid "Every 3 hours"
 msgstr "A cada 3 horas"
 
-#: acf/fields.php:133 acf/fields.php:293
+#: acf/fields.php:122 acf/fields.php:320
 msgid "Every 4 hours"
 msgstr "A cada 4 horas"
 
-#: acf/fields.php:134 acf/fields.php:294
+#: acf/fields.php:123 acf/fields.php:321
 msgid "Every 5 hours"
 msgstr "A cada 5 horas"
 
-#: acf/fields.php:135 acf/fields.php:295
+#: acf/fields.php:124 acf/fields.php:322
 msgid "Every 12 hours"
 msgstr "A cada 12 horas"
 
-#: acf/fields.php:136 acf/fields.php:296
+#: acf/fields.php:125 acf/fields.php:323
 msgid "Every 24 hours"
 msgstr "A cada 24 horas"
 
-#: acf/fields.php:150
-msgid "End of Poll"
-msgstr "Fim da Enquete"
-
-#: acf/fields.php:167 onyx-poll.php:69
-msgid "Total votes"
-msgstr "Total de votos"
-
-#: acf/fields.php:188
-msgid "Show Results"
-msgstr "Mostrar Resultados"
-
-#: acf/fields.php:207
+#: acf/fields.php:139
 msgid "Results"
 msgstr "Resultados"
 
-#: acf/fields.php:219
+#: acf/fields.php:151
 msgid "Show in percentage"
 msgstr "Mostrar em porcentagem"
 
-#: acf/fields.php:220
+#: acf/fields.php:152
 msgid "Show in numbers"
 msgstr "Mostrar em números"
 
-#: acf/fields.php:221
+#: acf/fields.php:153
 msgid "Show both"
 msgstr "Mostrar ambos"
 
-#: acf/fields.php:235
+#: acf/fields.php:167
+msgid "End of Poll"
+msgstr "Fim da Enquete"
+
+#: acf/fields.php:184 onyx-poll.php:69
+msgid "Total votes"
+msgstr "Total de votos"
+
+#: acf/fields.php:205
+msgid "Enable Images"
+msgstr "Habilitar Imagens"
+
+#: acf/fields.php:224
+msgid "Poll Modal"
+msgstr "Modal da Enquete"
+
+#: acf/fields.php:243
+msgid "Show Results"
+msgstr "Mostrar Resultados"
+
+#: acf/fields.php:262
 msgid "Expired"
 msgstr "Expirada"
 
-#: acf/fields.php:278
+#: acf/fields.php:305
 msgid "Modal Interval for Voting"
 msgstr "Intervalo da Modal para Votação"
 
-#: acf/fields.php:281
+#: acf/fields.php:308
 msgid "Periodicity that the poll modal appears to the user."
 msgstr "Periodicidade que a modal da enquete aparece para o usuário."
 
-#: acf/fields.php:309
+#: acf/fields.php:336
 msgid "Use own CSS"
 msgstr "Usar CSS próprio"
 
-#: acf/fields.php:312
+#: acf/fields.php:339
 msgid ""
 "To use your own CSS and disable the default plugin styles, check this option"
 msgstr ""
@@ -224,27 +228,27 @@ msgstr "Status"
 msgid "End date"
 msgstr "Expiração"
 
-#: api/poll-api.php:27
+#: api/poll-api.php:28
 msgid "Vote was submitted successfully"
 msgstr "Seu voto foi realizado com sucesso"
 
-#: api/poll-api.php:28
+#: api/poll-api.php:29
 msgid "Poll vote error, try again"
 msgstr "Erro na votação, tente novamente"
 
-#: api/poll-api.php:29
+#: api/poll-api.php:30
 msgid "Invalid poll parameters"
 msgstr "Parâmetros de votação da enquete inválidos"
 
-#: api/poll-api.php:30
+#: api/poll-api.php:31
 msgid "Non-existent or expired poll"
 msgstr "Enquete inexistente ou expirada"
 
-#: api/poll-api.php:31
+#: api/poll-api.php:32
 msgid "You have already voted in this poll"
 msgstr "Você já votou nesta enquete"
 
-#: api/poll-api.php:32
+#: api/poll-api.php:33
 msgid "No polls founded with ID "
 msgstr "Nenhuma enquete com ID "
 
