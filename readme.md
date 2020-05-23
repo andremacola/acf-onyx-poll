@@ -39,6 +39,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## TO DO
 
+- [ ] Improve/Cache REST API response for better performance on high traffic sites
 - [ ] Native widget for sidebar
 - [ ] Multiple style options
 - [ ] Custom Gutemberg Block
