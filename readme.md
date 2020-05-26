@@ -2,8 +2,6 @@
   <img width="914" height="296" src="https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/banner-1544x500.png">
 </p>
 
-# ACF ONYX POLL
-
 > Install from [Wordpress Plugins](https://br.wordpress.org/plugins/acf-onyx-poll/ "Wordpress Plugin Repository") or clone the master branch from this repository
 
 Plugin for polls based on regular Wordpress and acf (advanced custom fields) functionalities using **WP REST API** and ***Javascript*** methods. Fell free to submit a Pull Request.
