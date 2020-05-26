@@ -324,9 +324,9 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 1,
+		"oA": 0,
 		"oAP": "/languages/acf-onyx-poll.pot",
-		"oF": 1
+		"oF": 0
 		},
 	"/node_modules": {
 		"ft": 65536,

@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF Onyx Poll 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2020-05-22T16:07:09+00:00\n"
-"PO-Revision-Date: 2020-05-22 13:07-0300\n"
+"POT-Creation-Date: 2020-05-26T18:48:46+00:00\n"
+"PO-Revision-Date: 2020-05-26 15:50-0300\n"
 "Last-Translator: \n"
 "Language-Team: ONYX\n"
 "Language: pt_BR\n"
@@ -21,17 +21,20 @@ msgid "ACF Onyx Poll"
 msgstr "ACF Onyx Poll"
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
-msgid "https://macola.com.br"
-msgstr "https://macola.com.br"
+msgid "https://github.com/andremacola/acf-onyx-poll"
+msgstr "https://github.com/andremacola/acf-onyx-poll"
 
 #. Description of the plugin
 msgid "Create polls with ACF PRO"
 msgstr "Crie enquetes com o ACF PRO"
 
 #. Author of the plugin
-msgid "André Machado"
-msgstr "André Machado"
+msgid "André Mácola Machado"
+msgstr "André Mácola Machado"
+
+#. Author URI of the plugin
+msgid "https://github.com/andremacola"
+msgstr "https://github.com/andremacola"
 
 #: acf/fields.php:11
 msgid "Answers"
@@ -271,3 +274,15 @@ msgstr "Seu voto foi realizado com sucesso."
 #: onyx-poll.php:71
 msgid "Poll vote error, try again."
 msgstr "Erro na votação, tente novamente."
+
+#: onyx-poll.php:120
+msgid "Invalid poll ID"
+msgstr "ID da enquete inválida"
+
+#: onyx-poll.php:157
+msgid "Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active."
+msgstr ""
+"Desculpe, mas o ACF Onyx Poll requer o que ACF PRO esteja instalado e ativo."
+
+#~ msgid "https://macola.com.br"
+#~ msgstr "https://macola.com.br"

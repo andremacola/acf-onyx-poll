@@ -1,4 +1,4 @@
-# Copyright (C) 2020 André Machado
+# Copyright (C) 2020 André Mácola Machado
 # This file is distributed under the same license as the ACF Onyx Poll plugin.
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-22T16:07:09+00:00\n"
+"POT-Creation-Date: 2020-05-26T18:48:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: acf-onyx-poll\n"
@@ -19,8 +19,7 @@ msgid "ACF Onyx Poll"
 msgstr ""
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
-msgid "https://macola.com.br"
+msgid "https://github.com/andremacola/acf-onyx-poll"
 msgstr ""
 
 #. Description of the plugin
@@ -28,7 +27,11 @@ msgid "Create polls with ACF PRO"
 msgstr ""
 
 #. Author of the plugin
-msgid "André Machado"
+msgid "André Mácola Machado"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/andremacola"
 msgstr ""
 
 #: acf/fields.php:11
@@ -274,4 +277,12 @@ msgstr ""
 
 #: onyx-poll.php:71
 msgid "Poll vote error, try again."
+msgstr ""
+
+#: onyx-poll.php:120
+msgid "Invalid poll ID"
+msgstr ""
+
+#: onyx-poll.php:157
+msgid "Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active."
 msgstr ""

@@ -3,10 +3,10 @@
 Plugin Name: ACF Onyx Poll
 Version: 1.0
 Description: Create polls with ACF PRO
-Author: André Machado
-Author URI: https://macola.com.br
-Plugin URI: https://macola.com.br
-Requires PHP: 7.2
+Author: André Mácola Machado
+Author URI: https://github.com/andremacola
+Plugin URI: https://github.com/andremacola/acf-onyx-poll
+Requires PHP: 7.0
 Text Domain: acf-onyx-poll
 Domain Path: /languages/
 */
@@ -117,7 +117,7 @@ Class OnyxPollsInit {
 		if ($poll) {
 			$html = "<div id='onyx-poll-$poll' class='onyx-poll onyx-poll-widget active show $class' style='$style' data-poll='$poll'></div>";
 		} else {
-			$html = "<div id='onyx-poll-null' class='onyx-poll onyx-poll-widget show onyx-poll-invalid'>". __('Invalid poll ID') ."</div>";
+			$html = "<div id='onyx-poll-null' class='onyx-poll onyx-poll-widget show onyx-poll-invalid'>". __('Invalid poll ID', 'acf-onyx-poll') ."</div>";
 		}
 
 		return $html;
@@ -154,7 +154,7 @@ Class OnyxPollsInit {
 		add_action('admin_init', function() {
 			if (is_admin() && current_user_can('activate_plugins') && !is_plugin_active('advanced-custom-fields-pro/acf.php')) {
 				add_action('admin_notices', function() {
-					$notice = __('Desculpe, mas o ACF Onyx Poll requer o que ACF PRO esteja instalado e ativo.');
+					$notice = __('Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active.', 'acf-onyx-poll');
 					echo "<div class='error'><p>$notice</p></div>";
 				});
 				deactivate_plugins(plugin_basename(__FILE__));
