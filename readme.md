@@ -4,7 +4,7 @@
 
 > Install from [Wordpress Plugins](https://br.wordpress.org/plugins/acf-onyx-poll/ "Wordpress Plugin Repository") or clone the master branch from this repository
 
-Plugin for polls based on regular Wordpress and acf (advanced custom fields) functionalities using **WP REST API** and ***Javascript*** methods. Fell free to submit a Pull Request.
+Plugin for polls based on regular Wordpress and acf (advanced custom fields) functionalities using **WP REST API** and ***Javascript*** methods. Feel free to submit a Pull Request.
 
 The main goal of ACF Onyx Poll is to be **totally free, lightweight and simple**. No fancy, colorful and polluted options or donate screens.
 
