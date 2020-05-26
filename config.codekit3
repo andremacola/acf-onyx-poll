@@ -7,7 +7,7 @@
 		"uuidString": "967F8358-FCBF-43C1-8241-49E27F34878F"
 		}
 	],
-"creatorBuild": "32147",
+"creatorBuild": "32186",
 "files": {
 	"/.editorconfig": {
 		"cB": 0,
@@ -148,47 +148,80 @@
 		"oF": 0,
 		"oS": 3
 		},
-	"/assets/images/screen1.png": {
+	"/assets/images/banner-1544x500.png": {
 		"ft": 32768,
-		"iS": 33296,
+		"iS": 83659,
 		"oA": 0,
-		"oAP": "/assets/images/screen1.png",
+		"oAP": "/assets/images/banner-1544x500.png",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
-	"/assets/images/screen2.png": {
+	"/assets/images/banner-772x250.png": {
 		"ft": 32768,
-		"iS": 143318,
+		"iS": 35973,
 		"oA": 0,
-		"oAP": "/assets/images/screen2.png",
+		"oAP": "/assets/images/banner-772x250.png",
 		"oF": 0,
-		"oIPL": 1,
-		"opt": 1,
+		"oIPL": 0,
+		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
-	"/assets/images/screen3.png": {
+	"/assets/images/icon-128x128.png": {
 		"ft": 32768,
-		"iS": 27689,
+		"iS": 4923,
 		"oA": 0,
-		"oAP": "/assets/images/screen3.png",
+		"oAP": "/assets/images/icon-128x128.png",
 		"oF": 0,
-		"oIPL": 1,
-		"opt": 1,
+		"oIPL": 0,
+		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
-	"/assets/images/screen4.png": {
+	"/assets/images/icon-256x256.png": {
 		"ft": 32768,
-		"iS": 36506,
+		"iS": 10217,
 		"oA": 0,
-		"oAP": "/assets/images/screen4.png",
+		"oAP": "/assets/images/icon-256x256.png",
 		"oF": 0,
-		"oIPL": 1,
-		"opt": 1,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/assets/images/screenshot-1.png": {
+		"ft": 32768,
+		"iS": 74875,
+		"oA": 0,
+		"oAP": "/assets/images/screenshot-1.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/assets/images/screenshot-2.png": {
+		"ft": 32768,
+		"iS": 131343,
+		"oA": 0,
+		"oAP": "/assets/images/screenshot-2.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/assets/images/screenshot-3.png": {
+		"ft": 32768,
+		"iS": 53911,
+		"oA": 0,
+		"oAP": "/assets/images/screenshot-3.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
@@ -894,6 +927,10 @@
 			"active": 0,
 			"optionString": ""
 			},
+		"default-case-last": {
+			"active": 0,
+			"optionString": ""
+			},
 		"default-param-last": {
 			"active": 0,
 			"optionString": ""
@@ -1306,6 +1343,10 @@
 			"active": 0,
 			"optionString": ""
 			},
+		"no-loss-of-precision": {
+			"active": 0,
+			"optionString": ""
+			},
 		"no-magic-numbers": {
 			"active": 0,
 			"optionString": "{'ignore': [], 'ignoreArrayIndexes': true, 'enforceConst': false, 'detectObjects': false}"
@@ -1421,6 +1462,10 @@
 		"no-regex-spaces": {
 			"active": 1,
 			"optionString": ""
+			},
+		"no-restricted-exports": {
+			"active": 0,
+			"optionString": "{'restrictedNamedExports': []}"
 			},
 		"no-restricted-globals": {
 			"active": 0,
@@ -1565,6 +1610,10 @@
 		"no-use-before-define": {
 			"active": 0,
 			"optionString": "{'functions': true, 'classes': true, 'variables': true}"
+			},
+		"no-useless-backreference": {
+			"active": 0,
+			"optionString": ""
 			},
 		"no-useless-call": {
 			"active": 0,

@@ -1,6 +1,10 @@
+<p align="center">
+  <img width="772" height="772x250" src="https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/banner-772x250.png">
+</p>
+
 # ACF ONYX POLL
 
-> This is an **alpha version** and is not available in Wordpress Repository. Will be soon
+> Install from [Wordpress Plugins](https://br.wordpress.org/plugins/acf-onyx-poll/ "Wordpress Plugin Repository") or clone the master branch from this repository
 
 Plugin for polls based on regular Wordpress and acf (advanced custom fields) functionalities using **WP REST API** and ***Javascript*** methods. Fell free to submit a Pull Request.
 
@@ -10,13 +14,21 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## SCREENSHOTS
 
-![Admin List Table](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen1.png "Admin List Table")
+<p align="center">
 
-![Admin Edit Screen](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen2.png "Admin Edit Screen")
+![Admin List Table](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-1.png "Admin List Table")
 
-![Poll Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen3.png "Poll Example")
+![Admin Edit Screen](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-2.png "Admin Edit Screen")
 
-![Results Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screen4.png "Results Example")
+![Poll Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-3.png "Poll Example")
+
+</p>
+
+## HOW TO USE
+
+* Use the shortcode `[onyx-poll]` to get the latest poll
+* To add a specific poll, assign the option **ID** with the requested poll to the shortcode: `[onyx-poll id=XX]`
+* You can align the poll container with the option **class** in the shortcode: `[onyx-poll class=left]`. Available options are `left, right, full`
 
 ## FEATURES
 
