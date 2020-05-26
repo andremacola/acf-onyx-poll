@@ -1,5 +1,5 @@
 <p align="center">
-  <img style="width: 100%; height: auto" src="https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/banner-772x250.png">
+  <img width="914" height="296" src="https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/banner-1544x500.png">
 </p>
 
 # ACF ONYX POLL
