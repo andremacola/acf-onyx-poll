@@ -26,3 +26,7 @@ sftp-config.json
 # composer
 ######################
 ./vendor/
+
+# wordpress svn
+######################
+_svn

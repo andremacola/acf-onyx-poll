@@ -68,6 +68,12 @@
 		"oAP": "/.vscode/stubs.php",
 		"oF": 0
 		},
+	"/_svn": {
+		"ft": 65536,
+		"oA": 1,
+		"oAP": "/build/_svn",
+		"oF": 0
+		},
 	"/acf/fields.php": {
 		"cB": 0,
 		"ft": 8192,
@@ -2516,7 +2522,7 @@
 	"rollupExternals": "",
 	"rollupReplacements": "process.env.NODE_ENV:::$NODE_ENV,,,ENVIRONMENT:::$NODE_ENV",
 	"rollupTreeshakingEnabled": 1,
-	"skippedFoldersString": "log, _logs, logs, _cache, cache, .idea, /storage/framework/sessions, node_modules",
+	"skippedFoldersString": "log, _logs, logs, _cache, cache, .idea, /storage/framework/sessions, node_modules, /_svn",
 	"sourceFolderName": "source",
 	"susyVersion": 3,
 	"tsAllowSyntheticDefaultImports": 0,
