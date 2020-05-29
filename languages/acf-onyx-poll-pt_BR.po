@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF Onyx Poll 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2020-05-26T18:48:46+00:00\n"
-"PO-Revision-Date: 2020-05-26 15:50-0300\n"
+"POT-Creation-Date: 2020-05-29T01:16:40+00:00\n"
+"PO-Revision-Date: 2020-05-28 22:18-0300\n"
 "Last-Translator: \n"
 "Language-Team: ONYX\n"
 "Language: pt_BR\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Plugin Name of the plugin
+#: admin/poll-widget.php:28
 msgid "ACF Onyx Poll"
 msgstr "ACF Onyx Poll"
 
@@ -155,7 +156,7 @@ msgstr ""
 "Para utilizar seu próprio CSS e desabilitar os estilos padrões do plugin, "
 "marque esta opção"
 
-#: admin/poll-type.php:14
+#: admin/poll-type.php:14 admin/poll-widget.php:57
 msgid "Poll"
 msgstr "Enquete"
 
@@ -230,6 +231,14 @@ msgstr "Status"
 #: admin/poll-type.php:102
 msgid "End date"
 msgstr "Expiração"
+
+#: admin/poll-widget.php:30
+msgid "Show Onyx Poll"
+msgstr "Mostrar uma enquete"
+
+#: admin/poll-widget.php:52
+msgid "Title"
+msgstr "Título"
 
 #: api/poll-api.php:28
 msgid "Vote was submitted successfully"

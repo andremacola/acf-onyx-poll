@@ -100,6 +100,14 @@
 		"oAP": "/admin/poll-type.php",
 		"oF": 0
 		},
+	"/admin/poll-widget.php": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/admin/poll-widget.php",
+		"oF": 0
+		},
 	"/api/poll-api.php": {
 		"cB": 0,
 		"ft": 8192,

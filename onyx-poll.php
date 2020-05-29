@@ -171,8 +171,14 @@ Class OnyxPollsInit {
 
 		if(is_admin()) {
 			// Create Poll Post Type
-			require_once(__DIR__ . '/admin/poll-type.php');			
+			require_once(__DIR__ . '/admin/poll-type.php');
 		}
+
+		// Load widget
+		require_once(__DIR__ . '/admin/poll-widget.php');
+		add_action('widgets_init', function() {
+			register_widget('OnyxPollsWidget');
+		});
 
 		// Load Helper Methods
 		require_once(__DIR__ . '/classes/poll-helpers.php');

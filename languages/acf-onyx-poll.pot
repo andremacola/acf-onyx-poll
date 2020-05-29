@@ -9,12 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-26T18:48:46+00:00\n"
+"POT-Creation-Date: 2020-05-29T01:19:37+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: acf-onyx-poll\n"
 
 #. Plugin Name of the plugin
+#: admin/poll-widget.php:28
 msgid "ACF Onyx Poll"
 msgstr ""
 
@@ -160,6 +161,7 @@ msgid "To use your own CSS and disable the default plugin styles, check this opt
 msgstr ""
 
 #: admin/poll-type.php:14
+#: admin/poll-widget.php:57
 msgid "Poll"
 msgstr ""
 
@@ -233,6 +235,18 @@ msgstr ""
 
 #: admin/poll-type.php:102
 msgid "End date"
+msgstr ""
+
+#: admin/poll-widget.php:30
+msgid "Show Onyx Poll"
+msgstr ""
+
+#: admin/poll-widget.php:52
+msgid "Title"
+msgstr ""
+
+#: admin/poll-widget.php:78
+msgid "Latest"
 msgstr ""
 
 #: api/poll-api.php:28
