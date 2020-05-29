@@ -1,6 +1,11 @@
-.wp-list-table td.column-id { font-weight: bold; }
+.wp-list-table .column-id {
+	width: 15%;
+}
+.wp-list-table td.column-id span {
+	background: #f0f0f0;
+	padding: 3px 5px;
+}
 
-.wp-list-table .column-id,
 .wp-list-table .column-status,
 .wp-list-table .column-modal { width: 10%; }
 

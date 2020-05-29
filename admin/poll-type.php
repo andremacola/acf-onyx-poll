@@ -110,7 +110,7 @@ class OnyxPollsCpt {
 	public function custom_columns($column, $post_id) {
 		switch($column) {
 			case 'id':
-				echo "$post_id";
+				echo "<span>[onyx-poll id='$post_id']</span>";
 				break;
 			case 'votes':
 				echo get_field('onyx_poll_total', $post_id);

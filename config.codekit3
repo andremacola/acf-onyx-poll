@@ -52,14 +52,6 @@
 		"oAP": "/.prettierrc",
 		"oF": 1
 		},
-	"/.vscode/sftp.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/.vscode/sftp-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
 	"/.vscode/stubs.php": {
 		"cB": 0,
 		"ft": 8192,
