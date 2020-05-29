@@ -38,9 +38,10 @@ class OnyxPollsWidget extends WP_Widget {
 	public function widget($args, $instance) {
 		$title = apply_filters('widget_title', $instance['title']);
 		$poll = $instance['poll'];
+		$css = $instance['css'];
 
 		echo $args['before_widget'] . $args['before_title'] . $title . $args['after_title'];
-		echo do_shortcode("[onyx-poll id=$poll class='']");
+		echo do_shortcode("[onyx-poll id=$poll class='$css']");
 		echo $args['after_widget'];
 	}
 
@@ -56,6 +57,10 @@ class OnyxPollsWidget extends WP_Widget {
 		$poll_id      = $this->get_field_id('poll');
 		$poll_label   = __('Poll', 'acf-onyx-poll');
 		$poll_name    = $this->get_field_name('poll');
+
+		$css_id       = $this->get_field_id('css');
+		$css_label    = __('Style', 'acf-onyx-poll');
+		$css_name     = $this->get_field_name('css');
 
 		$instance['poll'] = $instance['poll'] ?? false;
 		$poll_options = $this->query_polls($instance['poll']);
@@ -80,6 +85,22 @@ class OnyxPollsWidget extends WP_Widget {
 				</select>
 			</p>
 		";
+
+		if (!get_field('onyx_poll_css', 'options')) {
+			$form .= "
+			<p>
+				<label for='$css_id'>$css_label:</label>
+				<select
+					class='widefat'
+					id='$css_id'
+					name='$css_name'>
+					<option value='standard' ". selected($instance['css'], 'Bar style', false) .">". __('Bar style', 'acf-onyx-poll') ."</option>
+					<option value='twitter' ". selected($instance['css'], 'twitter', false) .">". __('Twitter style', 'acf-onyx-poll') ."</option>
+				</select>
+			</p>
+			";
+		}
+
 		echo $form;
 	}
 
@@ -90,6 +111,7 @@ class OnyxPollsWidget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['poll']  = OnyxPolls::has_poll($instance['poll']) ? strip_tags($new_instance['poll']) : '';
+		$instance['css'] = strip_tags($new_instance['css']);
 		return $instance;
 	}
 

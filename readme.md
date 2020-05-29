@@ -27,6 +27,9 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 * Use the shortcode `[onyx-poll]` to get the latest poll
 * To add a specific poll, assign the option **ID** with the requested poll to the shortcode: `[onyx-poll id=XX]`
 * You can align the poll container with the option **class** in the shortcode: `[onyx-poll class=left]`. Available options are `left, right, full`
+* To select which **style** you want: `[onyx-poll class="twitter|standard"]`
+* Is it possible to combine style and aligment. Ex: `[onyx-poll class="standard left"]`
+* To include a **widget**, your theme need to support it. Go to Appereance > Widgets and select **ACF Onyx Poll** widget
 
 ## FEATURES
 
@@ -36,6 +39,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [x] Multiple polls per page
 - [x] Support for images
 - [x] Native widget for sidebar
+- [x] Multiple style options `[onyx-poll class="twitter|standard"]`
 - [x] Show poll in a modal
 - [x] Show poll results on widget after expired
 - [x] Highlight choosed choice in results area
@@ -51,7 +55,6 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 ## TO DO
 
 - [ ] Improve/Cache REST API response for better performance on high traffic sites
-- [ ] Multiple style options
 - [ ] Custom Gutemberg Block
 - [ ] Inject javascript only if current page has a poll
 - [ ] Documentation/Wiki for users and developers
@@ -87,6 +90,7 @@ You can do some customization by overriding some CSS variables inside your css f
 	--choiceColor: #333;
 	--buttonColor: #333;
 	--choiceHoverBG: #f5f5f5;
+	--choiceBarColor: #e0e0e0;
 	--choiceBorderRadius: 100px;
 	--closeBorderRadius: 100px;
 	--loaderBorderColor: rgb(209, 226, 240);
