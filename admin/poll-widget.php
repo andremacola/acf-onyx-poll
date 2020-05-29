@@ -25,9 +25,9 @@ class OnyxPollsWidget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'onyx_poll',
-			__('ACF Onyx Poll', 'acf-onyx-poll'),
+			__('Poll', 'acf-onyx-poll'),
 			array(
-				'description' => __('Show Onyx Poll', 'acf-onyx-poll')
+				'description' => __('Show ACF Onyx Poll', 'acf-onyx-poll')
 			)
 		);
 	}

@@ -2,20 +2,19 @@
 # This file is distributed under the same license as the ACF Onyx Poll plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: ACF Onyx Poll 1.0\n"
+"Project-Id-Version: ACF Onyx Poll 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-29T01:19:37+00:00\n"
+"POT-Creation-Date: 2020-05-29T06:27:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: acf-onyx-poll\n"
 
 #. Plugin Name of the plugin
-#: admin/poll-widget.php:28
 msgid "ACF Onyx Poll"
 msgstr ""
 
@@ -161,7 +160,8 @@ msgid "To use your own CSS and disable the default plugin styles, check this opt
 msgstr ""
 
 #: admin/poll-type.php:14
-#: admin/poll-widget.php:57
+#: admin/poll-widget.php:28
+#: admin/poll-widget.php:58
 msgid "Poll"
 msgstr ""
 
@@ -238,15 +238,27 @@ msgid "End date"
 msgstr ""
 
 #: admin/poll-widget.php:30
-msgid "Show Onyx Poll"
+msgid "Show ACF Onyx Poll"
 msgstr ""
 
-#: admin/poll-widget.php:52
+#: admin/poll-widget.php:53
 msgid "Title"
 msgstr ""
 
-#: admin/poll-widget.php:78
+#: admin/poll-widget.php:62
+msgid "Style"
+msgstr ""
+
+#: admin/poll-widget.php:83
 msgid "Latest"
+msgstr ""
+
+#: admin/poll-widget.php:97
+msgid "Bar style"
+msgstr ""
+
+#: admin/poll-widget.php:98
+msgid "Twitter style"
 msgstr ""
 
 #: api/poll-api.php:28

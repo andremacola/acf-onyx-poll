@@ -29,7 +29,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 * You can align the poll container with the option **class** in the shortcode: `[onyx-poll class=left]`. Available options are `left, right, full`
 * To select which **style** you want: `[onyx-poll class="twitter|standard"]`
 * Is it possible to combine style and aligment. Ex: `[onyx-poll class="standard left"]`
-* To include a **widget**, your theme need to support it. Go to Appereance > Widgets and select **ACF Onyx Poll** widget
+* To include a **widget**, your theme need to support it. Go to Appereance > Widgets and select **Poll** widget from *from ACF Onyx Poll*
 
 ## FEATURES
 
