@@ -35,6 +35,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 - [x] Works with cache plugins
 - [x] Multiple polls per page
 - [x] Support for images
+- [x] Native widget for sidebar
 - [x] Show poll in a modal
 - [x] Show poll results on widget after expired
 - [x] Highlight choosed choice in results area
@@ -50,7 +51,6 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 ## TO DO
 
 - [ ] Improve/Cache REST API response for better performance on high traffic sites
-- [ ] Native widget for sidebar
 - [ ] Multiple style options
 - [ ] Custom Gutemberg Block
 - [ ] Inject javascript only if current page has a poll

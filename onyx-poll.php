@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: ACF Onyx Poll
-Version: 1.0
+Version: 1.0.1
 Description: Create polls with ACF PRO
 Author: André Mácola Machado
 Author URI: https://github.com/andremacola
@@ -20,7 +20,7 @@ if(!class_exists('OnyxPollsInit')):
 
 Class OnyxPollsInit {
 
-	var $version = "1.0";
+	var $version = "1.0.1";
 
 	/**
 	 * __construct
