@@ -350,10 +350,10 @@
 /*
 /* BAR STANDARD STYLE
 */
-.onyx-poll.standard-bar .onyx-poll-choice { border-radius: 4px; }
-.onyx-poll.standard-bar.view .onyx-poll-choice:before { display: none; }
+.onyx-poll.standard .onyx-poll-choice { border-radius: 4px; }
+.onyx-poll.standard.view .onyx-poll-choice:before { display: none; }
 
-.onyx-poll.standard-bar.view .onyx-poll-choice:after {
+.onyx-poll.standard.view .onyx-poll-choice:after {
 	position: absolute;
 	width: 100%;
 	max-width: 100%;
@@ -362,7 +362,7 @@
 	z-index: 2;
 }
 
-.onyx-poll.standard-bar.view .onyx-poll-choice .answer:after {
+.onyx-poll.standard.view .onyx-poll-choice .answer:after {
 	opacity: .6;
 	content: "";
 	display: block;
