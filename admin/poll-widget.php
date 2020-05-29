@@ -61,6 +61,7 @@ class OnyxPollsWidget extends WP_Widget {
 		$css_id       = $this->get_field_id('css');
 		$css_label    = __('Style', 'acf-onyx-poll');
 		$css_name     = $this->get_field_name('css');
+		$instance['css'] = $instance['css'] ?? '';
 
 		$instance['poll'] = $instance['poll'] ?? false;
 		$poll_options = $this->query_polls($instance['poll']);

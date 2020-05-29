@@ -258,9 +258,9 @@ class onyxAcfPoll {
 			const percent = (percentFull >= 1) ? percentFull.toFixed(2) + '%' : '0%';
 
 			let result = `${votes} ${onyxpoll.labels.votes} / ${percent}`;
-			if (res.type == 2) {
+			if (res.results.type == 2) {
 				result = `${votes} ${onyxpoll.labels.votes}`;
-			} else if (res.type == 1) {
+			} else if (res.results.type == 1) {
 				result = `${percent}`;
 			}
 
