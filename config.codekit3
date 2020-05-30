@@ -74,30 +74,6 @@
 		"oAP": "/acf/fields.php",
 		"oF": 0
 		},
-	"/acf/group_5e7d2e8ddec98.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/acf/group_5e7d2e8ddec98-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/acf/group_5e81950362e50.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/acf/group_5e81950362e50-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/acf/group_5ed174ac8bd06.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/acf/group_5ed174ac8bd06-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
 	"/admin/block/block.php": {
 		"cB": 0,
 		"ft": 8192,

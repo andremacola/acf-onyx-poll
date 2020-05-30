@@ -370,6 +370,77 @@ acf_add_local_field_group(array(
 	'description' => '',
 ));
 
+acf_add_local_field_group(array(
+	'key' => 'group_5ed174ac8bd06',
+	'title' => 'Onyx Poll Block',
+	'fields' => array(
+		array(
+			'key' => 'field_5ed174c6b5a8f',
+			'label' => 'Poll',
+			'name' => 'onyx_poll_block_id',
+			'type' => 'post_object',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '70',
+				'class' => '',
+				'id' => '',
+			),
+			'post_type' => array(
+				0 => 'onyxpolls',
+			),
+			'taxonomy' => '',
+			'allow_null' => 0,
+			'multiple' => 0,
+			'return_format' => 'id',
+			'ui' => 1,
+		),
+		array(
+			'key' => 'field_5ed17b7ef8646',
+			'label' => 'Style',
+			'name' => 'onyx_poll_block_style',
+			'type' => 'select',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '30',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'standard' => 'Bar style',
+				'twitter' => 'Twitter',
+			),
+			'default_value' => false,
+			'allow_null' => 0,
+			'multiple' => 0,
+			'ui' => 1,
+			'ajax' => 0,
+			'return_format' => 'value',
+			'placeholder' => '',
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'block',
+				'operator' => '==',
+				'value' => 'acf/acf-onyx-poll',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'seamless',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
 endif;
 
 ?>
