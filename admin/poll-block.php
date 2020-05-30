@@ -21,20 +21,20 @@ add_action('acf/init', function() {
 	));
 });
 
-/* customizar retorno html do campo post object dos blocos/posts */
-add_filter('acf/fields/post_object/result/key=field_5ed174c6b5a8f', 'acf_object_result', 10, 4);
-function acf_object_result($title, $post, $field, $post_id) {
+/* customize html return of the blocks object field*/
+add_filter('acf/fields/post_object/result/key=field_5ed174c6b5a8f', 'acf_onyx_poll_object_result', 10, 4);
+function acf_onyx_poll_object_result($title, $post, $field, $post_id) {
 	$title = "<span class='id ref'>[$post->ID]</span> / <span class='title'>$title</span>";
 	return $title;
 }
 
-/* customizar query do campo post object dos blocos/posts */
-add_filter('acf/fields/post_object/quer/key=field_5ed174c6b5a8f', 'acf_post_object_query', 10, 3);
-function acf_post_object_query($args, $field, $post) {
+/* customize query from blocks post object field */
+add_filter('acf/fields/post_object/quer/key=field_5ed174c6b5a8f', 'acf_onyx_poll_post_object_query', 10, 3);
+function acf_onyx_poll_post_object_query($args, $field, $post) {
 	$args['order']		= 'DESC';
 	$args['orderby']	= 'ID';
 
-	// buscar post por ID
+	// search by ID
 	$search = !empty($args['s']) ? $args['s'] : false;
 	if($search && is_numeric($search)) {
 		$args['post__in'] = array($search);
