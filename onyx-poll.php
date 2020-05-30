@@ -146,9 +146,12 @@ Class OnyxPollsInit {
 
 		// Enqueue scripts and styles
 		add_action('admin_head', array($this, 'admin_styles'));
-		if (!is_admin() && !$this->is_amp()) {
-			add_action('wp_footer', 'OnyxPolls::add_assets');
-		}
+		add_action('wp_footer', function() {
+			if (!is_admin() && !$this->is_amp()) {
+				OnyxPolls::add_assets();
+			}
+		});
+		
 
 		// Add onyx poll shortcode
 		add_shortcode("onyx-poll", array($this, 'shortcode'));
