@@ -33,6 +33,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
 ## FEATURES
 
+- [x] **Gutemberg Block** with live preview
 - [x] Include poll with a shortcode (ommit the ID to get the latest poll) `[onyx-poll id=XX class="left|right|full"]`
 - [x] One click to vote
 - [x] Works with cache plugins
@@ -55,7 +56,6 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 ## TO DO
 
 - [ ] Improve/Cache REST API response for better performance on high traffic sites
-- [ ] Custom Gutemberg Block
 - [ ] Inject javascript only if current page has a poll
 - [ ] Documentation/Wiki for users and developers
 - [ ] Integration with Google reCaptcha
