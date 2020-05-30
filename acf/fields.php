@@ -376,7 +376,7 @@ acf_add_local_field_group(array(
 	'fields' => array(
 		array(
 			'key' => 'field_5ed174c6b5a8f',
-			'label' => 'Poll',
+			'label' => __('Poll', 'acf-onyx-poll'),
 			'name' => 'onyx_poll_block_id',
 			'type' => 'post_object',
 			'instructions' => '',
@@ -398,7 +398,7 @@ acf_add_local_field_group(array(
 		),
 		array(
 			'key' => 'field_5ed17b7ef8646',
-			'label' => 'Style',
+			'label' => __('Style', 'acf-onyx-poll'),
 			'name' => 'onyx_poll_block_style',
 			'type' => 'select',
 			'instructions' => '',
@@ -410,8 +410,8 @@ acf_add_local_field_group(array(
 				'id' => '',
 			),
 			'choices' => array(
-				'standard' => 'Bar style',
-				'twitter' => 'Twitter',
+				'standard' => __('Bar style', 'acf-onyx-poll'),
+				'twitter' => __('Twitter', 'acf-onyx-poll'),
 			),
 			'default_value' => false,
 			'allow_null' => 0,

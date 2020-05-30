@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the ACF Onyx Poll plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: ACF Onyx Poll 1.0.1\n"
+"Project-Id-Version: ACF Onyx Poll 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-29T06:27:10+00:00\n"
+"POT-Creation-Date: 2020-05-30T02:20:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: acf-onyx-poll\n"
@@ -35,280 +35,443 @@ msgid "https://github.com/andremacola"
 msgstr ""
 
 #: acf/fields.php:11
+#: _svn/tags/1.0.1/acf/fields.php:11
+#: _svn/tags/1.0/acf/fields.php:11
 msgid "Answers"
 msgstr ""
 
 #: acf/fields.php:30
+#: _svn/tags/1.0.1/acf/fields.php:30
+#: _svn/tags/1.0/acf/fields.php:30
 msgid "Image"
 msgstr ""
 
 #: acf/fields.php:62
+#: _svn/tags/1.0.1/acf/fields.php:62
+#: _svn/tags/1.0/acf/fields.php:62
 msgid "Answer"
 msgstr ""
 
 #: acf/fields.php:81
 #: admin/poll-type.php:99
+#: _svn/tags/1.0.1/acf/fields.php:81
+#: _svn/tags/1.0.1/admin/poll-type.php:99
+#: _svn/tags/1.0/acf/fields.php:81
+#: _svn/tags/1.0/admin/poll-type.php:99
 msgid "Votes"
 msgstr ""
 
 #: acf/fields.php:104
+#: _svn/tags/1.0.1/acf/fields.php:104
+#: _svn/tags/1.0/acf/fields.php:104
 msgid "Limit voting"
 msgstr ""
 
 #: acf/fields.php:116
+#: _svn/tags/1.0.1/acf/fields.php:116
+#: _svn/tags/1.0/acf/fields.php:116
 msgid "Free Vote"
 msgstr ""
 
 #: acf/fields.php:117
+#: _svn/tags/1.0.1/acf/fields.php:117
+#: _svn/tags/1.0/acf/fields.php:117
 msgid "Per device"
 msgstr ""
 
 #: acf/fields.php:118
+#: _svn/tags/1.0.1/acf/fields.php:118
+#: _svn/tags/1.0/acf/fields.php:118
 msgid "Every 30 minutes"
 msgstr ""
 
 #: acf/fields.php:119
 #: acf/fields.php:317
+#: _svn/tags/1.0.1/acf/fields.php:119
+#: _svn/tags/1.0.1/acf/fields.php:317
+#: _svn/tags/1.0/acf/fields.php:119
+#: _svn/tags/1.0/acf/fields.php:317
 msgid "Every 1 hour"
 msgstr ""
 
 #: acf/fields.php:120
 #: acf/fields.php:318
+#: _svn/tags/1.0.1/acf/fields.php:120
+#: _svn/tags/1.0.1/acf/fields.php:318
+#: _svn/tags/1.0/acf/fields.php:120
+#: _svn/tags/1.0/acf/fields.php:318
 msgid "Every 2 hours"
 msgstr ""
 
 #: acf/fields.php:121
 #: acf/fields.php:319
+#: _svn/tags/1.0.1/acf/fields.php:121
+#: _svn/tags/1.0.1/acf/fields.php:319
+#: _svn/tags/1.0/acf/fields.php:121
+#: _svn/tags/1.0/acf/fields.php:319
 msgid "Every 3 hours"
 msgstr ""
 
 #: acf/fields.php:122
 #: acf/fields.php:320
+#: _svn/tags/1.0.1/acf/fields.php:122
+#: _svn/tags/1.0.1/acf/fields.php:320
+#: _svn/tags/1.0/acf/fields.php:122
+#: _svn/tags/1.0/acf/fields.php:320
 msgid "Every 4 hours"
 msgstr ""
 
 #: acf/fields.php:123
 #: acf/fields.php:321
+#: _svn/tags/1.0.1/acf/fields.php:123
+#: _svn/tags/1.0.1/acf/fields.php:321
+#: _svn/tags/1.0/acf/fields.php:123
+#: _svn/tags/1.0/acf/fields.php:321
 msgid "Every 5 hours"
 msgstr ""
 
 #: acf/fields.php:124
 #: acf/fields.php:322
+#: _svn/tags/1.0.1/acf/fields.php:124
+#: _svn/tags/1.0.1/acf/fields.php:322
+#: _svn/tags/1.0/acf/fields.php:124
+#: _svn/tags/1.0/acf/fields.php:322
 msgid "Every 12 hours"
 msgstr ""
 
 #: acf/fields.php:125
 #: acf/fields.php:323
+#: _svn/tags/1.0.1/acf/fields.php:125
+#: _svn/tags/1.0.1/acf/fields.php:323
+#: _svn/tags/1.0/acf/fields.php:125
+#: _svn/tags/1.0/acf/fields.php:323
 msgid "Every 24 hours"
 msgstr ""
 
 #: acf/fields.php:139
+#: _svn/tags/1.0.1/acf/fields.php:139
+#: _svn/tags/1.0/acf/fields.php:139
 msgid "Results"
 msgstr ""
 
 #: acf/fields.php:151
+#: _svn/tags/1.0.1/acf/fields.php:151
+#: _svn/tags/1.0/acf/fields.php:151
 msgid "Show in percentage"
 msgstr ""
 
 #: acf/fields.php:152
+#: _svn/tags/1.0.1/acf/fields.php:152
+#: _svn/tags/1.0/acf/fields.php:152
 msgid "Show in numbers"
 msgstr ""
 
 #: acf/fields.php:153
+#: _svn/tags/1.0.1/acf/fields.php:153
+#: _svn/tags/1.0/acf/fields.php:153
 msgid "Show both"
 msgstr ""
 
 #: acf/fields.php:167
+#: _svn/tags/1.0.1/acf/fields.php:167
+#: _svn/tags/1.0/acf/fields.php:167
 msgid "End of Poll"
 msgstr ""
 
 #: acf/fields.php:184
-#: onyx-poll.php:69
+#: classes/poll-helpers.php:155
+#: _svn/tags/1.0.1/acf/fields.php:184
+#: _svn/tags/1.0.1/onyx-poll.php:69
+#: _svn/tags/1.0/acf/fields.php:184
+#: _svn/tags/1.0/onyx-poll.php:69
 msgid "Total votes"
 msgstr ""
 
 #: acf/fields.php:205
+#: _svn/tags/1.0.1/acf/fields.php:205
+#: _svn/tags/1.0/acf/fields.php:205
 msgid "Enable Images"
 msgstr ""
 
 #: acf/fields.php:224
+#: _svn/tags/1.0.1/acf/fields.php:224
+#: _svn/tags/1.0/acf/fields.php:224
 msgid "Poll Modal"
 msgstr ""
 
 #: acf/fields.php:243
+#: _svn/tags/1.0.1/acf/fields.php:243
+#: _svn/tags/1.0/acf/fields.php:243
 msgid "Show Results"
 msgstr ""
 
 #: acf/fields.php:262
+#: _svn/tags/1.0.1/acf/fields.php:262
+#: _svn/tags/1.0/acf/fields.php:262
 msgid "Expired"
 msgstr ""
 
 #: acf/fields.php:305
+#: _svn/tags/1.0.1/acf/fields.php:305
+#: _svn/tags/1.0/acf/fields.php:305
 msgid "Modal Interval for Voting"
 msgstr ""
 
 #: acf/fields.php:308
+#: _svn/tags/1.0.1/acf/fields.php:308
+#: _svn/tags/1.0/acf/fields.php:308
 msgid "Periodicity that the poll modal appears to the user."
 msgstr ""
 
 #: acf/fields.php:336
+#: _svn/tags/1.0.1/acf/fields.php:336
+#: _svn/tags/1.0/acf/fields.php:336
 msgid "Use own CSS"
 msgstr ""
 
 #: acf/fields.php:339
+#: _svn/tags/1.0.1/acf/fields.php:339
+#: _svn/tags/1.0/acf/fields.php:339
 msgid "To use your own CSS and disable the default plugin styles, check this option"
 msgstr ""
 
+#: acf/fields.php:379
 #: admin/poll-type.php:14
 #: admin/poll-widget.php:28
 #: admin/poll-widget.php:58
+#: _svn/tags/1.0.1/admin/poll-type.php:14
+#: _svn/tags/1.0.1/admin/poll-widget.php:28
+#: _svn/tags/1.0.1/admin/poll-widget.php:58
+#: _svn/tags/1.0/admin/poll-type.php:14
 msgid "Poll"
 msgstr ""
 
+#: acf/fields.php:401
+#: admin/poll-widget.php:62
+#: _svn/tags/1.0.1/admin/poll-widget.php:62
+msgid "Style"
+msgstr ""
+
+#: acf/fields.php:413
+#: admin/poll-widget.php:98
+#: _svn/tags/1.0.1/admin/poll-widget.php:98
+msgid "Bar style"
+msgstr ""
+
+#: acf/fields.php:414
+msgid "Twitter"
+msgstr ""
+
+#: admin/poll-block.php:7
+msgid "Onyx Poll"
+msgstr ""
+
+#: admin/poll-block.php:8
+msgid "Insert a poll in the post"
+msgstr ""
+
 #: admin/poll-type.php:15
+#: _svn/tags/1.0.1/admin/poll-type.php:15
+#: _svn/tags/1.0/admin/poll-type.php:15
 msgid "Polls"
 msgstr ""
 
 #: admin/poll-type.php:37
+#: _svn/tags/1.0.1/admin/poll-type.php:37
+#: _svn/tags/1.0/admin/poll-type.php:37
 msgid "All polls"
 msgstr ""
 
 #: admin/poll-type.php:38
+#: _svn/tags/1.0.1/admin/poll-type.php:38
+#: _svn/tags/1.0/admin/poll-type.php:38
 msgid "Add new"
 msgstr ""
 
 #: admin/poll-type.php:39
+#: _svn/tags/1.0.1/admin/poll-type.php:39
+#: _svn/tags/1.0/admin/poll-type.php:39
 msgid "Add new poll"
 msgstr ""
 
 #: admin/poll-type.php:40
+#: _svn/tags/1.0.1/admin/poll-type.php:40
+#: _svn/tags/1.0/admin/poll-type.php:40
 msgid "Edit poll"
 msgstr ""
 
 #: admin/poll-type.php:41
+#: _svn/tags/1.0.1/admin/poll-type.php:41
+#: _svn/tags/1.0/admin/poll-type.php:41
 msgid "Add poll"
 msgstr ""
 
 #: admin/poll-type.php:42
+#: _svn/tags/1.0.1/admin/poll-type.php:42
+#: _svn/tags/1.0/admin/poll-type.php:42
 msgid "View poll"
 msgstr ""
 
 #: admin/poll-type.php:43
+#: _svn/tags/1.0.1/admin/poll-type.php:43
+#: _svn/tags/1.0/admin/poll-type.php:43
 msgid "Search poll"
 msgstr ""
 
 #: admin/poll-type.php:44
+#: _svn/tags/1.0.1/admin/poll-type.php:44
+#: _svn/tags/1.0/admin/poll-type.php:44
 msgid "No polls found"
 msgstr ""
 
 #: admin/poll-type.php:45
+#: _svn/tags/1.0.1/admin/poll-type.php:45
+#: _svn/tags/1.0/admin/poll-type.php:45
 msgid "No poll found in trash"
 msgstr ""
 
 #: admin/poll-type.php:46
+#: _svn/tags/1.0.1/admin/poll-type.php:46
+#: _svn/tags/1.0/admin/poll-type.php:46
 msgid "Poll father"
 msgstr ""
 
 #: admin/poll-type.php:53
+#: _svn/tags/1.0.1/admin/poll-type.php:53
+#: _svn/tags/1.0/admin/poll-type.php:53
 msgid "Add new polls"
 msgstr ""
 
 #: admin/poll-type.php:81
+#: _svn/tags/1.0.1/admin/poll-type.php:81
+#: _svn/tags/1.0/admin/poll-type.php:81
 msgid "Poll Settings"
 msgstr ""
 
 #: admin/poll-type.php:82
+#: _svn/tags/1.0.1/admin/poll-type.php:82
+#: _svn/tags/1.0/admin/poll-type.php:82
 msgid "Settings"
 msgstr ""
 
 #: admin/poll-type.php:98
+#: _svn/tags/1.0.1/admin/poll-type.php:98
+#: _svn/tags/1.0/admin/poll-type.php:98
 msgid "ID"
 msgstr ""
 
 #: admin/poll-type.php:100
+#: _svn/tags/1.0.1/admin/poll-type.php:100
+#: _svn/tags/1.0/admin/poll-type.php:100
 msgid "Modal"
 msgstr ""
 
 #: admin/poll-type.php:101
+#: _svn/tags/1.0.1/admin/poll-type.php:101
+#: _svn/tags/1.0/admin/poll-type.php:101
 msgid "Status"
 msgstr ""
 
 #: admin/poll-type.php:102
+#: _svn/tags/1.0.1/admin/poll-type.php:102
+#: _svn/tags/1.0/admin/poll-type.php:102
 msgid "End date"
 msgstr ""
 
 #: admin/poll-widget.php:30
+#: _svn/tags/1.0.1/admin/poll-widget.php:30
 msgid "Show ACF Onyx Poll"
 msgstr ""
 
 #: admin/poll-widget.php:53
+#: _svn/tags/1.0.1/admin/poll-widget.php:53
 msgid "Title"
 msgstr ""
 
-#: admin/poll-widget.php:62
-msgid "Style"
-msgstr ""
-
-#: admin/poll-widget.php:83
+#: admin/poll-widget.php:84
+#: _svn/tags/1.0.1/admin/poll-widget.php:84
 msgid "Latest"
 msgstr ""
 
-#: admin/poll-widget.php:97
-msgid "Bar style"
-msgstr ""
-
-#: admin/poll-widget.php:98
+#: admin/poll-widget.php:99
+#: _svn/tags/1.0.1/admin/poll-widget.php:99
 msgid "Twitter style"
 msgstr ""
 
 #: api/poll-api.php:28
+#: _svn/tags/1.0.1/api/poll-api.php:28
+#: _svn/tags/1.0/api/poll-api.php:28
 msgid "Vote was submitted successfully"
 msgstr ""
 
 #: api/poll-api.php:29
+#: _svn/tags/1.0.1/api/poll-api.php:29
+#: _svn/tags/1.0/api/poll-api.php:29
 msgid "Poll vote error, try again"
 msgstr ""
 
 #: api/poll-api.php:30
+#: _svn/tags/1.0.1/api/poll-api.php:30
+#: _svn/tags/1.0/api/poll-api.php:30
 msgid "Invalid poll parameters"
 msgstr ""
 
 #: api/poll-api.php:31
+#: _svn/tags/1.0.1/api/poll-api.php:31
+#: _svn/tags/1.0/api/poll-api.php:31
 msgid "Non-existent or expired poll"
 msgstr ""
 
 #: api/poll-api.php:32
+#: _svn/tags/1.0.1/api/poll-api.php:32
+#: _svn/tags/1.0/api/poll-api.php:32
 msgid "You have already voted in this poll"
 msgstr ""
 
 #: api/poll-api.php:33
+#: _svn/tags/1.0.1/api/poll-api.php:33
+#: _svn/tags/1.0/api/poll-api.php:33
 msgid "No polls founded with ID "
 msgstr ""
 
-#: onyx-poll.php:66
+#: classes/poll-helpers.php:152
+#: _svn/tags/1.0.1/onyx-poll.php:66
+#: _svn/tags/1.0/onyx-poll.php:66
 msgid "Vote"
 msgstr ""
 
-#: onyx-poll.php:67
+#: classes/poll-helpers.php:153
+#: _svn/tags/1.0.1/onyx-poll.php:67
+#: _svn/tags/1.0/onyx-poll.php:67
 msgid "votes"
 msgstr ""
 
-#: onyx-poll.php:68
+#: classes/poll-helpers.php:154
+#: _svn/tags/1.0.1/onyx-poll.php:68
+#: _svn/tags/1.0/onyx-poll.php:68
 msgid "Views result"
 msgstr ""
 
-#: onyx-poll.php:70
+#: classes/poll-helpers.php:156
+#: _svn/tags/1.0.1/onyx-poll.php:70
+#: _svn/tags/1.0/onyx-poll.php:70
 msgid "Vote was submitted successfully."
 msgstr ""
 
-#: onyx-poll.php:71
+#: classes/poll-helpers.php:157
+#: _svn/tags/1.0.1/onyx-poll.php:71
+#: _svn/tags/1.0/onyx-poll.php:71
 msgid "Poll vote error, try again."
 msgstr ""
 
-#: onyx-poll.php:120
+#: onyx-poll.php:75
+#: _svn/tags/1.0.1/onyx-poll.php:120
+#: _svn/tags/1.0/onyx-poll.php:120
 msgid "Invalid poll ID"
 msgstr ""
 
-#: onyx-poll.php:157
+#: onyx-poll.php:112
+#: _svn/tags/1.0.1/onyx-poll.php:157
+#: _svn/tags/1.0/onyx-poll.php:157
 msgid "Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active."
 msgstr ""
