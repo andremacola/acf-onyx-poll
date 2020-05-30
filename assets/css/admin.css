@@ -2,7 +2,7 @@
 	width: 15%;
 }
 .wp-list-table td.column-id span {
-	background: #f0f0f0;
+	background: #eaeaea;
 	padding: 3px 5px;
 }
 
@@ -14,3 +14,11 @@
 
 .wp-list-table .green { color: #28C840; }
 .wp-list-table .red { color: #FF554E; }
+
+
+/* object field customization */
+body .select2-results__option .id,
+body .select2-selection__rendered .id { color: #0173AA; }
+body .select2-results__option .title,
+body .select2-selection__rendered .title { font-weight: bold; }
+body .select2-results__option--highlighted .ref { color: #FFF; }

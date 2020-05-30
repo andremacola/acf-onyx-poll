@@ -139,7 +139,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 		if ($poll_expired || get_post_type($poll_id) != 'onyxpolls') {
 			return new WP_Error('error', $this->message['no_exist'], array('status' => 400));
 		}
-		if ($_COOKIE["onyx_poll_limit_$poll_id"] && $poll_limit != 1) {
+		if (isset($_COOKIE["onyx_poll_limit_$poll_id"]) && $poll_limit != 1) {
 			$response = array(
 				"code"     => "not_allowed",
 				"id"       => $poll_id,

@@ -334,4 +334,12 @@ class onyxAcfPoll {
 	}
 }
 
-new onyxAcfPoll();
+// Initialize dynamic block preview (editor).
+var initializePoll = function() {
+	new onyxAcfPoll();
+};
+if (window.acf) {
+	window.acf.addAction('render_block_preview/type=acf-onyx-poll', initializePoll);
+} else {
+	new onyxAcfPoll();
+}

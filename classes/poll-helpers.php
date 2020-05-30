@@ -116,6 +116,50 @@ Class OnyxPolls {
 		return ($query->have_posts()) ? $query->posts[0] : false;
 	}
 
+	/**
+	 * Get asset variables for enqueue
+	 * @param string $path required
+	 */
+	public static function get_asset_vars($path = null) {
+		if ($path) {
+			$a = new stdClass();
+			$a->path = $path;
+			$a->url  = plugins_url($path, ACF_ONYX_POLL_FILE);
+			$a->ver  = filemtime(ACF_ONYX_POLL_PATH . $path);
+			return $a;
+		}
+		return false;
+	}
+
+	/**
+	 * Enqueue assets
+	 */
+	public static function add_assets() {
+		// Include scripts on front end
+		$js = self::get_asset_vars('assets/js/onyx-poll.min.js');
+		wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
+
+		if (!get_field('onyx_poll_css', 'options')) {
+			$css = self::get_asset_vars('assets/css/onyx-poll.min.css');
+			wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
+		}
+
+		wp_localize_script('acf-onyx-poll', 'onyxpoll',
+			array(
+				'apiurl'    => rest_url(),
+				// 'modaltime' => get_field('onyx_poll_modal_time', 'options'),
+				'labels' => array(
+					'vote'    => __('Vote', 'acf-onyx-poll'),
+					'votes'   => __('votes', 'acf-onyx-poll'),
+					'view'    => __('Views result', 'acf-onyx-poll'),
+					'total'   => __('Total votes', 'acf-onyx-poll'),
+					'success' => __('Vote was submitted successfully.', 'acf-onyx-poll'),
+					'error'   => __('Poll vote error, try again.', 'acf-onyx-poll')
+				)
+			)
+		);
+	}
+
 }
 
 ?>

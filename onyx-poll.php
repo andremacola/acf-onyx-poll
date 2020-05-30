@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: ACF Onyx Poll
-Version: 1.0.1
+Version: 1.1.0
 Description: Create polls with ACF PRO
 Author: André Mácola Machado
 Author URI: https://github.com/andremacola
@@ -20,18 +20,19 @@ if(!class_exists('OnyxPollsInit')):
 
 Class OnyxPollsInit {
 
-	var $version = "1.0.1";
-
 	/**
 	 * __construct
 	 *
 	 * A dummy constructor to ensure Acf Onyx Poll is only setup once.
+	 * Set some constants
 	 *
 	 * @param	void
 	 * @return	void
 	 */
 	function __construct() {
-		// Do nothing.
+		define('ACF_ONYX_POLL_VERSION', '1.1.0');
+		define('ACF_ONYX_POLL_FILE', __FILE__);
+		define('ACF_ONYX_POLL_PATH', plugin_dir_path(__FILE__));
 	}
 
 	/**
@@ -45,60 +46,14 @@ Class OnyxPollsInit {
 	}
 
 	/**
-	 * Enqueue assets
-	 */
-	public function add_assets() {
-		// Include scripts on front end
-		if (!is_admin() && !$this->is_amp()) {
-			$js = $this->get_asset_vars('assets/js/onyx-poll.min.js');
-			wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
-
-			if (!get_field('onyx_poll_css', 'options')) {
-				$css = $this->get_asset_vars('assets/css/onyx-poll.min.css');
-				wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
-			}
-
-			wp_localize_script('acf-onyx-poll', 'onyxpoll',
-				array(
-					'apiurl'    => rest_url(),
-					'modaltime' => get_field('onyx_poll_modal_time', 'options'),
-					'labels' => array(
-						'vote'    => __('Vote', 'acf-onyx-poll'),
-						'votes'   => __('votes', 'acf-onyx-poll'),
-						'view'    => __('Views result', 'acf-onyx-poll'),
-						'total'   => __('Total votes', 'acf-onyx-poll'),
-						'success' => __('Vote was submitted successfully.', 'acf-onyx-poll'),
-						'error'   => __('Poll vote error, try again.', 'acf-onyx-poll')
-					)
-				)
-			);
-		}
-	}
-
-	/**
 	 * Some admin styles for better view
 	 */
 	public function admin_styles() {
 		global $post_type;
-		if ('onyxpolls' == $post_type) {
-			$css = $this->get_asset_vars('assets/css/admin.min.css');
+		if ('onyxpolls' == $post_type || get_current_screen()->is_block_editor) {
+			$css = OnyxPolls::get_asset_vars('assets/css/admin.min.css');
 			wp_enqueue_style('acf-onyx-poll-admin', $css->url, array(), $css->ver);
 		}
-	}
-
-	/**
-	 * Get asset variables for enqueue
-	 * @param string $path required
-	 */
-	public function get_asset_vars($path = null) {
-		if ($path) {
-			$a = new stdClass();
-			$a->path = $path;
-			$a->url  = plugins_url($path, __FILE__);
-			$a->ver  = filemtime(plugin_dir_path(__FILE__) . $path);
-			return $a;
-		}
-		return false;
 	}
 
 	/**
@@ -133,9 +88,9 @@ Class OnyxPollsInit {
 	 */
 	 public function initialize() {
 		// Change ACF Local JSON save location to /acf folder inside this plugin
-		// add_filter('acf/settings/save_json', function() {
-		// 	return __DIR__ . '/acf';
-		// });
+		add_filter('acf/settings/save_json', function() {
+			return __DIR__ . '/acf';
+		});
 
 		// Include the /acf folder in the places to look for ACF Local JSON files
 		// add_filter('acf/settings/load_json', function($paths) {
@@ -174,11 +129,11 @@ Class OnyxPollsInit {
 			require_once(__DIR__ . '/admin/poll-type.php');
 		}
 
+		// Load Gutenberg Block
+		require_once(__DIR__ . '/admin/poll-block.php');
+
 		// Load widget
 		require_once(__DIR__ . '/admin/poll-widget.php');
-		add_action('widgets_init', function() {
-			register_widget('OnyxPollsWidget');
-		});
 
 		// Load Helper Methods
 		require_once(__DIR__ . '/classes/poll-helpers.php');
@@ -190,8 +145,10 @@ Class OnyxPollsInit {
 		add_action('wp_footer', array($this, 'add_footer_elements'), 1);
 
 		// Enqueue scripts and styles
-		add_action('wp_footer', array($this, 'add_assets'));
 		add_action('admin_head', array($this, 'admin_styles'));
+		if (!is_admin() && !$this->is_amp()) {
+			add_action('wp_footer', 'OnyxPolls::add_assets');
+		}
 
 		// Add onyx poll shortcode
 		add_shortcode("onyx-poll", array($this, 'shortcode'));

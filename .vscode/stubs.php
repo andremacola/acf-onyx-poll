@@ -10,4 +10,9 @@ function is_amp_endpoint() {}
  */
 function acf_add_options_page() {}
 
+/**
+ * Register ACF Block
+ */
+function acf_register_block_type() {}
+
 ?>
