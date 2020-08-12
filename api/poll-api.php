@@ -42,7 +42,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 		register_rest_route($this->namespace, '/polls/list', array(
 			'methods'  => WP_REST_Server::READABLE,
 			'callback' => array($this, 'list'),
-			'permittion_callback' => function($req) {
+			'permission_callback' => function($req) {
 				return true;
 			}
 		));
@@ -51,7 +51,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 		register_rest_route($this->namespace, '/polls/vote', array(
 			'methods'  => WP_REST_Server::ALLMETHODS,
 			'callback' => array($this, 'vote'),
-			'permittion_callback' => function($req) {
+			'permission_callback' => function($req) {
 				return true;
 			}
 		));
@@ -60,7 +60,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 		register_rest_route($this->namespace, '/polls/cron', array(
 			'methods'  => WP_REST_Server::READABLE,
 			'callback' => array($this, 'expire'),
-			'permittion_callback' => function($req) {
+			'permission_callback' => function($req) {
 				return true;
 			}
 		));
