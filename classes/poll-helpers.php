@@ -125,7 +125,7 @@ Class OnyxPolls {
 			$a = new stdClass();
 			$a->path = $path;
 			$a->url  = plugins_url($path, ACF_ONYX_POLL_FILE);
-			$a->ver  = filemtime(ACF_ONYX_POLL_PATH . $path);
+			$a->ver  = ACF_ONYX_POLL_VERSION;
 			return $a;
 		}
 		return false;

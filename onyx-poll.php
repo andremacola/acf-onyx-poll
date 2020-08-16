@@ -30,7 +30,7 @@ Class OnyxPollsInit {
 	 * @return	void
 	 */
 	function __construct() {
-		define('ACF_ONYX_POLL_VERSION', '1.1.1');
+		define('ACF_ONYX_POLL_VERSION', '1.1.2');
 		define('ACF_ONYX_POLL_FILE', __FILE__);
 		define('ACF_ONYX_POLL_PATH', plugin_dir_path(__FILE__));
 	}
