@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: ACF Onyx Poll
-Version: 1.1.2
+Version: 1.1.3
 Description: Create polls with ACF PRO
 Author: André Mácola Machado
 Author URI: https://github.com/andremacola
@@ -30,7 +30,7 @@ Class OnyxPollsInit {
 	 * @return	void
 	 */
 	function __construct() {
-		define('ACF_ONYX_POLL_VERSION', '1.1.2');
+		define('ACF_ONYX_POLL_VERSION', '1.1.3');
 		define('ACF_ONYX_POLL_FILE', __FILE__);
 		define('ACF_ONYX_POLL_PATH', plugin_dir_path(__FILE__));
 	}
@@ -107,7 +107,7 @@ Class OnyxPollsInit {
 
 		// Verify if Advanced Custom Fields PRO is activated
 		add_action('admin_init', function() {
-			if (is_admin() && current_user_can('activate_plugins') && !is_plugin_active('advanced-custom-fields-pro/acf.php')) {
+			if (is_admin() && current_user_can('activate_plugins') && !class_exists('acf_pro')) {
 				add_action('admin_notices', function() {
 					$notice = __('Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active.', 'acf-onyx-poll');
 					echo "<div class='error'><p>$notice</p></div>";
