@@ -127,11 +127,21 @@ class OnyxPollsCpt {
 				break;
 			case 'end':
 				$date = get_field('onyx_poll_end', $post_id);
-				$date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-				$date = $date->format('d/m/Y');
-				echo "$date";
+				echo $this->format_date($date);
 				break;
 		}
+	}
+
+	/**
+	 * Format date
+	 */
+	public function format_date($date) {
+		if ($date) {
+			$date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+			return $date->format('d/m/Y');
+		}
+
+		return __('Not set', 'acf-onyx-poll');
 	}
 
 	/**
