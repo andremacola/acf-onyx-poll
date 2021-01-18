@@ -1,6 +1,6 @@
 .onyx-poll *, .onyx-poll *::before, .onyx-poll *::after {
-	-webkit-box-sizing: inherit;
-	box-sizing: inherit;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .onyx-poll {
