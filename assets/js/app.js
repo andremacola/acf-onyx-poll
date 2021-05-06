@@ -256,10 +256,11 @@ class onyxAcfPoll {
 			const votes = res.answers[i].votes;
 			const percentFull = res.answers[i].percent;
 			const percent = (percentFull >= 1) ? percentFull.toFixed(2) + '%' : '0%';
+			const label = (votes != 1) ? onyxpoll.labels.votes : onyxpoll.labels.vote;
 
-			let result = `${votes} ${onyxpoll.labels.votes} / ${percent}`;
+			let result = `${votes} ${label} / ${percent}`;
 			if (res.results.type == 2) {
-				result = `${votes} ${onyxpoll.labels.votes}`;
+				result = `${votes} ${label}`;
 			} else if (res.results.type == 1) {
 				result = `${percent}`;
 			}
