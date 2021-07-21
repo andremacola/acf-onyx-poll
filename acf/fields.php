@@ -350,6 +350,28 @@ acf_add_local_field_group(array(
 			'ui_on_text' => '',
 			'ui_off_text' => '',
 		),
+		array(
+			'key' => 'field_5f08c2bf8aa37',
+			'label' => __('Select the thumbnail size', 'acf-onyx-poll'),
+			'name' => 'onyx_poll_image_size',
+			'type' => 'select',
+			'instructions' => __('When a poll has images, select the size that will be shown. Atention: you will have to adjust your css', 'acf-onyx-poll'),
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '50',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array_combine(array_keys(wp_get_registered_image_subsizes()), array_keys(wp_get_registered_image_subsizes())),
+			'default_value' => 'thumbnail',
+			'allow_null' => 1,
+			'multiple' => 0,
+			'ui' => 0,
+			'return_format' => 'value',
+			'ajax' => 0,
+			'placeholder' => '',
+		),
 	),
 	'location' => array(
 		array(

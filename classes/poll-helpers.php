@@ -147,7 +147,7 @@ Class OnyxPolls {
 		wp_localize_script('acf-onyx-poll', 'onyxpoll',
 			array(
 				'apiurl'    => rest_url(),
-				// 'modaltime' => get_field('onyx_poll_modal_time', 'options'),
+				'modaltime' => get_field('onyx_poll_modal_time', 'options'),
 				'labels' => array(
 					'vote'    => __('Vote', 'acf-onyx-poll'),
 					'votes'   => __('votes', 'acf-onyx-poll'),

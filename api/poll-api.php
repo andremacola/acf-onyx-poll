@@ -213,9 +213,11 @@ class OnyxPollsApi extends WP_REST_Controller {
 			while (have_rows($this->field['answers'], $poll_id)):
 				the_row();
 				$image_id = get_sub_field('image');
+				$image_size = get_field('onyx_poll_image_size', 'options');
+				$image_size = ($image_size) ? $image_size : 'thumbnail';
 				$response['answers'][] = array(
 					"option"  => get_row_index(),
-					"image"   => ($response['has_image']) ? wp_get_attachment_image_url($image_id) : false,
+					"image"   => ($response['has_image']) ? wp_get_attachment_image_url($image_id, $image_size) : false,
 					"answer"  => get_sub_field('answer'),
 					"votes"   => (in_array($type, array(2,3)) && $show_results) ? get_sub_field('votes') : false,
 					"percent" => ($total >= 1) ? get_sub_field('votes') * 100 / $total : "0"
