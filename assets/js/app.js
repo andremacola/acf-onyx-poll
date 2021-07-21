@@ -1,4 +1,4 @@
-import './closest-polyfill';
+// import './closest-polyfill';
 
 class onyxAcfPoll {
 	constructor() {
