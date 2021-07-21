@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-01-14T02:40:02+00:00\n"
+"POT-Creation-Date: 2021-07-21T02:19:47+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: acf-onyx-poll\n"
@@ -159,24 +159,32 @@ msgstr ""
 msgid "To use your own CSS and disable the default plugin styles, check this option"
 msgstr ""
 
-#: acf/fields.php:379
+#: acf/fields.php:355
+msgid "Select the thumbnail size"
+msgstr ""
+
+#: acf/fields.php:358
+msgid "When a poll has images, select the size that will be shown. Atention: you will have to adjust your css"
+msgstr ""
+
+#: acf/fields.php:401
 #: admin/poll-type.php:14
 #: admin/poll-widget.php:28
 #: admin/poll-widget.php:58
 msgid "Poll"
 msgstr ""
 
-#: acf/fields.php:401
+#: acf/fields.php:423
 #: admin/poll-widget.php:62
 msgid "Style"
 msgstr ""
 
-#: acf/fields.php:413
+#: acf/fields.php:435
 #: admin/poll-widget.php:98
 msgid "Bar style"
 msgstr ""
 
-#: acf/fields.php:414
+#: acf/fields.php:436
 msgid "Twitter"
 msgstr ""
 

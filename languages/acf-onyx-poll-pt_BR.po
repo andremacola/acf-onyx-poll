@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF Onyx Poll 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2021-01-14T02:40:02+00:00\n"
-"PO-Revision-Date: 2021-01-13 23:42-0300\n"
+"POT-Creation-Date: 2021-07-21T02:19:47+00:00\n"
+"PO-Revision-Date: 2021-07-20 23:22-0300\n"
 "Last-Translator: \n"
 "Language-Team: ONYX\n"
 "Language: pt_BR\n"
@@ -155,20 +155,32 @@ msgstr ""
 "Para utilizar seu próprio CSS e desabilitar os estilos padrões do plugin, "
 "marque esta opção"
 
-#: acf/fields.php:379 admin/poll-type.php:14 admin/poll-widget.php:28
+#: acf/fields.php:355
+msgid "Select the thumbnail size"
+msgstr "Selecione o tamanho da tumbnail"
+
+#: acf/fields.php:358
+msgid ""
+"When a poll has images, select the size that will be shown. Atention: you "
+"will have to adjust your css"
+msgstr ""
+"Quando uma enquete tiver imagens, selecione o tamanho que será mostrado. "
+"Atenção: você terá que ajustar seu css"
+
+#: acf/fields.php:401 admin/poll-type.php:14 admin/poll-widget.php:28
 #: admin/poll-widget.php:58
 msgid "Poll"
 msgstr "Enquete"
 
-#: acf/fields.php:401 admin/poll-widget.php:62
+#: acf/fields.php:423 admin/poll-widget.php:62
 msgid "Style"
 msgstr "Estilo"
 
-#: acf/fields.php:413 admin/poll-widget.php:98
+#: acf/fields.php:435 admin/poll-widget.php:98
 msgid "Bar style"
 msgstr "Em barras"
 
-#: acf/fields.php:414
+#: acf/fields.php:436
 msgid "Twitter"
 msgstr "Twitter"
 
