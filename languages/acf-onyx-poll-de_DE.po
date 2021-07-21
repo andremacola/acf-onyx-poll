@@ -1,0 +1,320 @@
+# Translation of Plugins - ACF Onyx Poll - Stable (latest release) in German
+# This file is distributed under the same license as the Plugins - ACF Onyx Poll - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-05-05 17:47+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.4.3\n"
+"Language: de\n"
+"Project-Id-Version: Plugins - ACF Onyx Poll - Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+
+#: admin/poll-type.php:144
+msgid "Not set"
+msgstr "Nicht festgelegt"
+
+#: admin/poll-block.php:14
+msgid "Insert a poll in the post"
+msgstr "Umfrage in Beitrag einfügen"
+
+#: admin/poll-block.php:13
+msgid "Onyx Poll"
+msgstr "Onyx Poll"
+
+#: acf/fields.php:414
+msgid "Twitter"
+msgstr "Twitter"
+
+#: admin/poll-widget.php:99
+msgid "Twitter style"
+msgstr "Twitter Stil"
+
+#: acf/fields.php:413 admin/poll-widget.php:98
+msgid "Bar style"
+msgstr "Balken Stil"
+
+#: admin/poll-widget.php:84
+msgid "Latest"
+msgstr "Neuestes"
+
+#: acf/fields.php:401 admin/poll-widget.php:62
+msgid "Style"
+msgstr "Stil"
+
+#: admin/poll-widget.php:53
+msgid "Title"
+msgstr "Titel"
+
+#: admin/poll-widget.php:30
+msgid "Show ACF Onyx Poll"
+msgstr "ACF Onyx Poll anzeigen"
+
+#: onyx-poll.php:112
+msgid "Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active."
+msgstr "Entschuldigung, ACF Onyx Poll setzt voraus, dass ACF PRO installiert und aktiviert ist."
+
+#: onyx-poll.php:75
+msgid "Invalid poll ID"
+msgstr "Ungültige Umfrage ID"
+
+#: classes/poll-helpers.php:157
+msgid "Poll vote error, try again."
+msgstr "Fehler bei Abstimmung, versuche es erneut."
+
+#: classes/poll-helpers.php:156
+msgid "Vote was submitted successfully."
+msgstr "Abstimmung wurde erfolgreich übertragen."
+
+#: classes/poll-helpers.php:154
+msgid "Views result"
+msgstr "Ergebnisse anzeigen"
+
+#: classes/poll-helpers.php:153
+msgid "votes"
+msgstr "Stimmen"
+
+#: classes/poll-helpers.php:152
+msgid "Vote"
+msgstr "Stimme"
+
+#: admin/poll-type.php:102
+msgid "End date"
+msgstr "End-Datum"
+
+#: admin/poll-type.php:101
+msgid "Status"
+msgstr "Status"
+
+#: admin/poll-type.php:100
+msgid "Modal"
+msgstr "Modal"
+
+#: admin/poll-type.php:98
+msgid "ID"
+msgstr "ID"
+
+#: admin/poll-type.php:82
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: admin/poll-type.php:81
+msgid "Poll Settings"
+msgstr "Umfrage-Einstellungen"
+
+#: admin/poll-type.php:53
+msgid "Add new polls"
+msgstr "Neue Umfrage hinzufügen"
+
+#: admin/poll-type.php:46
+msgid "Poll father"
+msgstr "Umfragen"
+
+#: admin/poll-type.php:45
+msgid "No poll found in trash"
+msgstr "Keine Umfrage im Papierkorb gefunden"
+
+#: admin/poll-type.php:44
+msgid "No polls found"
+msgstr "Keine Umfragen gefunden"
+
+#: admin/poll-type.php:43
+msgid "Search poll"
+msgstr "Umfrage suchen"
+
+#: admin/poll-type.php:42
+msgid "View poll"
+msgstr "Umfrage anzeigen"
+
+#: admin/poll-type.php:41
+msgid "Add poll"
+msgstr "Umfrage hinzufügen"
+
+#: admin/poll-type.php:40
+msgid "Edit poll"
+msgstr "Umfrage bearbeiten"
+
+#: admin/poll-type.php:39
+msgid "Add new poll"
+msgstr "Neue Umfrage hinzufügen"
+
+#: admin/poll-type.php:38
+msgid "Add new"
+msgstr "Hinzufügen"
+
+#: admin/poll-type.php:37
+msgid "All polls"
+msgstr "Alle Umfragen"
+
+#: admin/poll-type.php:15
+msgid "Polls"
+msgstr "Umfragen"
+
+#: acf/fields.php:379 admin/poll-widget.php:28 admin/poll-widget.php:58
+#: admin/poll-type.php:14
+msgid "Poll"
+msgstr "Umfrage"
+
+#: acf/fields.php:339
+msgid "To use your own CSS and disable the default plugin styles, check this option"
+msgstr "Aktiviere diese Option, um den Standard Stil zu deaktivieren und dein eigenes CSS zu verwenden"
+
+#: acf/fields.php:336
+msgid "Use own CSS"
+msgstr "Eigenes CSS verwenden"
+
+#: acf/fields.php:308
+msgid "Periodicity that the poll modal appears to the user."
+msgstr "Anzeige-Turnus des Umfrage Modals für den Nutzer."
+
+#: acf/fields.php:305
+msgid "Modal Interval for Voting"
+msgstr "Modal Interval zur Abstimmung"
+
+#: acf/fields.php:262
+msgid "Expired"
+msgstr "Abgelaufen"
+
+#: acf/fields.php:243
+msgid "Show Results"
+msgstr "Ergebnisse anzeigen"
+
+#: acf/fields.php:224
+msgid "Poll Modal"
+msgstr "Umfrage Modal"
+
+#: acf/fields.php:205
+msgid "Enable Images"
+msgstr "Bilder aktivieren"
+
+#: classes/poll-helpers.php:155 acf/fields.php:184
+msgid "Total votes"
+msgstr "Stimmen insgesamt"
+
+#: acf/fields.php:167
+msgid "End of Poll"
+msgstr "Ende der Umfrage"
+
+#: acf/fields.php:153
+msgid "Show both"
+msgstr "Beides anzeigen"
+
+#: acf/fields.php:152
+msgid "Show in numbers"
+msgstr "Absolut anzeigen"
+
+#: acf/fields.php:151
+msgid "Show in percentage"
+msgstr "Prozentual anzeigen"
+
+#: acf/fields.php:139
+msgid "Results"
+msgstr "Ergebnisse"
+
+#: acf/fields.php:125 acf/fields.php:323
+msgid "Every 24 hours"
+msgstr "Alle 24 Stunden"
+
+#: acf/fields.php:124 acf/fields.php:322
+msgid "Every 12 hours"
+msgstr "Alle 12 Stunden"
+
+#: acf/fields.php:123 acf/fields.php:321
+msgid "Every 5 hours"
+msgstr "Alle 5 Stunden"
+
+#: acf/fields.php:122 acf/fields.php:320
+msgid "Every 4 hours"
+msgstr "Alle 4 Stunden"
+
+#: acf/fields.php:121 acf/fields.php:319
+msgid "Every 3 hours"
+msgstr "Alle 3 Stunden"
+
+#: acf/fields.php:120 acf/fields.php:318
+msgid "Every 2 hours"
+msgstr "Alle 2 Stunden"
+
+#: acf/fields.php:119 acf/fields.php:317
+msgid "Every 1 hour"
+msgstr "Jede Stunde"
+
+#: acf/fields.php:118
+msgid "Every 30 minutes"
+msgstr "Alle 30 Minuten"
+
+#: acf/fields.php:117
+msgid "Per device"
+msgstr "Pro Gerät"
+
+#: acf/fields.php:116
+msgid "Free Vote"
+msgstr "Freie Abstimmung"
+
+#: acf/fields.php:104
+msgid "Limit voting"
+msgstr "Abstimmung limitieren"
+
+#: acf/fields.php:81 admin/poll-type.php:99
+msgid "Votes"
+msgstr "Stimmen"
+
+#: acf/fields.php:62
+msgid "Answer"
+msgstr "Antwort"
+
+#: acf/fields.php:30
+msgid "Image"
+msgstr "Bild"
+
+#: acf/fields.php:11
+msgid "Answers"
+msgstr "Antworten"
+
+#: api/poll-api.php:33
+msgid "No polls founded with ID "
+msgstr "Keine Umfrage mit dieser ID gefunden "
+
+#: api/poll-api.php:32
+msgid "You have already voted in this poll"
+msgstr "Du hast bereits an dieser Umfrage teilgenommen"
+
+#: api/poll-api.php:31
+msgid "Non-existent or expired poll"
+msgstr "Nicht-exisitierende oder abgelaufende Umfrage"
+
+#: api/poll-api.php:30
+msgid "Invalid poll parameters"
+msgstr "Ungültige Umfrage Parameter"
+
+#: api/poll-api.php:29
+msgid "Poll vote error, try again"
+msgstr "Fehler bei Abstimmung, versuche es erneut"
+
+#: api/poll-api.php:28
+msgid "Vote was submitted successfully"
+msgstr "Abstimmung wurde erfolgreich übertragen"
+
+#. Author URI of the plugin
+msgid "https://github.com/andremacola"
+msgstr "https://github.com/andremacola"
+
+#. Author of the plugin
+msgid "André Mácola Machado"
+msgstr "André Mácola Machado"
+
+#. Description of the plugin
+msgid "Create polls with ACF PRO"
+msgstr "Erstelle Umfragen with ACF PRO"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/andremacola/acf-onyx-poll"
+msgstr "https://github.com/andremacola/acf-onyx-poll"
+
+#. Plugin Name of the plugin
+msgid "ACF Onyx Poll"
+msgstr "ACF Onyx Poll"
