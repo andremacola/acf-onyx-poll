@@ -7,6 +7,15 @@
 
 class OnyxPollsCpt {
 
+	private $name;
+	private $namep;
+	private $cap;
+	private $caps;
+	private $slug;
+	private $icon;
+	private $name_l;
+	private $namep_l;
+
 	/**
 	 * Constructor
 	 */
