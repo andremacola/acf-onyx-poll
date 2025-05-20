@@ -32,6 +32,8 @@ class OnyxPollsApi extends WP_REST_Controller {
 			'no_allowed' => __('You have already voted in this poll', 'acf-onyx-poll'),
 			'no_polls'   => __('No polls founded with ID ', 'acf-onyx-poll')
 		);
+
+		add_action('rest_api_init', array($this, 'register_routes'));
 	}
 
 	/**
@@ -247,7 +249,9 @@ class OnyxPollsApi extends WP_REST_Controller {
 /**
  * Instantiate Onyx Poll API
  */
-$onyx_poll_controller = new OnyxPollsApi();
-add_action('rest_api_init', array($onyx_poll_controller, 'register_routes'));
+function initialize_poll_rest_controller() {
+    new OnyxPollsApi();
+}
+add_action('init', 'initialize_poll_rest_controller');
 
 ?>

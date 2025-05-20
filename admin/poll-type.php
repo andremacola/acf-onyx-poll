@@ -28,8 +28,12 @@ class OnyxPollsCpt {
 		$this->icon    = 'dashicons-chart-bar';
 		$this->name_l  = strtolower($this->name);
 		$this->namep_l = strtolower($this->namep);
-		add_action('init', array($this, 'register_cpt'));
-		add_action('init', array($this, 'register_config_admin'));
+
+		// Register post type and admin config
+		$this->register_cpt();
+		$this->register_config_admin();
+
+		// Setup admin columns
 		add_filter("manage_{$this->slug}_posts_columns", array($this, 'manage_columns'));
 		add_action("manage_{$this->slug}_posts_custom_column", array($this, 'custom_columns'), 10, 2);
 		add_filter("manage_edit-{$this->slug}_sortable_columns", array($this, 'sortable_columns'));
@@ -86,7 +90,7 @@ class OnyxPollsCpt {
 	 */
 	public function register_config_admin() {
 		if(function_exists('acf_add_options_page')) {
-			$options = acf_add_options_page(array(
+			acf_add_options_page(array(
 				'page_title'  => __('Poll Settings', 'acf-onyx-poll'),
 				'menu_title'  => __('Settings', 'acf-onyx-poll'),
 				'menu_slug'   => 'onyx-poll-settings',
@@ -191,8 +195,11 @@ class OnyxPollsCpt {
 
 
 /**
- * Instantiate Onyx Poll Admin
+ * Instantiate Onyx Poll Admin on WordPress init hook
  */
-$onyx_poll_admin = new OnyxPollsCpt();
+function initialize_onyx_polls_cpt() {
+    new OnyxPollsCpt();
+}
+add_action('init', 'initialize_onyx_polls_cpt');
 
 ?>
