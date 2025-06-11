@@ -41,7 +41,7 @@ Class OnyxPollsInit {
 	public function add_footer_elements() {
 		$poll = OnyxPolls::has_polls(true, true);
 		if ($poll && !$this->is_amp()) {
-			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal' data-poll='$poll'></div>";
+			echo "<div id='onyx-poll-modal' class='onyx-poll onyx-poll-modal' data-poll='". esc_attr($poll) ."'></div>";
 		}
 	}
 
@@ -61,18 +61,28 @@ Class OnyxPollsInit {
 	 * Just a simple shortcode method
 	 */
 	public function shortcode($atts) {
-		extract(shortcode_atts(array(
-			'id' => '',
+		$atts = shortcode_atts(array(
+			'id'    => '',
 			'class' => 'left',
 			'style' => ''
-		), $atts));
+		), $atts, 'onyx-poll');
+
+		// Sanitize attributes to prevent XSS
+		$id    = intval($atts['id']);
+		$class = esc_attr($atts['class']);
+		$style = esc_attr($atts['style']);
 
 		$poll = OnyxPolls::has_poll($id);
 
 		if ($poll) {
-			$html = "<div id='onyx-poll-$poll' class='onyx-poll onyx-poll-widget active show $class' style='$style' data-poll='$poll'></div>";
+			$html = sprintf(
+				'<div id="onyx-poll-%1$s" class="onyx-poll onyx-poll-widget active show %2$s" style="%3$s" data-poll="%1$s"></div>',
+				esc_attr($poll),
+				$class,
+				$style
+			);
 		} else {
-			$html = "<div id='onyx-poll-null' class='onyx-poll onyx-poll-widget show onyx-poll-invalid'>". __('Invalid poll ID', 'acf-onyx-poll') ."</div>";
+			$html = "<div id='onyx-poll-null' class='onyx-poll onyx-poll-widget show onyx-poll-invalid'>". esc_html__('Invalid poll ID', 'acf-onyx-poll') ."</div>";
 		}
 
 		return $html;
@@ -116,7 +126,7 @@ Class OnyxPollsInit {
 				if (isset($_GET['activate'])) {
 					unset($_GET['activate']);
 				}
-		    }
+			}
 		});
 
 		// Load ACF fields
