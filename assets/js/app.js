@@ -203,7 +203,7 @@ class onyxAcfPoll {
 
 	submitVote(event) {
 		event.preventDefault();
-		const t = event.target;
+		const t = event.currentTarget;
 		const poll = t.closest(`.${this.name.parent}`);
 		this.togglePollLoader(poll, false);
 		this.requestVote(t)
