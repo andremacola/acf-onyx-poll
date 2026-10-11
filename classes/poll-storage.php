@@ -146,12 +146,30 @@ class OnyxPollsStorage {
 
 	public static function ids($id = 0, $active = false, $modal = false, $limit = 1) {
 		global $wpdb;
+		$pending = !get_option(self::MIGRATION);
+		$column = function($key, $default) use ($wpdb, $pending) {
+			if (!$pending) { return 'o.' . $key; }
+			// Select legacy candidates without importing every poll in one request.
+			return 'COALESCE(o.' . $key . ',(SELECT m.meta_value FROM ' . $wpdb->postmeta .
+				' m WHERE m.post_id=p.ID AND m.meta_key=' . $wpdb->prepare('%s', 'onyx_poll_' . $key) .
+				' ORDER BY m.meta_id DESC LIMIT 1),' . $default . ')';
+		};
 		$where = "p.post_type='onyxpolls' AND p.post_status='publish'";
 		if ($id) { $where .= $wpdb->prepare(' AND p.ID=%d', $id); }
-		if ($modal) { $where .= ' AND o.modal=1'; }
-		if ($active) { $where .= $wpdb->prepare(' AND o.expired=0 AND (o.end IS NULL OR o.end>%s)', current_time('mysql')); }
-		return array_map('intval', $wpdb->get_col($wpdb->prepare("SELECT p.ID FROM $wpdb->posts p JOIN " .
-			self::table() . " o ON o.poll_id=p.ID WHERE $where ORDER BY p.post_date DESC,p.ID DESC LIMIT %d", $limit)));
+		if ($modal) { $where .= ' AND ' . $column('modal', '0') . '=1'; }
+		if ($active) {
+			$end = "NULLIF(" . $column('end', 'NULL') . ",'')";
+			$where .= ' AND ' . $column('expired', '0') . '=0' . $wpdb->prepare(" AND ($end IS NULL OR $end>%s)", current_time('mysql'));
+		}
+		$join = $pending ? 'LEFT JOIN' : 'JOIN';
+		$rows = $wpdb->get_results($wpdb->prepare("SELECT p.ID,o.poll_id AS imported FROM $wpdb->posts p $join " .
+			self::table() . " o ON o.poll_id=p.ID WHERE $where ORDER BY p.post_date DESC,p.ID DESC LIMIT %d", $limit), ARRAY_A);
+		$ids = array();
+		foreach ($rows as $row) {
+			if (!$row['imported'] && is_wp_error(self::migrate_poll($row['ID']))) { continue; }
+			$ids[] = (int) $row['ID'];
+		}
+		return $ids;
 	}
 
 	public static function vote($id, $position) {

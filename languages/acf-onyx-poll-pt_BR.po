@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Onyx Poll 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2026-10-11T20:59:46+00:00\n"
+"POT-Creation-Date: 2026-10-11T21:18:06+00:00\n"
 "PO-Revision-Date: 2026-10-11 00:00-0300\n"
 "Last-Translator: Onyx Poll\n"
 "Language-Team: Portuguese (Brazil)\n"
@@ -239,7 +239,7 @@ msgid "Use image"
 msgstr "Usar imagem"
 
 #: admin/poll-admin.php:113 admin/poll-admin.php:197 api/poll-api.php:21
-#: api/poll-api.php:35 api/poll-api.php:45 classes/poll-storage.php:165
+#: api/poll-api.php:35 api/poll-api.php:45 classes/poll-storage.php:183
 msgid "Invalid poll parameters"
 msgstr "Parâmetros de votação da enquete inválidos"
 
@@ -489,10 +489,62 @@ msgstr ""
 "respostas, imagens e votos."
 
 #: admin/poll-settings-help.php:33
+msgid "How does migration from 1.2.0 to 2.0 work?"
+msgstr "Como funciona a migração da versão 1.2.0 para a 2.0?"
+
+#: admin/poll-settings-help.php:34
+msgid ""
+"Migration starts on activation or on the next WordPress request after "
+"updating an active plugin. It copies polls in resumable batches of 50 per "
+"request; a poll needed by a block, shortcode, widget or modal is imported on "
+"demand. No manual import or ACF installation is required."
+msgstr "A migração começa na ativação ou na próxima requisição ao WordPress após atualizar o plugin ativo. As enquetes são copiadas em lotes de 50 por requisição, com continuação automática; uma enquete solicitada por bloco, shortcode, widget ou modal é importada quando necessário. Não é preciso importar manualmente nem instalar o ACF."
+
+#: admin/poll-settings-help.php:35
+msgid ""
+"Poll IDs, answer order, image references, individual vote counters, dates "
+"and settings are preserved. Repeated migration does not overwrite new votes. "
+"Old custom fields are kept, but new votes and edits are saved only in the "
+"plugin tables."
+msgstr "Os IDs das enquetes, a ordem das respostas, as referências das imagens, os votos de cada resposta, as datas e as configurações são preservados. Repetir a migração não sobrescreve novos votos. Os campos antigos são mantidos, mas novos votos e alterações são salvos somente nas tabelas do plugin."
+
+#: admin/poll-settings-help.php:37
+msgid "What are the breaking changes in 2.0?"
+msgstr "Quais mudanças da versão 2.0 exigem atenção?"
+
+#: admin/poll-settings-help.php:38
+msgid ""
+"Version 2.0 requires WordPress 6.3 and PHP 7.4 or newer. The database user "
+"must be allowed to create tables. Back up the database and plugin files and "
+"test the update on a staging copy before updating a production site."
+msgstr "A versão 2.0 requer WordPress 6.3 e PHP 7.4 ou superiores. O usuário do banco de dados precisa ter permissão para criar tabelas. Faça backup do banco e dos arquivos do plugin e teste a atualização em uma cópia do site antes de atualizar o ambiente de produção."
+
+#: admin/poll-settings-help.php:39
+msgid ""
+"Existing plugin blocks, shortcodes and widgets remain compatible. Custom "
+"code that reads or writes ACF poll fields or legacy post metadata, or relies "
+"on ACF forms and hooks, must be adapted to dedicated storage and native "
+"forms. Total votes is now read-only and equals the sum of the answers; a "
+"different manually entered total will change."
+msgstr "Os blocos, shortcodes e widgets existentes do plugin continuam compatíveis. Código personalizado que lê ou grava campos ACF das enquetes ou metadados antigos, ou depende de formulários e hooks do ACF, precisa ser adaptado às tabelas próprias e aos formulários nativos. O total de votos agora é somente leitura e corresponde à soma das respostas; um total informado manualmente que seja diferente dessa soma será alterado."
+
+#: admin/poll-settings-help.php:41
+msgid "Can I remove ACF or downgrade after updating?"
+msgstr "Posso remover o ACF ou voltar à versão anterior após atualizar?"
+
+#: admin/poll-settings-help.php:42
+msgid ""
+"Onyx Poll and migration work without ACF. Keep ACF if your theme or other "
+"plugins need it. Downgrading to 1.2.0 does not copy new votes or edits back "
+"into legacy fields, and restoring a backup loses changes made after that "
+"backup. Keep a current database backup and test any rollback separately."
+msgstr "O Onyx Poll e a migração funcionam sem ACF. Mantenha o ACF se o tema ou outros plugins precisarem dele. Voltar à versão 1.2.0 não copia novos votos ou alterações para os campos antigos, e restaurar um backup perde as alterações posteriores a ele. Mantenha um backup atualizado do banco e teste qualquer retorno de versão separadamente."
+
+#: admin/poll-settings-help.php:44
 msgid "How do I add a poll to a post?"
 msgstr "Como inserir uma enquete em um post?"
 
-#: admin/poll-settings-help.php:34
+#: admin/poll-settings-help.php:45
 msgid ""
 "Insert the Onyx Poll block, select a poll and choose its style. You can also "
 "use a shortcode: without an ID it shows the latest published poll; with an "
@@ -502,7 +554,7 @@ msgstr ""
 "também pode usar um shortcode: sem ID, ele mostra a última enquete "
 "publicada; com ID, mostra a enquete indicada."
 
-#: admin/poll-settings-help.php:36
+#: admin/poll-settings-help.php:47
 msgid ""
 "Replace 85 with your poll ID. Available alignment classes: left, right and "
 "full. Styles: twitter and standard. Copy the shortcode from the poll list."
@@ -511,11 +563,11 @@ msgstr ""
 "full. Estilos: twitter e standard. Você pode copiar o shortcode na lista de "
 "enquetes."
 
-#: admin/poll-settings-help.php:38
+#: admin/poll-settings-help.php:49
 msgid "How do I add a poll to a sidebar?"
 msgstr "Como inserir uma enquete na barra lateral?"
 
-#: admin/poll-settings-help.php:39
+#: admin/poll-settings-help.php:50
 msgid ""
 "If your theme supports widget areas, go to Appearance > Widgets and add the "
 "Poll widget. Select the poll and style in its settings."
@@ -523,11 +575,11 @@ msgstr ""
 "Se o tema oferecer áreas de widgets, acesse Aparência > Widgets e adicione o "
 "widget Enquete. Selecione a enquete e o estilo nas configurações dele."
 
-#: admin/poll-settings-help.php:41
+#: admin/poll-settings-help.php:52
 msgid "How do I customize the appearance?"
 msgstr "Como personalizar a aparência?"
 
-#: admin/poll-settings-help.php:42
+#: admin/poll-settings-help.php:53
 msgid ""
 "Keep the default stylesheet enabled to customize these variables in your "
 "theme CSS. To replace all plugin styles, enable Use own CSS and provide a "
@@ -537,11 +589,11 @@ msgstr ""
 "tema. Para substituir todos os estilos do plugin, habilite Usar CSS próprio "
 "e forneça uma folha de estilos completa."
 
-#: admin/poll-settings-help.php:45
+#: admin/poll-settings-help.php:56
 msgid "What should I do if the cron is delayed?"
 msgstr "O que fazer se o cron estiver atrasado?"
 
-#: admin/poll-settings-help.php:46
+#: admin/poll-settings-help.php:57
 msgid ""
 "A site with few visits may run WP-Cron late. Check WordPress Site Health for "
 "scheduled event or loopback errors. For predictable execution, ask your host "
@@ -553,14 +605,14 @@ msgstr ""
 "chamada a wp-cron.php a cada cinco minutos. A tarefa do Onyx continua sendo "
 "executada a cada hora."
 
-#: admin/poll-settings-help.php:47
+#: admin/poll-settings-help.php:58
 msgid ""
 "Replace https://example.com with your WordPress site URL in these examples."
 msgstr ""
 "Substitua https://example.com pelo endereço do seu site WordPress nestes "
 "exemplos."
 
-#: admin/poll-settings-help.php:49
+#: admin/poll-settings-help.php:60
 msgid ""
 "Only after an external scheduler is configured and tested, you can disable "
 "the automatic page trigger in wp-config.php:"
@@ -568,7 +620,7 @@ msgstr ""
 "Somente após configurar e testar o agendador externo, você pode desabilitar "
 "o acionamento automático por visitas em wp-config.php:"
 
-#: admin/poll-settings-help.php:51
+#: admin/poll-settings-help.php:62
 msgid ""
 "For compatibility, the plugin also keeps a direct hourly expiration "
 "endpoint. It runs only the Onyx check, not other WordPress tasks. Its "
@@ -579,15 +631,15 @@ msgstr ""
 "As demais tarefas do WordPress precisam de outro acionamento. As execuções "
 "pelo endpoint são identificadas no status acima."
 
-#: admin/poll-settings-help.php:53
+#: admin/poll-settings-help.php:64
 msgid "WordPress documentation: configuring a server scheduler"
 msgstr "Documentação do WordPress: configurar um agendador no servidor"
 
-#: admin/poll-settings-help.php:55
+#: admin/poll-settings-help.php:66
 msgid "Where are poll data and visitor data stored?"
 msgstr "Onde ficam os dados das enquetes e dos visitantes?"
 
-#: admin/poll-settings-help.php:56
+#: admin/poll-settings-help.php:67
 msgid ""
 "Rules, answers and vote counters use the plugin tables onyx_polls and "
 "onyx_poll_answers, with your WordPress database prefix. WordPress stores "
@@ -601,11 +653,11 @@ msgstr ""
 "nomes de visitantes; cookies no navegador lembram as escolhas, os intervalos "
 "de votação e o fechamento da modal."
 
-#: admin/poll-settings-help.php:58
+#: admin/poll-settings-help.php:69
 msgid "What happens when I delete the plugin?"
 msgstr "O que acontece ao excluir o plugin?"
 
-#: admin/poll-settings-help.php:59
+#: admin/poll-settings-help.php:70
 msgid ""
 "By default, data is kept for reinstallation. If you explicitly select "
 "permanent deletion, uninstall removes the two plugin tables, its own listed "
@@ -704,7 +756,7 @@ msgstr "Twitter"
 msgid "No polls founded with ID "
 msgstr "Nenhuma enquete com ID "
 
-#: api/poll-api.php:42 classes/poll-storage.php:162
+#: api/poll-api.php:42 classes/poll-storage.php:180
 msgid "Non-existent or expired poll"
 msgstr "Enquete inexistente ou expirada"
 
@@ -769,7 +821,7 @@ msgstr "Seu voto foi realizado com sucesso."
 msgid "Poll vote error, try again."
 msgstr "Erro na votação, tente novamente."
 
-#: classes/poll-storage.php:176
+#: classes/poll-storage.php:194
 msgid ""
 "This poll changed while you were editing it. Reload the page before saving "
 "again."
@@ -777,7 +829,7 @@ msgstr ""
 "Esta enquete mudou durante a edição. Recarregue a página antes de salvar "
 "novamente."
 
-#: classes/poll-storage.php:214
+#: classes/poll-storage.php:232
 msgid "Unable to save poll data. Please try again."
 msgstr "Não foi possível salvar os dados da enquete. Tente novamente."
 

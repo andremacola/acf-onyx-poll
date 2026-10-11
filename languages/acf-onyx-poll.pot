@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-11T20:59:46+00:00\n"
+"POT-Creation-Date: 2026-10-11T21:18:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: acf-onyx-poll\n"
@@ -231,7 +231,7 @@ msgstr ""
 #: api/poll-api.php:21
 #: api/poll-api.php:35
 #: api/poll-api.php:45
-#: classes/poll-storage.php:165
+#: classes/poll-storage.php:183
 msgid "Invalid poll parameters"
 msgstr ""
 
@@ -439,70 +439,102 @@ msgid "No. Onyx Poll has its own editor, settings and database tables. Existing 
 msgstr ""
 
 #: admin/poll-settings-help.php:33
-msgid "How do I add a poll to a post?"
+msgid "How does migration from 1.2.0 to 2.0 work?"
 msgstr ""
 
 #: admin/poll-settings-help.php:34
-msgid "Insert the Onyx Poll block, select a poll and choose its style. You can also use a shortcode: without an ID it shows the latest published poll; with an ID it shows that specific poll."
+msgid "Migration starts on activation or on the next WordPress request after updating an active plugin. It copies polls in resumable batches of 50 per request; a poll needed by a block, shortcode, widget or modal is imported on demand. No manual import or ACF installation is required."
 msgstr ""
 
-#: admin/poll-settings-help.php:36
-msgid "Replace 85 with your poll ID. Available alignment classes: left, right and full. Styles: twitter and standard. Copy the shortcode from the poll list."
+#: admin/poll-settings-help.php:35
+msgid "Poll IDs, answer order, image references, individual vote counters, dates and settings are preserved. Repeated migration does not overwrite new votes. Old custom fields are kept, but new votes and edits are saved only in the plugin tables."
+msgstr ""
+
+#: admin/poll-settings-help.php:37
+msgid "What are the breaking changes in 2.0?"
 msgstr ""
 
 #: admin/poll-settings-help.php:38
-msgid "How do I add a poll to a sidebar?"
+msgid "Version 2.0 requires WordPress 6.3 and PHP 7.4 or newer. The database user must be allowed to create tables. Back up the database and plugin files and test the update on a staging copy before updating a production site."
 msgstr ""
 
 #: admin/poll-settings-help.php:39
-msgid "If your theme supports widget areas, go to Appearance > Widgets and add the Poll widget. Select the poll and style in its settings."
+msgid "Existing plugin blocks, shortcodes and widgets remain compatible. Custom code that reads or writes ACF poll fields or legacy post metadata, or relies on ACF forms and hooks, must be adapted to dedicated storage and native forms. Total votes is now read-only and equals the sum of the answers; a different manually entered total will change."
 msgstr ""
 
 #: admin/poll-settings-help.php:41
-msgid "How do I customize the appearance?"
+msgid "Can I remove ACF or downgrade after updating?"
 msgstr ""
 
 #: admin/poll-settings-help.php:42
-msgid "Keep the default stylesheet enabled to customize these variables in your theme CSS. To replace all plugin styles, enable Use own CSS and provide a complete stylesheet."
+msgid "Onyx Poll and migration work without ACF. Keep ACF if your theme or other plugins need it. Downgrading to 1.2.0 does not copy new votes or edits back into legacy fields, and restoring a backup loses changes made after that backup. Keep a current database backup and test any rollback separately."
+msgstr ""
+
+#: admin/poll-settings-help.php:44
+msgid "How do I add a poll to a post?"
 msgstr ""
 
 #: admin/poll-settings-help.php:45
-msgid "What should I do if the cron is delayed?"
-msgstr ""
-
-#: admin/poll-settings-help.php:46
-msgid "A site with few visits may run WP-Cron late. Check WordPress Site Health for scheduled event or loopback errors. For predictable execution, ask your host to call wp-cron.php every five minutes. The Onyx task itself remains hourly."
+msgid "Insert the Onyx Poll block, select a poll and choose its style. You can also use a shortcode: without an ID it shows the latest published poll; with an ID it shows that specific poll."
 msgstr ""
 
 #: admin/poll-settings-help.php:47
-msgid "Replace https://example.com with your WordPress site URL in these examples."
+msgid "Replace 85 with your poll ID. Available alignment classes: left, right and full. Styles: twitter and standard. Copy the shortcode from the poll list."
 msgstr ""
 
 #: admin/poll-settings-help.php:49
-msgid "Only after an external scheduler is configured and tested, you can disable the automatic page trigger in wp-config.php:"
+msgid "How do I add a poll to a sidebar?"
 msgstr ""
 
-#: admin/poll-settings-help.php:51
-msgid "For compatibility, the plugin also keeps a direct hourly expiration endpoint. It runs only the Onyx check, not other WordPress tasks. Its executions are identified separately in the status above."
+#: admin/poll-settings-help.php:50
+msgid "If your theme supports widget areas, go to Appearance > Widgets and add the Poll widget. Select the poll and style in its settings."
+msgstr ""
+
+#: admin/poll-settings-help.php:52
+msgid "How do I customize the appearance?"
 msgstr ""
 
 #: admin/poll-settings-help.php:53
-msgid "WordPress documentation: configuring a server scheduler"
-msgstr ""
-
-#: admin/poll-settings-help.php:55
-msgid "Where are poll data and visitor data stored?"
+msgid "Keep the default stylesheet enabled to customize these variables in your theme CSS. To replace all plugin styles, enable Use own CSS and provide a complete stylesheet."
 msgstr ""
 
 #: admin/poll-settings-help.php:56
-msgid "Rules, answers and vote counters use the plugin tables onyx_polls and onyx_poll_answers, with your WordPress database prefix. WordPress stores poll titles and publication status. The plugin stores no visitor IP addresses or usernames; browser cookies remember choices, voting intervals and modal dismissal."
+msgid "What should I do if the cron is delayed?"
+msgstr ""
+
+#: admin/poll-settings-help.php:57
+msgid "A site with few visits may run WP-Cron late. Check WordPress Site Health for scheduled event or loopback errors. For predictable execution, ask your host to call wp-cron.php every five minutes. The Onyx task itself remains hourly."
 msgstr ""
 
 #: admin/poll-settings-help.php:58
+msgid "Replace https://example.com with your WordPress site URL in these examples."
+msgstr ""
+
+#: admin/poll-settings-help.php:60
+msgid "Only after an external scheduler is configured and tested, you can disable the automatic page trigger in wp-config.php:"
+msgstr ""
+
+#: admin/poll-settings-help.php:62
+msgid "For compatibility, the plugin also keeps a direct hourly expiration endpoint. It runs only the Onyx check, not other WordPress tasks. Its executions are identified separately in the status above."
+msgstr ""
+
+#: admin/poll-settings-help.php:64
+msgid "WordPress documentation: configuring a server scheduler"
+msgstr ""
+
+#: admin/poll-settings-help.php:66
+msgid "Where are poll data and visitor data stored?"
+msgstr ""
+
+#: admin/poll-settings-help.php:67
+msgid "Rules, answers and vote counters use the plugin tables onyx_polls and onyx_poll_answers, with your WordPress database prefix. WordPress stores poll titles and publication status. The plugin stores no visitor IP addresses or usernames; browser cookies remember choices, voting intervals and modal dismissal."
+msgstr ""
+
+#: admin/poll-settings-help.php:69
 msgid "What happens when I delete the plugin?"
 msgstr ""
 
-#: admin/poll-settings-help.php:59
+#: admin/poll-settings-help.php:70
 msgid "By default, data is kept for reinstallation. If you explicitly select permanent deletion, uninstall removes the two plugin tables, its own listed options and posts of type onyxpolls. Other posts and pages are preserved, including those with poll blocks or shortcodes, as are media files. Legacy custom fields are preserved. Deactivation never deletes poll data."
 msgstr ""
 
@@ -591,7 +623,7 @@ msgid "No polls founded with ID "
 msgstr ""
 
 #: api/poll-api.php:42
-#: classes/poll-storage.php:162
+#: classes/poll-storage.php:180
 msgid "Non-existent or expired poll"
 msgstr ""
 
@@ -657,11 +689,11 @@ msgstr ""
 msgid "Poll vote error, try again."
 msgstr ""
 
-#: classes/poll-storage.php:176
+#: classes/poll-storage.php:194
 msgid "This poll changed while you were editing it. Reload the page before saving again."
 msgstr ""
 
-#: classes/poll-storage.php:214
+#: classes/poll-storage.php:232
 msgid "Unable to save poll data. Please try again."
 msgstr ""
 

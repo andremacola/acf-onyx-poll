@@ -30,9 +30,21 @@ Onyx Poll creates lightweight polls with the WordPress REST API and JavaScript. 
 
 = Upgrading from the ACF version =
 
-Existing polls migrate automatically, in resumable batches. IDs, titles, publication status, answers, images, individual vote counters and settings are preserved. Existing blocks, shortcodes and widgets keep working. The total is recalculated from the answers, correcting any manually entered total.
+IMPORTANT: 2.0 is a major update with breaking changes to requirements and internal storage. Back up the full database and plugin files, and test the update on a staging copy before updating a production site. See the breaking changes below and the migration FAQ.
 
-Legacy custom fields are kept for recovery. New rules and votes are written only to the plugin tables. Back up the database before upgrading. Once migration completes, ACF is not needed by this plugin; other plugins or your theme may still use it.
+Migration starts automatically on activation or on the next WordPress request after upgrading an already active plugin from 1.2.0 or an earlier ACF version. No manual export, import or reactivation is needed. The plugin creates {prefix}onyx_polls and {prefix}onyx_poll_answers and copies existing polls in resumable batches of 50 per request. A requested poll is imported on demand if its batch has not run yet, including the latest-poll shortcode and modal selection.
+
+IDs, titles, publication status, answer order and text, image references, individual vote counters, dates, voting limits, result preferences and global settings are preserved. Existing blocks, shortcodes and widgets keep working without editing post content. Each poll is imported in a database transaction; retrying migration does not overwrite already imported polls or votes received in 2.0.
+
+Legacy custom fields are kept for recovery and are not deleted by the update. New rules and votes are written only to the plugin tables. ACF is not required to run the plugin or migration; keep it installed if your theme or another plugin still needs it. The database user must be allowed to create the plugin tables.
+
+= Breaking changes in 2.0 =
+
+* Minimum requirements are now WordPress 6.3 and PHP 7.4. Check the hosting environment before updating.
+* Poll data moves from WordPress custom fields to the plugin tables. Custom templates, snippets or integrations that read or write ACF fields or onyx_poll_* post metadata must be adapted; those legacy fields stop receiving updates. The plugin's existing shortcodes, block identifier, widget and public REST routes remain compatible.
+* Total votes is now read-only and equals the sum of answer counters. A manually entered total that differed from that sum will change during migration; individual answer counters are preserved.
+* Poll editing and settings use native plugin forms. Customizations that depend on ACF field registration, form markup or ACF-specific hooks must be reviewed.
+* Downgrading to 1.2.0 does not copy new votes or edits back into legacy fields. Restoring an old backup also loses changes made after that backup. Plan rollback with a current database backup; do not use downgrade as a way to reverse migration.
 
 == Installation ==
 
@@ -45,6 +57,20 @@ Legacy custom fields are kept for recovery. New rules and votes are written only
 = Do I need ACF PRO installed? =
 
 No. Version 2.0 uses its own editor, settings and database tables. Existing ACF poll data migrates automatically.
+
+= Will my 1.2.0 polls and votes migrate automatically? =
+
+Yes. Updating the active plugin starts migration on the next WordPress request; a fresh activation also starts it. Polls are copied in batches of 50 per request and migration resumes on subsequent requests. A poll needed by a shortcode, block, widget or modal is imported on demand, so a large poll collection does not need to finish migrating before those polls can be displayed. No ACF installation or manual import is required.
+
+Poll IDs, answers, images, individual counters and settings are preserved. Migration does not delete the original custom fields and repeated runs do not overwrite new votes. The only intentional result change is that total votes becomes the sum of the answers.
+
+= Can I update without changing existing posts or losing site content? =
+
+The built-in blocks, shortcodes and widgets remain compatible, and the update does not rewrite posts or pages or remove media. However, no major update can guarantee compatibility with every hosting environment, theme or custom integration. Back up the database and files, test on staging, verify PHP 7.4 and WordPress 6.3 or newer, and confirm that the database user can create tables. Review the breaking changes if custom code accesses the old ACF fields directly.
+
+= Can I remove ACF or downgrade after updating? =
+
+Onyx Poll 2.0 and its migration work without ACF. Remove ACF only if your theme and other plugins do not need it. Old ACF fields remain as a pre-migration copy; they are not synchronized with new votes or edits. Downgrading to 1.2.0 therefore does not preserve changes made in 2.0. Keep a current database backup and test any rollback separately.
 
 = How do I add a poll to a post? =
 
@@ -129,10 +155,12 @@ Current Chrome, Firefox, Safari and Edge. Internet Explorer is not supported. Th
 
 * Removed the ACF PRO dependency with native administration and a native Gutenberg block.
 * Added dedicated tables and automatic, resumable migration of existing polls.
+* Keep latest-poll shortcodes, listings and modal selection working while a large migration is still pending.
 * Calculate total votes from answers and preserve concurrent votes during administration saves.
 * Added settings descriptions, help, cron execution tracking and Site Health integration.
 * Improved image controls, answer reordering and block previews.
 * Added an explicit, scoped data cleanup option on uninstall; other content is preserved.
+* Breaking: requires WordPress 6.3 and PHP 7.4; custom ACF-based integrations must adapt to dedicated storage and native forms. Total votes is derived from answers. See the upgrade notice and migration FAQ.
 
 = 1.2.0 =
 *Release Date - 11 Jun 2025*
@@ -224,4 +252,4 @@ Thanks to:
 == Upgrade Notice ==
 
 = 2.0.0 =
-Back up your database before upgrading. Existing polls migrate automatically to dedicated tables and retain their IDs. ACF PRO is no longer required. Total votes are recalculated from individual answer counters. Data is kept on uninstall unless you explicitly enable permanent deletion.
+Major update: requires WordPress 6.3 and PHP 7.4. Polls migrate automatically to dedicated tables; total votes becomes the answer sum. Custom ACF integrations need adaptation. Back up and test on staging before upgrading. Downgrading does not restore new votes to old fields.

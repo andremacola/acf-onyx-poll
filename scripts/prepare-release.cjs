@@ -8,6 +8,7 @@ const { execFileSync } = require('node:child_process');
 const slug = 'acf-onyx-poll';
 const rootFiles = [ 'onyx-poll.php', 'uninstall.php', 'index.php', 'readme.txt' ];
 const folders = { admin: [ '.php' ], api: [ '.php' ], classes: [ '.php' ], 'assets/css': [ '.css' ], 'assets/js': [ '.js' ], languages: [ '.mo', '.po', '.pot' ] };
+const directoryAssets = { 'banner-1544x500.png': [ 1544, 500 ], 'banner-772x250.png': [ 772, 250 ], 'icon-256x256.png': [ 256, 256 ], 'icon-128x128.png': [ 128, 128 ] };
 const hash = (data) => crypto.createHash('sha256').update(data).digest('hex');
 const svn = (...args) => execFileSync('svn', args, { encoding: 'utf8', stdio: [ 'ignore', 'pipe', 'pipe' ] }).trim();
 const xmlText = (text) => text.replace(/&quot;/g, '"').replace(/&apos;/g, '\'').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
@@ -36,6 +37,31 @@ function collect(source) {
 		}
 		return [ path.relative(source, file).split(path.sep).join('/'), fs.readFileSync(file) ];
 	}));
+}
+
+function collectDirectoryAssets(source) {
+	return Object.fromEntries(Object.entries(directoryAssets).map(([ file, dimensions ]) => {
+		const absolute = path.join(source, 'assets/images', file);
+		if (! fs.lstatSync(absolute).isFile()) {
+			throw new Error(`Expected a regular directory image: ${absolute}`);
+		}
+		const contents = fs.readFileSync(absolute);
+		const pngSignature = Buffer.from([ 137, 80, 78, 71, 13, 10, 26, 10 ]);
+		if (contents.length < 24 || ! contents.subarray(0, 8).equals(pngSignature) || contents.toString('ascii', 12, 16) !== 'IHDR' || contents.readUInt32BE(16) !== dimensions[0] || contents.readUInt32BE(20) !== dimensions[1]) {
+			throw new Error(`Directory image ${file} must be a PNG at ${dimensions.join('x')} pixels.`);
+		}
+		return [ file, contents ];
+	}));
+}
+
+function syncDirectoryAssets(workingCopy, images) {
+	const assets = path.join(workingCopy, 'assets');
+	fs.mkdirSync(assets, { recursive: true });
+	for (const [ file, contents ] of Object.entries(images)) {
+		const destination = path.join(assets, file);
+		fs.writeFileSync(destination, contents);
+		svn('add', '--force', '--parents', destination);
+	}
 }
 
 function versionOf(source) {
@@ -95,6 +121,7 @@ function prepare({ source, workingCopy, output }) {
 	workingCopy = fs.realpathSync(workingCopy);
 	const version = versionOf(source);
 	const files = collect(source);
+	const images = collectDirectoryAssets(source);
 	if (fs.realpathSync(svn('info', '--show-item', 'wc-root', workingCopy)) !== workingCopy) {
 		throw new Error('The SVN path must be the working-copy root.');
 	}
@@ -114,13 +141,14 @@ function prepare({ source, workingCopy, output }) {
 	}
 	// All checks above happen before changing the working copy.
 	syncTrunk(workingCopy, files);
+	syncDirectoryAssets(workingCopy, images);
 	if (tagExists) {
 		// This tag is an uncommitted output from our prior run, whose hashes were verified above.
 		svn('delete', '--force', tag);
 	}
 	svn('copy', path.join(workingCopy, 'trunk'), tag);
 	fs.mkdirSync(output, { recursive: true });
-	const manifest = { version, workingCopy, files: Object.fromEntries(Object.entries(files).map(([ file, contents ]) => [ file, hash(contents) ])), changes: status(workingCopy) };
+	const manifest = { version, workingCopy, files: Object.fromEntries(Object.entries(files).map(([ file, contents ]) => [ file, hash(contents) ])), directoryAssets: Object.fromEntries(Object.entries(images).map(([ file, contents ]) => [ file, hash(contents) ])), changes: status(workingCopy) };
 	fs.writeFileSync(stateFile, JSON.stringify(manifest, null, 2) + '\n');
 	return { version, fileCount: Object.keys(files).length, trunk: path.join(workingCopy, 'trunk'), tag };
 }
@@ -164,4 +192,4 @@ if (require.main === module) {
 	}
 }
 
-module.exports = { prepare, zip, collect, versionOf, status };
+module.exports = { prepare, zip, collect, collectDirectoryAssets, versionOf, status };

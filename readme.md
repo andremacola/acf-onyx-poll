@@ -6,7 +6,7 @@
 
 Onyx Poll is an independent WordPress polling plugin using the **WP REST API**, native WordPress administration and its own database tables. ACF and ACF PRO are not required. Feel free to submit a Pull Request.
 
-The main goal of ACF Onyx Poll is to be **totally free, lightweight and simple**. No fancy, colorful and polluted options or donate screens.
+The main goal of Onyx Poll is to be **totally free, lightweight and simple**. No fancy, colorful and polluted options or donate screens.
 
 This plugin is based on [Twitter](https://twitter.com) poll cards style.
 
@@ -29,7 +29,7 @@ This plugin is based on [Twitter](https://twitter.com) poll cards style.
 * You can align the poll container with the option **class** in the shortcode: `[onyx-poll class=left]`. Available options are `left, right, full`
 * To select which **style** you want: `[onyx-poll class="twitter|standard"]`
 * Is it possible to combine style and aligment. Ex: `[onyx-poll class="standard left"]`
-* To include a **widget**, your theme need to support it. Go to Appereance > Widgets and select **Poll** widget from *from ACF Onyx Poll*
+* To include a **widget**, your theme need to support it. Go to Appereance > Widgets and select **Poll** widget from *Onyx Poll*
 
 ## FEATURES
 
@@ -70,6 +70,8 @@ On activation or upgrade, existing polls are automatically copied from their leg
 
 Poll IDs, answer order, image IDs, answer counters, end dates, voting limits and general settings are preserved. The legacy manually entered total is replaced with the sum of the answers. Old post metadata is retained for recovery. Existing shortcodes, widgets and `acf/acf-onyx-poll` Gutenberg blocks continue to work without rewriting post content. The legacy block name is a compatibility identifier, not an ACF dependency.
 
+Version 2.0 requires WordPress 6.3 and PHP 7.4 or newer and permission to create database tables. Custom templates or integrations that read/write ACF fields, legacy poll post metadata or ACF forms/hooks must be adapted. Back up and test on staging before a production upgrade. Legacy fields are not synchronized after migration: downgrading to 1.2.0 does not copy new votes or edits back to them. The public `readme.txt` includes a breaking-changes disclaimer, migration FAQ and WordPress.org upgrade notice.
+
 ## UNINSTALLING
 
 In **Polls > Settings**, administrators can choose **Keep data (default)** or **Permanently delete plugin data**. Permanent deletion displays an irreversible deletion warning and requires acknowledgement before saving the setting. Deactivating the plugin never deletes poll data.
@@ -109,9 +111,11 @@ svn diff _svn
 
 The version command updates `package.json`, the plugin header, the PHP version constant and the readme's stable tag together. `npm run release` checks JavaScript lint, builds the CSS/JS, checks that versions and requirements match, copies only runtime files into `_svn/trunk`, stages obsolete-file removals and new files, and creates `_svn/tags/<version>` locally. It also writes a SHA-256 manifest in `dist/svn-preparation.json`.
 
+The same command validates the exact PNG dimensions and copies the two banners (1544×500 and 772×250) and two icons (256×256 and 128×128) from `assets/images/` to `_svn/assets/`. These directory images stay outside trunk, tags and installation packages. Original branding backups in `assets/images/backups/` are local only: Git ignores them and release preparation never copies them to SVN or packages.
+
 No ZIP is needed for SVN publication, and the default command does not generate one. If you separately need a package for manual installation, `npm run release:zip` creates `dist/acf-onyx-poll-<version>.zip`; this optional command does not modify SVN.
 
-Preparing again before a commit is supported when the SVN files still match the previous generated manifest. Manual edits or unexpected working-copy changes cause preparation to stop before changing SVN. Committed tags are never overwritten. Historical tags and WordPress.org directory assets are preserved. The script never runs `svn update` or `svn commit` and never uses publication credentials; review and submit the local changes explicitly when ready.
+Preparing again before a commit is supported when the SVN files still match the previous generated manifest. Manual edits or unexpected working-copy changes, including changes to directory images, cause preparation to stop before changing SVN. Committed tags are never overwritten. Historical tags, screenshots and other directory assets are preserved. The script never runs `svn update` or `svn commit` and never uses publication credentials; review and submit the local changes explicitly when ready.
 
 `npm run test:release` exercises packaging, repeat preparation, version checks and protection of manual edits and published tags against a disposable local SVN repository. It never connects to WordPress.org.
 

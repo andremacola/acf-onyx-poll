@@ -31,3 +31,6 @@ sftp-config.json
 ######################
 /_svn/
 /dist/
+
+# original branding backups (local only)
+/assets/images/backups/

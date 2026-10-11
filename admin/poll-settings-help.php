@@ -30,6 +30,17 @@ class OnyxPollsSettingsHelp {
 		self::start(__('Do I need ACF or ACF PRO?', 'acf-onyx-poll'));
 		self::paragraph(__('No. Onyx Poll has its own editor, settings and database tables. Existing polls are migrated automatically and keep their IDs, answers, images and votes.', 'acf-onyx-poll'));
 		self::end();
+		self::start(__('How does migration from 1.2.0 to 2.0 work?', 'acf-onyx-poll'));
+		self::paragraph(__('Migration starts on activation or on the next WordPress request after updating an active plugin. It copies polls in resumable batches of 50 per request; a poll needed by a block, shortcode, widget or modal is imported on demand. No manual import or ACF installation is required.', 'acf-onyx-poll'));
+		self::paragraph(__('Poll IDs, answer order, image references, individual vote counters, dates and settings are preserved. Repeated migration does not overwrite new votes. Old custom fields are kept, but new votes and edits are saved only in the plugin tables.', 'acf-onyx-poll'));
+		self::end();
+		self::start(__('What are the breaking changes in 2.0?', 'acf-onyx-poll'));
+		self::paragraph(__('Version 2.0 requires WordPress 6.3 and PHP 7.4 or newer. The database user must be allowed to create tables. Back up the database and plugin files and test the update on a staging copy before updating a production site.', 'acf-onyx-poll'));
+		self::paragraph(__('Existing plugin blocks, shortcodes and widgets remain compatible. Custom code that reads or writes ACF poll fields or legacy post metadata, or relies on ACF forms and hooks, must be adapted to dedicated storage and native forms. Total votes is now read-only and equals the sum of the answers; a different manually entered total will change.', 'acf-onyx-poll'));
+		self::end();
+		self::start(__('Can I remove ACF or downgrade after updating?', 'acf-onyx-poll'));
+		self::paragraph(__('Onyx Poll and migration work without ACF. Keep ACF if your theme or other plugins need it. Downgrading to 1.2.0 does not copy new votes or edits back into legacy fields, and restoring a backup loses changes made after that backup. Keep a current database backup and test any rollback separately.', 'acf-onyx-poll'));
+		self::end();
 		self::start(__('How do I add a poll to a post?', 'acf-onyx-poll'));
 		self::paragraph(__('Insert the Onyx Poll block, select a poll and choose its style. You can also use a shortcode: without an ID it shows the latest published poll; with an ID it shows that specific poll.', 'acf-onyx-poll'));
 		self::code("[onyx-poll]\n[onyx-poll id=85]\n[onyx-poll id=85 class=\"twitter full\"]");
