@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) { exit; }
 /*
 
 	@ POLL HELPER METHODS
@@ -23,12 +24,15 @@ Class OnyxPolls {
 		$ids = $wpdb->get_col($wpdb->prepare("SELECT o.poll_id FROM $table o JOIN $wpdb->posts p ON p.ID=o.poll_id WHERE p.post_type='onyxpolls' AND p.post_status='publish' AND o.expired=0 AND o.end IS NOT NULL AND o.end<=%s", current_time('mysql')));
 		if ($wpdb->last_error) { return new WP_Error('onyx_cron_database', __('The poll expiration check could not be completed.', 'acf-onyx-poll'), array('status' => 500)); }
 		if (!$ids) { return null; }
+		$expired = array();
 		foreach ($ids as $id) {
-			if ($wpdb->update($table, array('expired' => 1), array('poll_id' => $id)) === false) {
+			$updated = $wpdb->query($wpdb->prepare("UPDATE $table SET expired=1 WHERE poll_id=%d AND expired=0 AND end IS NOT NULL AND end<=%s", $id, current_time('mysql')));
+			if ($updated === false) {
 				return new WP_Error('onyx_cron_database', __('The poll expiration check could not be completed.', 'acf-onyx-poll'), array('status' => 500));
 			}
+			if ($updated) { $expired[] = (int) $id; }
 		}
-		return array_map('intval', $ids);
+		return $expired ?: null;
 	}
 
 	/**
@@ -86,6 +90,8 @@ Class OnyxPolls {
 		wp_localize_script('acf-onyx-poll', 'onyxpoll',
 			array(
 				'apiurl'    => rest_url(),
+				'listurl'   => rest_url('onyx/polls/list'),
+				'voteurl'   => rest_url('onyx/polls/vote'),
 				'modaltime' => OnyxPollsStorage::settings()['modal_time'],
 				'labels' => array(
 					'vote'    => __('Vote', 'acf-onyx-poll'),
@@ -94,7 +100,8 @@ Class OnyxPolls {
 					'view'    => __('View results', 'acf-onyx-poll'),
 					'total'   => __('Total votes', 'acf-onyx-poll'),
 					'success' => __('Your vote was submitted successfully.', 'acf-onyx-poll'),
-					'error'   => __('Your vote could not be submitted. Try again.', 'acf-onyx-poll')
+					'error'   => __('Your vote could not be submitted. Try again.', 'acf-onyx-poll'),
+					'refresh' => __('Refresh the page before voting.', 'acf-onyx-poll')
 				)
 			)
 		);

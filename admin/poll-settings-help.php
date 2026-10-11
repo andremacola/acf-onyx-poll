@@ -64,10 +64,13 @@ class OnyxPollsSettingsHelp {
 		echo '<p><a href="https://developer.wordpress.org/plugins/cron/hooking-wp-cron-into-the-system-task-scheduler/" target="_blank" rel="noopener noreferrer">' . esc_html__('WordPress documentation: configuring a server scheduler', 'acf-onyx-poll') . '</a></p>';
 		self::end();
 		self::start(__('Where are poll and visitor data stored?', 'acf-onyx-poll'));
-		self::paragraph(__('Rules, answers and vote counters use the plugin tables onyx_polls and onyx_poll_answers, with your WordPress database prefix. WordPress stores poll titles and publication status. The plugin stores no visitor IP addresses or usernames; browser cookies remember choices, voting intervals and modal dismissal.', 'acf-onyx-poll'));
+		self::paragraph(__('Rules, answers and vote counters use onyx_polls and onyx_poll_answers. Temporary session limits use onyx_poll_guards. All three tables use your WordPress database prefix. WordPress stores poll titles and publication status. The plugin stores no visitor IP addresses or usernames; browser cookies remember choices, identify anonymous voting sessions and remember modal dismissal.', 'acf-onyx-poll'));
+		self::end();
+		self::start(__('Can anonymous polls prevent all voting fraud?', 'acf-onyx-poll'));
+		self::paragraph(__('Votes require a signed browser session and a short-lived token. The server enforces voting intervals and a limit of 10 requests per minute per session. IP addresses and browser fingerprints are not used. Someone who deletes every poll cookie or starts another browser session can still vote again; anonymous polls cannot prove a unique person.', 'acf-onyx-poll'));
 		self::end();
 		self::start(__('What happens when I delete the plugin?', 'acf-onyx-poll'));
-		self::paragraph(__('By default, data is kept for reinstallation. If you explicitly select permanent deletion, uninstall removes the two plugin tables, its own listed options and posts of type onyxpolls. Other posts and pages are preserved, including those with poll blocks or shortcodes, as are media files. Legacy custom fields are preserved. Deactivation never deletes poll data.', 'acf-onyx-poll'));
+		self::paragraph(__('By default, data is kept for reinstallation. If you explicitly select permanent deletion, uninstall removes the three plugin tables, its own listed options and posts of type onyxpolls. Other posts and pages are preserved, including those with poll blocks or shortcodes, as are media files. Legacy custom fields are preserved. Deactivation never deletes poll data.', 'acf-onyx-poll'));
 		self::end();
 		echo '</section>';
 	}

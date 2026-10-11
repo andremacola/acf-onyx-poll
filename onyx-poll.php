@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Onyx Poll
-Version: 2.0.1
+Version: 2.0.2
 Description: Create independent polls with native WordPress administration.
 Author: André Mácola Machado
 Author URI: https://github.com/andremacola
@@ -31,7 +31,7 @@ Class OnyxPollsInit {
 	 * @return	void
 	 */
 	function __construct() {
-		define('ACF_ONYX_POLL_VERSION', '2.0.1');
+		define('ACF_ONYX_POLL_VERSION', '2.0.2');
 		define('ACF_ONYX_POLL_FILE', __FILE__);
 		define('ACF_ONYX_POLL_PATH', plugin_dir_path(__FILE__));
 	}
@@ -98,6 +98,7 @@ Class OnyxPollsInit {
 	 * @return	void
 	 */
 	 public function initialize() {
+		require_once __DIR__ . '/classes/poll-security.php';
 		require_once __DIR__ . '/classes/poll-storage.php';
 		require_once __DIR__ . '/classes/poll-helpers.php';
 		require_once __DIR__ . '/classes/poll-cron.php';

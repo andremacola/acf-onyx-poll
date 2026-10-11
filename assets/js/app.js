@@ -7,6 +7,7 @@ class onyxAcfPoll {
 		this.mpoll = document.querySelector(`#onyx-poll-modal`);
 		this.polls = document.querySelectorAll(`.onyx-poll-widget`);
 		this.element = {};
+		this.pendingVote = false;
 		this.name = {
 			parent: this.prefix,
 			modal: `${this.prefix}-modal`,
@@ -57,7 +58,7 @@ class onyxAcfPoll {
 						} else {
 							console.log(`Warn: ${data.message}`);
 							poll.classList.add('onyx-poll-invalid'); // temp
-							poll.innerHTML = `${data.message}`; // temp
+							poll.textContent = data.message;
 						}
 					})
 					.catch((error) => console.log(error)));
@@ -72,23 +73,33 @@ class onyxAcfPoll {
 	}
 
 	requestPoll(pollID) {
-		const getUrl = `${onyxpoll.apiurl}onyx/polls/list/?id=${pollID}`;
+		const getUrl = new URL(onyxpoll.listurl);
+		getUrl.searchParams.set('id', pollID);
+		// Fetch a session-bound token at runtime, independently of page/CDN caches.
+		getUrl.searchParams.set('_onyx', Date.now());
 		return new Promise((resolve, reject) => {
-			if (! pollID) {
-				reject('requestPoll: Empty or invalid poll ID.');
+			if (! /^[1-9][0-9]*$/.test(String(pollID))) {
+				return reject({ message: onyxpoll.labels.error });
 			}
 
 			const self = this;
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', getUrl);
+			xhr.timeout = 15000;
+			xhr.onerror = xhr.ontimeout = xhr.onabort = () => reject({ message: onyxpoll.labels.error });
 			xhr.send(null);
 			xhr.onload = function() {
 				if (this.status >= 200 && this.status < 400) {
-					const json = JSON.parse(this.response);
+					let json;
+					try {
+						json = JSON.parse(this.response);
+					} catch (error) {
+						return reject({ message: onyxpoll.labels.error });
+					}
 					self.response[json.id] = json;
 					resolve(json);
 				} else {
-					reject('Poll cannot be loaded.');
+					reject({ message: onyxpoll.labels.error });
 				}
 			};
 		});
@@ -99,27 +110,41 @@ class onyxAcfPoll {
 			choice: choice.getAttribute('data-choice'),
 			poll: choice.getAttribute('data-poll'),
 		};
-		return new Promise((resolve, reject) => {
-			const self = this;
-			const xhr = new XMLHttpRequest();
-			xhr.open('POST', `${onyxpoll.apiurl}onyx/polls/vote`);
-			xhr.setRequestHeader('Content-Type', 'application/json');
-			xhr.send(JSON.stringify(voteOptions));
+		const displayedVersion = Number(choice.getAttribute('data-version'));
+		return this.requestPoll(voteOptions.poll).then((poll) => {
+			if (! poll.vote_token || poll.version !== displayedVersion || String(poll.id) !== voteOptions.poll) {
+				return Promise.reject({ message: onyxpoll.labels.refresh });
+			}
+			return new Promise((resolve, reject) => {
+				const self = this;
+				const xhr = new XMLHttpRequest();
+				xhr.open('POST', onyxpoll.voteurl);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader('X-Onyx-Poll-Token', poll.vote_token);
+				xhr.timeout = 15000;
+				xhr.onerror = xhr.ontimeout = xhr.onabort = () => reject({ message: onyxpoll.labels.error });
+				xhr.send(JSON.stringify(voteOptions));
 
-			xhr.onload = function() {
-				const json = JSON.parse(this.response);
-				self.response[json.poll] = json;
-				if (this.status >= 200 && this.status < 400) {
-					resolve(json);
-				} else {
-					reject(json);
-				}
-			};
+				xhr.onload = function() {
+					let json;
+					try {
+						json = JSON.parse(this.response);
+					} catch (error) {
+						return reject({ message: onyxpoll.labels.error });
+					}
+					if (this.status >= 200 && this.status < 400) {
+						self.response[json.poll] = json;
+						resolve(json);
+					} else {
+						reject(json);
+					}
+				};
+			});
 		});
 	}
 
 	renderTemplate(data, poll) {
-		const cookieLimit = this.getCookie(`onyx_poll_limit_${data.id}`);
+		const cookieLimit = data.limit_vote === 1 ? '' : this.getCookie(`onyx_poll_limit_${data.id}`);
 
 		// poll template
 		poll.innerHTML = `
@@ -152,6 +177,7 @@ class onyxAcfPoll {
 			const choiceEl = document.createElement('li');
 			choiceEl.setAttribute('data-choice', choice.option);
 			choiceEl.setAttribute('data-poll', data.id);
+			choiceEl.setAttribute('data-version', data.version);
 			choiceEl.innerHTML = `
 				${data.has_image ? `<span class='image'><img loading='lazy' src='${this.escapeHTML(choice.image)}' title='${this.escapeHTML(choice.answer)}' alt='${this.escapeHTML(choice.answer)}'></span>` : ``}
 				<span class='answer'>${this.escapeHTML(choice.answer)}</span>`;
@@ -204,10 +230,11 @@ class onyxAcfPoll {
 	submitVote(event) {
 		event.preventDefault();
 		const t = event.currentTarget;
-		if (! t) {
+		if (! t || this.pendingVote) {
 			return;
 		}
 		const poll = t.closest(`.${this.name.parent}`);
+		this.pendingVote = true;
 		this.togglePollLoader(poll, false);
 		this.requestVote(t)
 			.then(function(response) {
@@ -233,10 +260,13 @@ class onyxAcfPoll {
 			}.bind(this))
 			.catch(function(err) {
 				console.warn(err.message);
-				poll.classList.add('voted');
+				poll.classList.remove('voted');
 				this.togglePollLoader(poll, true);
 				this.handleMessage(poll, err.message, 'error');
-			}.bind(this));
+			}.bind(this))
+			.finally(() => {
+				this.pendingVote = false;
+			});
 	}
 
 	showResults(event, poll) {
@@ -253,7 +283,7 @@ class onyxAcfPoll {
 		poll.querySelector(`.${this.name.total} span`).textContent = res.results.total;
 
 		const choosedChoice = this.getCookie(`onyx_poll_choice_${res.id}`);
-		if (choosedChoice) {
+		if (/^[1-9][0-9]*$/.test(choosedChoice)) {
 			const chosen = poll.querySelector(`li[data-choice="${choosedChoice}"]`);
 			if (chosen) {
 				chosen.classList.add('choosed');
@@ -323,15 +353,18 @@ class onyxAcfPoll {
 
 	getCookie(cname) {
 		var name = cname + '=';
-		var decodedCookie = decodeURIComponent(document.cookie);
-		var ca = decodedCookie.split(';');
+		var ca = document.cookie.split(';');
 		for (var i = 0; i < ca.length; i++) {
 			var c = ca[i];
 			while (c.charAt(0) == ' ') {
 				c = c.substring(1);
 			}
 			if (c.indexOf(name) == 0) {
-				return c.substring(name.length, c.length);
+				try {
+					return decodeURIComponent(c.substring(name.length));
+				} catch (error) {
+					return '';
+				}
 			}
 		}
 		return '';
@@ -346,7 +379,7 @@ class onyxAcfPoll {
 		} else {
 			expires = '';
 		}
-		document.cookie = name + '=' + value + expires + '; path=/';
+		document.cookie = name + '=' + value + expires + '; path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
 	}
 }
 

@@ -62,7 +62,7 @@ class OnyxPollsAdmin {
 		echo '<template id="onyx-answer-template">';
 		$this->row(array('id' => 0, 'answer' => '', 'image_id' => 0, 'votes' => 0), '__index__');
 		echo '</template><div class="onyx-admin-grid">';
-		$this->select('limit_vote', __('Limit voting', 'acf-onyx-poll'), $poll['limit_vote'], self::limits(), __('Controls repeat votes using a browser cookie. Unlimited voting allows unlimited votes.', 'acf-onyx-poll'));
+		$this->select('limit_vote', __('Limit voting', 'acf-onyx-poll'), $poll['limit_vote'], self::limits(), __('Controls repeat votes per browser session using server-side records. Unlimited voting removes the poll interval; each session can submit up to 10 voting requests per minute.', 'acf-onyx-poll'));
 		$this->select('results', __('Results', 'acf-onyx-poll'), $poll['results'], array(1 => __('Show percentages', 'acf-onyx-poll'), 2 => __('Show vote counts', 'acf-onyx-poll'), 3 => __('Show both', 'acf-onyx-poll')), __('Display answer totals as percentages, numbers or both.', 'acf-onyx-poll'));
 		$end = $poll['end'] ? substr(str_replace(' ', 'T', $poll['end']), 0, 16) : '';
 		/* translators: %s: Site timezone name or UTC offset. */
@@ -156,11 +156,11 @@ class OnyxPollsAdmin {
 	}
 
 	public function menu() {
-		add_submenu_page('edit.php?post_type=onyxpolls', __('Poll settings', 'acf-onyx-poll'), __('Settings', 'acf-onyx-poll'), 'edit_posts', 'onyx-poll-settings', array($this, 'settings_form'));
+		add_submenu_page('edit.php?post_type=onyxpolls', __('Poll settings', 'acf-onyx-poll'), __('Settings', 'acf-onyx-poll'), 'manage_options', 'onyx-poll-settings', array($this, 'settings_form'));
 	}
 
 	public function settings_form() {
-		if (!current_user_can('edit_posts')) { return; }
+		if (!current_user_can('manage_options')) { return; }
 		$settings = OnyxPollsStorage::settings();
 		echo '<div class="wrap"><h1>' . esc_html__('Poll settings', 'acf-onyx-poll') . '</h1>';
 		if (isset($_GET['updated'])) { echo '<div class="notice notice-success"><p>' . esc_html__('Settings saved.', 'acf-onyx-poll') . '</p></div>'; }
@@ -191,7 +191,7 @@ class OnyxPollsAdmin {
 	}
 
 	public function save_settings() {
-		if (!current_user_can('edit_posts')) { wp_die(esc_html__('You are not allowed to change these settings.', 'acf-onyx-poll')); }
+		if (!current_user_can('manage_options')) { wp_die(esc_html__('You are not allowed to change these settings.', 'acf-onyx-poll')); }
 		check_admin_referer('onyx_poll_settings');
 		$input = isset($_POST['onyx_poll']) ? wp_unslash($_POST['onyx_poll']) : array();
 		if (!is_array($input)) { wp_die(esc_html__('Invalid poll parameters.', 'acf-onyx-poll')); }

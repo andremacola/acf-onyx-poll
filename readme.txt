@@ -4,7 +4,7 @@ Tags: poll, polls, onyx, voting, survey
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ Onyx Poll creates lightweight polls with the WordPress REST API and JavaScript. 
 * Multiple polls per page, answer images and registered thumbnail sizes.
 * Editable answer counters; the total is always their sum.
 * Percentage, number or combined results, with an option to hide results until expiration.
-* Voting intervals remembered by browser cookies.
+* Voting intervals enforced on the server for signed browser sessions.
 * Automatic expiration and an hourly WP-Cron task.
 * Native administration with media selection and answer reordering.
 * Dedicated tables for poll rules, answers and vote counters.
@@ -136,7 +136,21 @@ No visitor IP addresses or usernames are stored. Cookies remember votes, modal d
 
 Data is kept by default. In Poll settings, administrators can choose permanent deletion and must acknowledge that recovery will not be possible without a backup.
 
-Permanent cleanup removes only the two plugin tables, the exact list of plugin-owned options, and wp_posts rows with post_type onyxpolls. Other posts and pages are preserved, including those containing poll blocks or shortcodes. Media files, attachment relationships, comments, revisions and legacy custom fields are preserved. Deactivation never deletes poll data.
+Permanent cleanup removes only the three plugin tables, the exact list of plugin-owned options, and wp_posts rows with post_type onyxpolls. Other posts and pages are preserved, including those containing poll blocks or shortcodes. Media files, attachment relationships, comments, revisions and legacy custom fields are preserved. Deactivation never deletes poll data.
+
+= What protects anonymous voting? =
+
+Voting requires POST, a signed browser cookie and a short-lived token bound to the poll and its current answer order. Browser sessions can submit up to 10 valid voting requests per minute. Poll-specific intervals are enforced in the same database transaction as the vote, so simultaneous requests and removal of the old limit cookie cannot duplicate a limited vote. IP addresses and browser fingerprints are not used, and users sharing a VPN or network do not share a voting limit.
+
+Someone who deletes all poll cookies, obtains another browser session or automates new sessions can still vote again. These controls reduce request forgery and session-based abuse; anonymous voting does not guarantee one vote per person. Unlimited voting removes the poll-specific interval while keeping the session burst limit.
+
+Session limits use {prefix}onyx_poll_guards, which stores keyed hashes, poll IDs, counters and expiry times. Expired records are pruned by cron. WordPress password protection is respected by public poll reads and votes. Poll settings require the manage_options capability; poll editing keeps the existing WordPress permissions.
+
+= Do custom voting integrations need an update in 2.0.2? =
+
+Yes. Keep the cookie returned by GET /wp-json/onyx/polls/list?id=POLL_ID, read vote_token from the response, then send POST /wp-json/onyx/polls/vote with the same cookie and the X-Onyx-Poll-Token header. The JSON body still contains poll and choice, with one-based choice positions. Refresh the list when the poll changes or the token expires. Requests from unrelated browser origins are rejected. Shared caches must respect Cache-Control: private, no-store on poll REST responses. WordPress supplies the correct REST URLs even when pretty permalinks are disabled.
+
+Existing plugin shortcodes, blocks and widgets handle this automatically. Browser cookies are required for voting. Upgrading creates the guards table automatically and preserves existing poll data and votes. The direct cron endpoint remains compatible and is limited to one execution per minute.
 
 = Which browsers are supported? =
 
@@ -149,6 +163,18 @@ Current Chrome, Firefox, Safari and Edge. Internet Explorer is not supported. Th
 3. Poll displayed on the site.
 
 == Changelog ==
+
+= 2.0.2 =
+*Release date: 11 Oct 2026*
+
+* Security: restricted voting to POST and added signed browser sessions, poll-bound tokens, and origin checks.
+* Security: enforced repeat voting limits atomically on the server and limited each session to 10 voting requests per minute, without using IP addresses.
+* Security: protected password-restricted polls and limited global settings to administrators with manage_options.
+* Invalidated stale voting tokens when answers change and disabled shared caching of personalized REST responses.
+* Added a dedicated guards table, cron cleanup, and scoped uninstall handling; existing polls and vote counts are preserved.
+* Limited repeated public cron calls and prevented expiration from closing a poll that was concurrently reopened.
+* Improved duplicate-click and network error handling and supported REST URLs with plain permalinks.
+* Custom voting clients must send the new token and session cookie. See the voting integration FAQ.
 
 = 2.0.1 =
 *Release date: 11 Oct 2026*
@@ -258,6 +284,9 @@ Thanks to:
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.0.2 =
+Security update: voting requires POST, a session cookie and X-Onyx-Poll-Token. Custom voting clients must adapt. Global settings require manage_options. A new guards table stores limits; existing polls and votes are preserved. See the voting integration FAQ.
 
 = 2.0.1 =
 Updates English, Brazilian Portuguese and German text, adds Spanish and Dutch translations, and uses your WordPress date format. The database format is unchanged from 2.0.0.

@@ -50,6 +50,7 @@ try {
 	OnyxPollsStorage::upgrade();
 	$created[] = OnyxPollsStorage::table();
 	$created[] = OnyxPollsStorage::table(true);
+	$created[] = OnyxPollsSecurity::table();
 	$poll = OnyxPollsStorage::get($poll_id);
 	onyx_check($poll['total'] === 11, 'The total must be the answer sum, not legacy manual total.');
 	onyx_check(array_column($poll['answers'], 'votes') === array(4, 7), 'Migration must preserve individual counters.');
@@ -137,6 +138,7 @@ try {
 	$vote = new WP_REST_Request('POST');
 	$vote->set_param('poll', $poll_id);
 	$vote->set_param('choice', 1);
+	$vote->set_header('X-Onyx-Poll-Token', $api->list($request)->get_data()['vote_token']);
 	$_COOKIE['onyx_poll_limit_' . $poll_id] = 1;
 	$before = OnyxPollsStorage::get($poll_id)['total'];
 	onyx_check($api->vote($vote)->get_data()['code'] === 'not_allowed', 'Respect vote-limit cookie.');
@@ -226,6 +228,7 @@ try {
 	onyx_check(get_option(OnyxPollsStorage::SETTINGS, null) === null && get_option('options_onyx_poll_css', null) === null, 'Delete only listed plugin options.');
 	onyx_check(get_option(OnyxPollsCron::OPTION, null) === null, 'Cron diagnostics are removed only when explicit purge is enabled.');
 	onyx_check(!$wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like(OnyxPollsStorage::table()))), 'Drop only the plugin tables.');
+	onyx_check(!$wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like(OnyxPollsSecurity::table()))), 'Explicit purge includes only the plugin-owned security guards table.');
 	WP_CLI::success($checks . ' integration checks passed in isolated tables.');
 } finally {
 	$wpdb->set_prefix($original_prefix);

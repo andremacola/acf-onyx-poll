@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Onyx Poll 2.0.1\n"
+"Project-Id-Version: Onyx Poll 2.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2026-10-11T22:00:48+00:00\n"
-"PO-Revision-Date: 2026-10-11 22:01+0000\n"
+"POT-Creation-Date: 2026-10-11T23:02:10+00:00\n"
+"PO-Revision-Date: 2026-10-11 22:53+0000\n"
 "Last-Translator: Onyx Poll\n"
 "Language-Team: Spanish (Spain)\n"
 "Language: es_ES\n"
@@ -94,7 +94,7 @@ msgstr "Imagen"
 msgid "Answer"
 msgstr "Respuesta"
 
-#: admin/poll-admin.php:57 admin/poll-admin.php:87 admin/poll-type.php:97
+#: admin/poll-admin.php:57 admin/poll-admin.php:87 admin/poll-type.php:98
 msgid "Votes"
 msgstr "Votos"
 
@@ -112,11 +112,13 @@ msgstr "Limitar la votación"
 
 #: admin/poll-admin.php:65
 msgid ""
-"Controls repeat votes using a browser cookie. Unlimited voting allows "
-"unlimited votes."
+"Controls repeat votes per browser session using server-side records. "
+"Unlimited voting removes the poll interval; each session can submit up to 10 "
+"voting requests per minute."
 msgstr ""
-"Controla los votos repetidos mediante una cookie del navegador. La opción "
-"Votación sin límites permite votar sin restricciones."
+"Controla los votos repetidos por sesión del navegador mediante registros en "
+"el servidor. Votación sin límites elimina el intervalo de la encuesta; cada "
+"sesión puede enviar hasta 10 solicitudes de votación por minuto."
 
 #: admin/poll-admin.php:66
 msgid "Results"
@@ -142,7 +144,8 @@ msgstr "Muestra el total de cada respuesta como porcentaje, número o ambos."
 #: admin/poll-admin.php:69
 #, php-format
 msgid ""
-"Voting closes at this time in the site timezone (%s), even if cron is delayed."
+"Voting closes at this time in the site timezone (%s), even if cron is "
+"delayed."
 msgstr ""
 "La votación se cierra a esta hora en la zona horaria del sitio (%s), aunque "
 "el cron se retrase."
@@ -151,7 +154,7 @@ msgstr ""
 msgid "Poll end date"
 msgstr "Fecha de cierre de la encuesta"
 
-#: admin/poll-admin.php:71 admin/poll-block.php:13 classes/poll-helpers.php:95
+#: admin/poll-admin.php:71 admin/poll-block.php:13 classes/poll-helpers.php:101
 msgid "Total votes"
 msgstr "Total de votos"
 
@@ -167,8 +170,8 @@ msgstr "Activar imágenes"
 msgid ""
 "Show an image with each answer. Every answer needs an image when enabled."
 msgstr ""
-"Muestra una imagen junto a cada respuesta. Todas las respuestas necesitan una "
-"imagen cuando esta opción está activada."
+"Muestra una imagen junto a cada respuesta. Todas las respuestas necesitan "
+"una imagen cuando esta opción está activada."
 
 #: admin/poll-admin.php:73
 msgid "Poll modal"
@@ -176,8 +179,8 @@ msgstr "Ventana emergente de la encuesta"
 
 #: admin/poll-admin.php:73
 msgid ""
-"Allow this poll in the site modal. The latest active poll with this option is "
-"used."
+"Allow this poll in the site modal. The latest active poll with this option "
+"is used."
 msgstr ""
 "Permite mostrar esta encuesta en la ventana emergente del sitio. Se utiliza "
 "la encuesta activa más reciente con esta opción."
@@ -194,7 +197,7 @@ msgstr ""
 "Permite a los visitantes ver los resultados antes de la fecha de cierre. Las "
 "encuestas caducadas siempre muestran los resultados."
 
-#: admin/poll-admin.php:75 admin/poll-type.php:125
+#: admin/poll-admin.php:75 admin/poll-type.php:126
 msgid "Expired"
 msgstr "Caducada"
 
@@ -238,8 +241,9 @@ msgstr "Quitar respuesta"
 msgid "Use image"
 msgstr "Usar imagen"
 
-#: admin/poll-admin.php:113 admin/poll-admin.php:197 api/poll-api.php:21
-#: api/poll-api.php:38 api/poll-api.php:48 classes/poll-storage.php:183
+#: admin/poll-admin.php:113 admin/poll-admin.php:197 api/poll-api.php:41
+#: api/poll-api.php:61 api/poll-api.php:64 api/poll-api.php:75
+#: classes/poll-storage.php:201
 msgid "Invalid poll parameters."
 msgstr "Parámetros de la encuesta no válidos."
 
@@ -269,7 +273,7 @@ msgstr "Ajustes"
 msgid "Settings saved."
 msgstr "Ajustes guardados."
 
-#: admin/poll-admin.php:170 admin/poll-type.php:144
+#: admin/poll-admin.php:170 admin/poll-type.php:145
 msgid "Not set"
 msgstr "Sin definir"
 
@@ -290,8 +294,8 @@ msgid ""
 "How often the poll modal can reappear on the same browser. Not set allows it "
 "to reappear without an interval."
 msgstr ""
-"Frecuencia con la que la ventana emergente de la encuesta puede reaparecer en "
-"el mismo navegador. La opción Sin definir permite que reaparezca sin "
+"Frecuencia con la que la ventana emergente de la encuesta puede reaparecer "
+"en el mismo navegador. La opción Sin definir permite que reaparezca sin "
 "intervalo."
 
 #: admin/poll-admin.php:177
@@ -300,8 +304,8 @@ msgstr "Selecciona el tamaño de la miniatura"
 
 #: admin/poll-admin.php:177
 msgid ""
-"WordPress image size used for poll answers. A larger file does not change its "
-"display size; adjust your CSS if needed."
+"WordPress image size used for poll answers. A larger file does not change "
+"its display size; adjust your CSS if needed."
 msgstr ""
 "Tamaño de imagen de WordPress utilizado en las respuestas de las encuestas. "
 "Un archivo más grande no cambia su tamaño de visualización; ajusta tu CSS si "
@@ -316,9 +320,9 @@ msgid ""
 "Disables the default poll stylesheet so your theme can provide all styles. "
 "You can also keep it enabled and override the CSS variables shown in Help."
 msgstr ""
-"Desactiva la hoja de estilos predeterminada de las encuestas para que tu tema "
-"proporcione todos los estilos. También puedes mantenerla activada y modificar "
-"las variables CSS que se muestran en la ayuda."
+"Desactiva la hoja de estilos predeterminada de las encuestas para que tu "
+"tema proporcione todos los estilos. También puedes mantenerla activada y "
+"modificar las variables CSS que se muestran en la ayuda."
 
 #: admin/poll-admin.php:182
 msgid "Data on uninstall"
@@ -342,9 +346,9 @@ msgstr ""
 
 #: admin/poll-admin.php:183
 msgid ""
-"When you delete this plugin, all Onyx polls, answers, votes and settings will "
-"be permanently deleted. This cannot be undone. Other posts, pages and media "
-"will be preserved. Deactivation does not delete data."
+"When you delete this plugin, all Onyx polls, answers, votes and settings "
+"will be permanently deleted. This cannot be undone. Other posts, pages and "
+"media will be preserved. Deactivation does not delete data."
 msgstr ""
 "Al borrar este plugin, todas las encuestas, respuestas, votos y ajustes de "
 "Onyx se borrarán permanentemente. Esta acción no se puede deshacer. Se "
@@ -362,18 +366,19 @@ msgstr "No tienes permiso para cambiar estos ajustes."
 #: admin/poll-admin.php:204
 msgid ""
 "Confirm that you understand the permanent deletion warning before saving."
-msgstr "Confirma que entiendes el aviso de borrado permanente antes de guardar."
+msgstr ""
+"Confirma que entiendes el aviso de borrado permanente antes de guardar."
 
-#: admin/poll-block.php:9 admin/poll-type.php:23 admin/poll-widget.php:28
-#: admin/poll-widget.php:58
+#: admin/poll-block.php:9 admin/poll-type.php:24 admin/poll-widget.php:29
+#: admin/poll-widget.php:59
 msgid "Poll"
 msgstr "Encuesta"
 
-#: admin/poll-block.php:10 admin/poll-widget.php:62
+#: admin/poll-block.php:10 admin/poll-widget.php:63
 msgid "Style"
 msgstr "Estilo"
 
-#: admin/poll-block.php:10 admin/poll-widget.php:98
+#: admin/poll-block.php:10 admin/poll-widget.php:99
 msgid "Bar style"
 msgstr "Estilo de barras"
 
@@ -381,11 +386,11 @@ msgstr "Estilo de barras"
 msgid "Twitter"
 msgstr "Twitter"
 
-#: admin/poll-block.php:11 classes/poll-helpers.php:93
+#: admin/poll-block.php:11 classes/poll-helpers.php:99
 msgid "votes"
 msgstr "votos"
 
-#: admin/poll-block.php:12 classes/poll-helpers.php:92
+#: admin/poll-block.php:12 classes/poll-helpers.php:98
 msgctxt "vote count noun"
 msgid "vote"
 msgstr "voto"
@@ -448,19 +453,18 @@ msgstr "Zona horaria del sitio"
 msgid "Last attempt"
 msgstr "Último intento"
 
-# Contexto: ruta HTTP de la API REST, no una variable de programación.
 #: admin/poll-settings-help.php:21
 msgid "Plugin REST endpoint"
 msgstr "Ruta REST del plugin"
 
-#: admin/poll-settings-help.php:24 classes/poll-cron.php:79
+#: admin/poll-settings-help.php:24 classes/poll-cron.php:80
 msgid ""
 "Onyx Poll checks expired polls every hour. WP-Cron depends on site visits "
 "unless your server runs it externally. Poll voting also checks the deadline "
 "immediately."
 msgstr ""
-"Onyx Poll comprueba las encuestas caducadas cada hora. WP-Cron depende de las "
-"visitas al sitio, a menos que tu servidor lo ejecute externamente. La "
+"Onyx Poll comprueba las encuestas caducadas cada hora. WP-Cron depende de "
+"las visitas al sitio, a menos que tu servidor lo ejecute externamente. La "
 "votación también comprueba la fecha de cierre inmediatamente."
 
 #: admin/poll-settings-help.php:25
@@ -468,8 +472,8 @@ msgid ""
 "This version starts recording executions after the update. No earlier "
 "execution history is available."
 msgstr ""
-"Esta versión empieza a registrar las ejecuciones después de la actualización. "
-"No hay un historial de ejecuciones anteriores."
+"Esta versión empieza a registrar las ejecuciones después de la "
+"actualización. No hay un historial de ejecuciones anteriores."
 
 #: admin/poll-settings-help.php:27
 msgid ""
@@ -509,21 +513,21 @@ msgid ""
 msgstr ""
 "La migración comienza al activar el plugin o en la siguiente solicitud a "
 "WordPress después de actualizar un plugin activo. Copia las encuestas en "
-"lotes de 50 por solicitud que se pueden reanudar; una encuesta necesaria para "
-"un bloque, shortcode, widget o ventana emergente se importa bajo demanda. No "
-"se necesita una importación manual ni instalar ACF."
+"lotes de 50 por solicitud que se pueden reanudar; una encuesta necesaria "
+"para un bloque, shortcode, widget o ventana emergente se importa bajo "
+"demanda. No se necesita una importación manual ni instalar ACF."
 
 #: admin/poll-settings-help.php:35
 msgid ""
-"Poll IDs, answer order, image references, individual vote counters, dates and "
-"settings are preserved. Repeated migration does not overwrite new votes. Old "
-"custom fields are kept, but new votes and edits are saved only in the plugin "
-"tables."
+"Poll IDs, answer order, image references, individual vote counters, dates "
+"and settings are preserved. Repeated migration does not overwrite new votes. "
+"Old custom fields are kept, but new votes and edits are saved only in the "
+"plugin tables."
 msgstr ""
 "Se conservan los ID de las encuestas, el orden de las respuestas, las "
-"referencias de las imágenes, los contadores de votos individuales, las fechas "
-"y los ajustes. Repetir la migración no sobrescribe los votos nuevos. Se "
-"conservan los campos personalizados antiguos, pero los nuevos votos y "
+"referencias de las imágenes, los contadores de votos individuales, las "
+"fechas y los ajustes. Repetir la migración no sobrescribe los votos nuevos. "
+"Se conservan los campos personalizados antiguos, pero los nuevos votos y "
 "cambios solo se guardan en las tablas del plugin."
 
 #: admin/poll-settings-help.php:37
@@ -544,15 +548,15 @@ msgstr ""
 
 #: admin/poll-settings-help.php:39
 msgid ""
-"Existing plugin blocks, shortcodes and widgets remain compatible. Custom code "
-"that reads or writes ACF poll fields or legacy post metadata, or relies on "
-"ACF forms and hooks, must be adapted to dedicated storage and native forms. "
-"Total votes is now read-only and equals the sum of the answer vote counts; a "
-"different manually entered total will change."
+"Existing plugin blocks, shortcodes and widgets remain compatible. Custom "
+"code that reads or writes ACF poll fields or legacy post metadata, or relies "
+"on ACF forms and hooks, must be adapted to dedicated storage and native "
+"forms. Total votes is now read-only and equals the sum of the answer vote "
+"counts; a different manually entered total will change."
 msgstr ""
 "Los bloques, shortcodes y widgets existentes del plugin siguen siendo "
-"compatibles. El código personalizado que lee o escribe campos de encuestas de "
-"ACF o metadatos antiguos de las entradas, o que depende de formularios y "
+"compatibles. El código personalizado que lee o escribe campos de encuestas "
+"de ACF o metadatos antiguos de las entradas, o que depende de formularios y "
 "ganchos de ACF, debe adaptarse al almacenamiento propio y a los formularios "
 "nativos. El total de votos ahora es de solo lectura y equivale a la suma de "
 "los votos de cada respuesta; un total introducido manualmente que sea "
@@ -572,10 +576,9 @@ msgid ""
 msgstr ""
 "Onyx Poll y la migración funcionan sin ACF. Conserva ACF si tu tema u otros "
 "plugins lo necesitan. Volver a la versión 1.2.0 no copia los nuevos votos ni "
-"los cambios a los campos antiguos, y restaurar una copia de "
-"seguridad descarta los cambios posteriores a esa copia. Mantén una copia de "
-"seguridad actualizada de la base de datos y prueba cualquier reversión por "
-"separado."
+"los cambios a los campos antiguos, y restaurar una copia de seguridad "
+"descarta los cambios posteriores a esa copia. Mantén una copia de seguridad "
+"actualizada de la base de datos y prueba cualquier reversión por separado."
 
 #: admin/poll-settings-help.php:44
 msgid "How do I add a poll to a post?"
@@ -584,8 +587,8 @@ msgstr "¿Cómo añado una encuesta a una entrada?"
 #: admin/poll-settings-help.php:45
 msgid ""
 "Insert the Onyx Poll block, select a poll and choose its style. You can also "
-"use a shortcode: without an ID it shows the latest published poll; with an ID "
-"it shows that specific poll."
+"use a shortcode: without an ID it shows the latest published poll; with an "
+"ID it shows that specific poll."
 msgstr ""
 "Inserta el bloque Onyx Poll, selecciona una encuesta y elige su estilo. "
 "También puedes usar un shortcode: sin ID muestra la encuesta publicada más "
@@ -637,10 +640,10 @@ msgid ""
 "to call wp-cron.php every five minutes. The Onyx task itself remains hourly."
 msgstr ""
 "Un sitio con pocas visitas puede ejecutar WP-Cron con retraso. Comprueba "
-"Salud del sitio de WordPress para detectar errores en los eventos programados "
-"o en el bucle de retorno. Para una ejecución predecible, pide a tu proveedor "
-"de alojamiento que llame a wp-cron.php cada cinco minutos. La tarea de Onyx "
-"sigue ejecutándose cada hora."
+"Salud del sitio de WordPress para detectar errores en los eventos "
+"programados o en el bucle de retorno. Para una ejecución predecible, pide a "
+"tu proveedor de alojamiento que llame a wp-cron.php cada cinco minutos. La "
+"tarea de Onyx sigue ejecutándose cada hora."
 
 #: admin/poll-settings-help.php:58
 msgid ""
@@ -659,9 +662,9 @@ msgstr ""
 
 #: admin/poll-settings-help.php:62
 msgid ""
-"For compatibility, the plugin also keeps a direct hourly expiration endpoint. "
-"It runs only the Onyx check, not other WordPress tasks. Its executions are "
-"identified separately in the status above."
+"For compatibility, the plugin also keeps a direct hourly expiration "
+"endpoint. It runs only the Onyx check, not other WordPress tasks. Its "
+"executions are identified separately in the status above."
 msgstr ""
 "Por compatibilidad, el plugin también conserva una ruta directa para "
 "comprobar la caducidad cada hora. Solo ejecuta la comprobación de Onyx, no "
@@ -678,210 +681,247 @@ msgstr "¿Dónde se almacenan los datos de las encuestas y de los visitantes?"
 
 #: admin/poll-settings-help.php:67
 msgid ""
-"Rules, answers and vote counters use the plugin tables onyx_polls and "
-"onyx_poll_answers, with your WordPress database prefix. WordPress stores poll "
-"titles and publication status. The plugin stores no visitor IP addresses or "
-"usernames; browser cookies remember choices, voting intervals and modal "
-"dismissal."
+"Rules, answers and vote counters use onyx_polls and onyx_poll_answers. "
+"Temporary session limits use onyx_poll_guards. All three tables use your "
+"WordPress database prefix. WordPress stores poll titles and publication "
+"status. The plugin stores no visitor IP addresses or usernames; browser "
+"cookies remember choices, identify anonymous voting sessions and remember "
+"modal dismissal."
 msgstr ""
-"Las reglas, las respuestas y los contadores de votos usan las tablas del "
-"plugin onyx_polls y onyx_poll_answers, con el prefijo de tu base de datos de "
-"WordPress. WordPress almacena los títulos de las encuestas y el estado de "
-"publicación. El plugin no almacena direcciones IP ni nombres de usuario de "
-"los visitantes; las cookies del navegador recuerdan las opciones, los "
-"intervalos de votación y el cierre de la ventana emergente."
+"Las reglas, las respuestas y los contadores de votos usan onyx_polls y "
+"onyx_poll_answers. Los límites temporales de sesión usan onyx_poll_guards. "
+"Las tres tablas usan el prefijo de tu base de datos de WordPress. WordPress "
+"almacena los títulos de las encuestas y el estado de publicación. El plugin "
+"no almacena direcciones IP ni nombres de usuario de los visitantes; las "
+"cookies del navegador recuerdan las opciones, identifican las sesiones "
+"anónimas de votación y recuerdan el cierre de la ventana emergente."
 
 #: admin/poll-settings-help.php:69
-msgid "What happens when I delete the plugin?"
-msgstr "¿Qué ocurre al borrar el plugin?"
+msgid "Can anonymous polls prevent all voting fraud?"
+msgstr ""
+"¿Pueden las encuestas anónimas evitar todo el fraude en las votaciones?"
 
 #: admin/poll-settings-help.php:70
 msgid ""
+"Votes require a signed browser session and a short-lived token. The server "
+"enforces voting intervals and a limit of 10 requests per minute per session. "
+"IP addresses and browser fingerprints are not used. Someone who deletes "
+"every poll cookie or starts another browser session can still vote again; "
+"anonymous polls cannot prove a unique person."
+msgstr ""
+"Los votos requieren una sesión del navegador firmada y un token de corta "
+"duración. El servidor aplica los intervalos de votación y un límite de 10 "
+"solicitudes por minuto y sesión. No se usan direcciones IP ni huellas "
+"digitales del navegador. Quien borre todas las cookies de las encuestas o "
+"inicie otra sesión del navegador podrá volver a votar; las encuestas "
+"anónimas no pueden identificar a una persona de forma única."
+
+#: admin/poll-settings-help.php:72
+msgid "What happens when I delete the plugin?"
+msgstr "¿Qué ocurre al borrar el plugin?"
+
+#: admin/poll-settings-help.php:73
+msgid ""
 "By default, data is kept for reinstallation. If you explicitly select "
-"permanent deletion, uninstall removes the two plugin tables, its own listed "
-"options and posts of type onyxpolls. Other posts and pages are preserved, "
-"including those with poll blocks or shortcodes, as are media files. Legacy "
-"custom fields are preserved. Deactivation never deletes poll data."
+"permanent deletion, uninstall removes the three plugin tables, its own "
+"listed options and posts of type onyxpolls. Other posts and pages are "
+"preserved, including those with poll blocks or shortcodes, as are media "
+"files. Legacy custom fields are preserved. Deactivation never deletes poll "
+"data."
 msgstr ""
 "Por defecto, los datos se conservan para la reinstalación. Si seleccionas "
-"explícitamente el borrado permanente, la desinstalación borra las dos tablas "
-"del plugin, sus propias opciones enumeradas y las entradas del tipo "
+"explícitamente el borrado permanente, la desinstalación borra las tres "
+"tablas del plugin, sus propias opciones enumeradas y las entradas del tipo "
 "onyxpolls. Se conservan las demás entradas y páginas, incluidas las que "
 "contienen bloques o shortcodes de encuestas, así como los archivos "
-"multimedia. Se conservan los campos personalizados antiguos. La desactivación "
-"nunca borra los datos de las encuestas."
+"multimedia. Se conservan los campos personalizados antiguos. La "
+"desactivación nunca borra los datos de las encuestas."
 
-#: admin/poll-type.php:24
+#: admin/poll-type.php:25
 msgid "Polls"
 msgstr "Encuestas"
 
-#: admin/poll-type.php:51
+#: admin/poll-type.php:52
 msgid "All polls"
 msgstr "Todas las encuestas"
 
-#: admin/poll-type.php:52
+#: admin/poll-type.php:53
 msgid "Add new"
 msgstr "Añadir nueva"
 
-#: admin/poll-type.php:53
+#: admin/poll-type.php:54
 msgid "Add new poll"
 msgstr "Añadir nueva encuesta"
 
-#: admin/poll-type.php:54
+#: admin/poll-type.php:55
 msgid "Edit poll"
 msgstr "Editar encuesta"
 
-#: admin/poll-type.php:55
+#: admin/poll-type.php:56
 msgid "New poll"
 msgstr "Nueva encuesta"
 
-#: admin/poll-type.php:56
+#: admin/poll-type.php:57
 msgid "View poll"
 msgstr "Ver encuesta"
 
-#: admin/poll-type.php:57
+#: admin/poll-type.php:58
 msgid "Search polls"
 msgstr "Buscar encuestas"
 
-#: admin/poll-type.php:58
+#: admin/poll-type.php:59
 msgid "No polls found"
 msgstr "No se han encontrado encuestas"
 
-#: admin/poll-type.php:59
+#: admin/poll-type.php:60
 msgid "No polls found in Trash"
 msgstr "No se han encontrado encuestas en la papelera"
 
-#: admin/poll-type.php:60
+#: admin/poll-type.php:61
 msgid "Parent poll:"
 msgstr "Encuesta superior:"
 
-#: admin/poll-type.php:67
+#: admin/poll-type.php:68
 msgid "Create and manage polls."
 msgstr "Crea y gestiona encuestas."
 
-#: admin/poll-type.php:96
+#: admin/poll-type.php:97
 msgid "ID"
 msgstr "ID"
 
-#: admin/poll-type.php:98
+#: admin/poll-type.php:99
 msgid "Modal"
 msgstr "Ventana emergente"
 
-#: admin/poll-type.php:99
+#: admin/poll-type.php:100
 msgid "Status"
 msgstr "Estado"
 
-#: admin/poll-type.php:100
+#: admin/poll-type.php:101
 msgid "End date"
 msgstr "Fecha de cierre"
 
-#: admin/poll-type.php:120
+#: admin/poll-type.php:121
 msgid "Yes"
 msgstr "Sí"
 
-#: admin/poll-type.php:120
+#: admin/poll-type.php:121
 msgid "No"
 msgstr "No"
 
-#: admin/poll-type.php:125
+#: admin/poll-type.php:126
 msgid "Open"
 msgstr "Abierta"
 
-#: admin/poll-widget.php:30
+#: admin/poll-widget.php:31
 msgid "Display an Onyx Poll."
 msgstr "Muestra una encuesta de Onyx Poll."
 
-#: admin/poll-widget.php:53
+#: admin/poll-widget.php:54
 msgid "Title"
 msgstr "Título"
 
-#: admin/poll-widget.php:84
+#: admin/poll-widget.php:85
 msgid "Latest"
 msgstr "Más reciente"
 
-#: admin/poll-widget.php:99
+#: admin/poll-widget.php:100
 msgid "Twitter style"
 msgstr "Estilo de Twitter"
 
+#: api/poll-api.php:44 api/poll-api.php:56 api/poll-api.php:69
+#: api/poll-api.php:72 api/poll-api.php:115 api/poll-api.php:117
+#: classes/poll-storage.php:193
+msgid "This poll does not exist or has expired."
+msgstr "Esta encuesta no existe o ha caducado."
+
 #. translators: %d: Poll ID.
-#: api/poll-api.php:28
+#: api/poll-api.php:49
 #, php-format
 msgid "No poll found with ID %d."
 msgstr "No se ha encontrado ninguna encuesta con el ID %d."
 
-#: api/poll-api.php:45 classes/poll-storage.php:180
-msgid "This poll does not exist or has expired."
-msgstr "Esta encuesta no existe o ha caducado."
-
-#: api/poll-api.php:58
+#: api/poll-api.php:94 classes/poll-security.php:118
 msgid "You have already voted in this poll."
 msgstr "Ya has votado en esta encuesta."
 
-#: api/poll-api.php:58 classes/poll-helpers.php:96
+#: api/poll-api.php:94 classes/poll-helpers.php:102
 msgid "Your vote was submitted successfully."
 msgstr "Tu voto se ha enviado correctamente."
 
-#: classes/poll-cron.php:33 classes/poll-helpers.php:24
-#: classes/poll-helpers.php:28
+#: api/poll-api.php:101 api/poll-api.php:107 classes/poll-cron.php:34
+#: classes/poll-helpers.php:25 classes/poll-helpers.php:31
 msgid "The poll expiration check could not be completed."
 msgstr ""
 "No se ha podido completar la comprobación de caducidad de las encuestas."
 
-#: classes/poll-cron.php:59
+#: classes/poll-cron.php:60
 msgid "Running normally"
 msgstr "Funciona con normalidad"
 
-#: classes/poll-cron.php:60
+#: classes/poll-cron.php:61
 msgid "Awaiting first recorded run"
 msgstr "Esperando la primera ejecución registrada"
 
-#: classes/poll-cron.php:61
+#: classes/poll-cron.php:62
 msgid "Check in progress"
 msgstr "Comprobación en curso"
 
-#: classes/poll-cron.php:62
+#: classes/poll-cron.php:63
 msgid "Scheduled check is overdue"
 msgstr "La comprobación programada se ha retrasado"
 
-#: classes/poll-cron.php:63
+#: classes/poll-cron.php:64
 msgid "Last check failed"
 msgstr "La última comprobación ha fallado"
 
-#: classes/poll-cron.php:64
+#: classes/poll-cron.php:65
 msgid "Event is not scheduled"
 msgstr "El evento no está programado"
 
-#: classes/poll-cron.php:70
+#: classes/poll-cron.php:71
 msgid "Onyx Poll scheduled checks"
 msgstr "Comprobaciones programadas de Onyx Poll"
 
-#: classes/poll-cron.php:80
+#: classes/poll-cron.php:81
 msgid "View poll cron status"
 msgstr "Ver el estado del cron de las encuestas"
 
-#: classes/poll-helpers.php:91
+#: classes/poll-helpers.php:97
 msgid "Vote"
 msgstr "Votar"
 
-#: classes/poll-helpers.php:94
+#: classes/poll-helpers.php:100
 msgid "View results"
 msgstr "Ver resultados"
 
-#: classes/poll-helpers.php:97
+#: classes/poll-helpers.php:103
 msgid "Your vote could not be submitted. Try again."
 msgstr "No se ha podido enviar tu voto. Inténtalo de nuevo."
 
-#: classes/poll-storage.php:194
+#: classes/poll-helpers.php:104 classes/poll-security.php:70
+#: classes/poll-security.php:75 classes/poll-storage.php:196
+msgid "Refresh the page before voting."
+msgstr "Recarga la página antes de votar."
+
+#: classes/poll-security.php:88 classes/poll-security.php:90
+#: classes/poll-security.php:95 classes/poll-security.php:100
+#: classes/poll-security.php:108 classes/poll-storage.php:250
+msgid "Unable to save poll data. Please try again."
+msgstr "No se han podido guardar los datos de la encuesta. Inténtalo de nuevo."
+
+#: classes/poll-security.php:104
+msgid "Too many voting requests. Try again shortly."
+msgstr ""
+"Demasiadas solicitudes de votación. Inténtalo de nuevo en unos instantes."
+
+#: classes/poll-storage.php:212
 msgid ""
 "This poll changed while you were editing it. Reload the page before saving "
 "again."
 msgstr ""
 "Esta encuesta ha cambiado mientras la editabas. Recarga la página antes de "
 "volver a guardar."
-
-#: classes/poll-storage.php:232
-msgid "Unable to save poll data. Please try again."
-msgstr "No se han podido guardar los datos de la encuesta. Inténtalo de nuevo."
 
 #: onyx-poll.php:86
 msgid "Invalid poll ID."

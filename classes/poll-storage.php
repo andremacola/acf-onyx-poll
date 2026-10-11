@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) { exit; }
 
 class OnyxPollsStorage {
 
-	const DB_VERSION = '1';
+	const DB_VERSION = '2';
 	const SETTINGS = 'onyx_poll_settings';
 	const VERSION = 'onyx_poll_db_version';
 	const MIGRATION = 'onyx_poll_migration_complete';
@@ -31,6 +31,7 @@ class OnyxPollsStorage {
 			$collate = $wpdb->get_charset_collate();
 			$polls = self::table();
 			$answers = self::table(true);
+			$guards = OnyxPollsSecurity::table();
 			dbDelta("CREATE TABLE $polls (
 				poll_id bigint(20) unsigned NOT NULL,
 				limit_vote int(11) unsigned NOT NULL DEFAULT 1,
@@ -55,7 +56,16 @@ class OnyxPollsStorage {
 				PRIMARY KEY  (id),
 				KEY poll_position (poll_id,position)
 			) ENGINE=InnoDB $collate;");
-			foreach (array($polls, $answers) as $table) {
+			dbDelta("CREATE TABLE $guards (
+				guard_key char(64) NOT NULL,
+				poll_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				expires bigint(20) unsigned NOT NULL,
+				hits int(11) unsigned NOT NULL DEFAULT 0,
+				PRIMARY KEY  (guard_key),
+				KEY expiration (expires),
+				KEY poll_id (poll_id)
+			) ENGINE=InnoDB $collate;");
+			foreach (array($polls, $answers, $guards) as $table) {
 				if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($table))) !== $table) {
 					return;
 				}
@@ -156,6 +166,7 @@ class OnyxPollsStorage {
 		};
 		$where = "p.post_type='onyxpolls' AND p.post_status='publish'";
 		if ($id) { $where .= $wpdb->prepare(' AND p.ID=%d', $id); }
+		else { $where .= " AND p.post_password=''"; }
 		if ($modal) { $where .= ' AND ' . $column('modal', '0') . '=1'; }
 		if ($active) {
 			$end = "NULLIF(" . $column('end', 'NULL') . ",'')";
@@ -166,22 +177,29 @@ class OnyxPollsStorage {
 			self::table() . " o ON o.poll_id=p.ID WHERE $where ORDER BY p.post_date DESC,p.ID DESC LIMIT %d", $limit), ARRAY_A);
 		$ids = array();
 		foreach ($rows as $row) {
+			if (!OnyxPollsSecurity::public_poll($row['ID'])) { continue; }
 			if (!$row['imported'] && is_wp_error(self::migrate_poll($row['ID']))) { continue; }
 			$ids[] = (int) $row['ID'];
 		}
 		return $ids;
 	}
 
-	public static function vote($id, $position) {
+	public static function vote($id, $position, $context = array()) {
 		global $wpdb;
-		$wpdb->query('START TRANSACTION');
+		if ($wpdb->query('START TRANSACTION') === false) { return self::rollback(); }
 		$poll = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . self::table() . ' WHERE poll_id=%d FOR UPDATE', $id), ARRAY_A);
-		if (!$poll || get_post_status($id) !== 'publish' || self::expired($poll)) {
+		$post = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->posts WHERE ID=%d FOR UPDATE", $id));
+		if (!$poll || !OnyxPollsSecurity::public_poll($post) || self::expired($poll)) {
 			return self::rollback(__('This poll does not exist or has expired.', 'acf-onyx-poll'));
+		}
+		if ($context) {
+			if (!isset($context['voter'], $context['version']) || (int) $poll['version'] !== $context['version']) { return self::rollback(__('Refresh the page before voting.', 'acf-onyx-poll')); }
+			$guard = OnyxPollsSecurity::reserve_vote($id, (int) $poll['limit_vote'], $context['voter']);
+			if (is_wp_error($guard)) { $wpdb->query('ROLLBACK'); return $guard; }
 		}
 		$updated = $wpdb->query($wpdb->prepare('UPDATE ' . self::table(true) . ' SET votes=votes+1 WHERE poll_id=%d AND position=%d', $id, $position));
 		if ($updated !== 1) { return self::rollback(__('Invalid poll parameters.', 'acf-onyx-poll')); }
-		$wpdb->query('COMMIT');
+		if ($wpdb->query('COMMIT') === false) { return self::rollback(); }
 		return true;
 	}
 
@@ -235,6 +253,7 @@ class OnyxPollsStorage {
 	public static function delete_poll($id) {
 		global $wpdb;
 		if (get_post_type($id) === 'onyxpolls') {
+			$wpdb->delete(OnyxPollsSecurity::table(), array('poll_id' => $id));
 			$wpdb->delete(self::table(true), array('poll_id' => $id));
 			$wpdb->delete(self::table(), array('poll_id' => $id));
 		}

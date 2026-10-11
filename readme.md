@@ -89,6 +89,8 @@ Other posts and pages are preserved, including their blocks and shortcodes refer
 
 Run `wp eval-file tests/integration.php` against a WordPress installation with this plugin loaded. The suite creates temporary tables with a random isolated prefix, checks migration, derived totals, concurrency, REST compatibility, legacy blocks and uninstall isolation, and removes its own fixtures. It never runs destructive uninstall against the site's real tables. The database user needs permission to create and drop temporary fixture tables.
 
+Run `wp eval-file tests/security.php` for isolated REST, CSRF, password protection, browser-session limits, concurrent voting, cache controls and settings-permission checks. Run `npm run test:frontend` for client-side token refresh, plain-permalink URLs, malformed cookies, transport errors and duplicate-click handling.
+
 Run `npm install` and `npm run build` after changing frontend JavaScript or shared CSS to regenerate the shipped bundles. Native admin and block scripts are shipped without a build dependency at runtime.
 
 Run `npm run lint:js` to check JavaScript sources and Node scripts with the project's WordPress ESLint rules. `npm run lint:js:fix` applies automatic formatting corrections. Generated minified files, dependencies, `dist/` and the entire `_svn/` checkout are excluded. The parser supports the syntax already used by the plugin and Node scripts; WordPress and administration globals are declared explicitly.
@@ -107,7 +109,7 @@ Update each `.po` against the template with `msgmerge`, review the translations,
 
 Use the [Brazilian Portuguese guidelines](https://br.wordpress.org/team/handbook/traducao/boas-praticas/), [English style guide](https://make.wordpress.org/docs/style-guide/formatting/text/), [Spanish guide](https://es.wordpress.org/team/handbook/traducciones/guia/), [Dutch style guide](https://nl.wordpress.org/vertaalproces/stijlgids/), and [German style guide](https://de.wordpress.org/team/handbook/polyglots-team/style-guide/) and their locale glossaries. Preserve placeholders, code examples, and product names. Translations still need review and approval by the relevant community editors before becoming official WordPress.org language packs.
 
-The translation updates in 2.0.1 use new source strings. Do not replace a published SVN tag. Import copies in `dist/translations/` use the current source strings; submit them to Translate WordPress after that source version is available there.
+New releases can add or change source strings. Do not replace a published SVN tag. Import copies in `dist/translations/` use the current source strings; submit them to Translate WordPress after that source version is available there.
 
 ## Preparing a WordPress.org release
 
@@ -118,8 +120,8 @@ Requirements: Node.js 18 or newer, the Subversion CLI, GNU gettext, and installe
 For a new release:
 
 ```sh
-npm run release:version -- 2.0.1
-# Add the 2.0.1 changes to the changelog in readme.txt.
+npm run release:version -- 2.0.2
+# Add the 2.0.2 changes to the changelog in readme.txt.
 npm run release
 svn status _svn
 svn diff _svn
@@ -181,6 +183,8 @@ For more customization options, refer to `assets/css/onyx-poll.css`. Add overrid
 
 Onyx Poll stores poll rules in `{prefix}onyx_polls` and answers, image references and vote counters in `{prefix}onyx_poll_answers`. It uses the actual WordPress table prefix, not a hard-coded `wp_`.
 
+`{prefix}onyx_poll_guards` stores keyed hashes, poll IDs, counters and expiry times for anonymous session limits and public cron throttling. It contains no IP addresses, usernames or browser fingerprints. Cron prunes expired rows in bounded batches. Explicit uninstall cleanup includes this table and preserves the same exclusions for unrelated WordPress content.
+
 The total is always calculated from the answer counters. It is read-only in administration and is not stored as a separate counter. Manual edits to individual answer counts remain available. Concurrent votes use atomic increments; saving the administration form preserves votes received while the form was open and reports conflicting edits.
 
 WordPress still stores poll titles and publication status as the `onyxpolls` post type. General settings live in the plugin's own `onyx_poll_settings` option. New poll data is never written to `wp_postmeta`.
@@ -188,6 +192,18 @@ WordPress still stores poll titles and publication status as the `onyxpolls` pos
 Onyx Poll does not store visitor IP addresses or usernames.
 
 Browser cookies remember answer choices, voting intervals, and modal dismissal: `onyx_poll_limit_XX`, `onyx_poll_modal`, and `onyx_poll_choice_XX`.
+
+## Voting security in 2.0.2
+
+Anonymous votes use a signed, HttpOnly browser cookie (`__Host-onyx_poll_voter` on HTTPS, `onyx_poll_voter` on HTTP) with SameSite=Lax. The cookie uses a random identity, not an IP address or fingerprint. HTTPS cookies also use Secure, the host-only prefix and path `/`. Each poll response supplies a short-lived token bound to the identity, poll ID and administrative version; changing the answers invalidates old tokens.
+
+Voting accepts POST only. The request must carry `X-Onyx-Poll-Token` and the same session cookie; foreign or opaque browser origins are rejected. Tokens are fetched at runtime rather than embedded in cached HTML. Poll REST responses send `Cache-Control: private, no-store`, and the frontend also refreshes the token before voting. Custom clients must follow this flow and preserve cookies; built-in blocks, widgets and shortcodes already do so.
+
+Each browser session can submit at most 10 valid voting requests per minute. Poll intervals are reserved under a database lock in the vote transaction, preventing duplicate limited votes from parallel requests or deletion of only the legacy limit cookie. A complete cookie reset, a different browser or automated creation of new sessions can still bypass anonymous identity limits. Unlimited voting keeps the session burst limit while removing the poll interval. These protections cannot establish one unique human and do not replace host-level protection against traffic floods.
+
+Public reads and votes respect WordPress poll passwords. Global settings require `manage_options`; poll editing keeps its existing WordPress permissions. The compatible public cron endpoint is limited to one execution per minute. Expiration updates recheck deadlines so they cannot close a concurrently reopened poll.
+
+The hardening follows the [WordPress guidance on guest nonces](https://developer.wordpress.org/apis/security/nonces/#customize-nonces-for-guests-non-logged-in-users), [OWASP CSRF guidance](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html) and [OWASP API resource limits](https://api-security.owasp.org/editions/2023/en/0xa4-unrestricted-resource-consumption/). The update creates the guards table through the existing schema upgrade without rewriting poll records or reimporting completed migrations.
 
 ## Browser support
 

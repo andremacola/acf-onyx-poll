@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Onyx Poll 2.0.1\n"
+"Project-Id-Version: Onyx Poll 2.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2026-10-11T22:00:48+00:00\n"
-"PO-Revision-Date: 2026-10-11 22:01+0000\n"
+"POT-Creation-Date: 2026-10-11T23:02:10+00:00\n"
+"PO-Revision-Date: 2026-10-11 22:53+0000\n"
 "Last-Translator: Onyx Poll\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
@@ -94,7 +94,7 @@ msgstr "Afbeelding"
 msgid "Answer"
 msgstr "Antwoord"
 
-#: admin/poll-admin.php:57 admin/poll-admin.php:87 admin/poll-type.php:97
+#: admin/poll-admin.php:57 admin/poll-admin.php:87 admin/poll-type.php:98
 msgid "Votes"
 msgstr "Stemmen"
 
@@ -112,11 +112,13 @@ msgstr "Stemmen beperken"
 
 #: admin/poll-admin.php:65
 msgid ""
-"Controls repeat votes using a browser cookie. Unlimited voting allows "
-"unlimited votes."
+"Controls repeat votes per browser session using server-side records. "
+"Unlimited voting removes the poll interval; each session can submit up to 10 "
+"voting requests per minute."
 msgstr ""
-"Beperkt herhaald stemmen met een browsercookie. Met Onbeperkt stemmen kun je "
-"zonder beperking stemmen."
+"Beperkt herhaalde stemmen per browsersessie met records op de server. "
+"Onbeperkt stemmen verwijdert het pollinterval; elke sessie kan maximaal 10 "
+"stemaanvragen per minuut indienen."
 
 #: admin/poll-admin.php:66
 msgid "Results"
@@ -142,16 +144,17 @@ msgstr "Toon het totaal per antwoord als percentage, aantal of beide."
 #: admin/poll-admin.php:69
 #, php-format
 msgid ""
-"Voting closes at this time in the site timezone (%s), even if cron is delayed."
+"Voting closes at this time in the site timezone (%s), even if cron is "
+"delayed."
 msgstr ""
-"Het stemmen sluit op dit tijdstip in de tijdzone van de site (%s), ook als de "
-"cron vertraagd is."
+"Het stemmen sluit op dit tijdstip in de tijdzone van de site (%s), ook als "
+"de cron vertraagd is."
 
 #: admin/poll-admin.php:70
 msgid "Poll end date"
 msgstr "Einddatum van de poll"
 
-#: admin/poll-admin.php:71 admin/poll-block.php:13 classes/poll-helpers.php:95
+#: admin/poll-admin.php:71 admin/poll-block.php:13 classes/poll-helpers.php:101
 msgid "Total votes"
 msgstr "Totaal aantal stemmen"
 
@@ -167,8 +170,8 @@ msgstr "Afbeeldingen inschakelen"
 msgid ""
 "Show an image with each answer. Every answer needs an image when enabled."
 msgstr ""
-"Toon een afbeelding bij elk antwoord. Elk antwoord heeft een afbeelding nodig "
-"als deze optie is ingeschakeld."
+"Toon een afbeelding bij elk antwoord. Elk antwoord heeft een afbeelding "
+"nodig als deze optie is ingeschakeld."
 
 #: admin/poll-admin.php:73
 msgid "Poll modal"
@@ -176,8 +179,8 @@ msgstr "Modal van de poll"
 
 #: admin/poll-admin.php:73
 msgid ""
-"Allow this poll in the site modal. The latest active poll with this option is "
-"used."
+"Allow this poll in the site modal. The latest active poll with this option "
+"is used."
 msgstr ""
 "Sta deze poll toe in de modal van de site. De nieuwste actieve poll met deze "
 "optie wordt gebruikt."
@@ -191,10 +194,10 @@ msgid ""
 "Let visitors view results before the deadline. Expired polls always show "
 "results."
 msgstr ""
-"Laat bezoekers de resultaten vóór de einddatum bekijken. Verlopen polls tonen "
-"altijd de resultaten."
+"Laat bezoekers de resultaten vóór de einddatum bekijken. Verlopen polls "
+"tonen altijd de resultaten."
 
-#: admin/poll-admin.php:75 admin/poll-type.php:125
+#: admin/poll-admin.php:75 admin/poll-type.php:126
 msgid "Expired"
 msgstr "Verlopen"
 
@@ -238,8 +241,9 @@ msgstr "Antwoord verwijderen"
 msgid "Use image"
 msgstr "Afbeelding gebruiken"
 
-#: admin/poll-admin.php:113 admin/poll-admin.php:197 api/poll-api.php:21
-#: api/poll-api.php:38 api/poll-api.php:48 classes/poll-storage.php:183
+#: admin/poll-admin.php:113 admin/poll-admin.php:197 api/poll-api.php:41
+#: api/poll-api.php:61 api/poll-api.php:64 api/poll-api.php:75
+#: classes/poll-storage.php:201
 msgid "Invalid poll parameters."
 msgstr "Ongeldige pollparameters."
 
@@ -268,7 +272,7 @@ msgstr "Instellingen"
 msgid "Settings saved."
 msgstr "Instellingen opgeslagen."
 
-#: admin/poll-admin.php:170 admin/poll-type.php:144
+#: admin/poll-admin.php:170 admin/poll-type.php:145
 msgid "Not set"
 msgstr "Niet ingesteld"
 
@@ -298,8 +302,8 @@ msgstr "Selecteer het thumbnailformaat"
 
 #: admin/poll-admin.php:177
 msgid ""
-"WordPress image size used for poll answers. A larger file does not change its "
-"display size; adjust your CSS if needed."
+"WordPress image size used for poll answers. A larger file does not change "
+"its display size; adjust your CSS if needed."
 msgstr ""
 "WordPress-afbeeldingsformaat voor pollantwoorden. Een groter bestand "
 "verandert de weergavegrootte niet; pas zo nodig je CSS aan."
@@ -340,19 +344,20 @@ msgstr ""
 
 #: admin/poll-admin.php:183
 msgid ""
-"When you delete this plugin, all Onyx polls, answers, votes and settings will "
-"be permanently deleted. This cannot be undone. Other posts, pages and media "
-"will be preserved. Deactivation does not delete data."
+"When you delete this plugin, all Onyx polls, answers, votes and settings "
+"will be permanently deleted. This cannot be undone. Other posts, pages and "
+"media will be preserved. Deactivation does not delete data."
 msgstr ""
-"Als je deze plugin verwijdert, worden alle Onyx-polls, antwoorden, stemmen en "
-"instellingen permanent verwijderd. Dit kan niet ongedaan worden gemaakt. "
-"Andere berichten, pagina's en media blijven behouden. Deactivering verwijdert "
-"geen gegevens."
+"Als je deze plugin verwijdert, worden alle Onyx-polls, antwoorden, stemmen "
+"en instellingen permanent verwijderd. Dit kan niet ongedaan worden gemaakt. "
+"Andere berichten, pagina's en media blijven behouden. Deactivering "
+"verwijdert geen gegevens."
 
 #: admin/poll-admin.php:184
 msgid "I understand that deleting the plugin will permanently erase its data."
 msgstr ""
-"Ik begrijp dat het verwijderen van de plugin de gegevens permanent verwijdert."
+"Ik begrijp dat het verwijderen van de plugin de gegevens permanent "
+"verwijdert."
 
 #: admin/poll-admin.php:194 admin/poll-admin.php:203
 msgid "You are not allowed to change these settings."
@@ -365,16 +370,16 @@ msgstr ""
 "Bevestig dat je de waarschuwing over permanent verwijderen begrijpt voordat "
 "je opslaat."
 
-#: admin/poll-block.php:9 admin/poll-type.php:23 admin/poll-widget.php:28
-#: admin/poll-widget.php:58
+#: admin/poll-block.php:9 admin/poll-type.php:24 admin/poll-widget.php:29
+#: admin/poll-widget.php:59
 msgid "Poll"
 msgstr "Poll"
 
-#: admin/poll-block.php:10 admin/poll-widget.php:62
+#: admin/poll-block.php:10 admin/poll-widget.php:63
 msgid "Style"
 msgstr "Stijl"
 
-#: admin/poll-block.php:10 admin/poll-widget.php:98
+#: admin/poll-block.php:10 admin/poll-widget.php:99
 msgid "Bar style"
 msgstr "Balkstijl"
 
@@ -382,11 +387,11 @@ msgstr "Balkstijl"
 msgid "Twitter"
 msgstr "Twitter"
 
-#: admin/poll-block.php:11 classes/poll-helpers.php:93
+#: admin/poll-block.php:11 classes/poll-helpers.php:99
 msgid "votes"
 msgstr "stemmen"
 
-#: admin/poll-block.php:12 classes/poll-helpers.php:92
+#: admin/poll-block.php:12 classes/poll-helpers.php:98
 msgctxt "vote count noun"
 msgid "vote"
 msgstr "stem"
@@ -454,23 +459,23 @@ msgstr "Laatste poging"
 msgid "Plugin REST endpoint"
 msgstr "REST-endpoint van de plugin"
 
-#: admin/poll-settings-help.php:24 classes/poll-cron.php:79
+#: admin/poll-settings-help.php:24 classes/poll-cron.php:80
 msgid ""
 "Onyx Poll checks expired polls every hour. WP-Cron depends on site visits "
 "unless your server runs it externally. Poll voting also checks the deadline "
 "immediately."
 msgstr ""
 "Onyx Poll controleert elk uur op verlopen polls. WP-Cron is afhankelijk van "
-"sitebezoeken, tenzij je server het extern uitvoert. Bij het stemmen wordt ook "
-"direct de einddatum gecontroleerd."
+"sitebezoeken, tenzij je server het extern uitvoert. Bij het stemmen wordt "
+"ook direct de einddatum gecontroleerd."
 
 #: admin/poll-settings-help.php:25
 msgid ""
 "This version starts recording executions after the update. No earlier "
 "execution history is available."
 msgstr ""
-"Deze versie registreert uitvoeringen vanaf de update. Er is geen geschiedenis "
-"van eerdere uitvoeringen beschikbaar."
+"Deze versie registreert uitvoeringen vanaf de update. Er is geen "
+"geschiedenis van eerdere uitvoeringen beschikbaar."
 
 #: admin/poll-settings-help.php:27
 msgid ""
@@ -516,10 +521,10 @@ msgstr ""
 
 #: admin/poll-settings-help.php:35
 msgid ""
-"Poll IDs, answer order, image references, individual vote counters, dates and "
-"settings are preserved. Repeated migration does not overwrite new votes. Old "
-"custom fields are kept, but new votes and edits are saved only in the plugin "
-"tables."
+"Poll IDs, answer order, image references, individual vote counters, dates "
+"and settings are preserved. Repeated migration does not overwrite new votes. "
+"Old custom fields are kept, but new votes and edits are saved only in the "
+"plugin tables."
 msgstr ""
 "Poll-ID's, de antwoordvolgorde, afbeeldingsverwijzingen, afzonderlijke "
 "stemmentellers, datums en instellingen blijven behouden. Het opnieuw "
@@ -544,18 +549,18 @@ msgstr ""
 
 #: admin/poll-settings-help.php:39
 msgid ""
-"Existing plugin blocks, shortcodes and widgets remain compatible. Custom code "
-"that reads or writes ACF poll fields or legacy post metadata, or relies on "
-"ACF forms and hooks, must be adapted to dedicated storage and native forms. "
-"Total votes is now read-only and equals the sum of the answer vote counts; a "
-"different manually entered total will change."
+"Existing plugin blocks, shortcodes and widgets remain compatible. Custom "
+"code that reads or writes ACF poll fields or legacy post metadata, or relies "
+"on ACF forms and hooks, must be adapted to dedicated storage and native "
+"forms. Total votes is now read-only and equals the sum of the answer vote "
+"counts; a different manually entered total will change."
 msgstr ""
-"Bestaande pluginblokken, shortcodes en widgets blijven compatibel. Aangepaste "
-"code die ACF-pollvelden of oude berichtmetadata leest of schrijft, of "
-"afhankelijk is van ACF-formulieren en hooks, moet worden aangepast aan de "
-"eigen opslag en native formulieren. Het totale aantal stemmen is nu alleen-"
-"lezen en gelijk aan de som van de stemmen per antwoord; een afwijkend "
-"handmatig ingevoerd totaal verandert."
+"Bestaande pluginblokken, shortcodes en widgets blijven compatibel. "
+"Aangepaste code die ACF-pollvelden of oude berichtmetadata leest of "
+"schrijft, of afhankelijk is van ACF-formulieren en hooks, moet worden "
+"aangepast aan de eigen opslag en native formulieren. Het totale aantal "
+"stemmen is nu alleen-lezen en gelijk aan de som van de stemmen per antwoord; "
+"een afwijkend handmatig ingevoerd totaal verandert."
 
 #: admin/poll-settings-help.php:41
 msgid "Can I remove ACF or downgrade after updating?"
@@ -569,11 +574,12 @@ msgid ""
 "into legacy fields, and restoring a backup discards changes made after that "
 "backup. Keep a current database backup and test any rollback separately."
 msgstr ""
-"Onyx Poll en de migratie werken zonder ACF. Behoud ACF als je thema of andere "
-"plugins het nodig hebben. Teruggaan naar 1.2.0 kopieert nieuwe stemmen of "
-"wijzigingen niet terug naar de oude velden. Het herstellen van een back-up "
-"verwijdert wijzigingen die na die back-up zijn gemaakt. Bewaar een actuele "
-"databaseback-up en test elke terugkeer naar een eerdere versie apart."
+"Onyx Poll en de migratie werken zonder ACF. Behoud ACF als je thema of "
+"andere plugins het nodig hebben. Teruggaan naar 1.2.0 kopieert nieuwe "
+"stemmen of wijzigingen niet terug naar de oude velden. Het herstellen van "
+"een back-up verwijdert wijzigingen die na die back-up zijn gemaakt. Bewaar "
+"een actuele databaseback-up en test elke terugkeer naar een eerdere versie "
+"apart."
 
 #: admin/poll-settings-help.php:44
 msgid "How do I add a poll to a post?"
@@ -582,12 +588,12 @@ msgstr "Hoe voeg ik een poll toe aan een bericht?"
 #: admin/poll-settings-help.php:45
 msgid ""
 "Insert the Onyx Poll block, select a poll and choose its style. You can also "
-"use a shortcode: without an ID it shows the latest published poll; with an ID "
-"it shows that specific poll."
+"use a shortcode: without an ID it shows the latest published poll; with an "
+"ID it shows that specific poll."
 msgstr ""
 "Voeg het Onyx Poll-blok in, selecteer een poll en kies de stijl. Je kunt ook "
-"een shortcode gebruiken: zonder ID toont deze de nieuwste gepubliceerde poll; "
-"met ID toont deze die specifieke poll."
+"een shortcode gebruiken: zonder ID toont deze de nieuwste gepubliceerde "
+"poll; met ID toont deze die specifieke poll."
 
 #: admin/poll-settings-help.php:47
 msgid ""
@@ -620,8 +626,8 @@ msgid ""
 "theme CSS. To replace all plugin styles, enable Use custom CSS and provide a "
 "complete stylesheet."
 msgstr ""
-"Laat de standaard stylesheet ingeschakeld om deze variabelen in de CSS van je "
-"thema aan te passen. Schakel Aangepaste CSS gebruiken in en lever een "
+"Laat de standaard stylesheet ingeschakeld om deze variabelen in de CSS van "
+"je thema aan te passen. Schakel Aangepaste CSS gebruiken in en lever een "
 "volledige stylesheet om alle pluginstijlen te vervangen."
 
 #: admin/poll-settings-help.php:56
@@ -635,9 +641,9 @@ msgid ""
 "to call wp-cron.php every five minutes. The Onyx task itself remains hourly."
 msgstr ""
 "Op een site met weinig bezoeken kan WP-Cron te laat worden uitgevoerd. "
-"Controleer de WordPress-sitediagnose op fouten bij geplande gebeurtenissen of "
-"loopbacks. Vraag je hostingprovider om wp-cron.php elke vijf minuten aan te "
-"roepen voor voorspelbare uitvoeringen. De Onyx-taak zelf blijft elk uur "
+"Controleer de WordPress-sitediagnose op fouten bij geplande gebeurtenissen "
+"of loopbacks. Vraag je hostingprovider om wp-cron.php elke vijf minuten aan "
+"te roepen voor voorspelbare uitvoeringen. De Onyx-taak zelf blijft elk uur "
 "draaien."
 
 #: admin/poll-settings-help.php:58
@@ -657,13 +663,14 @@ msgstr ""
 
 #: admin/poll-settings-help.php:62
 msgid ""
-"For compatibility, the plugin also keeps a direct hourly expiration endpoint. "
-"It runs only the Onyx check, not other WordPress tasks. Its executions are "
-"identified separately in the status above."
+"For compatibility, the plugin also keeps a direct hourly expiration "
+"endpoint. It runs only the Onyx check, not other WordPress tasks. Its "
+"executions are identified separately in the status above."
 msgstr ""
 "Voor compatibiliteit behoudt de plugin ook een direct endpoint voor de "
-"uurlijkse verloopcontrole. Dit voert alleen de Onyx-controle uit, niet andere "
-"WordPress-taken. De uitvoeringen worden apart vermeld in de status hierboven."
+"uurlijkse verloopcontrole. Dit voert alleen de Onyx-controle uit, niet "
+"andere WordPress-taken. De uitvoeringen worden apart vermeld in de status "
+"hierboven."
 
 #: admin/poll-settings-help.php:64
 msgid "WordPress documentation: configuring a server scheduler"
@@ -675,207 +682,243 @@ msgstr "Waar worden pollgegevens en bezoekersgegevens opgeslagen?"
 
 #: admin/poll-settings-help.php:67
 msgid ""
-"Rules, answers and vote counters use the plugin tables onyx_polls and "
-"onyx_poll_answers, with your WordPress database prefix. WordPress stores poll "
-"titles and publication status. The plugin stores no visitor IP addresses or "
-"usernames; browser cookies remember choices, voting intervals and modal "
-"dismissal."
+"Rules, answers and vote counters use onyx_polls and onyx_poll_answers. "
+"Temporary session limits use onyx_poll_guards. All three tables use your "
+"WordPress database prefix. WordPress stores poll titles and publication "
+"status. The plugin stores no visitor IP addresses or usernames; browser "
+"cookies remember choices, identify anonymous voting sessions and remember "
+"modal dismissal."
 msgstr ""
-"Regels, antwoorden en stemmentellers gebruiken de plugintabellen onyx_polls "
-"en onyx_poll_answers, met het voorvoegsel van je WordPress-database. "
-"WordPress slaat polltitels en de publicatiestatus op. De plugin slaat geen IP-"
-"adressen of gebruikersnamen van bezoekers op; browsercookies onthouden "
-"keuzes, stemintervallen en het sluiten van de modal."
+"Regels, antwoorden en stemmentellers gebruiken onyx_polls en "
+"onyx_poll_answers. Tijdelijke sessielimieten gebruiken onyx_poll_guards. "
+"Alle drie de tabellen gebruiken het voorvoegsel van je WordPress-database. "
+"WordPress slaat polltitels en de publicatiestatus op. De plugin slaat geen "
+"IP-adressen of gebruikersnamen van bezoekers op; browsercookies onthouden "
+"keuzes, identificeren anonieme stemsessies en onthouden het sluiten van de "
+"modal."
 
 #: admin/poll-settings-help.php:69
-msgid "What happens when I delete the plugin?"
-msgstr "Wat gebeurt er als ik de plugin verwijder?"
+msgid "Can anonymous polls prevent all voting fraud?"
+msgstr "Kunnen anonieme polls alle stemfraude voorkomen?"
 
 #: admin/poll-settings-help.php:70
 msgid ""
+"Votes require a signed browser session and a short-lived token. The server "
+"enforces voting intervals and a limit of 10 requests per minute per session. "
+"IP addresses and browser fingerprints are not used. Someone who deletes "
+"every poll cookie or starts another browser session can still vote again; "
+"anonymous polls cannot prove a unique person."
+msgstr ""
+"Stemmen vereisen een ondertekende browsersessie en een token met beperkte "
+"geldigheid. De server handhaaft stemintervallen en een limiet van 10 "
+"aanvragen per minuut per sessie. IP-adressen en browserfingerprints worden "
+"niet gebruikt. Iemand die alle pollcookies verwijdert of een andere "
+"browsersessie start, kan opnieuw stemmen; anonieme polls kunnen een persoon "
+"niet uniek identificeren."
+
+#: admin/poll-settings-help.php:72
+msgid "What happens when I delete the plugin?"
+msgstr "Wat gebeurt er als ik de plugin verwijder?"
+
+#: admin/poll-settings-help.php:73
+msgid ""
 "By default, data is kept for reinstallation. If you explicitly select "
-"permanent deletion, uninstall removes the two plugin tables, its own listed "
-"options and posts of type onyxpolls. Other posts and pages are preserved, "
-"including those with poll blocks or shortcodes, as are media files. Legacy "
-"custom fields are preserved. Deactivation never deletes poll data."
+"permanent deletion, uninstall removes the three plugin tables, its own "
+"listed options and posts of type onyxpolls. Other posts and pages are "
+"preserved, including those with poll blocks or shortcodes, as are media "
+"files. Legacy custom fields are preserved. Deactivation never deletes poll "
+"data."
 msgstr ""
 "Standaard blijven de gegevens behouden voor herinstallatie. Als je expliciet "
-"permanent verwijderen selecteert, verwijdert de de-installatie de twee "
+"permanent verwijderen selecteert, verwijdert de de-installatie de drie "
 "plugintabellen, de opgesomde eigen opties en berichten van het type "
 "onyxpolls. Andere berichten en pagina's blijven behouden, ook die met "
 "pollblokken of shortcodes, evenals mediabestanden. Oude aangepaste velden "
 "blijven behouden. Deactivering verwijdert nooit pollgegevens."
 
-#: admin/poll-type.php:24
+#: admin/poll-type.php:25
 msgid "Polls"
 msgstr "Polls"
 
-#: admin/poll-type.php:51
+#: admin/poll-type.php:52
 msgid "All polls"
 msgstr "Alle polls"
 
-#: admin/poll-type.php:52
+#: admin/poll-type.php:53
 msgid "Add new"
 msgstr "Nieuwe toevoegen"
 
-#: admin/poll-type.php:53
+#: admin/poll-type.php:54
 msgid "Add new poll"
 msgstr "Nieuwe poll toevoegen"
 
-#: admin/poll-type.php:54
+#: admin/poll-type.php:55
 msgid "Edit poll"
 msgstr "Poll bewerken"
 
-#: admin/poll-type.php:55
+#: admin/poll-type.php:56
 msgid "New poll"
 msgstr "Nieuwe poll"
 
-#: admin/poll-type.php:56
+#: admin/poll-type.php:57
 msgid "View poll"
 msgstr "Poll bekijken"
 
-#: admin/poll-type.php:57
+#: admin/poll-type.php:58
 msgid "Search polls"
 msgstr "Polls zoeken"
 
-#: admin/poll-type.php:58
+#: admin/poll-type.php:59
 msgid "No polls found"
 msgstr "Geen polls gevonden"
 
-#: admin/poll-type.php:59
+#: admin/poll-type.php:60
 msgid "No polls found in Trash"
 msgstr "Geen polls gevonden in de prullenbak"
 
-#: admin/poll-type.php:60
+#: admin/poll-type.php:61
 msgid "Parent poll:"
 msgstr "Hoofdpoll:"
 
-#: admin/poll-type.php:67
+#: admin/poll-type.php:68
 msgid "Create and manage polls."
 msgstr "Maak en beheer polls."
 
-#: admin/poll-type.php:96
+#: admin/poll-type.php:97
 msgid "ID"
 msgstr "ID"
 
-#: admin/poll-type.php:98
+#: admin/poll-type.php:99
 msgid "Modal"
 msgstr "Modal"
 
-#: admin/poll-type.php:99
+#: admin/poll-type.php:100
 msgid "Status"
 msgstr "Status"
 
-#: admin/poll-type.php:100
+#: admin/poll-type.php:101
 msgid "End date"
 msgstr "Einddatum"
 
-#: admin/poll-type.php:120
+#: admin/poll-type.php:121
 msgid "Yes"
 msgstr "Ja"
 
-#: admin/poll-type.php:120
+#: admin/poll-type.php:121
 msgid "No"
 msgstr "Nee"
 
-#: admin/poll-type.php:125
+#: admin/poll-type.php:126
 msgid "Open"
 msgstr "Open"
 
-#: admin/poll-widget.php:30
+#: admin/poll-widget.php:31
 msgid "Display an Onyx Poll."
 msgstr "Toon een Onyx Poll."
 
-#: admin/poll-widget.php:53
+#: admin/poll-widget.php:54
 msgid "Title"
 msgstr "Titel"
 
-#: admin/poll-widget.php:84
+#: admin/poll-widget.php:85
 msgid "Latest"
 msgstr "Nieuwste"
 
-#: admin/poll-widget.php:99
+#: admin/poll-widget.php:100
 msgid "Twitter style"
 msgstr "Twitter-stijl"
 
+#: api/poll-api.php:44 api/poll-api.php:56 api/poll-api.php:69
+#: api/poll-api.php:72 api/poll-api.php:115 api/poll-api.php:117
+#: classes/poll-storage.php:193
+msgid "This poll does not exist or has expired."
+msgstr "Deze poll bestaat niet of is verlopen."
+
 #. translators: %d: Poll ID.
-#: api/poll-api.php:28
+#: api/poll-api.php:49
 #, php-format
 msgid "No poll found with ID %d."
 msgstr "Geen poll gevonden met ID %d."
 
-#: api/poll-api.php:45 classes/poll-storage.php:180
-msgid "This poll does not exist or has expired."
-msgstr "Deze poll bestaat niet of is verlopen."
-
-#: api/poll-api.php:58
+#: api/poll-api.php:94 classes/poll-security.php:118
 msgid "You have already voted in this poll."
 msgstr "Je hebt al gestemd in deze poll."
 
-#: api/poll-api.php:58 classes/poll-helpers.php:96
+#: api/poll-api.php:94 classes/poll-helpers.php:102
 msgid "Your vote was submitted successfully."
 msgstr "Je stem is succesvol verzonden."
 
-#: classes/poll-cron.php:33 classes/poll-helpers.php:24
-#: classes/poll-helpers.php:28
+#: api/poll-api.php:101 api/poll-api.php:107 classes/poll-cron.php:34
+#: classes/poll-helpers.php:25 classes/poll-helpers.php:31
 msgid "The poll expiration check could not be completed."
 msgstr "De verloopcontrole van polls kon niet worden voltooid."
 
-#: classes/poll-cron.php:59
+#: classes/poll-cron.php:60
 msgid "Running normally"
 msgstr "Werkt normaal"
 
-#: classes/poll-cron.php:60
+#: classes/poll-cron.php:61
 msgid "Awaiting first recorded run"
 msgstr "Wacht op de eerste geregistreerde uitvoering"
 
-#: classes/poll-cron.php:61
+#: classes/poll-cron.php:62
 msgid "Check in progress"
 msgstr "Controle wordt uitgevoerd"
 
-#: classes/poll-cron.php:62
+#: classes/poll-cron.php:63
 msgid "Scheduled check is overdue"
 msgstr "Geplande controle is te laat"
 
-#: classes/poll-cron.php:63
+#: classes/poll-cron.php:64
 msgid "Last check failed"
 msgstr "Laatste controle is mislukt"
 
-#: classes/poll-cron.php:64
+#: classes/poll-cron.php:65
 msgid "Event is not scheduled"
 msgstr "Gebeurtenis is niet gepland"
 
-#: classes/poll-cron.php:70
+#: classes/poll-cron.php:71
 msgid "Onyx Poll scheduled checks"
 msgstr "Geplande controles van Onyx Poll"
 
-#: classes/poll-cron.php:80
+#: classes/poll-cron.php:81
 msgid "View poll cron status"
 msgstr "Cronstatus van polls bekijken"
 
-#: classes/poll-helpers.php:91
+#: classes/poll-helpers.php:97
 msgid "Vote"
 msgstr "Stemmen"
 
-#: classes/poll-helpers.php:94
+#: classes/poll-helpers.php:100
 msgid "View results"
 msgstr "Resultaten bekijken"
 
-#: classes/poll-helpers.php:97
+#: classes/poll-helpers.php:103
 msgid "Your vote could not be submitted. Try again."
 msgstr "Je stem kon niet worden verzonden. Probeer het opnieuw."
 
-#: classes/poll-storage.php:194
+#: classes/poll-helpers.php:104 classes/poll-security.php:70
+#: classes/poll-security.php:75 classes/poll-storage.php:196
+msgid "Refresh the page before voting."
+msgstr "Vernieuw de pagina voordat je stemt."
+
+#: classes/poll-security.php:88 classes/poll-security.php:90
+#: classes/poll-security.php:95 classes/poll-security.php:100
+#: classes/poll-security.php:108 classes/poll-storage.php:250
+msgid "Unable to save poll data. Please try again."
+msgstr "Pollgegevens kunnen niet worden opgeslagen. Probeer het opnieuw."
+
+#: classes/poll-security.php:104
+msgid "Too many voting requests. Try again shortly."
+msgstr "Te veel stemaanvragen. Probeer het zo opnieuw."
+
+#: classes/poll-storage.php:212
 msgid ""
 "This poll changed while you were editing it. Reload the page before saving "
 "again."
 msgstr ""
-"Deze poll is gewijzigd terwijl je deze bewerkte. Herlaad de pagina voordat je "
-"opnieuw opslaat."
-
-#: classes/poll-storage.php:232
-msgid "Unable to save poll data. Please try again."
-msgstr "Pollgegevens kunnen niet worden opgeslagen. Probeer het opnieuw."
+"Deze poll is gewijzigd terwijl je deze bewerkte. Herlaad de pagina voordat "
+"je opnieuw opslaat."
 
 #: onyx-poll.php:86
 msgid "Invalid poll ID."

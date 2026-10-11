@@ -29,6 +29,7 @@ class OnyxPollsCron {
 		update_option(self::OPTION, $record, false);
 		try {
 			$result = OnyxPolls::expire_polls();
+			if (!is_wp_error($result)) { OnyxPollsSecurity::cleanup(); }
 		} catch (Throwable $error) {
 			$result = new WP_Error('onyx_cron_failed', __('The poll expiration check could not be completed.', 'acf-onyx-poll'), array('status' => 500));
 		}
