@@ -124,7 +124,7 @@ class onyxAcfPoll {
 		// poll template
 		poll.innerHTML = `
 			<div id='${this.name.wrapper}-${data.id}' class="${this.name.wrapper}">
-				<p class='${this.name.question}'>${data.title}</p>
+				<p class='${this.name.question}'>${this.escapeHTML(data.title)}</p>
 				<ul class='${this.name.list}'></ul>
 				<div class="${this.name.footer}">
 					<p class='${this.name.message}'></p>
@@ -153,8 +153,8 @@ class onyxAcfPoll {
 			choiceEl.setAttribute('data-choice', choice.option);
 			choiceEl.setAttribute('data-poll', data.id);
 			choiceEl.innerHTML = `
-				${data.has_image ? `<span class='image'><img loading='lazy' src='${choice.image}' title='${choice.answer}' alt='${choice.answer}'></span>` : ``}
-				<span class='answer'>${choice.answer}</span>`;
+				${data.has_image ? `<span class='image'><img loading='lazy' src='${this.escapeHTML(choice.image)}' title='${this.escapeHTML(choice.answer)}' alt='${this.escapeHTML(choice.answer)}'></span>` : ``}
+				<span class='answer'>${this.escapeHTML(choice.answer)}</span>`;
 			if (! data.expired && ! cookieLimit) {
 				choiceEl.className = this.name.choice; // enable onclick event
 			}
@@ -190,8 +190,8 @@ class onyxAcfPoll {
 		// view poll results button and vote poll button (back from results)
 		if (this.element.viewButton) {
 			for (let i = 0; i < this.element.viewButton.length; i++) {
-				this.element.viewButton[i].onclick = () => this.showResults(event, false);
-				this.element.voteButton[i].onclick = () => this.showPoll();
+				this.element.viewButton[i].onclick = (event) => this.showResults(event, false);
+				this.element.voteButton[i].onclick = (event) => this.showPoll(event);
 			}
 		}
 
@@ -204,6 +204,9 @@ class onyxAcfPoll {
 	submitVote(event) {
 		event.preventDefault();
 		const t = event.currentTarget;
+		if (! t) {
+			return;
+		}
 		const poll = t.closest(`.${this.name.parent}`);
 		this.togglePollLoader(poll, false);
 		this.requestVote(t)
@@ -242,13 +245,19 @@ class onyxAcfPoll {
 		}
 		poll = (event) ? event.target.closest(`.${this.name.parent}`) : poll;
 		const res = this.response[poll.getAttribute('data-poll')];
+		if (! res || ! res.results) {
+			return;
+		}
 
 		poll.classList.add('view');
 		poll.querySelector(`.${this.name.total} span`).textContent = res.results.total;
 
 		const choosedChoice = this.getCookie(`onyx_poll_choice_${res.id}`);
 		if (choosedChoice) {
-			poll.querySelector(`li[data-choice="${choosedChoice}"]`).classList.add('choosed');
+			const chosen = poll.querySelector(`li[data-choice="${choosedChoice}"]`);
+			if (chosen) {
+				chosen.classList.add('choosed');
+			}
 		}
 
 		const choices = poll.querySelectorAll(`.${this.name.list} li`);
@@ -271,7 +280,7 @@ class onyxAcfPoll {
 		});
 	}
 
-	showPoll() {
+	showPoll(event) {
 		event.preventDefault();
 		const t = event.target;
 		const poll = t.closest(`.${this.name.parent}`);
@@ -306,6 +315,12 @@ class onyxAcfPoll {
 		poll.classList.add(addClass);
 	}
 
+	escapeHTML(value) {
+		const element = document.createElement('span');
+		element.textContent = String(value == null ? '' : value);
+		return element.innerHTML.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+	}
+
 	getCookie(cname) {
 		var name = cname + '=';
 		var decodedCookie = decodeURIComponent(document.cookie);
@@ -335,12 +350,9 @@ class onyxAcfPoll {
 	}
 }
 
-// Initialize dynamic block preview (editor).
-var initializePoll = function() {
-	new onyxAcfPoll();
-};
-if (window.acf) {
-	window.acf.addAction('render_block_preview/type=acf-onyx-poll', initializePoll);
+// Native blocks render their preview through the editor module.
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', () => new onyxAcfPoll());
 } else {
 	new onyxAcfPoll();
 }

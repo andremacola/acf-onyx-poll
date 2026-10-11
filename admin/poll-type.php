@@ -31,13 +31,14 @@ class OnyxPollsCpt {
 
 		// Register post type and admin config
 		$this->register_cpt();
-		$this->register_config_admin();
+
 
 		// Setup admin columns
 		add_filter("manage_{$this->slug}_posts_columns", array($this, 'manage_columns'));
 		add_action("manage_{$this->slug}_posts_custom_column", array($this, 'custom_columns'), 10, 2);
 		add_filter("manage_edit-{$this->slug}_sortable_columns", array($this, 'sortable_columns'));
 		add_action('pre_get_posts', array($this, 'orderby_columns'));
+		add_filter('posts_clauses', array($this, 'sort_clauses'), 10, 2);
 	}
 
 	/**
@@ -86,22 +87,6 @@ class OnyxPollsCpt {
 	}
 
 	/**
-	 * Create settings page
-	 */
-	public function register_config_admin() {
-		if(function_exists('acf_add_options_page')) {
-			acf_add_options_page(array(
-				'page_title'  => __('Poll Settings', 'acf-onyx-poll'),
-				'menu_title'  => __('Settings', 'acf-onyx-poll'),
-				'menu_slug'   => 'onyx-poll-settings',
-				'capability'  => 'edit_posts',
-				'parent_slug' => 'edit.php?post_type=' . $this->slug,
-				'redirect'    => false
-			));
-		}
-	}
-
-	/**
 	 * Customize admin columns
 	 */
 	public function manage_columns($columns) {
@@ -121,25 +106,27 @@ class OnyxPollsCpt {
 	 * Edit columns output
 	 */
 	public function custom_columns($column, $post_id) {
+		$poll = OnyxPollsStorage::get($post_id);
+		if (!$poll) { return; }
 		switch($column) {
 			case 'id':
 				echo "<span>[onyx-poll id='$post_id']</span>";
 				break;
 			case 'votes':
-				echo get_field('onyx_poll_total', $post_id);
+				echo $poll['total'];
 				break;
 			case 'modal':
-				$modal  = get_field('onyx_poll_modal', $post_id);
+				$modal  = $poll['modal'];
 				$status = ($modal) ? "<span class='green' title='Yes'>✔</span>" : "<span class='red' title='No'>✘</span>";
 				echo $status;
 				break;
 			case 'status':
-				$expired = get_field('onyx_poll_expired', $post_id);
+				$expired = OnyxPollsStorage::expired($poll);
 				$status  = (!$expired) ? "<span class='green' title='Published'>✔</span>" : "<span class='red' title='expired'>✘</span>";
 				echo $status;
 				break;
 			case 'end':
-				$date = get_field('onyx_poll_end', $post_id);
+				$date = $poll['end'];
 				echo $this->format_date($date);
 				break;
 		}
@@ -151,7 +138,7 @@ class OnyxPollsCpt {
 	public function format_date($date) {
 		if ($date) {
 			$date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-			return $date->format('d/m/Y');
+			if ($date) { return $date->format('d/m/Y'); }
 		}
 
 		return __('Not set', 'acf-onyx-poll');
@@ -172,23 +159,25 @@ class OnyxPollsCpt {
 	 * Sort query columns
 	 */
 	public function orderby_columns($query) {
-		if(!is_admin())
-			return;
+		if (!is_admin() || !$query->is_main_query() || $query->get('post_type') !== 'onyxpolls') { return; }
+		if ($query->get('orderby') === 'id') { $query->set('orderby', 'ID'); }
 
+	}
+
+	public function sort_clauses($clauses, $query) {
+		global $wpdb;
+		if (!is_admin() || !$query->is_main_query() || $query->get('post_type') !== 'onyxpolls') { return $clauses; }
 		$orderby = $query->get('orderby');
-
-		if ('id' == $orderby) {
-			$query->set('orderby', 'ID');
-  		} else if ('votes' == $orderby) {
-			$query->set('meta_key', 'onyx_poll_total');
-			$query->set('orderby', 'meta_value_num');
-  		} else if ('modal' == $orderby) {
-			$query->set('meta_key', 'onyx_poll_modal');
-			$query->set('orderby', 'meta_value_num');
-  		} else if ('status' == $orderby) {
-			$query->set('meta_key', 'onyx_poll_expired');
-			$query->set('orderby', 'meta_value_num');
-  		}
+		if (!in_array($orderby, array('votes', 'modal', 'status'), true)) { return $clauses; }
+		$clauses['join'] .= ' LEFT JOIN ' . OnyxPollsStorage::table() . " onyx_sort ON onyx_sort.poll_id=$wpdb->posts.ID";
+		if ($orderby === 'votes') {
+			$column = '(SELECT COALESCE(SUM(votes),0) FROM ' . OnyxPollsStorage::table(true) . " WHERE poll_id=$wpdb->posts.ID)";
+		} elseif ($orderby === 'status') {
+			$column = $wpdb->prepare('(onyx_sort.expired=1 OR (onyx_sort.end IS NOT NULL AND onyx_sort.end<=%s))', current_time('mysql'));
+		} else { $column = 'onyx_sort.modal'; }
+		$order = strtoupper($query->get('order')) === 'ASC' ? 'ASC' : 'DESC';
+		$clauses['orderby'] = "$column $order, $wpdb->posts.ID $order";
+		return $clauses;
 	}
 
 }

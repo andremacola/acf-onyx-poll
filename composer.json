@@ -1,7 +1,12 @@
 {
   "name": "onyx/acf-onyx-poll",
   "description": "",
-  "keywords": ["wordpress", "plugin", "onyx", "poll"],
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "onyx",
+    "poll"
+  ],
   "homepage": "https://github.com/andremacola/onyx-poll",
   "authors": [
     {
@@ -11,6 +16,6 @@
   ],
   "type": "wordpress-plugin",
   "require": {
-    "php": ">=7.2"
+    "php": ">=7.4"
   }
 }

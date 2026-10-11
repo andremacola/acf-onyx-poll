@@ -18,39 +18,17 @@ Class OnyxPolls {
 	* Update poll status when expire
 	*/
 	public static function expire_polls() {
-		$today = date_i18n('Y-m-d H:i:s');
-		$query = new WP_Query([
-			"post_type"         => "onyxpolls",
-			"no_found_rows"     => true,
-			"posts_per_page"    => 5,
-			"fields"            => 'ids',
-			"meta_query"        => array(
-				"relation"    => "AND",
-				array(
-					"key"      => 'onyx_poll_end',
-					"value"    => $today,
-					"compare"  => "<=",
-					"type"     => "DATETIME"
-				),
-				array(
-					"key"      => 'onyx_poll_expired',
-					"value"    => 1,
-					"compare"  => "!="
-				)
-			)
-		]);
-
-		if ($query->have_posts()) {
-			$response = $query->posts;
-			foreach ($query->posts as $post) {
-				// $post = array("ID" => $post, 'post_status' => 'draft');
-				// wp_update_post($post);
-				update_field('onyx_poll_expired', 1, $post);
+		global $wpdb;
+		$table = OnyxPollsStorage::table();
+		$ids = $wpdb->get_col($wpdb->prepare("SELECT o.poll_id FROM $table o JOIN $wpdb->posts p ON p.ID=o.poll_id WHERE p.post_type='onyxpolls' AND p.post_status='publish' AND o.expired=0 AND o.end IS NOT NULL AND o.end<=%s", current_time('mysql')));
+		if ($wpdb->last_error) { return new WP_Error('onyx_cron_database', __('The poll expiration check could not be completed.', 'acf-onyx-poll'), array('status' => 500)); }
+		if (!$ids) { return null; }
+		foreach ($ids as $id) {
+			if ($wpdb->update($table, array('expired' => 1), array('poll_id' => $id)) === false) {
+				return new WP_Error('onyx_cron_database', __('The poll expiration check could not be completed.', 'acf-onyx-poll'), array('status' => 500));
 			}
-		} else {
-			$response = null;
 		}
-		return $response;
+		return array_map('intval', $ids);
 	}
 
 	/**
@@ -61,38 +39,8 @@ Class OnyxPolls {
 	 * @return $post->ID
 	 */
 	public static function has_polls($noexpired = false, $onlymodal = false) {
-		$args = [
-			'post_type'         => 'onyxpolls',
-			'no_found_rows'     => true,
-			'suppress_filters'  => true,
-			'posts_per_page'    => 1,
-			'fields'            => 'ids',
-			'meta_query'        => array()
-		];
-
-		if ($noexpired) {
-			$args['meta_query'][] = array(
-				array(
-					'key'   => 'onyx_poll_expired',
-					'value'   => '1',
-					'compare' => '!='
-				)
-			);
-		}
-
-		if ($onlymodal) {
-			$args['meta_query'][] = array(
-				array(
-					'key'   => 'onyx_poll_modal',
-					'value' => '1'
-				)
-			);
-		}
-
-		
-
-		$query = new WP_Query($args);
-		return ($query->have_posts()) ? $query->posts[0] : false;
+		$ids = OnyxPollsStorage::ids(0, $noexpired, $onlymodal);
+		return $ids ? $ids[0] : false;
 	}
 
 	/**
@@ -102,18 +50,9 @@ Class OnyxPolls {
 	 */
 	public static function has_poll($id = false) {
 
-		$args = array(
-			'post_type'         => 'onyxpolls',
-			'no_found_rows'     => true,
-			'suppress_filters'  => true,
-			'posts_per_page'    => 1,
-			'fields'            => 'ids'
-		);
-
-		if($id) $args['p'] = (int) $id;
-
-		$query = new WP_Query($args);
-		return ($query->have_posts()) ? $query->posts[0] : false;
+		if ($id) { OnyxPollsStorage::get($id); }
+		$ids = OnyxPollsStorage::ids($id);
+		return $ids ? $ids[0] : false;
 	}
 
 	/**
@@ -125,7 +64,7 @@ Class OnyxPolls {
 			$a = new stdClass();
 			$a->path = $path;
 			$a->url  = plugins_url($path, ACF_ONYX_POLL_FILE);
-			$a->ver  = ACF_ONYX_POLL_VERSION;
+			$a->ver  = ACF_ONYX_POLL_VERSION . '.' . filemtime(ACF_ONYX_POLL_PATH . $path);
 			return $a;
 		}
 		return false;
@@ -137,9 +76,9 @@ Class OnyxPolls {
 	public static function add_assets() {
 		// Include scripts on front end
 		$js = self::get_asset_vars('assets/js/onyx-poll.min.js');
-		wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, false, true);
+		wp_enqueue_script('acf-onyx-poll', $js->url, array(), $js->ver, true);
 
-		if (!get_field('onyx_poll_css', 'options')) {
+		if (!OnyxPollsStorage::settings()['css']) {
 			$css = self::get_asset_vars('assets/css/onyx-poll.min.css');
 			wp_enqueue_style('acf-onyx-poll', $css->url, array(), $css->ver);
 		}
@@ -147,7 +86,7 @@ Class OnyxPolls {
 		wp_localize_script('acf-onyx-poll', 'onyxpoll',
 			array(
 				'apiurl'    => rest_url(),
-				'modaltime' => get_field('onyx_poll_modal_time', 'options'),
+				'modaltime' => OnyxPollsStorage::settings()['modal_time'],
 				'labels' => array(
 					'vote'    => __('Vote', 'acf-onyx-poll'),
 					'votes'   => __('votes', 'acf-onyx-poll'),

@@ -1,53 +1,41 @@
 <?php
-/*
+if (!defined('ABSPATH')) { exit; }
 
-	@ POLL GUTENBERG BLOCKS (NEED REFACTORING)
-
-*/
-
-
-// register a testimonial block.
-add_action('acf/init', function() {
-	acf_register_block_type(array(
-		'name'              => 'acf-onyx-poll',
-		'title'             => __('Onyx Poll', 'acf-onyx-poll'),
-		'description'       => __('Insert a poll in the post', 'acf-onyx-poll'),
-		'render_template'   => plugin_dir_path(__FILE__) . 'block/block.php',
-		'category'          => 'widgets',
-		'icon'              => 'chart-bar',
-		'keywords'          => array('poll', 'enquete', 'onyx'),
-		'mode'              => 'auto',
-		'enqueue_assets'    => function() {
-			add_action('admin_footer', 'OnyxPolls::add_assets');
-		},
-		'supports' => array(
-			'mode' => true,
-			'align' => true,
-		)
-	));
+/** Keep the serialized name so existing posts need no content rewrite. */
+add_action('init', function() {
+	wp_register_script('onyx-poll-block', plugins_url('assets/js/block.js', ACF_ONYX_POLL_FILE),
+		array('wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-api-fetch', 'wp-i18n'), OnyxPolls::get_asset_vars('assets/js/block.js')->ver, true);
+	wp_localize_script('onyx-poll-block', 'onyxPollBlockLabels', array(
+		'Onyx Poll' => __('Onyx Poll', 'acf-onyx-poll'), 'Poll' => __('Poll', 'acf-onyx-poll'),
+		'Style' => __('Style', 'acf-onyx-poll'), 'Bar style' => __('Bar style', 'acf-onyx-poll'), 'Settings' => __('Settings', 'acf-onyx-poll'),
+		'Twitter' => __('Twitter', 'acf-onyx-poll'), 'votes' => __('votes', 'acf-onyx-poll'),
+		'Total votes' => __('Total votes', 'acf-onyx-poll'),
+		'Insert a poll in the post' => __('Insert a poll in the post', 'acf-onyx-poll'),
+		'Select a poll to preview it.' => __('Select a poll to preview it.', 'acf-onyx-poll')));
+	wp_register_style('onyx-poll-editor', plugins_url('assets/css/block-editor.css', ACF_ONYX_POLL_FILE), array(), OnyxPolls::get_asset_vars('assets/css/block-editor.css')->ver);
+	$editor_style = array('onyx-poll-editor');
+	if (!OnyxPollsStorage::settings()['css']) {
+		wp_register_style('onyx-poll-block', plugins_url('assets/css/onyx-poll.css', ACF_ONYX_POLL_FILE), array(), OnyxPolls::get_asset_vars('assets/css/onyx-poll.css')->ver);
+		array_unshift($editor_style, 'onyx-poll-block');
+	}
+	register_block_type('acf/acf-onyx-poll', array(
+		'api_version' => 3, 'title' => __('Onyx Poll', 'acf-onyx-poll'), 'category' => 'widgets', 'icon' => 'chart-bar',
+		'editor_script' => 'onyx-poll-block', 'editor_style' => $editor_style,
+		'attributes' => array('pollId' => array('type' => 'integer', 'default' => 0),
+			'pollStyle' => array('type' => 'string', 'default' => ''), 'data' => array('type' => 'object', 'default' => array()),
+			'id' => array('type' => 'string'), 'name' => array('type' => 'string'), 'mode' => array('type' => 'string')),
+		'supports' => array('align' => true, 'anchor' => true, 'html' => false),
+		'render_callback' => 'onyx_poll_render_block'));
 });
 
-/* customize html return of the blocks object field*/
-add_filter('acf/fields/post_object/result/key=field_5ed174c6b5a8f', 'acf_onyx_poll_object_result', 10, 4);
-function acf_onyx_poll_object_result($title, $post, $field, $post_id) {
-	$title = "<span class='id ref'>[$post->ID]</span> / <span class='title'>$title</span>";
-	return $title;
+function onyx_poll_render_block($attributes) {
+	$data = isset($attributes['data']) && is_array($attributes['data']) ? $attributes['data'] : array();
+	$id = !empty($attributes['pollId']) ? absint($attributes['pollId']) : absint($data['onyx_poll_block_id'] ?? $data['field_5ed174c6b5a8f'] ?? 0);
+	$style = !empty($attributes['pollStyle']) ? $attributes['pollStyle'] : ($data['onyx_poll_block_style'] ?? $data['field_5ed17b7ef8646'] ?? 'standard');
+	$style = $style === 'twitter' ? 'twitter' : 'standard';
+	$classes = 'onyx-poll-block';
+	if (!empty($attributes['align'])) { $classes .= ' align' . sanitize_html_class($attributes['align']); }
+	if (!empty($attributes['className'])) { $classes .= ' ' . $attributes['className']; }
+	$anchor = !empty($attributes['anchor']) ? ' id="' . esc_attr($attributes['anchor']) . '"' : '';
+	return '<div' . $anchor . ' class="' . esc_attr($classes) . '">' . do_shortcode('[onyx-poll id="' . $id . '" class="' . $style . '"]') . '</div>';
 }
-
-/* customize query from blocks post object field */
-add_filter('acf/fields/post_object/quer/key=field_5ed174c6b5a8f', 'acf_onyx_poll_post_object_query', 10, 3);
-function acf_onyx_poll_post_object_query($args, $field, $post) {
-	$args['order']		= 'DESC';
-	$args['orderby']	= 'ID';
-
-	// search by ID
-	$search = !empty($args['s']) ? $args['s'] : false;
-	if($search && is_numeric($search)) {
-		$args['post__in'] = array($search);
-		unset($args['s']);
-	}
-
-	return $args;
-}
-
-?>

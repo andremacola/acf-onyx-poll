@@ -1,257 +1,101 @@
 <?php
-/*
-
-	@ POLL REST API
-	@ Endpoint: /wp/onyx/poll/{route}
-
-*/
+if (!defined('ABSPATH')) { exit; }
 
 class OnyxPollsApi extends WP_REST_Controller {
-
-	/**
-	 * Constructor
-	 */
 	public function __construct() {
 		$this->namespace = 'onyx';
-		$this->field = array(
-			'answers'      => 'onyx_poll_answers',
-			'modal'        => 'onyx_poll_modal',
-			'limit_vote'   => 'onyx_poll_limit_vote',
-			'end'          => 'onyx_poll_end',
-			'total'        => 'onyx_poll_total',
-			'show_results' => 'onyx_poll_show_results',
-			'results'      => 'onyx_poll_results',
-			'expired'      => 'onyx_poll_expired',
-			'has_image'    => 'onyx_poll_images',
-		);
-		$this->message = array(
-			'success'    => __('Vote was submitted successfully', 'acf-onyx-poll'),
-			'error'      => __('Poll vote error, try again', 'acf-onyx-poll'),
-			'invalid'    => __('Invalid poll parameters', 'acf-onyx-poll'),
-			'no_exist'   => __('Non-existent or expired poll', 'acf-onyx-poll'),
-			'no_allowed' => __('You have already voted in this poll', 'acf-onyx-poll'),
-			'no_polls'   => __('No polls founded with ID ', 'acf-onyx-poll')
-		);
-
 		add_action('rest_api_init', array($this, 'register_routes'));
 	}
 
-	/**
-	 * Register API Routes
-	 */
 	public function register_routes() {
-		// list polls
-		register_rest_route($this->namespace, '/polls/list', array(
-			'methods'  => WP_REST_Server::READABLE,
-			'callback' => array($this, 'list'),
-			'permission_callback' => function($req) {
-				return true;
-			}
-		));
-
-		// compute vote
-		register_rest_route($this->namespace, '/polls/vote', array(
-			'methods'  => WP_REST_Server::ALLMETHODS,
-			'callback' => array($this, 'vote'),
-			'permission_callback' => function($req) {
-				return true;
-			}
-		));
-
-		// cron expiration route (add to your crontab)
-		register_rest_route($this->namespace, '/polls/cron', array(
-			'methods'  => WP_REST_Server::READABLE,
-			'callback' => array($this, 'expire'),
-			'permission_callback' => function($req) {
-				return true;
-			}
-		));
+		foreach (array('list' => WP_REST_Server::READABLE, 'vote' => WP_REST_Server::ALLMETHODS, 'cron' => WP_REST_Server::READABLE) as $route => $methods) {
+			register_rest_route($this->namespace, '/polls/' . $route, array('methods' => $methods,
+				'callback' => array($this, $route === 'cron' ? 'expire' : $route), 'permission_callback' => '__return_true'));
+		}
+		register_rest_route($this->namespace, '/polls/editor', array('methods' => WP_REST_Server::READABLE,
+			'callback' => array($this, 'editor'), 'permission_callback' => function() { return current_user_can('edit_pages') || current_user_can('edit_posts'); }));
 	}
 
-	/**
-	 * List 10 latest polls
-	 * @param int $req['poll_id'] poll ID optional
-	 * @param boolean $req['modal'] optional
-	 */
 	public function list($req) {
-
-		$poll_args = array(
-			'post_type'        => 'onyxpolls',
-			'posts_per_page'   => 10,
-			'suppress_filters' => true,
-			'no_found_rows'    => true
-		);
-
-		$poll_args['p'] = (!empty($req['id'])) ? $req['id'] : null;
-
-		if (!empty($req['modal'])) {
-			$poll_args['posts_per_page'] = 1;
-			$poll_args['meta_query'] = array(
-				array(
-					'key'   => $this->field['modal'],
-					'value' => "1"
-				)
-			);
+		if (isset($req['id']) && (!is_scalar($req['id']) || !preg_match('/^\d+$/', (string) $req['id']))) {
+			return new WP_Error('error', __('Invalid poll parameters', 'acf-onyx-poll'), array('status' => 400));
 		}
-
-		$poll_query = new WP_Query($poll_args);
-		if ($poll_query->have_posts()) {
-			while ($poll_query->have_posts()):
-				$poll_query->the_post();
-
-				$poll['id']          = get_the_ID();
-				$poll['title']       = get_the_title();
-				$poll['limit_vote']  = get_field($this->field['limit_vote']);
-				$poll                = array_merge($poll, $this->poll_data($poll['id']));
-
-				// return response based on founded posts count
-				if (count($poll_query->posts) == 1) {
-					$response = $poll;
-				} else {
-					$response[] = $poll;
-				}
-
-			endwhile;
-		} else {
-			return new WP_Error('error', $this->message['no_polls'] . $req['id'], array('status' => 200));
-		}
-
-		return new WP_REST_Response($response, 200);
+		$id = isset($req['id']) ? absint($req['id']) : 0;
+		if ($id) { OnyxPollsStorage::get($id); }
+		$ids = OnyxPollsStorage::ids($id, false, !empty($req['modal']), !empty($req['modal']) ? 1 : 10);
+		if (!$ids) { return new WP_Error('error', __('No polls founded with ID ', 'acf-onyx-poll') . $id, array('status' => 200)); }
+		$response = array();
+		foreach ($ids as $poll_id) { $response[] = $this->poll_data($poll_id); }
+		return new WP_REST_Response(count($response) === 1 ? $response[0] : $response, 200);
 	}
 
-	/**
-	 * Compute vote
-	 * @param int $req['poll'] poll ID required
-	 * @param int $req['choice'] poll answer choice required
-	 * @todo: [$poll_choice - 1] is just a temp fix. maybe acf/settings/row_index_offset filter?
-	 */
 	public function vote($req) {
-		// params vars
-		$poll_id       = $req['poll'];
-		$poll_choice   = (int) $req['choice'];
-		$poll_answers  = get_field($this->field['answers'], $poll_id);
-		$poll_total    = get_field($this->field['total'], $poll_id);
-		$poll_expired  = get_field($this->field['expired'], $poll_id);
-		$poll_limit    = get_field($this->field['limit_vote'], $poll_id);
-
-		// validate params from req
-		if (!is_numeric($poll_id) || !isset($poll_choice) || empty($poll_answers[$poll_choice - 1])) {
-			return new WP_Error('error', $this->message['invalid'], array('status' => 400));
+		foreach (array('poll', 'choice') as $key) {
+			if (!isset($req[$key]) || !is_scalar($req[$key]) || !preg_match('/^[1-9]\d*$/', (string) $req[$key])) {
+				return new WP_Error('error', __('Invalid poll parameters', 'acf-onyx-poll'), array('status' => 400));
+			}
 		}
-		if ($poll_expired || get_post_type($poll_id) != 'onyxpolls') {
-			return new WP_Error('error', $this->message['no_exist'], array('status' => 400));
+		$id = absint($req['poll']);
+		$choice = absint($req['choice']);
+		$poll = OnyxPollsStorage::get($id);
+		if (!$poll || get_post_status($id) !== 'publish' || OnyxPollsStorage::expired($poll)) {
+			return new WP_Error('error', __('Non-existent or expired poll', 'acf-onyx-poll'), array('status' => 400));
 		}
-		if (isset($_COOKIE["onyx_poll_limit_$poll_id"]) && $poll_limit != 1) {
-			$response = array(
-				"code"     => "not_allowed",
-				"id"       => $poll_id,
-				"message"  => $this->message['no_allowed'],
-				"voted"    => false,
-				"data"     => ["status" => 200]
-			);
-		} else {
-			// update vote fields
-			$add_vote = array(
-				"votes" => $poll_answers[$poll_choice - 1]['votes']+1
-			);
-			$row   = update_row($this->field['answers'], $poll_choice, $add_vote, $poll_id);
-			$total = update_field($this->field['total'], $poll_total+1, $poll_id);
-
-			// set cookies
-			// limit = 1 (free vote)
-			// limit = 2 (per device/no expires)
-			$this->setcookie($poll_id, $poll_choice);
-
-			// return reponse
-			$response = array(
-				"code"     => ($row && $total) ? "success" : 'error',
-				"poll"     => $poll_id,
-				"choice"   => $poll_choice,
-				"message"  => ($row && $total) ? $this->message['success'] : $this->message['error'],
-				"voted"    => ($row && $total) ? true : false,
-				"data"     => ["status" => 200]
-			);
+		if (!isset($poll['answers'][$choice - 1])) {
+			return new WP_Error('error', __('Invalid poll parameters', 'acf-onyx-poll'), array('status' => 400));
 		}
-
-		$response += $this->poll_data($poll_id);
-		return new WP_REST_Response($response, 200);
+		$blocked = $poll['limit_vote'] !== 1 && isset($_COOKIE['onyx_poll_limit_' . $id]);
+		if (!$blocked) {
+			$vote = OnyxPollsStorage::vote($id, $choice);
+			if (is_wp_error($vote)) { return new WP_Error('error', $vote->get_error_message(), array('status' => 400)); }
+			$this->cookies($id, $choice, $poll['limit_vote']);
+		}
+		return new WP_REST_Response(array_merge($this->poll_data($id), array(
+			'code' => $blocked ? 'not_allowed' : 'success', 'id' => $id, 'poll' => $id, 'choice' => $choice,
+			'message' => $blocked ? __('You have already voted in this poll', 'acf-onyx-poll') : __('Vote was submitted successfully', 'acf-onyx-poll'),
+			'voted' => !$blocked, 'data' => array('status' => 200))), 200);
 	}
 
-	/**
-	* Update poll status when expire
-	*/
 	public function expire() {
-		$response = OnyxPolls::expire_polls();
-		$header_code = ($response) ? 200 : 204;
-		return new WP_REST_Response($response, $header_code);
+		$response = OnyxPollsCron::run();
+		if (is_wp_error($response)) { return $response; }
+		return new WP_REST_Response($response, $response ? 200 : 204);
 	}
 
-	/**
-	 * Return poll data after voting
-	 * @param int $poll_id required
-	 */
-	protected function poll_data($poll_id) {
-		// has image
-		$response['has_image'] = get_field($this->field['has_image'], $poll_id);
-
-		// format result
-		$type = get_field($this->field['results'], $poll_id);
-		$total = get_field($this->field['total'], $poll_id);
-
-		$response['expired'] = get_field($this->field['expired'], $poll_id);
-		$response['expired'] = $response['expired'] ? $response['expired'] : false;
-
-		// @FIX: need better code here
-		// All expired polls need to return the results info even show results is false
-		$is_expired = $response['expired'];
-		$show_results = $is_expired ? $is_expired : get_field($this->field['show_results'], $poll_id);
-		if ($show_results) {
-			$response['results']['type'] = $type;
-			$response['results']['total'] = $total;
+	public function poll_data($id) {
+		$poll = OnyxPollsStorage::get($id);
+		$expired = OnyxPollsStorage::expired($poll);
+		$show = $expired || $poll['show_results'];
+		$response = array('id' => (int) $id, 'title' => get_the_title($id), 'limit_vote' => $poll['limit_vote'],
+			'has_image' => (bool) $poll['images'], 'expired' => $expired, 'answers' => array());
+		if ($show) { $response['results'] = array('type' => $poll['results'], 'total' => $poll['total']); }
+		$size = OnyxPollsStorage::settings()['image_size'] ?: 'thumbnail';
+		foreach ($poll['answers'] as $answer) {
+			$response['answers'][] = array('option' => $answer['position'],
+				'image' => $poll['images'] ? wp_get_attachment_image_url($answer['image_id'], $size) : false,
+				'answer' => $answer['answer'], 'votes' => $show && in_array($poll['results'], array(2, 3), true) ? $answer['votes'] : false,
+				'percent' => $show ? ($poll['total'] ? $answer['votes'] * 100 / $poll['total'] : 0) : false);
 		}
-
-		// format answers
-		if (have_rows($this->field['answers'], $poll_id)) {
-			while (have_rows($this->field['answers'], $poll_id)):
-				the_row();
-				$image_id = get_sub_field('image');
-				$image_size = get_field('onyx_poll_image_size', 'options');
-				$image_size = ($image_size) ? $image_size : 'thumbnail';
-				$response['answers'][] = array(
-					"option"  => get_row_index(),
-					"image"   => ($response['has_image']) ? wp_get_attachment_image_url($image_id, $image_size) : false,
-					"answer"  => get_sub_field('answer'),
-					"votes"   => (in_array($type, array(2,3)) && $show_results) ? get_sub_field('votes') : false,
-					"percent" => ($total >= 1) ? get_sub_field('votes') * 100 / $total : "0"
-				);
-			endwhile;
-		}
-
 		return $response;
 	}
 
-	/**
-	 * Create cookie for the expiration user time
-	 * @param int $poll_id required
-	 */
-	protected function setcookie($poll_id, $poll_choice) {
-		$poll_limit_vote = get_field($this->field['limit_vote'], $poll_id);
-		$poll_limit_time = ($poll_limit_vote == 2) ? strtotime('+1 year') : (60 * $poll_limit_vote);
-		setcookie("onyx_poll_choice_$poll_id", $poll_choice, time() + strtotime('+1 year'), "/");
-		if ($poll_limit_vote != 1) {
-			setcookie("onyx_poll_limit_$poll_id", $poll_choice, time() + $poll_limit_time, "/");
-		}
+	public function editor($req) {
+		$search = isset($req['search']) && is_scalar($req['search']) ? sanitize_text_field($req['search']) : '';
+		$args = array('post_type' => 'onyxpolls', 'post_status' => 'publish', 'posts_per_page' => 30, 'orderby' => 'ID', 'order' => 'DESC', 's' => $search);
+		if (ctype_digit($search)) { unset($args['s']); $args['p'] = absint($search); }
+		$posts = get_posts($args);
+		$selected = isset($req['selected']) && is_scalar($req['selected']) ? absint($req['selected']) : 0;
+		if ($selected && get_post_type($selected) === 'onyxpolls' && get_post_status($selected) === 'publish' && !in_array($selected, wp_list_pluck($posts, 'ID'), true)) { $posts[] = get_post($selected); }
+		return array_map(function($post) { return array('id' => $post->ID, 'title' => get_the_title($post)); }, $posts);
 	}
 
+	private function cookies($id, $choice, $limit) {
+		$options = array('expires' => time() + YEAR_IN_SECONDS, 'path' => '/', 'secure' => is_ssl(), 'samesite' => 'Lax');
+		setcookie('onyx_poll_choice_' . $id, (string) $choice, $options);
+		if ($limit !== 1) {
+			$options['expires'] = time() + ($limit === 2 ? YEAR_IN_SECONDS : $limit * MINUTE_IN_SECONDS);
+			setcookie('onyx_poll_limit_' . $id, (string) $choice, $options);
+		}
+	}
 }
-
-
-/**
- * Instantiate Onyx Poll API
- */
-function initialize_poll_rest_controller() {
-    new OnyxPollsApi();
-}
-add_action('init', 'initialize_poll_rest_controller');
-
-?>
+add_action('init', function() { new OnyxPollsApi(); });
