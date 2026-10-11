@@ -8,15 +8,18 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^4.1.0",
+		"babel-eslint": "^10.1.0",
 		"eslint": "^6.8.0",
 		"clean-css": "^5.3.3",
 		"terser": "^5.44.0"
 	},
 	"scripts": {
+		"lint:js": "eslint . --ext .js,.cjs --max-warnings=0",
+		"lint:js:fix": "npm run lint:js -- --fix",
 		"build": "npm run build:css && npm run build:js",
 		"build:css": "node scripts/build-css.cjs",
 		"build:js": "terser assets/js/app.js --compress --mangle --output assets/js/onyx-poll.min.js",
-		"release": "npm run build && node scripts/prepare-release.cjs",
+		"release": "npm run lint:js && npm run build && node scripts/prepare-release.cjs",
 		"release:version": "node scripts/set-version.cjs",
 		"release:zip": "npm run build && node scripts/prepare-release.cjs --zip-only",
 		"test:release": "node tests/release.cjs"

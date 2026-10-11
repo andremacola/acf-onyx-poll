@@ -203,9 +203,11 @@ class onyxAcfPoll {
 
 	submitVote(event) {
 		event.preventDefault();
-			const t = event.target.closest('li[data-choice]');
-			if (!t) { return; }
-			const poll = t.closest(`.${this.name.parent}`);
+		const t = event.target.closest('li[data-choice]');
+		if (! t) {
+			return;
+		}
+		const poll = t.closest(`.${this.name.parent}`);
 		this.togglePollLoader(poll, false);
 		this.requestVote(t)
 			.then(function(response) {
@@ -243,7 +245,9 @@ class onyxAcfPoll {
 		}
 		poll = (event) ? event.target.closest(`.${this.name.parent}`) : poll;
 		const res = this.response[poll.getAttribute('data-poll')];
-		if (!res || !res.results) { return; }
+		if (! res || ! res.results) {
+			return;
+		}
 
 		poll.classList.add('view');
 		poll.querySelector(`.${this.name.total} span`).textContent = res.results.total;
@@ -251,7 +255,9 @@ class onyxAcfPoll {
 		const choosedChoice = this.getCookie(`onyx_poll_choice_${res.id}`);
 		if (choosedChoice) {
 			const chosen = poll.querySelector(`li[data-choice="${choosedChoice}"]`);
-			if (chosen) { chosen.classList.add('choosed'); }
+			if (chosen) {
+				chosen.classList.add('choosed');
+			}
 		}
 
 		const choices = poll.querySelectorAll(`.${this.name.list} li`);
@@ -346,5 +352,7 @@ class onyxAcfPoll {
 
 // Native blocks render their preview through the editor module.
 if (document.readyState === 'loading') {
- document.addEventListener('DOMContentLoaded', () => new onyxAcfPoll());
-} else { new onyxAcfPoll(); }
+	document.addEventListener('DOMContentLoaded', () => new onyxAcfPoll());
+} else {
+	new onyxAcfPoll();
+}

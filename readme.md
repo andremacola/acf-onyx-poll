@@ -89,6 +89,8 @@ Run `wp eval-file tests/integration.php` against a WordPress installation with t
 
 Run `npm install` and `npm run build` after changing frontend JavaScript or shared CSS to regenerate the shipped bundles. Native admin and block scripts are shipped without a build dependency at runtime.
 
+Run `npm run lint:js` to check JavaScript sources and Node scripts with the project's WordPress ESLint rules. `npm run lint:js:fix` applies automatic formatting corrections. Generated minified files, dependencies, `dist/` and the entire `_svn/` checkout are excluded. The parser supports the syntax already used by the plugin and Node scripts; WordPress and administration globals are declared explicitly.
+
 ## PREPARING A WORDPRESS.ORG RELEASE
 
 The SVN working copy lives in `_svn/`, inside this project. Git ignores the entire folder, including `.svn` and historical tags. `dist/` stores preparation manifests and is also ignored. These folders and all development files are excluded from the distributable plugin.
@@ -105,7 +107,7 @@ svn status _svn
 svn diff _svn
 ```
 
-The version command updates `package.json`, the plugin header, the PHP version constant and the readme's stable tag together. `npm run release` builds the CSS/JS, checks that versions and requirements match, copies only runtime files into `_svn/trunk`, stages obsolete-file removals and new files, and creates `_svn/tags/<version>` locally. It also writes a SHA-256 manifest in `dist/svn-preparation.json`.
+The version command updates `package.json`, the plugin header, the PHP version constant and the readme's stable tag together. `npm run release` checks JavaScript lint, builds the CSS/JS, checks that versions and requirements match, copies only runtime files into `_svn/trunk`, stages obsolete-file removals and new files, and creates `_svn/tags/<version>` locally. It also writes a SHA-256 manifest in `dist/svn-preparation.json`.
 
 No ZIP is needed for SVN publication, and the default command does not generate one. If you separately need a package for manual installation, `npm run release:zip` creates `dist/acf-onyx-poll-<version>.zip`; this optional command does not modify SVN.
 

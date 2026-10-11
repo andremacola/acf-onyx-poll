@@ -1,4 +1,4 @@
-(function () {
+(function() {
 	'use strict';
 	const editor = document.getElementById('onyx-poll-editor');
 	if (editor) {
@@ -8,7 +8,7 @@
 			let total = 0;
 			rows().forEach((row, index) => {
 				row.querySelector('[data-onyx-number]').textContent = index + 1;
-				row.querySelectorAll('[name]').forEach(input => {
+				row.querySelectorAll('[name]').forEach((input) => {
 					input.name = input.name.replace(/\[answers\]\[[^\]]+\]/, '[answers][' + index + ']');
 				});
 				row.querySelector('[data-onyx-remove]').disabled = rows().length <= 2;
@@ -26,9 +26,11 @@
 		};
 		editor.addEventListener('input', refresh);
 		editor.addEventListener('change', refresh);
-		editor.addEventListener('click', event => {
+		editor.addEventListener('click', (event) => {
 			const button = event.target.closest('button');
-			if (!button) { return; }
+			if (! button) {
+				return;
+			}
 			const row = button.closest('[data-onyx-row]');
 			if (button.hasAttribute('data-onyx-add')) {
 				body.appendChild(document.getElementById('onyx-answer-template').content.cloneNode(true));
@@ -68,18 +70,20 @@
 			jQuery(body).sortable({
 				items: '> tr[data-onyx-row]', handle: '.onyx-drag-handle', axis: 'y', distance: 4,
 				tolerance: 'pointer', placeholder: 'onyx-sort-placeholder', forcePlaceholderSize: true,
-				helper: function (event, row) {
+				helper(event, row) {
 					// A detached table row recalculates its columns. Lock a clone to the
 					// rendered cell sizes while leaving the original responsive row intact.
 					const clone = row.clone();
-					row.children().each(function (index) {
+					row.children().each(function(index) {
 						clone.children().eq(index).outerWidth(jQuery(this).outerWidth());
 					});
 					clone.width(row.width()).height(row.height());
 					return clone;
 				},
-				start: function (event, ui) { ui.placeholder.height(ui.item.outerHeight()); },
-				update: refresh
+				start(event, ui) {
+					ui.placeholder.height(ui.item.outerHeight());
+				},
+				update: refresh,
 			});
 		}
 		refresh();
@@ -90,11 +94,11 @@
 		const ack = document.getElementById('onyx-uninstall-ack');
 		const refresh = () => {
 			const enabled = deletion.value === '1';
-			warning.hidden = !enabled;
-			ack.hidden = !enabled;
+			warning.hidden = ! enabled;
+			ack.hidden = ! enabled;
 			ack.querySelector('input').required = enabled;
 		};
 		deletion.addEventListener('change', refresh);
 		refresh();
 	}
-})();
+}());

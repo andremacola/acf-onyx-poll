@@ -3,3 +3,5 @@
 *.min.js
 **/node_modules/**
 **/vendor/**
+_svn/
+dist/
