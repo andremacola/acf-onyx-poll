@@ -1,12 +1,13 @@
 <?php
 /*
-Plugin Name: ACF Onyx Poll
-Version: 1.2.0
-Description: Create polls with ACF PRO
+Plugin Name: Onyx Poll
+Version: 2.0.0
+Description: Create independent polls with native WordPress administration.
 Author: André Mácola Machado
 Author URI: https://github.com/andremacola
 Plugin URI: https://github.com/andremacola/acf-onyx-poll
-Requires PHP: 7.0
+Requires PHP: 7.4
+Requires at least: 6.3
 Text Domain: acf-onyx-poll
 Domain Path: /languages/
 */
@@ -30,7 +31,7 @@ Class OnyxPollsInit {
 	 * @return	void
 	 */
 	function __construct() {
-		define('ACF_ONYX_POLL_VERSION', '1.2.0');
+		define('ACF_ONYX_POLL_VERSION', '2.0.0');
 		define('ACF_ONYX_POLL_FILE', __FILE__);
 		define('ACF_ONYX_POLL_PATH', plugin_dir_path(__FILE__));
 	}
@@ -49,9 +50,9 @@ Class OnyxPollsInit {
 	 * Some admin styles for better view
 	 */
 	public function admin_styles() {
-		global $post_type;
-		if ('onyxpolls' == $post_type || get_current_screen()->is_block_editor) {
-			$css = OnyxPolls::get_asset_vars('assets/css/admin.min.css');
+		$screen = get_current_screen();
+		if ($screen && ('onyxpolls' === $screen->post_type || $screen->is_block_editor())) {
+			$css = OnyxPolls::get_asset_vars('assets/css/admin.css');
 			wp_enqueue_style('acf-onyx-poll-admin', $css->url, array(), $css->ver);
 		}
 	}
@@ -97,47 +98,17 @@ Class OnyxPollsInit {
 	 * @return	void
 	 */
 	 public function initialize() {
-		// Change ACF Local JSON save location to /acf folder inside this plugin
-		// add_filter('acf/settings/save_json', function() {
-		// 	return __DIR__ . '/acf';
-		// });
-
-		// Include the /acf folder in the places to look for ACF Local JSON files
-		// add_filter('acf/settings/load_json', function($paths) {
-		// 	$paths[] = __DIR__ . '/acf';
-		// 	return $paths;
-		// });
-
-		// Load text domain language
-		load_plugin_textdomain(
-			'acf-onyx-poll',
-			false,
-			dirname(plugin_basename(__FILE__)) . '/languages'
-		);
-
-		// Verify if Advanced Custom Fields PRO is activated
-		add_action('admin_init', function() {
-			if (is_admin() && current_user_can('activate_plugins') && !class_exists('acf_pro')) {
-				add_action('admin_notices', function() {
-					$notice = __('Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active.', 'acf-onyx-poll');
-					echo "<div class='error'><p>$notice</p></div>";
-				});
-				deactivate_plugins(plugin_basename(__FILE__));
-				if (isset($_GET['activate'])) {
-					unset($_GET['activate']);
-				}
-			}
-		});
-
-		// Load ACF fields
-		add_action('acf/init', function() {
-			require(__DIR__ . '/acf/fields.php');
-		});
-
-		if(is_admin()) {
-			// Create Poll Post Type
-			require_once(__DIR__ . '/admin/poll-type.php');
-		}
+		require_once __DIR__ . '/classes/poll-storage.php';
+		require_once __DIR__ . '/classes/poll-helpers.php';
+		require_once __DIR__ . '/classes/poll-cron.php';
+		require_once __DIR__ . '/admin/poll-type.php';
+		require_once __DIR__ . '/admin/poll-admin.php';
+		add_action('init', function() {
+			load_plugin_textdomain('acf-onyx-poll', false, dirname(plugin_basename(__FILE__)) . '/languages');
+			OnyxPollsStorage::upgrade();
+			OnyxPollsCron::ensure_scheduled();
+		}, 0);
+		add_action('before_delete_post', array('OnyxPollsStorage', 'delete_poll'));
 
 		// Load Gutenberg Block
 		require_once(__DIR__ . '/admin/poll-block.php');
@@ -145,8 +116,6 @@ Class OnyxPollsInit {
 		// Load widget
 		require_once(__DIR__ . '/admin/poll-widget.php');
 
-		// Load Helper Methods
-		require_once(__DIR__ . '/classes/poll-helpers.php');
 
 		// Create REST API for Onyx Poll
 		require_once(__DIR__ . '/api/poll-api.php');
@@ -155,7 +124,7 @@ Class OnyxPollsInit {
 		add_action('wp_footer', array($this, 'add_footer_elements'), 1);
 
 		// Enqueue scripts and styles
-		add_action('admin_head', array($this, 'admin_styles'));
+		add_action('admin_enqueue_scripts', array($this, 'admin_styles'));
 		add_action('wp_footer', function() {
 			if (!is_admin() && !$this->is_amp()) {
 				OnyxPolls::add_assets();
@@ -167,18 +136,16 @@ Class OnyxPollsInit {
 		add_shortcode("onyx-poll", array($this, 'shortcode'));
 
 		// Define cron event for expired polls
-		add_action('onyx-poll-cron',  array($this, 'cron_job'));
+		add_action(OnyxPollsCron::HOOK, array('OnyxPollsCron', 'scheduled_run'));
+		add_filter('site_status_tests', array('OnyxPollsCron', 'site_health_tests'));
 		register_activation_hook(__FILE__, function() {
-			wp_schedule_event(time(), 'hourly', 'onyx-poll-cron');
+			OnyxPollsStorage::upgrade();
+			OnyxPollsCron::ensure_scheduled();
 		});
 		register_deactivation_hook(__FILE__, function() {
 			wp_clear_scheduled_hook('onyx-poll-cron');
 		});
 
-	}
-
-	public function cron_job() {
-		OnyxPolls::expire_polls();
 	}
 
 	public function is_amp() {

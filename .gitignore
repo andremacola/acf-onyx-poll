@@ -29,4 +29,5 @@ sftp-config.json
 
 # wordpress svn
 ######################
-_svn
+/_svn/
+/dist/

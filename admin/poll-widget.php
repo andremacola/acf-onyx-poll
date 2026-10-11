@@ -36,9 +36,9 @@ class OnyxPollsWidget extends WP_Widget {
 	 * Creating widget front-end
 	 */
 	public function widget($args, $instance) {
-		$title = apply_filters('widget_title', $instance['title']);
-		$poll = $instance['poll'];
-		$css = $instance['css'];
+		$title = apply_filters('widget_title', ($instance['title'] ?? ''));
+		$poll = absint($instance['poll'] ?? 0);
+		$css = $instance['css'] ?? 'standard';
 
 		echo $args['before_widget'] . $args['before_title'] . $title . $args['after_title'];
 		echo do_shortcode("[onyx-poll id=$poll class='$css']");
@@ -52,7 +52,7 @@ class OnyxPollsWidget extends WP_Widget {
 		$title_id    = $this->get_field_id('title');
 		$title_label = __('Title', 'acf-onyx-poll');
 		$title_name  = $this->get_field_name('title');
-		$title_value = !empty($instance['title']) ? $instance['title'] : '';
+		$title_value = !empty($instance['title']) ? esc_attr($instance['title']) : '';
 
 		$poll_id      = $this->get_field_id('poll');
 		$poll_label   = __('Poll', 'acf-onyx-poll');
@@ -87,7 +87,7 @@ class OnyxPollsWidget extends WP_Widget {
 			</p>
 		";
 
-		if (!get_field('onyx_poll_css', 'options')) {
+		if (!OnyxPollsStorage::settings()['css']) {
 			$form .= "
 			<p>
 				<label for='$css_id'>$css_label:</label>
@@ -95,7 +95,7 @@ class OnyxPollsWidget extends WP_Widget {
 					class='widefat'
 					id='$css_id'
 					name='$css_name'>
-					<option value='standard' ". selected($instance['css'], 'Bar style', false) .">". __('Bar style', 'acf-onyx-poll') ."</option>
+					<option value='standard' ". selected($instance['css'], 'standard', false) .">". __('Bar style', 'acf-onyx-poll') ."</option>
 					<option value='twitter' ". selected($instance['css'], 'twitter', false) .">". __('Twitter style', 'acf-onyx-poll') ."</option>
 				</select>
 			</p>
@@ -111,8 +111,8 @@ class OnyxPollsWidget extends WP_Widget {
 	public function update($new_instance, $old_instance) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['poll']  = OnyxPolls::has_poll($instance['poll']) ? strip_tags($new_instance['poll']) : '';
-		$instance['css'] = strip_tags($new_instance['css']);
+		$instance['poll'] = !empty($new_instance['poll']) && OnyxPolls::has_poll(absint($new_instance['poll'])) ? absint($new_instance['poll']) : '';
+		$instance['css'] = ($new_instance['css'] ?? '') === 'twitter' ? 'twitter' : 'standard';
 		return $instance;
 	}
 
@@ -132,7 +132,7 @@ class OnyxPollsWidget extends WP_Widget {
 		if ($poll_query->have_posts()) {
 			foreach ($poll_query->posts as $post) {
 				$select = ((int) $option === $post->ID) ? 'selected' : null;
-				$response .= "<option value='$post->ID' $select>[$post->ID] / $post->post_title</option>";
+				$response .= "<option value='$post->ID' $select>[$post->ID] / " . esc_html($post->post_title) . "</option>";
 			}
 		}
 

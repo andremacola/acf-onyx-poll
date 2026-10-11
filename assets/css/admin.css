@@ -22,3 +22,90 @@ body .select2-selection__rendered .id { color: #0173AA; }
 body .select2-results__option .title,
 body .select2-selection__rendered .title { font-weight: bold; }
 body .select2-results__option--highlighted .ref { color: #FFF; }
+
+.onyx-admin { margin-top: 32px; }
+.onyx-admin-label, .onyx-admin-field > span:first-child { font-weight: 600; }
+.onyx-admin .required { color: #b32d2e; }
+.onyx-answer-table { overflow-x: auto; }
+.onyx-answers { width: 100%; min-width: 580px; border-collapse: collapse; table-layout: fixed; }
+.onyx-answers th, .onyx-answers td { box-sizing: border-box; border: 1px solid #dcdcde; padding: 12px; vertical-align: middle; }
+.onyx-answers th { background: #f6f7f7; font-weight: 600; }
+.onyx-answers input:not([type=hidden]) { box-sizing: border-box; width: 100%; margin: 0; }
+.onyx-answers .onyx-row-number { width: 44px; padding: 8px; text-align: center; color: #787c82; background: #f6f7f7; }
+.onyx-drag-handle { display: flex; align-items: center; justify-content: center; height: 28px; cursor: grab; }
+.onyx-drag-handle:hover { color: #2271b1; }
+.onyx-grip { display: block; width: 12px; height: 18px; background-image: radial-gradient(circle, currentColor 1.5px, transparent 1.6px); background-size: 6px 6px; }
+.onyx-answers [data-onyx-number] { display: block; font-size: 12px; }
+.onyx-answers .onyx-image-column { width: 104px; }
+.onyx-answers .onyx-votes-column { width: 108px; }
+.onyx-answers .onyx-row-actions { width: 128px; text-align: center; }
+.onyx-image-control { position: relative; width: 72px; margin: auto; }
+.onyx-answers .onyx-image-picker { display: flex; align-items: center; justify-content: center; position: relative; width: 72px; height: 72px; padding: 0; background: #f6f7f7; border: 1px dashed #a7aaad; border-radius: 4px; overflow: hidden; cursor: pointer; }
+.onyx-answers .has-image .onyx-image-picker { border-style: solid; border-color: #dcdcde; }
+.onyx-image-picker:hover { border-color: #2271b1; }
+.onyx-image-picker:focus-visible, .onyx-image-remove:focus-visible { outline: 2px solid #2271b1; outline-offset: 2px; }
+.onyx-answers [data-onyx-image-preview], .onyx-answers [data-onyx-image-preview] img { display: block; width: 100%; height: 100%; margin: 0; max-width: none; object-fit: cover; }
+.onyx-image-placeholder { color: #787c82; font-size: 28px; width: 28px; height: 28px; }
+.onyx-image-edit { position: absolute; right: 0; bottom: 0; padding: 3px; width: 22px; height: 22px; font-size: 16px; line-height: 1; box-sizing: border-box; background: rgba(255,255,255,.95); color: #646970; border-radius: 3px 0 0 0; }
+.onyx-answers .onyx-image-remove { position: absolute; right: -8px; top: -8px; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; padding: 0; border: 1px solid #dcdcde; border-radius: 50%; background: white; color: #646970; box-shadow: 0 1px 2px rgba(0,0,0,.08); cursor: pointer; }
+.onyx-image-remove:hover { color: #b32d2e; border-color: #b32d2e; }
+.onyx-image-remove { opacity: 0; pointer-events: none; transition: opacity .1s; }
+.onyx-image-control:hover .onyx-image-remove, .onyx-image-control:focus-within .onyx-image-remove { opacity: 1; pointer-events: auto; }
+@media (hover: none) { .onyx-image-remove { opacity: 1; pointer-events: auto; } }
+.onyx-image-remove .dashicons { font-size: 16px; width: 16px; height: 16px; }
+.onyx-image-control.has-image .onyx-image-placeholder, .onyx-image-control:not(.has-image) [data-onyx-image-preview], .onyx-image-control:not(.has-image) .onyx-image-edit, .onyx-image-control:not(.has-image) .onyx-image-remove { display: none; }
+.onyx-row-tools { display: flex; gap: 4px; align-items: center; justify-content: center; }
+.onyx-row-tools .onyx-icon-button { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; width: 30px; min-width: 30px; height: 32px; min-height: 32px; padding: 0; border: 1px solid #c3c4c7; border-radius: 3px; background: #fff; color: #50575e; box-shadow: none; cursor: pointer; }
+.onyx-row-tools .onyx-icon-button .dashicons { display: block; font-size: 18px; width: 18px; height: 18px; line-height: 1; margin: 0; }
+.onyx-row-tools .onyx-icon-button:hover { border-color: #2271b1; color: #2271b1; background: #f6f7f7; }
+.onyx-row-tools .onyx-action-remove:hover { color: #b32d2e; border-color: #b32d2e; background: #fcf0f1; }
+.onyx-row-tools .onyx-icon-button:disabled { color: #a7aaad; border-color: #dcdcde; background: #f6f7f7; cursor: default; }
+.onyx-answers tr.ui-sortable-helper { display: table; table-layout: fixed; border-collapse: collapse; background: white; box-shadow: 0 8px 24px rgba(0,0,0,.16); }
+.onyx-answers tr.ui-sortable-helper .onyx-drag-handle { cursor: grabbing; }
+.onyx-sort-placeholder td { background: #f0f6fc; border-top: 1px dashed #2271b1; border-bottom: 1px dashed #2271b1; }
+.onyx-admin:not(.has-images) .onyx-image-column { display: none; }
+.onyx-add-row { text-align: right; margin: 8px 0 28px; }
+.onyx-admin-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.onyx-admin-field { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.onyx-admin-field input:not([type=checkbox]), .onyx-admin-field select { width: 100%; max-width: none; min-height: 36px; }
+.onyx-admin-field small { color: #646970; font-size: 13px; line-height: 1.6; font-weight: 400; }
+.onyx-admin-field input[readonly] { background: #f0f0f1; color: #50575e; }
+.onyx-toggle { position: relative; display: inline-flex; width: 64px; height: 30px; }
+.onyx-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; z-index: 1; cursor: pointer; }
+.onyx-toggle-track { width: 64px; height: 30px; border-radius: 4px; background: #8c8f94; }
+.onyx-toggle-track::after { content: ''; position: absolute; top: 4px; left: 4px; width: 24px; height: 22px; border-radius: 2px; background: white; transition: left .1s; }
+.onyx-toggle input:checked + .onyx-toggle-track { background: #2271b1; }
+.onyx-toggle input:checked + .onyx-toggle-track::after { left: 36px; }
+.onyx-toggle input:focus-visible + .onyx-toggle-track { outline: 2px solid #2271b1; outline-offset: 3px; }
+.onyx-settings { max-width: 900px; background: white; border: 1px solid #dcdcde; padding: 24px; }
+.onyx-settings .onyx-admin-grid { grid-template-columns: minmax(0, 1fr); }
+.onyx-settings hr { margin: 28px 0; }
+.onyx-settings [hidden] { display: none; }
+.onyx-settings .submit { margin-bottom: 0; padding-bottom: 0; }
+.onyx-settings-panel { box-sizing: border-box; max-width: 950px; margin-top: 24px; padding: 24px; background: white; border: 1px solid #dcdcde; }
+.onyx-settings-panel h2 { margin-top: 0; font-size: 18px; }
+.onyx-cron-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+.onyx-cron-heading h2 { margin: 0; }
+.onyx-cron-badge { padding: 4px 10px; border-radius: 4px; font-weight: 600; background: #f0f0f1; color: #50575e; }
+.onyx-cron-healthy { background: #edfaef; color: #006b1b; }
+.onyx-cron-late, .onyx-cron-error, .onyx-cron-missing { background: #fcf0f1; color: #8a2424; }
+.onyx-cron-details { display: grid; grid-template-columns: max-content minmax(0,1fr); gap: 12px 24px; margin: 0 0 20px; }
+.onyx-cron-details dt { font-weight: 600; }
+.onyx-cron-details dd { margin: 0; }
+.onyx-settings-panel p { line-height: 1.7; }
+.onyx-help details { border-top: 1px solid #dcdcde; padding: 16px 0; }
+.onyx-help details:last-child { padding-bottom: 0; }
+.onyx-help summary { cursor: pointer; font-weight: 600; line-height: 1.6; }
+.onyx-help summary:focus-visible { outline: 2px solid #2271b1; outline-offset: 4px; }
+.onyx-help pre { overflow-x: auto; padding: 16px; background: #f6f7f7; border: 1px solid #dcdcde; line-height: 1.6; }
+.onyx-help pre code { padding: 0; background: none; }
+@media (max-width: 782px) {
+ .onyx-admin-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+ .onyx-settings .onyx-admin-grid { grid-template-columns: minmax(0, 1fr); }
+ .onyx-cron-details { grid-template-columns: minmax(0,1fr); gap: 6px; }
+ .onyx-cron-details dd { margin-bottom: 10px; }
+ .onyx-answers .onyx-image-column { width: 88px; }
+ .onyx-answers .onyx-votes-column { width: 88px; }
+ .onyx-answers .onyx-row-actions { width: 112px; }
+ .onyx-answers td, .onyx-answers th { padding: 6px; }
+}

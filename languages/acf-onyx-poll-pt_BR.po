@@ -1,272 +1,688 @@
-# Copyright (C) 2020 André Machado
-# This file is distributed under the same license as the ACF Onyx Poll plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: ACF Onyx Poll 1.0\n"
+"Project-Id-Version: Onyx Poll 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
-"POT-Creation-Date: 2021-07-21T02:19:47+00:00\n"
-"PO-Revision-Date: 2021-07-20 23:22-0300\n"
-"Last-Translator: \n"
-"Language-Team: ONYX\n"
+"POT-Creation-Date: 2026-10-11T20:59:46+00:00\n"
+"PO-Revision-Date: 2026-10-11 00:00-0300\n"
+"Last-Translator: Onyx Poll\n"
+"Language-Team: Portuguese (Brazil)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
-"X-Domain: acf-onyx-poll\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Plugin Name of the plugin
-msgid "ACF Onyx Poll"
-msgstr "ACF Onyx Poll"
+#: onyx-poll.php admin/poll-block.php:9 admin/poll-block.php:22
+msgid "Onyx Poll"
+msgstr "Onyx Poll"
 
 #. Plugin URI of the plugin
+#: onyx-poll.php
 msgid "https://github.com/andremacola/acf-onyx-poll"
 msgstr "https://github.com/andremacola/acf-onyx-poll"
 
 #. Description of the plugin
-msgid "Create polls with ACF PRO"
-msgstr "Crie enquetes com o ACF PRO"
+#: onyx-poll.php
+msgid "Create independent polls with native WordPress administration."
+msgstr ""
 
 #. Author of the plugin
+#: onyx-poll.php
 msgid "André Mácola Machado"
 msgstr "André Mácola Machado"
 
 #. Author URI of the plugin
+#: onyx-poll.php
 msgid "https://github.com/andremacola"
 msgstr "https://github.com/andremacola"
 
-#: acf/fields.php:11
-msgid "Answers"
-msgstr "Respostas"
-
-#: acf/fields.php:30
-msgid "Image"
-msgstr "Imagem"
-
-#: acf/fields.php:62
-msgid "Answer"
-msgstr "Resposta"
-
-#: acf/fields.php:81 admin/poll-type.php:99
-msgid "Votes"
-msgstr "Votos"
-
-#: acf/fields.php:104
-msgid "Limit voting"
-msgstr "Limitar votação"
-
-#: acf/fields.php:116
+#: admin/poll-admin.php:19
 msgid "Free Vote"
 msgstr "Voto Livre"
 
-#: acf/fields.php:117
+#: admin/poll-admin.php:19
 msgid "Per device"
 msgstr "Por dispositivo"
 
-#: acf/fields.php:118
+#: admin/poll-admin.php:20
 msgid "Every 30 minutes"
 msgstr "A cada 30 minutos"
 
-#: acf/fields.php:119 acf/fields.php:317
+#: admin/poll-admin.php:20
 msgid "Every 1 hour"
 msgstr "A cada 1 hora"
 
-#: acf/fields.php:120 acf/fields.php:318
+#: admin/poll-admin.php:21
 msgid "Every 2 hours"
 msgstr "A cada 2 horas"
 
-#: acf/fields.php:121 acf/fields.php:319
+#: admin/poll-admin.php:21
 msgid "Every 3 hours"
 msgstr "A cada 3 horas"
 
-#: acf/fields.php:122 acf/fields.php:320
+#: admin/poll-admin.php:22
 msgid "Every 4 hours"
 msgstr "A cada 4 horas"
 
-#: acf/fields.php:123 acf/fields.php:321
+#: admin/poll-admin.php:22
 msgid "Every 5 hours"
 msgstr "A cada 5 horas"
 
-#: acf/fields.php:124 acf/fields.php:322
+#: admin/poll-admin.php:23
 msgid "Every 12 hours"
 msgstr "A cada 12 horas"
 
-#: acf/fields.php:125 acf/fields.php:323
+#: admin/poll-admin.php:23
 msgid "Every 24 hours"
 msgstr "A cada 24 horas"
 
-#: acf/fields.php:139
+#: admin/poll-admin.php:56
+msgid "Answers"
+msgstr "Respostas"
+
+#: admin/poll-admin.php:57
+msgid "Order"
+msgstr "Ordem"
+
+#: admin/poll-admin.php:57
+msgid "Image"
+msgstr "Imagem"
+
+#: admin/poll-admin.php:57 admin/poll-admin.php:86
+msgid "Answer"
+msgstr "Resposta"
+
+#: admin/poll-admin.php:57 admin/poll-admin.php:87 admin/poll-type.php:97
+msgid "Votes"
+msgstr "Votos"
+
+#: admin/poll-admin.php:57
+msgid "Actions"
+msgstr "Ações"
+
+#: admin/poll-admin.php:61
+msgid "Add Row"
+msgstr "Adicionar linha"
+
+#: admin/poll-admin.php:65
+msgid "Limit voting"
+msgstr "Limitar votação"
+
+#: admin/poll-admin.php:65
+msgid ""
+"Controls repeat votes using a browser cookie. Free Vote allows unlimited "
+"votes."
+msgstr ""
+"Controla a repetição de votos por um cookie do navegador. Voto Livre permite "
+"votar sem limite."
+
+#: admin/poll-admin.php:66
 msgid "Results"
 msgstr "Resultados"
 
-#: acf/fields.php:151
+#: admin/poll-admin.php:66
 msgid "Show in percentage"
 msgstr "Mostrar em porcentagem"
 
-#: acf/fields.php:152
+#: admin/poll-admin.php:66
 msgid "Show in numbers"
 msgstr "Mostrar em números"
 
-#: acf/fields.php:153
+#: admin/poll-admin.php:66
 msgid "Show both"
 msgstr "Mostrar ambos"
 
-#: acf/fields.php:167
+#: admin/poll-admin.php:66
+msgid "Display answer totals as percentages, numbers or both."
+msgstr "Exibe os votos de cada resposta em porcentagem, números ou ambos."
+
+#. translators: %s: Site timezone name or UTC offset.
+#: admin/poll-admin.php:69
+#, php-format
+msgid ""
+"Voting closes at this time in the site timezone (%s), even if cron is "
+"delayed."
+msgstr ""
+"A votação encerra neste horário, no fuso do site (%s), mesmo se o cron "
+"estiver atrasado."
+
+#: admin/poll-admin.php:70
 msgid "End of Poll"
 msgstr "Fim da Enquete"
 
-#: acf/fields.php:184 classes/poll-helpers.php:155
+#: admin/poll-admin.php:71 admin/poll-block.php:12 classes/poll-helpers.php:94
 msgid "Total votes"
 msgstr "Total de votos"
 
-#: acf/fields.php:205
+#: admin/poll-admin.php:71
+msgid "Calculated from the answers."
+msgstr "Calculado pela soma das respostas."
+
+#: admin/poll-admin.php:72
 msgid "Enable Images"
 msgstr "Habilitar Imagens"
 
-#: acf/fields.php:224
+#: admin/poll-admin.php:72
+msgid ""
+"Show an image with each answer. Every answer needs an image when enabled."
+msgstr ""
+"Exibe uma imagem em cada resposta. Todas as respostas precisam de uma imagem "
+"quando esta opção está habilitada."
+
+#: admin/poll-admin.php:73
 msgid "Poll Modal"
 msgstr "Modal da Enquete"
 
-#: acf/fields.php:243
+#: admin/poll-admin.php:73
+msgid ""
+"Allow this poll in the site modal. The latest active poll with this option "
+"is used."
+msgstr ""
+"Permite exibir esta enquete na modal do site. Será usada a enquete ativa "
+"mais recente com esta opção."
+
+#: admin/poll-admin.php:74
 msgid "Show Results"
 msgstr "Mostrar Resultados"
 
-#: acf/fields.php:262
+#: admin/poll-admin.php:74
+msgid ""
+"Let visitors view results before the deadline. Expired polls always show "
+"results."
+msgstr ""
+"Permite consultar os resultados antes do encerramento. Enquetes expiradas "
+"sempre exibem os resultados."
+
+#: admin/poll-admin.php:75
 msgid "Expired"
 msgstr "Expirada"
 
-#: acf/fields.php:305
+#: admin/poll-admin.php:75
+msgid ""
+"Close voting manually. To reopen, disable this option and set a future "
+"deadline."
+msgstr ""
+"Encerra a votação manualmente. Para reabrir, desative esta opção e defina "
+"uma data futura."
+
+#: admin/poll-admin.php:81 admin/poll-admin.php:103
+msgid "Change image"
+msgstr "Trocar imagem"
+
+#: admin/poll-admin.php:81 admin/poll-admin.php:103
+msgid "Select image"
+msgstr "Selecionar imagem"
+
+#: admin/poll-admin.php:82
+msgid "Drag to reorder"
+msgstr "Arraste para reordenar"
+
+#: admin/poll-admin.php:85
+msgid "Remove image"
+msgstr "Remover imagem"
+
+#: admin/poll-admin.php:89
+msgid "Move up"
+msgstr "Mover para cima"
+
+#: admin/poll-admin.php:90
+msgid "Move down"
+msgstr "Mover para baixo"
+
+#: admin/poll-admin.php:91
+msgid "Remove answer"
+msgstr "Remover resposta"
+
+#: admin/poll-admin.php:103
+msgid "Use image"
+msgstr "Usar imagem"
+
+#: admin/poll-admin.php:113 admin/poll-admin.php:197 api/poll-api.php:21
+#: api/poll-api.php:35 api/poll-api.php:45 classes/poll-storage.php:165
+msgid "Invalid poll parameters"
+msgstr "Parâmetros de votação da enquete inválidos"
+
+#: admin/poll-admin.php:123
+msgid ""
+"Please complete all required poll fields. At least two answers are required."
+msgstr ""
+"Preencha todos os campos obrigatórios da enquete. São necessárias pelo menos "
+"duas respostas."
+
+#: admin/poll-admin.php:154
+msgid ""
+"Poll data migration is pending. It will resume automatically; existing data "
+"is preserved."
+msgstr ""
+"A migração das enquetes está pendente. Ela será retomada automaticamente; os "
+"dados existentes estão preservados."
+
+#: admin/poll-admin.php:159 admin/poll-admin.php:165
+msgid "Poll Settings"
+msgstr "Configurações das Enquetes"
+
+#: admin/poll-admin.php:159 admin/poll-block.php:10
+msgid "Settings"
+msgstr "Configurações"
+
+#: admin/poll-admin.php:166
+msgid "Settings saved."
+msgstr "Configurações salvas."
+
+#: admin/poll-admin.php:170 admin/poll-type.php:144
+msgid "Not set"
+msgstr "Não setada"
+
+#. translators: %d: Number of hours between modal appearances.
+#: admin/poll-admin.php:173
+#, php-format
+msgid "Every %d hour"
+msgid_plural "Every %d hours"
+msgstr[0] "A cada %d hora"
+msgstr[1] "A cada %d horas"
+
+#: admin/poll-admin.php:175
 msgid "Modal Interval for Voting"
 msgstr "Intervalo da Modal para Votação"
 
-#: acf/fields.php:308
-msgid "Periodicity that the poll modal appears to the user."
-msgstr "Periodicidade que a modal da enquete aparece para o usuário."
+#: admin/poll-admin.php:175
+msgid ""
+"How often the poll modal can reappear on the same browser. Not set allows it "
+"to reappear without an interval."
+msgstr ""
+"Intervalo para a modal da enquete reaparecer no mesmo navegador. Sem "
+"definição, ela pode reaparecer sem intervalo."
 
-#: acf/fields.php:336
+#: admin/poll-admin.php:177
+msgid "Select the thumbnail size"
+msgstr "Selecione o tamanho da miniatura"
+
+#: admin/poll-admin.php:177
+msgid ""
+"WordPress image size used for poll answers. A larger file does not change "
+"its display size; adjust your CSS if needed."
+msgstr ""
+"Tamanho de imagem do WordPress usado nas respostas. Um arquivo maior não "
+"altera o tamanho de exibição; ajuste seu CSS se necessário."
+
+#: admin/poll-admin.php:178
 msgid "Use own CSS"
 msgstr "Usar CSS próprio"
 
-#: acf/fields.php:339
+#: admin/poll-admin.php:178
 msgid ""
-"To use your own CSS and disable the default plugin styles, check this option"
+"Disables the default poll stylesheet so your theme can provide all styles. "
+"You can also keep it enabled and override the CSS variables shown in Help."
 msgstr ""
-"Para utilizar seu próprio CSS e desabilitar os estilos padrões do plugin, "
-"marque esta opção"
+"Desabilita o CSS padrão das enquetes para que seu tema forneça todos os "
+"estilos. Você também pode manter o CSS padrão e personalizar as variáveis "
+"disponíveis na Ajuda."
 
-#: acf/fields.php:355
-msgid "Select the thumbnail size"
-msgstr "Selecione o tamanho da tumbnail"
+#: admin/poll-admin.php:182
+msgid "Data on uninstall"
+msgstr "Dados ao desinstalar"
 
-#: acf/fields.php:358
+#: admin/poll-admin.php:182
+msgid "Keep data (default)"
+msgstr "Manter os dados (padrão)"
+
+#: admin/poll-admin.php:182
+msgid "Permanently delete plugin data"
+msgstr "Excluir permanentemente os dados do plugin"
+
+#: admin/poll-admin.php:182
 msgid ""
-"When a poll has images, select the size that will be shown. Atention: you "
-"will have to adjust your css"
+"Applies only when the plugin is deleted, not deactivated. Keeping data lets "
+"you reinstall without losing polls and votes."
 msgstr ""
-"Quando uma enquete tiver imagens, selecione o tamanho que será mostrado. "
-"Atenção: você terá que ajustar seu css"
+"Aplicado somente ao excluir o plugin. Ao manter os dados, você pode "
+"reinstalá-lo sem perder enquetes e votos. A desativação preserva os dados."
 
-#: acf/fields.php:401 admin/poll-type.php:14 admin/poll-widget.php:28
+#: admin/poll-admin.php:183
+msgid ""
+"When you delete this plugin, all Onyx polls, answers, votes and settings "
+"will be permanently deleted. This cannot be undone. Other posts, pages and "
+"media will be preserved. Deactivation does not delete data."
+msgstr ""
+"Ao excluir este plugin, todas as enquetes, respostas, votos e configurações "
+"do Onyx serão apagados permanentemente. Esta ação não poderá ser desfeita. "
+"Outros posts, páginas e mídias serão preservados. Desativar o plugin não "
+"apaga os dados."
+
+#: admin/poll-admin.php:184
+msgid "I understand that deleting the plugin will permanently erase its data."
+msgstr "Entendo que excluir o plugin apagará permanentemente os dados dele."
+
+#: admin/poll-admin.php:194 admin/poll-admin.php:203
+msgid "You are not allowed to change these settings."
+msgstr "Você não tem permissão para alterar estas configurações."
+
+#: admin/poll-admin.php:204
+msgid ""
+"Confirm that you understand the permanent deletion warning before saving."
+msgstr ""
+"Confirme que você compreende o aviso de exclusão permanente antes de salvar."
+
+#: admin/poll-block.php:9 admin/poll-type.php:23 admin/poll-widget.php:28
 #: admin/poll-widget.php:58
 msgid "Poll"
 msgstr "Enquete"
 
-#: acf/fields.php:423 admin/poll-widget.php:62
+#: admin/poll-block.php:10 admin/poll-widget.php:62
 msgid "Style"
 msgstr "Estilo"
 
-#: acf/fields.php:435 admin/poll-widget.php:98
+#: admin/poll-block.php:10 admin/poll-widget.php:98
 msgid "Bar style"
 msgstr "Em barras"
 
-#: acf/fields.php:436
+#: admin/poll-block.php:11
 msgid "Twitter"
 msgstr "Twitter"
 
-#: admin/poll-block.php:13
-msgid "Onyx Poll"
-msgstr "Onyx Poll"
+#: admin/poll-block.php:11 classes/poll-helpers.php:92
+msgid "votes"
+msgstr "votos"
 
-#: admin/poll-block.php:14
+#: admin/poll-block.php:13
 msgid "Insert a poll in the post"
 msgstr "Inserir uma enquete no post"
 
-#: admin/poll-type.php:15
+#: admin/poll-block.php:14
+msgid "Select a poll to preview it."
+msgstr "Selecione uma enquete para visualizar a prévia."
+
+#: admin/poll-settings-help.php:6
+msgid "Not recorded yet"
+msgstr "Ainda não registrada"
+
+#: admin/poll-settings-help.php:12
+msgid "Poll cron status"
+msgstr "Status do cron das enquetes"
+
+#: admin/poll-settings-help.php:14
+msgid "Frequency"
+msgstr "Frequência"
+
+#: admin/poll-settings-help.php:14
+msgid "Every hour"
+msgstr "A cada hora"
+
+#: admin/poll-settings-help.php:15
+msgid "Last successful check"
+msgstr "Última verificação com sucesso"
+
+#: admin/poll-settings-help.php:16
+msgid "Next scheduled check"
+msgstr "Próxima verificação agendada"
+
+#: admin/poll-settings-help.php:16
+msgid "Not scheduled"
+msgstr "Não agendada"
+
+#: admin/poll-settings-help.php:17
+msgid "Trigger"
+msgstr "Acionamento"
+
+#: admin/poll-settings-help.php:17
+msgid "WP-Cron page trigger disabled; an external scheduler is required."
+msgstr "Acionamento por visitas desativado; é necessário um agendador externo."
+
+#: admin/poll-settings-help.php:17
+msgid "WP-Cron, triggered by site visits"
+msgstr "WP-Cron, acionado por visitas ao site"
+
+#: admin/poll-settings-help.php:18
+msgid "Site timezone"
+msgstr "Fuso horário do site"
+
+#: admin/poll-settings-help.php:21
+msgid "Last attempt"
+msgstr "Última tentativa"
+
+#: admin/poll-settings-help.php:21
+msgid "Plugin REST endpoint"
+msgstr "Endpoint REST do plugin"
+
+#: admin/poll-settings-help.php:24 classes/poll-cron.php:79
+msgid ""
+"Onyx Poll checks expired polls every hour. WP-Cron depends on site visits "
+"unless your server runs it externally. Poll voting also checks the deadline "
+"immediately."
+msgstr ""
+"O Onyx Poll verifica enquetes expiradas a cada hora. O WP-Cron depende de "
+"visitas ao site, a menos que o servidor o execute externamente. A votação "
+"também confere o prazo de encerramento imediatamente."
+
+#: admin/poll-settings-help.php:25
+msgid ""
+"This version starts recording executions after the update. No earlier "
+"execution history is available."
+msgstr ""
+"Esta versão passa a registrar as execuções após a atualização. Não há "
+"histórico das execuções anteriores."
+
+#: admin/poll-settings-help.php:27
+msgid ""
+"Open WordPress Site Health to check scheduled events and loopback requests."
+msgstr ""
+"Abrir o Diagnóstico do WordPress para verificar eventos agendados e "
+"requisições de loopback."
+
+#: admin/poll-settings-help.php:29
+msgid "Help and frequently asked questions"
+msgstr "Ajuda e perguntas frequentes"
+
+#: admin/poll-settings-help.php:30
+msgid "Do I need ACF or ACF PRO?"
+msgstr "Preciso do ACF ou do ACF PRO?"
+
+#: admin/poll-settings-help.php:31
+msgid ""
+"No. Onyx Poll has its own editor, settings and database tables. Existing "
+"polls are migrated automatically and keep their IDs, answers, images and "
+"votes."
+msgstr ""
+"Não. O Onyx Poll possui editor, configurações e tabelas próprias. As "
+"enquetes existentes são migradas automaticamente e mantêm seus IDs, "
+"respostas, imagens e votos."
+
+#: admin/poll-settings-help.php:33
+msgid "How do I add a poll to a post?"
+msgstr "Como inserir uma enquete em um post?"
+
+#: admin/poll-settings-help.php:34
+msgid ""
+"Insert the Onyx Poll block, select a poll and choose its style. You can also "
+"use a shortcode: without an ID it shows the latest published poll; with an "
+"ID it shows that specific poll."
+msgstr ""
+"Insira o bloco Onyx Poll, selecione uma enquete e escolha o estilo. Você "
+"também pode usar um shortcode: sem ID, ele mostra a última enquete "
+"publicada; com ID, mostra a enquete indicada."
+
+#: admin/poll-settings-help.php:36
+msgid ""
+"Replace 85 with your poll ID. Available alignment classes: left, right and "
+"full. Styles: twitter and standard. Copy the shortcode from the poll list."
+msgstr ""
+"Substitua 85 pelo ID da sua enquete. Classes de alinhamento: left, right e "
+"full. Estilos: twitter e standard. Você pode copiar o shortcode na lista de "
+"enquetes."
+
+#: admin/poll-settings-help.php:38
+msgid "How do I add a poll to a sidebar?"
+msgstr "Como inserir uma enquete na barra lateral?"
+
+#: admin/poll-settings-help.php:39
+msgid ""
+"If your theme supports widget areas, go to Appearance > Widgets and add the "
+"Poll widget. Select the poll and style in its settings."
+msgstr ""
+"Se o tema oferecer áreas de widgets, acesse Aparência > Widgets e adicione o "
+"widget Enquete. Selecione a enquete e o estilo nas configurações dele."
+
+#: admin/poll-settings-help.php:41
+msgid "How do I customize the appearance?"
+msgstr "Como personalizar a aparência?"
+
+#: admin/poll-settings-help.php:42
+msgid ""
+"Keep the default stylesheet enabled to customize these variables in your "
+"theme CSS. To replace all plugin styles, enable Use own CSS and provide a "
+"complete stylesheet."
+msgstr ""
+"Mantenha o CSS padrão habilitado para personalizar estas variáveis no CSS do "
+"tema. Para substituir todos os estilos do plugin, habilite Usar CSS próprio "
+"e forneça uma folha de estilos completa."
+
+#: admin/poll-settings-help.php:45
+msgid "What should I do if the cron is delayed?"
+msgstr "O que fazer se o cron estiver atrasado?"
+
+#: admin/poll-settings-help.php:46
+msgid ""
+"A site with few visits may run WP-Cron late. Check WordPress Site Health for "
+"scheduled event or loopback errors. For predictable execution, ask your host "
+"to call wp-cron.php every five minutes. The Onyx task itself remains hourly."
+msgstr ""
+"Sites com poucas visitas podem executar o WP-Cron com atraso. Consulte o "
+"Diagnóstico do WordPress para verificar eventos agendados e erros de "
+"loopback. Para executar de forma previsível, configure na hospedagem uma "
+"chamada a wp-cron.php a cada cinco minutos. A tarefa do Onyx continua sendo "
+"executada a cada hora."
+
+#: admin/poll-settings-help.php:47
+msgid ""
+"Replace https://example.com with your WordPress site URL in these examples."
+msgstr ""
+"Substitua https://example.com pelo endereço do seu site WordPress nestes "
+"exemplos."
+
+#: admin/poll-settings-help.php:49
+msgid ""
+"Only after an external scheduler is configured and tested, you can disable "
+"the automatic page trigger in wp-config.php:"
+msgstr ""
+"Somente após configurar e testar o agendador externo, você pode desabilitar "
+"o acionamento automático por visitas em wp-config.php:"
+
+#: admin/poll-settings-help.php:51
+msgid ""
+"For compatibility, the plugin also keeps a direct hourly expiration "
+"endpoint. It runs only the Onyx check, not other WordPress tasks. Its "
+"executions are identified separately in the status above."
+msgstr ""
+"Por compatibilidade, o plugin também mantém um endpoint direto para "
+"verificar a expiração a cada hora. Ele executa apenas a verificação do Onyx. "
+"As demais tarefas do WordPress precisam de outro acionamento. As execuções "
+"pelo endpoint são identificadas no status acima."
+
+#: admin/poll-settings-help.php:53
+msgid "WordPress documentation: configuring a server scheduler"
+msgstr "Documentação do WordPress: configurar um agendador no servidor"
+
+#: admin/poll-settings-help.php:55
+msgid "Where are poll data and visitor data stored?"
+msgstr "Onde ficam os dados das enquetes e dos visitantes?"
+
+#: admin/poll-settings-help.php:56
+msgid ""
+"Rules, answers and vote counters use the plugin tables onyx_polls and "
+"onyx_poll_answers, with your WordPress database prefix. WordPress stores "
+"poll titles and publication status. The plugin stores no visitor IP "
+"addresses or usernames; browser cookies remember choices, voting intervals "
+"and modal dismissal."
+msgstr ""
+"Regras, respostas e contadores de votos usam as tabelas próprias onyx_polls "
+"e onyx_poll_answers, com o prefixo do seu banco WordPress. O WordPress "
+"armazena os títulos e o status de publicação. O plugin não armazena IPs nem "
+"nomes de visitantes; cookies no navegador lembram as escolhas, os intervalos "
+"de votação e o fechamento da modal."
+
+#: admin/poll-settings-help.php:58
+msgid "What happens when I delete the plugin?"
+msgstr "O que acontece ao excluir o plugin?"
+
+#: admin/poll-settings-help.php:59
+msgid ""
+"By default, data is kept for reinstallation. If you explicitly select "
+"permanent deletion, uninstall removes the two plugin tables, its own listed "
+"options and posts of type onyxpolls. Other posts and pages are preserved, "
+"including those with poll blocks or shortcodes, as are media files. Legacy "
+"custom fields are preserved. Deactivation never deletes poll data."
+msgstr ""
+"Por padrão, os dados são mantidos para reinstalação. Se você selecionar a "
+"exclusão permanente, a desinstalação remove as duas tabelas do plugin, a "
+"lista exata de opções próprias e os posts do tipo onyxpolls. Outros posts e "
+"páginas são preservados, inclusive os que contêm blocos ou shortcodes de "
+"enquetes, assim como os arquivos de mídia. Os campos antigos também são "
+"preservados. Desativar o plugin nunca exclui as enquetes."
+
+#: admin/poll-type.php:24
 msgid "Polls"
 msgstr "Enquetes"
 
-#: admin/poll-type.php:37
+#: admin/poll-type.php:51
 msgid "All polls"
 msgstr "Todas as enquetes"
 
-#: admin/poll-type.php:38
+#: admin/poll-type.php:52
 msgid "Add new"
 msgstr "Adicionar nova"
 
-#: admin/poll-type.php:39
+#: admin/poll-type.php:53
 msgid "Add new poll"
 msgstr "Adicionar nova enquete"
 
-#: admin/poll-type.php:40
+#: admin/poll-type.php:54
 msgid "Edit poll"
 msgstr "Editar enquete"
 
-#: admin/poll-type.php:41
+#: admin/poll-type.php:55
 msgid "Add poll"
 msgstr "Adicionar enquete"
 
-#: admin/poll-type.php:42
+#: admin/poll-type.php:56
 msgid "View poll"
 msgstr "Ver enquete"
 
-#: admin/poll-type.php:43
+#: admin/poll-type.php:57
 msgid "Search poll"
 msgstr "Buscar enquete"
 
-#: admin/poll-type.php:44
+#: admin/poll-type.php:58
 msgid "No polls found"
 msgstr "Nenhuma enquete encontrada"
 
-#: admin/poll-type.php:45
+#: admin/poll-type.php:59
 msgid "No poll found in trash"
 msgstr "Nenhuma enquete encontrada na lixeira"
 
-#: admin/poll-type.php:46
+#: admin/poll-type.php:60
 msgid "Poll father"
 msgstr "Enquete pai"
 
-#: admin/poll-type.php:53
+#: admin/poll-type.php:67
 msgid "Add new polls"
 msgstr "Inclusão de novas enquetes"
 
-#: admin/poll-type.php:81
-msgid "Poll Settings"
-msgstr "Configurações das Enquetes"
-
-#: admin/poll-type.php:82
-msgid "Settings"
-msgstr "Configurações"
-
-#: admin/poll-type.php:98
+#: admin/poll-type.php:96
 msgid "ID"
 msgstr "ID"
 
-#: admin/poll-type.php:100
+#: admin/poll-type.php:98
 msgid "Modal"
 msgstr "Modal"
 
-#: admin/poll-type.php:101
+#: admin/poll-type.php:99
 msgid "Status"
 msgstr "Status"
 
-#: admin/poll-type.php:102
+#: admin/poll-type.php:100
 msgid "End date"
 msgstr "Expiração"
-
-#: admin/poll-type.php:144
-msgid "Not set"
-msgstr "Não setada"
 
 #: admin/poll-widget.php:30
 msgid "Show ACF Onyx Poll"
@@ -284,58 +700,125 @@ msgstr "Última adicionada"
 msgid "Twitter style"
 msgstr "Twitter"
 
-#: api/poll-api.php:28
-msgid "Vote was submitted successfully"
-msgstr "Seu voto foi realizado com sucesso"
-
-#: api/poll-api.php:29
-msgid "Poll vote error, try again"
-msgstr "Erro na votação, tente novamente"
-
-#: api/poll-api.php:30
-msgid "Invalid poll parameters"
-msgstr "Parâmetros de votação da enquete inválidos"
-
-#: api/poll-api.php:31
-msgid "Non-existent or expired poll"
-msgstr "Enquete inexistente ou expirada"
-
-#: api/poll-api.php:32
-msgid "You have already voted in this poll"
-msgstr "Você já votou nesta enquete"
-
-#: api/poll-api.php:33
+#: api/poll-api.php:26
 msgid "No polls founded with ID "
 msgstr "Nenhuma enquete com ID "
 
-#: classes/poll-helpers.php:152
+#: api/poll-api.php:42 classes/poll-storage.php:162
+msgid "Non-existent or expired poll"
+msgstr "Enquete inexistente ou expirada"
+
+#: api/poll-api.php:55
+msgid "You have already voted in this poll"
+msgstr "Você já votou nesta enquete"
+
+#: api/poll-api.php:55
+msgid "Vote was submitted successfully"
+msgstr "Seu voto foi realizado com sucesso"
+
+#: classes/poll-cron.php:33 classes/poll-helpers.php:24
+#: classes/poll-helpers.php:28
+msgid "The poll expiration check could not be completed."
+msgstr "Não foi possível concluir a verificação de expiração das enquetes."
+
+#: classes/poll-cron.php:59
+msgid "Running normally"
+msgstr "Funcionando normalmente"
+
+#: classes/poll-cron.php:60
+msgid "Awaiting first recorded run"
+msgstr "Aguardando a primeira execução registrada"
+
+#: classes/poll-cron.php:61
+msgid "Check in progress"
+msgstr "Verificação em andamento"
+
+#: classes/poll-cron.php:62
+msgid "Scheduled check is overdue"
+msgstr "Verificação agendada em atraso"
+
+#: classes/poll-cron.php:63
+msgid "Last check failed"
+msgstr "A última verificação falhou"
+
+#: classes/poll-cron.php:64
+msgid "Event is not scheduled"
+msgstr "Evento não agendado"
+
+#: classes/poll-cron.php:70
+msgid "Onyx Poll scheduled checks"
+msgstr "Verificações agendadas do Onyx Poll"
+
+#: classes/poll-cron.php:80
+msgid "View poll cron status"
+msgstr "Ver status do cron das enquetes"
+
+#: classes/poll-helpers.php:91
 msgid "Vote"
 msgstr "Votar"
 
-#: classes/poll-helpers.php:153
-msgid "votes"
-msgstr "votos"
-
-#: classes/poll-helpers.php:154
+#: classes/poll-helpers.php:93
 msgid "Views result"
 msgstr "Ver resultado"
 
-#: classes/poll-helpers.php:156
+#: classes/poll-helpers.php:95
 msgid "Vote was submitted successfully."
 msgstr "Seu voto foi realizado com sucesso."
 
-#: classes/poll-helpers.php:157
+#: classes/poll-helpers.php:96
 msgid "Poll vote error, try again."
 msgstr "Erro na votação, tente novamente."
 
-#: onyx-poll.php:75
+#: classes/poll-storage.php:176
+msgid ""
+"This poll changed while you were editing it. Reload the page before saving "
+"again."
+msgstr ""
+"Esta enquete mudou durante a edição. Recarregue a página antes de salvar "
+"novamente."
+
+#: classes/poll-storage.php:214
+msgid "Unable to save poll data. Please try again."
+msgstr "Não foi possível salvar os dados da enquete. Tente novamente."
+
+#: onyx-poll.php:86
 msgid "Invalid poll ID"
 msgstr "ID da enquete inválida"
 
-#: onyx-poll.php:112
-msgid "Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active."
-msgstr ""
-"Desculpe, mas o ACF Onyx Poll requer o que ACF PRO esteja instalado e ativo."
+#~ msgid "Periodicity that the poll modal appears to the user."
+#~ msgstr "Periodicidade que a modal da enquete aparece para o usuário."
+
+#~ msgid ""
+#~ "To use your own CSS and disable the default plugin styles, check this "
+#~ "option"
+#~ msgstr ""
+#~ "Para utilizar seu próprio CSS e desabilitar os estilos padrões do plugin, "
+#~ "marque esta opção"
+
+#~ msgid ""
+#~ "When a poll has images, select the size that will be shown. Atention: you "
+#~ "will have to adjust your css"
+#~ msgstr ""
+#~ "Quando uma enquete tiver imagens, selecione o tamanho que será mostrado. "
+#~ "Atenção: você terá que ajustar seu css"
+
+#~ msgid "Remove"
+#~ msgstr "Remover"
+
+#~ msgid "ACF Onyx Poll"
+#~ msgstr "ACF Onyx Poll"
+
+#~ msgid "Create polls with ACF PRO"
+#~ msgstr "Crie enquetes com o ACF PRO"
+
+#~ msgid "Poll vote error, try again"
+#~ msgstr "Erro na votação, tente novamente"
+
+#~ msgid ""
+#~ "Sorry, but ACF Onyx Poll requires that ACF PRO is installed and active."
+#~ msgstr ""
+#~ "Desculpe, mas o ACF Onyx Poll requer o que ACF PRO esteja instalado e "
+#~ "ativo."
 
 #~ msgid "https://macola.com.br"
 #~ msgstr "https://macola.com.br"

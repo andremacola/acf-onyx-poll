@@ -1,0 +1,22 @@
+.onyx-poll-block-controls {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+.onyx-poll-block-controls > .components-base-control {
+	margin-bottom: 0;
+}
+.onyx-poll-block-empty-controls {
+	padding: 24px;
+}
+.wp-block-acf-acf-onyx-poll {
+	min-width: 0;
+}
+.onyx-poll.onyx-poll-editor-preview {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	margin: 0;
+	pointer-events: none;
+}
