@@ -16,7 +16,7 @@ class OnyxPollsAdmin {
 	}
 
 	public static function limits() {
-		return array(1 => __('Free Vote', 'acf-onyx-poll'), 2 => __('Per device', 'acf-onyx-poll'),
+		return array(1 => __('Unlimited voting', 'acf-onyx-poll'), 2 => __('Per device', 'acf-onyx-poll'),
 			30 => __('Every 30 minutes', 'acf-onyx-poll'), 60 => __('Every 1 hour', 'acf-onyx-poll'),
 			120 => __('Every 2 hours', 'acf-onyx-poll'), 180 => __('Every 3 hours', 'acf-onyx-poll'),
 			240 => __('Every 4 hours', 'acf-onyx-poll'), 300 => __('Every 5 hours', 'acf-onyx-poll'),
@@ -58,20 +58,20 @@ class OnyxPollsAdmin {
 		$answers = $poll['answers'];
 		while (count($answers) < 2) { $answers[] = array('id' => 0, 'answer' => '', 'image_id' => 0, 'votes' => 0); }
 		foreach ($answers as $i => $answer) { $this->row($answer, $i); }
-		echo '</tbody></table></div><p class="onyx-add-row"><button type="button" class="button button-primary" data-onyx-add>' . esc_html__('Add Row', 'acf-onyx-poll') . '</button></p>';
+		echo '</tbody></table></div><p class="onyx-add-row"><button type="button" class="button button-primary" data-onyx-add>' . esc_html__('Add row', 'acf-onyx-poll') . '</button></p>';
 		echo '<template id="onyx-answer-template">';
 		$this->row(array('id' => 0, 'answer' => '', 'image_id' => 0, 'votes' => 0), '__index__');
 		echo '</template><div class="onyx-admin-grid">';
-		$this->select('limit_vote', __('Limit voting', 'acf-onyx-poll'), $poll['limit_vote'], self::limits(), __('Controls repeat votes using a browser cookie. Free Vote allows unlimited votes.', 'acf-onyx-poll'));
-		$this->select('results', __('Results', 'acf-onyx-poll'), $poll['results'], array(1 => __('Show in percentage', 'acf-onyx-poll'), 2 => __('Show in numbers', 'acf-onyx-poll'), 3 => __('Show both', 'acf-onyx-poll')), __('Display answer totals as percentages, numbers or both.', 'acf-onyx-poll'));
+		$this->select('limit_vote', __('Limit voting', 'acf-onyx-poll'), $poll['limit_vote'], self::limits(), __('Controls repeat votes using a browser cookie. Unlimited voting allows unlimited votes.', 'acf-onyx-poll'));
+		$this->select('results', __('Results', 'acf-onyx-poll'), $poll['results'], array(1 => __('Show percentages', 'acf-onyx-poll'), 2 => __('Show vote counts', 'acf-onyx-poll'), 3 => __('Show both', 'acf-onyx-poll')), __('Display answer totals as percentages, numbers or both.', 'acf-onyx-poll'));
 		$end = $poll['end'] ? substr(str_replace(' ', 'T', $poll['end']), 0, 16) : '';
 		/* translators: %s: Site timezone name or UTC offset. */
 		$end_help = sprintf(__('Voting closes at this time in the site timezone (%s), even if cron is delayed.', 'acf-onyx-poll'), wp_timezone_string());
-		echo '<label class="onyx-admin-field"><span>' . esc_html__('End of Poll', 'acf-onyx-poll') . '</span><input type="datetime-local" aria-label="' . esc_attr__('End of Poll', 'acf-onyx-poll') . '" aria-describedby="onyx-end-help" name="onyx_poll[end]" value="' . esc_attr($end) . '" required><small id="onyx-end-help">' . esc_html($end_help) . '</small></label>';
-		echo '<label class="onyx-admin-field"><span>' . esc_html__('Total votes', 'acf-onyx-poll') . '</span><input id="onyx-total" type="number" value="' . esc_attr($poll['total']) . '" readonly aria-readonly="true"><small>' . esc_html__('Calculated from the answers.', 'acf-onyx-poll') . '</small></label>';
-		$this->toggle('images', __('Enable Images', 'acf-onyx-poll'), $poll['images'], __('Show an image with each answer. Every answer needs an image when enabled.', 'acf-onyx-poll'));
-		$this->toggle('modal', __('Poll Modal', 'acf-onyx-poll'), $poll['modal'], __('Allow this poll in the site modal. The latest active poll with this option is used.', 'acf-onyx-poll'));
-		$this->toggle('show_results', __('Show Results', 'acf-onyx-poll'), $poll['show_results'], __('Let visitors view results before the deadline. Expired polls always show results.', 'acf-onyx-poll'));
+		echo '<label class="onyx-admin-field"><span>' . esc_html__('Poll end date', 'acf-onyx-poll') . '</span><input type="datetime-local" aria-label="' . esc_attr__('Poll end date', 'acf-onyx-poll') . '" aria-describedby="onyx-end-help" name="onyx_poll[end]" value="' . esc_attr($end) . '" required><small id="onyx-end-help">' . esc_html($end_help) . '</small></label>';
+		echo '<label class="onyx-admin-field"><span>' . esc_html__('Total votes', 'acf-onyx-poll') . '</span><input id="onyx-total" type="number" value="' . esc_attr($poll['total']) . '" readonly aria-readonly="true"><small>' . esc_html__('Calculated by adding the votes for all answers.', 'acf-onyx-poll') . '</small></label>';
+		$this->toggle('images', __('Enable images', 'acf-onyx-poll'), $poll['images'], __('Show an image with each answer. Every answer needs an image when enabled.', 'acf-onyx-poll'));
+		$this->toggle('modal', __('Poll modal', 'acf-onyx-poll'), $poll['modal'], __('Allow this poll in the site modal. The latest active poll with this option is used.', 'acf-onyx-poll'));
+		$this->toggle('show_results', __('Show results', 'acf-onyx-poll'), $poll['show_results'], __('Let visitors view results before the deadline. Expired polls always show results.', 'acf-onyx-poll'));
 		$this->toggle('expired', __('Expired', 'acf-onyx-poll'), $poll['expired'], __('Close voting manually. To reopen, disable this option and set a future deadline.', 'acf-onyx-poll'));
 		echo '</div></div>';
 	}
@@ -110,7 +110,7 @@ class OnyxPollsAdmin {
 		$signature = isset($_POST['onyx_poll_signature']) ? sanitize_text_field(wp_unslash($_POST['onyx_poll_signature'])) : '';
 		$snapshot = $json ? json_decode($json, true) : null;
 		if (!$snapshot || !isset($snapshot['version'], $snapshot['answers']) || !hash_equals(hash_hmac('sha256', $id . ':' . $json, wp_salt('nonce')), $signature)) {
-			$this->error = __('Invalid poll parameters', 'acf-onyx-poll'); return;
+			$this->error = __('Invalid poll parameters.', 'acf-onyx-poll'); return;
 		}
 		$input = isset($_POST['onyx_poll']) ? wp_unslash($_POST['onyx_poll']) : array();
 		$validated = self::validate($input);
@@ -120,7 +120,7 @@ class OnyxPollsAdmin {
 	}
 
 	public static function validate($input) {
-		$invalid = new WP_Error('onyx_poll_invalid', __('Please complete all required poll fields. At least two answers are required.', 'acf-onyx-poll'));
+		$invalid = new WP_Error('onyx_poll_invalid', __('Complete all required poll fields. At least two answers are required.', 'acf-onyx-poll'));
 		if (!is_array($input) || !isset($input['answers']) || !is_array($input['answers']) || count($input['answers']) < 2) { return $invalid; }
 		$limit = isset($input['limit_vote']) && is_scalar($input['limit_vote']) ? (int) $input['limit_vote'] : 0;
 		$results = isset($input['results']) && is_scalar($input['results']) ? (int) $input['results'] : 0;
@@ -156,13 +156,13 @@ class OnyxPollsAdmin {
 	}
 
 	public function menu() {
-		add_submenu_page('edit.php?post_type=onyxpolls', __('Poll Settings', 'acf-onyx-poll'), __('Settings', 'acf-onyx-poll'), 'edit_posts', 'onyx-poll-settings', array($this, 'settings_form'));
+		add_submenu_page('edit.php?post_type=onyxpolls', __('Poll settings', 'acf-onyx-poll'), __('Settings', 'acf-onyx-poll'), 'edit_posts', 'onyx-poll-settings', array($this, 'settings_form'));
 	}
 
 	public function settings_form() {
 		if (!current_user_can('edit_posts')) { return; }
 		$settings = OnyxPollsStorage::settings();
-		echo '<div class="wrap"><h1>' . esc_html__('Poll Settings', 'acf-onyx-poll') . '</h1>';
+		echo '<div class="wrap"><h1>' . esc_html__('Poll settings', 'acf-onyx-poll') . '</h1>';
 		if (isset($_GET['updated'])) { echo '<div class="notice notice-success"><p>' . esc_html__('Settings saved.', 'acf-onyx-poll') . '</p></div>'; }
 		echo '<form class="onyx-admin onyx-settings" action="' . esc_url(admin_url('admin-post.php')) . '" method="post"><input type="hidden" name="action" value="onyx_poll_settings">';
 		wp_nonce_field('onyx_poll_settings');
@@ -172,10 +172,10 @@ class OnyxPollsAdmin {
 			/* translators: %d: Number of hours between modal appearances. */
 			$intervals[$hours] = sprintf(_n('Every %d hour', 'Every %d hours', $hours, 'acf-onyx-poll'), $hours);
 		}
-		$this->select('modal_time', __('Modal Interval for Voting', 'acf-onyx-poll'), $settings['modal_time'], $intervals, __('How often the poll modal can reappear on the same browser. Not set allows it to reappear without an interval.', 'acf-onyx-poll'));
+		$this->select('modal_time', __('Voting modal interval', 'acf-onyx-poll'), $settings['modal_time'], $intervals, __('How often the poll modal can reappear on the same browser. Not set allows it to reappear without an interval.', 'acf-onyx-poll'));
 		$sizes = array_keys(wp_get_registered_image_subsizes());
 		$this->select('image_size', __('Select the thumbnail size', 'acf-onyx-poll'), $settings['image_size'], array_combine($sizes, $sizes), __('WordPress image size used for poll answers. A larger file does not change its display size; adjust your CSS if needed.', 'acf-onyx-poll'));
-		$this->toggle('css', __('Use own CSS', 'acf-onyx-poll'), $settings['css'], __('Disables the default poll stylesheet so your theme can provide all styles. You can also keep it enabled and override the CSS variables shown in Help.', 'acf-onyx-poll'));
+		$this->toggle('css', __('Use custom CSS', 'acf-onyx-poll'), $settings['css'], __('Disables the default poll stylesheet so your theme can provide all styles. You can also keep it enabled and override the CSS variables shown in Help.', 'acf-onyx-poll'));
 		echo '</div>';
 		if (current_user_can('manage_options')) {
 			echo '<hr>';
@@ -194,7 +194,7 @@ class OnyxPollsAdmin {
 		if (!current_user_can('edit_posts')) { wp_die(esc_html__('You are not allowed to change these settings.', 'acf-onyx-poll')); }
 		check_admin_referer('onyx_poll_settings');
 		$input = isset($_POST['onyx_poll']) ? wp_unslash($_POST['onyx_poll']) : array();
-		if (!is_array($input)) { wp_die(esc_html__('Invalid poll parameters', 'acf-onyx-poll')); }
+		if (!is_array($input)) { wp_die(esc_html__('Invalid poll parameters.', 'acf-onyx-poll')); }
 		$settings = OnyxPollsStorage::settings();
 		$settings['modal_time'] = isset($input['modal_time']) && is_scalar($input['modal_time']) && in_array((int) $input['modal_time'], array(1, 2, 3, 4, 5, 12, 24), true) ? (int) $input['modal_time'] : '';
 		$settings['css'] = empty($input['css']) ? 0 : 1;

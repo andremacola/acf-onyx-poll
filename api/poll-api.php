@@ -18,12 +18,15 @@ class OnyxPollsApi extends WP_REST_Controller {
 
 	public function list($req) {
 		if (isset($req['id']) && (!is_scalar($req['id']) || !preg_match('/^\d+$/', (string) $req['id']))) {
-			return new WP_Error('error', __('Invalid poll parameters', 'acf-onyx-poll'), array('status' => 400));
+			return new WP_Error('error', __('Invalid poll parameters.', 'acf-onyx-poll'), array('status' => 400));
 		}
 		$id = isset($req['id']) ? absint($req['id']) : 0;
 		if ($id) { OnyxPollsStorage::get($id); }
 		$ids = OnyxPollsStorage::ids($id, false, !empty($req['modal']), !empty($req['modal']) ? 1 : 10);
-		if (!$ids) { return new WP_Error('error', __('No polls founded with ID ', 'acf-onyx-poll') . $id, array('status' => 200)); }
+		if (!$ids) {
+			/* translators: %d: Poll ID. */
+			return new WP_Error('error', sprintf(__('No poll found with ID %d.', 'acf-onyx-poll'), $id), array('status' => 200));
+		}
 		$response = array();
 		foreach ($ids as $poll_id) { $response[] = $this->poll_data($poll_id); }
 		return new WP_REST_Response(count($response) === 1 ? $response[0] : $response, 200);
@@ -32,17 +35,17 @@ class OnyxPollsApi extends WP_REST_Controller {
 	public function vote($req) {
 		foreach (array('poll', 'choice') as $key) {
 			if (!isset($req[$key]) || !is_scalar($req[$key]) || !preg_match('/^[1-9]\d*$/', (string) $req[$key])) {
-				return new WP_Error('error', __('Invalid poll parameters', 'acf-onyx-poll'), array('status' => 400));
+				return new WP_Error('error', __('Invalid poll parameters.', 'acf-onyx-poll'), array('status' => 400));
 			}
 		}
 		$id = absint($req['poll']);
 		$choice = absint($req['choice']);
 		$poll = OnyxPollsStorage::get($id);
 		if (!$poll || get_post_status($id) !== 'publish' || OnyxPollsStorage::expired($poll)) {
-			return new WP_Error('error', __('Non-existent or expired poll', 'acf-onyx-poll'), array('status' => 400));
+			return new WP_Error('error', __('This poll does not exist or has expired.', 'acf-onyx-poll'), array('status' => 400));
 		}
 		if (!isset($poll['answers'][$choice - 1])) {
-			return new WP_Error('error', __('Invalid poll parameters', 'acf-onyx-poll'), array('status' => 400));
+			return new WP_Error('error', __('Invalid poll parameters.', 'acf-onyx-poll'), array('status' => 400));
 		}
 		$blocked = $poll['limit_vote'] !== 1 && isset($_COOKIE['onyx_poll_limit_' . $id]);
 		if (!$blocked) {
@@ -52,7 +55,7 @@ class OnyxPollsApi extends WP_REST_Controller {
 		}
 		return new WP_REST_Response(array_merge($this->poll_data($id), array(
 			'code' => $blocked ? 'not_allowed' : 'success', 'id' => $id, 'poll' => $id, 'choice' => $choice,
-			'message' => $blocked ? __('You have already voted in this poll', 'acf-onyx-poll') : __('Vote was submitted successfully', 'acf-onyx-poll'),
+			'message' => $blocked ? __('You have already voted in this poll.', 'acf-onyx-poll') : __('Your vote was submitted successfully.', 'acf-onyx-poll'),
 			'voted' => !$blocked, 'data' => array('status' => 200))), 200);
 	}
 

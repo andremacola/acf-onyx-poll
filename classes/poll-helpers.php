@@ -89,11 +89,12 @@ Class OnyxPolls {
 				'modaltime' => OnyxPollsStorage::settings()['modal_time'],
 				'labels' => array(
 					'vote'    => __('Vote', 'acf-onyx-poll'),
+					'vote_noun' => _x('vote', 'vote count noun', 'acf-onyx-poll'),
 					'votes'   => __('votes', 'acf-onyx-poll'),
-					'view'    => __('Views result', 'acf-onyx-poll'),
+					'view'    => __('View results', 'acf-onyx-poll'),
 					'total'   => __('Total votes', 'acf-onyx-poll'),
-					'success' => __('Vote was submitted successfully.', 'acf-onyx-poll'),
-					'error'   => __('Poll vote error, try again.', 'acf-onyx-poll')
+					'success' => __('Your vote was submitted successfully.', 'acf-onyx-poll'),
+					'error'   => __('Your vote could not be submitted. Try again.', 'acf-onyx-poll')
 				)
 			)
 		);

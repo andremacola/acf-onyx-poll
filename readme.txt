@@ -4,7 +4,7 @@ Tags: poll, polls, onyx, voting, survey
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Onyx Poll creates lightweight polls with the WordPress REST API and JavaScript. 
 
 = Features =
 
-* Gutenberg block with live preview, standard and Twitter styles.
+* Block editor integration with live preview, standard and Twitter styles.
 * Shortcode, sidebar widget and automatic modal.
 * Multiple polls per page, answer images and registered thumbnail sizes.
 * Editable answer counters; the total is always their sum.
@@ -62,7 +62,7 @@ No. Version 2.0 uses its own editor, settings and database tables. Existing ACF 
 
 Yes. Updating the active plugin starts migration on the next WordPress request; a fresh activation also starts it. Polls are copied in batches of 50 per request and migration resumes on subsequent requests. A poll needed by a shortcode, block, widget or modal is imported on demand, so a large poll collection does not need to finish migrating before those polls can be displayed. No ACF installation or manual import is required.
 
-Poll IDs, answers, images, individual counters and settings are preserved. Migration does not delete the original custom fields and repeated runs do not overwrite new votes. The only intentional result change is that total votes becomes the sum of the answers.
+Poll IDs, answers, images, individual counters and settings are preserved. Migration does not delete the original custom fields and repeated runs do not overwrite new votes. The only intentional result change is that total votes becomes the sum of the answer vote counts.
 
 = Can I update without changing existing posts or losing site content? =
 
@@ -88,7 +88,7 @@ If your theme provides widget areas, add the Poll widget under Appearance > Widg
 
 = Can I use my own CSS? =
 
-Yes. Keep the default stylesheet enabled to override its CSS variables, or enable Use own CSS in Poll Settings to replace all plugin styles. Settings > Help contains the full variable example.
+Yes. Keep the default stylesheet enabled to override its CSS variables, or enable Use custom CSS in Poll settings to replace all plugin styles. The help section on that page contains the full variable example.
 
     .onyx-poll {
         --pollWidgetWidth: 400px;
@@ -108,7 +108,7 @@ Yes. Keep the default stylesheet enabled to override its CSS variables, or enabl
 
 = How can I check the expiration cron? =
 
-Poll Settings shows the last successful check, its source, the next scheduled check, timezone and status. A new installation waits for its first recorded execution; no older execution history is invented. Checks with no expired polls also count as successful runs. The plugin adds its status to Tools > Site Health.
+Poll settings shows the last successful check, its source, the next scheduled check, timezone and status. A new installation waits for its first recorded execution; earlier execution history is not available. Checks with no expired polls also count as successful runs. The plugin adds its status to Tools > Site Health.
 
 WP-Cron normally depends on site visits. For predictable execution, configure your host to request wp-cron.php every five minutes; the Onyx event itself remains hourly:
 
@@ -134,7 +134,7 @@ No visitor IP addresses or usernames are stored. Cookies remember votes, modal d
 
 = What happens on uninstall? =
 
-Data is kept by default. In Poll Settings, administrators can choose permanent deletion and must acknowledge that recovery will not be possible without a backup.
+Data is kept by default. In Poll settings, administrators can choose permanent deletion and must acknowledge that recovery will not be possible without a backup.
 
 Permanent cleanup removes only the two plugin tables, the exact list of plugin-owned options, and wp_posts rows with post_type onyxpolls. Other posts and pages are preserved, including those containing poll blocks or shortcodes. Media files, attachment relationships, comments, revisions and legacy custom fields are preserved. Deactivation never deletes poll data.
 
@@ -150,106 +150,117 @@ Current Chrome, Firefox, Safari and Edge. Internet Explorer is not supported. Th
 
 == Changelog ==
 
-= 2.0.0 =
-*Release Date - 11 Oct 2026*
+= 2.0.1 =
+*Release date: 11 Oct 2026*
 
-* Removed the ACF PRO dependency with native administration and a native Gutenberg block.
+* Improved English interface text, error messages, and documentation.
+* Updated Brazilian Portuguese and German translations and added complete Spanish (Spain) and Dutch translations.
+* Separated vote action labels from vote count nouns and translated administration status tooltips.
+* Poll end dates now follow the WordPress site date format.
+
+= 2.0.0 =
+*Release date: 11 Oct 2026*
+
+* Removed the ACF PRO dependency with native administration and a native block editor integration.
 * Added dedicated tables and automatic, resumable migration of existing polls.
-* Keep latest-poll shortcodes, listings and modal selection working while a large migration is still pending.
-* Calculate total votes from answers and preserve concurrent votes during administration saves.
+* Kept latest-poll shortcodes, listings, and modal selection working while a large migration is still pending.
+* Calculated total votes from answer counts and preserved concurrent votes during administration saves.
 * Added settings descriptions, help, cron execution tracking and Site Health integration.
 * Improved image controls, answer reordering and block previews.
 * Added an explicit, scoped data cleanup option on uninstall; other content is preserved.
 * Breaking: requires WordPress 6.3 and PHP 7.4; custom ACF-based integrations must adapt to dedicated storage and native forms. Total votes is derived from answers. See the upgrade notice and migration FAQ.
 
 = 1.2.0 =
-*Release Date - 11 Jun 2025*
+*Release date: 11 Jun 2025*
 
-* Fixed: Sanitize shortcode attributes to prevent Stored XSS
+* Fixed: Sanitized shortcode attributes to prevent stored cross-site scripting (XSS).
 
 = 1.1.9 =
-*Release Date - 20 Abr 2025*
+*Release date: 20 Apr 2025*
 
-* Fixed: Wordpress textdomain translation notices
+* Fixed: WordPress text domain translation notices.
 
 = 1.1.8 =
-*Release Date - 28 Jul 2024*
+*Release date: 28 Jul 2024*
 
-* Fixed: PHP 8.2 Deprecated dynamic property warnings
+* Fixed: PHP 8.2 warnings about deprecated dynamic properties.
 
 = 1.1.7 =
-*Release Date - 26 Jul 2024*
+*Release date: 26 Jul 2024*
 
-* TESTED: WordPress up to 6.6.1
+* Tested with WordPress up to 6.6.1
 
 = 1.1.6 =
-*Release Date - 29 Set 2023*
+*Release date: 29 Sep 2023*
 
-* TESTED: WordPress up to 6.3.1
+* Tested with WordPress up to 6.3.1
 
 = 1.1.5 =
-*Release Date - 20 Jul 2021*
+*Release date: 20 Jul 2021*
 
-* TESTED: WordPress up to 5.8
+* Tested with WordPress up to 5.8
 
-* ADDED: Now is possible to change the poll image size in options menu
+* Added: Poll image size selection in the settings menu.
 
-* FIXED: Label for singular votes, thanks to @Dathix. See more in: https://github.com/andremacola/acf-onyx-poll/pull/13
+* Fixed: Singular vote label, thanks to @Dathix. Details: https://github.com/andremacola/acf-onyx-poll/pull/13
 
 = 1.1.4 =
-*Release Date - 13 Jan 2021*
+*Release date: 13 Jan 2021*
 
-* FIXED: Removed an ACF hook that was causing issues with ACF JSON save location. See more in: https://github.com/andremacola/acf-onyx-poll/issues/12
+* Fixed: Removed an ACF hook that caused issues with the ACF JSON save location. Details: https://github.com/andremacola/acf-onyx-poll/issues/12
 
-* FIXED: Fatal error on list polls when 'end date' field was for some reason saved with an empty value. See more in: https://github.com/andremacola/acf-onyx-poll/issues/11
+* Fixed: A fatal error in the poll list when the end date was empty. Details: https://github.com/andremacola/acf-onyx-poll/issues/11
 
 Thanks to:
-- @rampantprint (on github)
-- @bwiebeck (on github)
+- @rampantprint (on GitHub)
+- @bwiebeck (on GitHub)
 
 = 1.1.3 =
-*Release Date - 21 Set 2020*
+*Release date: 21 Sep 2020*
 
-* IMPROVEMENT: Using ACF PRO as MU Plugin is now possible.
+* Improved: Support for ACF PRO as a must-use plugin.
 
 = 1.1.2 =
-*Release Date - 11 Aug 2020*
+*Release date: 11 Aug 2020*
 
-* TESTED: WordPress 5.5
-* FIXED: Rest API method permission_callback typo
+* Tested with WordPress 5.5.
+* Fixed: A typo in the REST API permission_callback method.
 
 = 1.1.1 =
-*Release Date - 30 May 2020*
+*Release date: 30 May 2020*
 
-* HOTFIX: Some filters were causing fatal errors in some themes and conflicting with certain plugins
+* Fixed: Filters that caused fatal errors in some themes and conflicts with other plugins.
 
 = 1.1.0 =
-*Release Date - 30 May 2020*
+*Release date: 30 May 2020*
 
-* NEW Gutenberg Onyx Poll Block with live preview (no more shortcodes :))
-* Shortcode is now available to copy on the pool table list
-* Fix some php notices (again :))
-* CSS adjustments
-* JS adjustments
-* Languages updates
+* Added: An Onyx Poll block with live preview.
+* Added: Copyable shortcodes in the poll list.
+* Fixed: PHP notices.
+* Adjusted CSS.
+* Adjusted JavaScript.
+* Updated translations.
 
 = 1.0.1 =
-*Release Date - 29 May 2020*
+*Release date: 29 May 2020*
 
 * Added native sidebar widget
 * Added new bar style
-* Update en language source pot file.
-* Fix results view bug when only numbers or percentage option is selected
-* Fix some php notices
-* Fix css flex alignment
-* Fix click event bug
+* Updated the English source translation template.
+* Fixed: Results display when only vote counts or percentages were selected.
+* Fixed: PHP notices.
+* Fixed: CSS flex alignment.
+* Fixed: Click event handling.
 
 = 1.0 =
-*Release Date - 27 May 2020*
+*Release date: 27 May 2020*
 
 * Initial release
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+Updates English, Brazilian Portuguese and German text, adds Spanish and Dutch translations, and uses your WordPress date format. The database format is unchanged from 2.0.0.
 
 = 2.0.0 =
 Major update: requires WordPress 6.3 and PHP 7.4. Polls migrate automatically to dedicated tables; total votes becomes the answer sum. Custom ACF integrations need adaptation. Back up and test on staging before upgrading. Downgrading does not restore new votes to old fields.

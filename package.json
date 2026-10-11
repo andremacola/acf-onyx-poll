@@ -1,6 +1,6 @@
 {
 	"name": "acf-onyx-poll",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Independent WordPress polls with native administration and dedicated database tables",
 	"main": "./assets/js/app.js",
 	"repository": "git@github.com:andremacola/onyx-poll.git",
@@ -19,9 +19,11 @@
 		"build": "npm run build:css && npm run build:js",
 		"build:css": "node scripts/build-css.cjs",
 		"build:js": "terser assets/js/app.js --compress --mangle --output assets/js/onyx-poll.min.js",
-		"release": "npm run lint:js && npm run build && node scripts/prepare-release.cjs",
+		"i18n:build": "node scripts/build-translations.cjs",
+		"i18n:check": "node scripts/build-translations.cjs --check",
+		"release": "npm run lint:js && npm run i18n:check && npm run build && node scripts/prepare-release.cjs",
 		"release:version": "node scripts/set-version.cjs",
-		"release:zip": "npm run build && node scripts/prepare-release.cjs --zip-only",
+		"release:zip": "npm run i18n:check && npm run build && node scripts/prepare-release.cjs --zip-only",
 		"test:release": "node tests/release.cjs"
 	}
 }

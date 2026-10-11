@@ -9,7 +9,7 @@
 
 	function resultLabel(answer, type) {
 		if (type === 2) {
-			return answer.votes + ' ' + text('votes');
+			return answer.votes + ' ' + text(answer.votes === 1 ? 'vote count singular' : 'votes');
 		}
 		if (type === 1) {
 			return answer.percent.toFixed(2) + '%';
@@ -63,7 +63,7 @@
 	}
 
 	wp.blocks.registerBlockType('acf/acf-onyx-poll', {
-		apiVersion: 3, title: text('Onyx Poll'), description: text('Insert a poll in the post'),
+		apiVersion: 3, title: text('Onyx Poll'), description: text('Add a poll to a post'),
 		icon: 'chart-bar', category: 'widgets', keywords: [ 'poll', 'enquete', 'onyx' ],
 		attributes: { pollId: { type: 'integer', default: 0 }, pollStyle: { type: 'string', default: '' },
 			data: { type: 'object', default: {} }, id: { type: 'string' }, name: { type: 'string' }, mode: { type: 'string' } },

@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Onyx Poll plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Onyx Poll 2.0.0\n"
+"Project-Id-Version: Onyx Poll 2.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acf-onyx-poll\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-11T21:18:06+00:00\n"
+"POT-Creation-Date: 2026-10-11T22:00:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: acf-onyx-poll\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: onyx-poll.php
 #: admin/poll-block.php:9
-#: admin/poll-block.php:22
+#: admin/poll-block.php:23
 msgid "Onyx Poll"
 msgstr ""
 
@@ -42,7 +42,7 @@ msgid "https://github.com/andremacola"
 msgstr ""
 
 #: admin/poll-admin.php:19
-msgid "Free Vote"
+msgid "Unlimited voting"
 msgstr ""
 
 #: admin/poll-admin.php:19
@@ -109,7 +109,7 @@ msgid "Actions"
 msgstr ""
 
 #: admin/poll-admin.php:61
-msgid "Add Row"
+msgid "Add row"
 msgstr ""
 
 #: admin/poll-admin.php:65
@@ -117,7 +117,7 @@ msgid "Limit voting"
 msgstr ""
 
 #: admin/poll-admin.php:65
-msgid "Controls repeat votes using a browser cookie. Free Vote allows unlimited votes."
+msgid "Controls repeat votes using a browser cookie. Unlimited voting allows unlimited votes."
 msgstr ""
 
 #: admin/poll-admin.php:66
@@ -125,11 +125,11 @@ msgid "Results"
 msgstr ""
 
 #: admin/poll-admin.php:66
-msgid "Show in percentage"
+msgid "Show percentages"
 msgstr ""
 
 #: admin/poll-admin.php:66
-msgid "Show in numbers"
+msgid "Show vote counts"
 msgstr ""
 
 #: admin/poll-admin.php:66
@@ -147,21 +147,21 @@ msgid "Voting closes at this time in the site timezone (%s), even if cron is del
 msgstr ""
 
 #: admin/poll-admin.php:70
-msgid "End of Poll"
+msgid "Poll end date"
 msgstr ""
 
 #: admin/poll-admin.php:71
-#: admin/poll-block.php:12
-#: classes/poll-helpers.php:94
+#: admin/poll-block.php:13
+#: classes/poll-helpers.php:95
 msgid "Total votes"
 msgstr ""
 
 #: admin/poll-admin.php:71
-msgid "Calculated from the answers."
+msgid "Calculated by adding the votes for all answers."
 msgstr ""
 
 #: admin/poll-admin.php:72
-msgid "Enable Images"
+msgid "Enable images"
 msgstr ""
 
 #: admin/poll-admin.php:72
@@ -169,7 +169,7 @@ msgid "Show an image with each answer. Every answer needs an image when enabled.
 msgstr ""
 
 #: admin/poll-admin.php:73
-msgid "Poll Modal"
+msgid "Poll modal"
 msgstr ""
 
 #: admin/poll-admin.php:73
@@ -177,7 +177,7 @@ msgid "Allow this poll in the site modal. The latest active poll with this optio
 msgstr ""
 
 #: admin/poll-admin.php:74
-msgid "Show Results"
+msgid "Show results"
 msgstr ""
 
 #: admin/poll-admin.php:74
@@ -185,6 +185,7 @@ msgid "Let visitors view results before the deadline. Expired polls always show 
 msgstr ""
 
 #: admin/poll-admin.php:75
+#: admin/poll-type.php:125
 msgid "Expired"
 msgstr ""
 
@@ -229,14 +230,14 @@ msgstr ""
 #: admin/poll-admin.php:113
 #: admin/poll-admin.php:197
 #: api/poll-api.php:21
-#: api/poll-api.php:35
-#: api/poll-api.php:45
+#: api/poll-api.php:38
+#: api/poll-api.php:48
 #: classes/poll-storage.php:183
-msgid "Invalid poll parameters"
+msgid "Invalid poll parameters."
 msgstr ""
 
 #: admin/poll-admin.php:123
-msgid "Please complete all required poll fields. At least two answers are required."
+msgid "Complete all required poll fields. At least two answers are required."
 msgstr ""
 
 #: admin/poll-admin.php:154
@@ -245,7 +246,7 @@ msgstr ""
 
 #: admin/poll-admin.php:159
 #: admin/poll-admin.php:165
-msgid "Poll Settings"
+msgid "Poll settings"
 msgstr ""
 
 #: admin/poll-admin.php:159
@@ -271,7 +272,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: admin/poll-admin.php:175
-msgid "Modal Interval for Voting"
+msgid "Voting modal interval"
 msgstr ""
 
 #: admin/poll-admin.php:175
@@ -287,7 +288,7 @@ msgid "WordPress image size used for poll answers. A larger file does not change
 msgstr ""
 
 #: admin/poll-admin.php:178
-msgid "Use own CSS"
+msgid "Use custom CSS"
 msgstr ""
 
 #: admin/poll-admin.php:178
@@ -349,15 +350,21 @@ msgid "Twitter"
 msgstr ""
 
 #: admin/poll-block.php:11
-#: classes/poll-helpers.php:92
+#: classes/poll-helpers.php:93
 msgid "votes"
 msgstr ""
 
-#: admin/poll-block.php:13
-msgid "Insert a poll in the post"
+#: admin/poll-block.php:12
+#: classes/poll-helpers.php:92
+msgctxt "vote count noun"
+msgid "vote"
 msgstr ""
 
 #: admin/poll-block.php:14
+msgid "Add a poll to a post"
+msgstr ""
+
+#: admin/poll-block.php:15
 msgid "Select a poll to preview it."
 msgstr ""
 
@@ -394,7 +401,7 @@ msgid "Trigger"
 msgstr ""
 
 #: admin/poll-settings-help.php:17
-msgid "WP-Cron page trigger disabled; an external scheduler is required."
+msgid "WP-Cron is not triggered by site visits. An external scheduler is required."
 msgstr ""
 
 #: admin/poll-settings-help.php:17
@@ -459,7 +466,7 @@ msgid "Version 2.0 requires WordPress 6.3 and PHP 7.4 or newer. The database use
 msgstr ""
 
 #: admin/poll-settings-help.php:39
-msgid "Existing plugin blocks, shortcodes and widgets remain compatible. Custom code that reads or writes ACF poll fields or legacy post metadata, or relies on ACF forms and hooks, must be adapted to dedicated storage and native forms. Total votes is now read-only and equals the sum of the answers; a different manually entered total will change."
+msgid "Existing plugin blocks, shortcodes and widgets remain compatible. Custom code that reads or writes ACF poll fields or legacy post metadata, or relies on ACF forms and hooks, must be adapted to dedicated storage and native forms. Total votes is now read-only and equals the sum of the answer vote counts; a different manually entered total will change."
 msgstr ""
 
 #: admin/poll-settings-help.php:41
@@ -467,7 +474,7 @@ msgid "Can I remove ACF or downgrade after updating?"
 msgstr ""
 
 #: admin/poll-settings-help.php:42
-msgid "Onyx Poll and migration work without ACF. Keep ACF if your theme or other plugins need it. Downgrading to 1.2.0 does not copy new votes or edits back into legacy fields, and restoring a backup loses changes made after that backup. Keep a current database backup and test any rollback separately."
+msgid "Onyx Poll and migration work without ACF. Keep ACF if your theme or other plugins need it. Downgrading to 1.2.0 does not copy new votes or edits back into legacy fields, and restoring a backup discards changes made after that backup. Keep a current database backup and test any rollback separately."
 msgstr ""
 
 #: admin/poll-settings-help.php:44
@@ -495,7 +502,7 @@ msgid "How do I customize the appearance?"
 msgstr ""
 
 #: admin/poll-settings-help.php:53
-msgid "Keep the default stylesheet enabled to customize these variables in your theme CSS. To replace all plugin styles, enable Use own CSS and provide a complete stylesheet."
+msgid "Keep the default stylesheet enabled to customize these variables in your theme CSS. To replace all plugin styles, enable Use custom CSS and provide a complete stylesheet."
 msgstr ""
 
 #: admin/poll-settings-help.php:56
@@ -511,7 +518,7 @@ msgid "Replace https://example.com with your WordPress site URL in these example
 msgstr ""
 
 #: admin/poll-settings-help.php:60
-msgid "Only after an external scheduler is configured and tested, you can disable the automatic page trigger in wp-config.php:"
+msgid "Once an external scheduler is configured and tested, you can disable the automatic page trigger in wp-config.php:"
 msgstr ""
 
 #: admin/poll-settings-help.php:62
@@ -523,7 +530,7 @@ msgid "WordPress documentation: configuring a server scheduler"
 msgstr ""
 
 #: admin/poll-settings-help.php:66
-msgid "Where are poll data and visitor data stored?"
+msgid "Where are poll and visitor data stored?"
 msgstr ""
 
 #: admin/poll-settings-help.php:67
@@ -559,7 +566,7 @@ msgid "Edit poll"
 msgstr ""
 
 #: admin/poll-type.php:55
-msgid "Add poll"
+msgid "New poll"
 msgstr ""
 
 #: admin/poll-type.php:56
@@ -567,7 +574,7 @@ msgid "View poll"
 msgstr ""
 
 #: admin/poll-type.php:57
-msgid "Search poll"
+msgid "Search polls"
 msgstr ""
 
 #: admin/poll-type.php:58
@@ -575,15 +582,15 @@ msgid "No polls found"
 msgstr ""
 
 #: admin/poll-type.php:59
-msgid "No poll found in trash"
+msgid "No polls found in Trash"
 msgstr ""
 
 #: admin/poll-type.php:60
-msgid "Poll father"
+msgid "Parent poll:"
 msgstr ""
 
 #: admin/poll-type.php:67
-msgid "Add new polls"
+msgid "Create and manage polls."
 msgstr ""
 
 #: admin/poll-type.php:96
@@ -602,8 +609,20 @@ msgstr ""
 msgid "End date"
 msgstr ""
 
+#: admin/poll-type.php:120
+msgid "Yes"
+msgstr ""
+
+#: admin/poll-type.php:120
+msgid "No"
+msgstr ""
+
+#: admin/poll-type.php:125
+msgid "Open"
+msgstr ""
+
 #: admin/poll-widget.php:30
-msgid "Show ACF Onyx Poll"
+msgid "Display an Onyx Poll."
 msgstr ""
 
 #: admin/poll-widget.php:53
@@ -618,21 +637,24 @@ msgstr ""
 msgid "Twitter style"
 msgstr ""
 
-#: api/poll-api.php:26
-msgid "No polls founded with ID "
+#. translators: %d: Poll ID.
+#: api/poll-api.php:28
+#, php-format
+msgid "No poll found with ID %d."
 msgstr ""
 
-#: api/poll-api.php:42
+#: api/poll-api.php:45
 #: classes/poll-storage.php:180
-msgid "Non-existent or expired poll"
+msgid "This poll does not exist or has expired."
 msgstr ""
 
-#: api/poll-api.php:55
-msgid "You have already voted in this poll"
+#: api/poll-api.php:58
+msgid "You have already voted in this poll."
 msgstr ""
 
-#: api/poll-api.php:55
-msgid "Vote was submitted successfully"
+#: api/poll-api.php:58
+#: classes/poll-helpers.php:96
+msgid "Your vote was submitted successfully."
 msgstr ""
 
 #: classes/poll-cron.php:33
@@ -677,16 +699,12 @@ msgstr ""
 msgid "Vote"
 msgstr ""
 
-#: classes/poll-helpers.php:93
-msgid "Views result"
+#: classes/poll-helpers.php:94
+msgid "View results"
 msgstr ""
 
-#: classes/poll-helpers.php:95
-msgid "Vote was submitted successfully."
-msgstr ""
-
-#: classes/poll-helpers.php:96
-msgid "Poll vote error, try again."
+#: classes/poll-helpers.php:97
+msgid "Your vote could not be submitted. Try again."
 msgstr ""
 
 #: classes/poll-storage.php:194
@@ -698,5 +716,5 @@ msgid "Unable to save poll data. Please try again."
 msgstr ""
 
 #: onyx-poll.php:86
-msgid "Invalid poll ID"
+msgid "Invalid poll ID."
 msgstr ""

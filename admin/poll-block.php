@@ -9,8 +9,9 @@ add_action('init', function() {
 		'Onyx Poll' => __('Onyx Poll', 'acf-onyx-poll'), 'Poll' => __('Poll', 'acf-onyx-poll'),
 		'Style' => __('Style', 'acf-onyx-poll'), 'Bar style' => __('Bar style', 'acf-onyx-poll'), 'Settings' => __('Settings', 'acf-onyx-poll'),
 		'Twitter' => __('Twitter', 'acf-onyx-poll'), 'votes' => __('votes', 'acf-onyx-poll'),
+		'vote count singular' => _x('vote', 'vote count noun', 'acf-onyx-poll'),
 		'Total votes' => __('Total votes', 'acf-onyx-poll'),
-		'Insert a poll in the post' => __('Insert a poll in the post', 'acf-onyx-poll'),
+		'Add a poll to a post' => __('Add a poll to a post', 'acf-onyx-poll'),
 		'Select a poll to preview it.' => __('Select a poll to preview it.', 'acf-onyx-poll')));
 	wp_register_style('onyx-poll-editor', plugins_url('assets/css/block-editor.css', ACF_ONYX_POLL_FILE), array(), OnyxPolls::get_asset_vars('assets/css/block-editor.css')->ver);
 	$editor_style = array('onyx-poll-editor');

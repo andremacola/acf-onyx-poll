@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Onyx Poll
-Version: 2.0.0
+Version: 2.0.1
 Description: Create independent polls with native WordPress administration.
 Author: André Mácola Machado
 Author URI: https://github.com/andremacola
@@ -31,7 +31,7 @@ Class OnyxPollsInit {
 	 * @return	void
 	 */
 	function __construct() {
-		define('ACF_ONYX_POLL_VERSION', '2.0.0');
+		define('ACF_ONYX_POLL_VERSION', '2.0.1');
 		define('ACF_ONYX_POLL_FILE', __FILE__);
 		define('ACF_ONYX_POLL_PATH', plugin_dir_path(__FILE__));
 	}
@@ -83,7 +83,7 @@ Class OnyxPollsInit {
 				$style
 			);
 		} else {
-			$html = "<div id='onyx-poll-null' class='onyx-poll onyx-poll-widget show onyx-poll-invalid'>". esc_html__('Invalid poll ID', 'acf-onyx-poll') ."</div>";
+			$html = "<div id='onyx-poll-null' class='onyx-poll onyx-poll-widget show onyx-poll-invalid'>". esc_html__('Invalid poll ID.', 'acf-onyx-poll') ."</div>";
 		}
 
 		return $html;

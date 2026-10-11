@@ -52,19 +52,19 @@ class OnyxPollsCpt {
 			'add_new'            => __('Add new', 'acf-onyx-poll'),
 			'add_new_item'       => __('Add new poll', 'acf-onyx-poll'),
 			'edit_item'          => __('Edit poll', 'acf-onyx-poll'),
-			'new_item'           => __('Add poll', 'acf-onyx-poll'),
+			'new_item'           => __('New poll', 'acf-onyx-poll'),
 			'view_item'          => __('View poll', 'acf-onyx-poll'),
-			'search_items'       => __('Search poll', 'acf-onyx-poll'),
+			'search_items'       => __('Search polls', 'acf-onyx-poll'),
 			'not_found'          => __('No polls found', 'acf-onyx-poll'),
-			'not_found_in_trash' => __('No poll found in trash', 'acf-onyx-poll'),
-			'parent_item_colon'  => __('Poll father', 'acf-onyx-poll'),
+			'not_found_in_trash' => __('No polls found in Trash', 'acf-onyx-poll'),
+			'parent_item_colon'  => __('Parent poll:', 'acf-onyx-poll'),
 			'menu_name'          => $this->namep
 		);
 
 		$args = array(
 			'labels'              => $labels,
 			'hierarchical'        => false,
-			'description'         => __('Add new polls', 'acf-onyx-poll'),
+			'description'         => __('Create and manage polls.', 'acf-onyx-poll'),
 			'supports'            => array('title'),
 			'public'              => false,
 			'show_ui'             => true,
@@ -117,12 +117,12 @@ class OnyxPollsCpt {
 				break;
 			case 'modal':
 				$modal  = $poll['modal'];
-				$status = ($modal) ? "<span class='green' title='Yes'>✔</span>" : "<span class='red' title='No'>✘</span>";
+				$status = ($modal) ? "<span class='green' title='" . esc_attr__('Yes', 'acf-onyx-poll') . "'>✔</span>" : "<span class='red' title='" . esc_attr__('No', 'acf-onyx-poll') . "'>✘</span>";
 				echo $status;
 				break;
 			case 'status':
 				$expired = OnyxPollsStorage::expired($poll);
-				$status  = (!$expired) ? "<span class='green' title='Published'>✔</span>" : "<span class='red' title='expired'>✘</span>";
+				$status  = (!$expired) ? "<span class='green' title='" . esc_attr__('Open', 'acf-onyx-poll') . "'>✔</span>" : "<span class='red' title='" . esc_attr__('Expired', 'acf-onyx-poll') . "'>✘</span>";
 				echo $status;
 				break;
 			case 'end':
@@ -137,8 +137,8 @@ class OnyxPollsCpt {
 	 */
 	public function format_date($date) {
 		if ($date) {
-			$date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-			if ($date) { return $date->format('d/m/Y'); }
+			$date = DateTime::createFromFormat('Y-m-d H:i:s', $date, wp_timezone());
+			if ($date) { return wp_date(get_option('date_format'), $date->getTimestamp(), wp_timezone()); }
 		}
 
 		return __('Not set', 'acf-onyx-poll');

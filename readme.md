@@ -2,77 +2,77 @@
   <img width="914" height="296" src="https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/banner-1544x500.png">
 </p>
 
-> Install from [Wordpress Plugins](https://br.wordpress.org/plugins/acf-onyx-poll/ "Wordpress Plugin Repository") or clone the master branch from this repository
+> Install from the [WordPress Plugin Directory](https://wordpress.org/plugins/acf-onyx-poll/) or clone the master branch of this repository.
 
-Onyx Poll is an independent WordPress polling plugin using the **WP REST API**, native WordPress administration and its own database tables. ACF and ACF PRO are not required. Feel free to submit a Pull Request.
+Onyx Poll is an independent WordPress polling plugin using the **WordPress REST API**, native WordPress administration, and its own database tables. ACF and ACF PRO are not required. Contributions through pull requests are welcome.
 
-The main goal of Onyx Poll is to be **totally free, lightweight and simple**. No fancy, colorful and polluted options or donate screens.
+Onyx Poll aims to remain **free, lightweight, and easy to use**.
 
-This plugin is based on [Twitter](https://twitter.com) poll cards style.
+The Twitter style is based on [Twitter](https://twitter.com) poll cards.
 
-## SCREENSHOTS
+## Screenshots
 
 <p align="center">
 
-![Admin List Table](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-1.png "Admin List Table")
+![Poll administration list](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-1.png)
 
-![Admin Edit Screen](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-2.png "Admin Edit Screen")
+![Poll editing screen](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-2.png)
 
-![Poll Example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-3.png "Poll Example")
+![Poll example](https://raw.github.com/andremacola/acf-onyx-poll/master/assets/images/screenshot-3.png)
 
 </p>
 
-## HOW TO USE
+## How to use
 
-* Use the shortcode `[onyx-poll]` to get the latest poll
-* To add a specific poll, assign the option **ID** with the requested poll to the shortcode: `[onyx-poll id=XX]`
-* You can align the poll container with the option **class** in the shortcode: `[onyx-poll class=left]`. Available options are `left, right, full`
-* To select which **style** you want: `[onyx-poll class="twitter|standard"]`
-* Is it possible to combine style and aligment. Ex: `[onyx-poll class="standard left"]`
-* To include a **widget**, your theme need to support it. Go to Appereance > Widgets and select **Poll** widget from *Onyx Poll*
+* Use `[onyx-poll]` to show the latest published poll.
+* To show a specific poll, replace `XX` with its ID: `[onyx-poll id=XX]`.
+* Set the alignment with the `class` attribute: `[onyx-poll class=left]`. Available values are `left`, `right`, and `full`.
+* Choose the `twitter` or `standard` style: `[onyx-poll class="twitter"]`.
+* Combine a style and alignment: `[onyx-poll class="standard left"]`.
+* If your theme supports widgets, go to **Appearance > Widgets** and add the **Poll** widget.
 
-## FEATURES
+## Features
 
-- [x] **Gutemberg Block** with live preview
-- [x] Include poll with a shortcode (ommit the ID to get the latest poll) `[onyx-poll id=XX class="left|right|full"]`
-- [x] One click to vote
-- [x] Works with cache plugins
+- [x] Block editor integration with live preview
+- [x] Shortcodes for specific polls or the latest published poll
+- [x] Voting with a single click
+- [x] Works with caching plugins
 - [x] Multiple polls per page
 - [x] Support for images and custom sizes
-- [x] Native widget for sidebar
-- [x] Multiple style options `[onyx-poll class="twitter|standard"]`
-- [x] Show poll in a modal
-- [x] Show poll results on widget after expired
-- [x] Highlight choosed choice in results area
-- [x] Limit vote by device or time
-- [x] Poll activation/expiration schedule
-- [x] Results in percentage, numbers or both
-- [x] Show/Hide results
-- [x] Customize css with css variables
+- [x] Native sidebar widget
+- [x] Standard and Twitter styles
+- [x] Automatic poll modal
+- [x] Widget results after the poll expires
+- [x] Highlighted answer choices in results
+- [x] Voting limits by device or time interval
+- [x] Scheduled poll publication and expiration
+- [x] Results as percentages, vote counts, or both
+- [x] Show or hide results
+- [x] CSS customization through variables
 - [x] Disable all plugin CSS and use your own
-- [x] Custom columns on Wordpress data table admin area
-- [x] Translations support
+- [x] Custom columns in the WordPress administration list
+- [x] Translation support
 
-## TO DO
+## To do
 
-- [ ] Improve/Cache REST API response for better performance on high traffic sites
-- [ ] Inject javascript only if current page has a poll
-- [ ] Documentation/Wiki for users and developers
-- [ ] Integration with Google reCaptcha
-- [ ] Email notification when poll is expired (considering)
-- [ ] Support for AMP Pages (considering)
-- [ ] Select multiple options to vote (considering)
-- [ ] Javascript Refactoring for better code view and maintenance (after first release)
+- [ ] Improve or cache REST API responses for sites with heavy traffic
+- [ ] Load JavaScript only on pages containing a poll
+- [ ] Documentation for users and developers
+- [ ] Integration with Google reCAPTCHA
+- [ ] Email notifications when polls expire (under consideration)
+- [ ] Support for AMP pages (under consideration)
+- [ ] Multiple answer selection (under consideration)
+- [ ] JavaScript refactoring for readability and maintenance
 
-## UPGRADING FROM THE ACF VERSION
+## Upgrading from the ACF version
 
 On activation or upgrade, existing polls are automatically copied from their legacy post metadata into the new tables. ACF does not need to be installed or active. Migration runs in batches of 50 polls per request and resumes automatically; an individually requested poll is also imported on demand. Each import is transactional, and retrying migration never overwrites already imported answers or new votes.
 
-Poll IDs, answer order, image IDs, answer counters, end dates, voting limits and general settings are preserved. The legacy manually entered total is replaced with the sum of the answers. Old post metadata is retained for recovery. Existing shortcodes, widgets and `acf/acf-onyx-poll` Gutenberg blocks continue to work without rewriting post content. The legacy block name is a compatibility identifier, not an ACF dependency.
+Poll IDs, answer order, image IDs, answer counters, end dates, voting limits, and general settings are preserved. The legacy manually entered total is replaced with the sum of the answer vote counts. Old post metadata is retained for recovery. Existing shortcodes, widgets, and `acf/acf-onyx-poll` blocks continue to work without rewriting post content. The legacy block name is retained for compatibility.
 
 Version 2.0 requires WordPress 6.3 and PHP 7.4 or newer and permission to create database tables. Custom templates or integrations that read/write ACF fields, legacy poll post metadata or ACF forms/hooks must be adapted. Back up and test on staging before a production upgrade. Legacy fields are not synchronized after migration: downgrading to 1.2.0 does not copy new votes or edits back to them. The public `readme.txt` includes a breaking-changes disclaimer, migration FAQ and WordPress.org upgrade notice.
 
-## UNINSTALLING
+## Uninstalling
 
 In **Polls > Settings**, administrators can choose **Keep data (default)** or **Permanently delete plugin data**. Permanent deletion displays an irreversible deletion warning and requires acknowledgement before saving the setting. Deactivating the plugin never deletes poll data.
 
@@ -85,7 +85,7 @@ When WordPress deletes the plugin, the saved choice is applied. If deletion was 
 
 Other posts and pages are preserved, including their blocks and shortcodes referencing a poll. Attachments, media files, legacy post metadata, comments, revisions and other plugins' data are untouched. Cleanup never matches names by a generic `onyx` prefix or searches post content to select records for deletion.
 
-## DEVELOPMENT CHECKS
+## Development checks
 
 Run `wp eval-file tests/integration.php` against a WordPress installation with this plugin loaded. The suite creates temporary tables with a random isolated prefix, checks migration, derived totals, concurrency, REST compatibility, legacy blocks and uninstall isolation, and removes its own fixtures. It never runs destructive uninstall against the site's real tables. The database user needs permission to create and drop temporary fixture tables.
 
@@ -93,11 +93,27 @@ Run `npm install` and `npm run build` after changing frontend JavaScript or shar
 
 Run `npm run lint:js` to check JavaScript sources and Node scripts with the project's WordPress ESLint rules. `npm run lint:js:fix` applies automatic formatting corrections. Generated minified files, dependencies, `dist/` and the entire `_svn/` checkout are excluded. The parser supports the syntax already used by the plugin and Node scripts; WordPress and administration globals are declared explicitly.
 
-## PREPARING A WORDPRESS.ORG RELEASE
+## Translations
+
+English (US) is the source language; no separate English catalog is needed. The plugin includes complete `.po` and compiled `.mo` catalogs for Brazilian Portuguese (`pt_BR`), Spanish from Spain (`es_ES`), Dutch (`nl_NL`), and German (`de_DE`). They use the default informal variants for Spanish, Dutch, and German. WordPress selects the appropriate catalog from its active locale.
+
+After changing translatable source strings, regenerate the template with WP-CLI:
+
+```sh
+wp i18n make-pot . languages/acf-onyx-poll.pot --domain=acf-onyx-poll --exclude=_svn,dist,node_modules,tests,scripts,assets/images/backups,assets/js/onyx-poll.min.js
+```
+
+Update each `.po` against the template with `msgmerge`, review the translations, and run `npm run i18n:build`. `npm run i18n:check` checks catalog coverage, placeholders, plural forms, and whether compiled files match the catalogs. Both commands require GNU gettext (`msgcmp` and `msgfmt`). Release preparation runs the translation check automatically.
+
+Use the [Brazilian Portuguese guidelines](https://br.wordpress.org/team/handbook/traducao/boas-praticas/), [English style guide](https://make.wordpress.org/docs/style-guide/formatting/text/), [Spanish guide](https://es.wordpress.org/team/handbook/traducciones/guia/), [Dutch style guide](https://nl.wordpress.org/vertaalproces/stijlgids/), and [German style guide](https://de.wordpress.org/team/handbook/polyglots-team/style-guide/) and their locale glossaries. Preserve placeholders, code examples, and product names. Translations still need review and approval by the relevant community editors before becoming official WordPress.org language packs.
+
+The translation updates in 2.0.1 use new source strings. Do not replace a published SVN tag. Import copies in `dist/translations/` use the current source strings; submit them to Translate WordPress after that source version is available there.
+
+## Preparing a WordPress.org release
 
 The SVN working copy lives in `_svn/`, inside this project. Git ignores the entire folder, including `.svn` and historical tags. `dist/` stores preparation manifests and is also ignored. These folders and all development files are excluded from the distributable plugin.
 
-Requirements: Node.js 18 or newer, the Subversion CLI, and installed development dependencies (`npm install` or `yarn install`). The checkout must contain `trunk/` and `tags/`. Keep `readme.txt` in this project as the canonical WordPress.org readme; it includes the public FAQ and historical changelog.
+Requirements: Node.js 18 or newer, the Subversion CLI, GNU gettext, and installed development dependencies (`npm install` or `yarn install`). The checkout must contain `trunk/` and `tags/`. Keep `readme.txt` in this project as the canonical WordPress.org readme; it includes the public FAQ and historical changelog.
 
 For a new release:
 
@@ -119,15 +135,15 @@ Preparing again before a commit is supported when the SVN files still match the 
 
 `npm run test:release` exercises packaging, repeat preparation, version checks and protection of manual edits and published tags against a disposable local SVN repository. It never connects to WordPress.org.
 
-## CRON STATUS
+## Cron status
 
-Poll Settings shows the last successful check, latest completed attempt and source, next scheduled event and site timezone. Executions from WP-Cron and the existing REST endpoint are identified separately. A check with no expired polls is still a successful run. Missing events, overdue runs and database failures are reported, and the same status appears in WordPress Site Health. Records start with version 2.0; earlier history is not invented. Reading the status does not execute the job.
+Poll settings shows the last successful check, latest completed attempt and source, next scheduled event and site timezone. Executions from WP-Cron and the existing REST endpoint are identified separately. A check with no expired polls is still a successful run. Missing events, overdue runs and database failures are reported, and the same status appears in WordPress Site Health. Records start with version 2.0; earlier history is not available. Reading the status does not execute the job.
 
 The hourly event is registered through the WordPress scheduler and is restored if missing, including on upgrades that do not trigger activation. Deactivation clears only the plugin event. Deadline checks during voting do not depend on cron.
 
-## OBSERVATIONS
+## Notes
 
-- I don't support Internet Explorer Browser and all PR's related will be rejected. One of the goals of this plugin is to be js/css lightweight and jQuery free.
+- Internet Explorer is not supported. The public interface uses lightweight JavaScript and CSS and does not require jQuery.
 
 - Requirements: PHP 7.4 or newer and WordPress 6.3 or newer. Poll editing, settings and Gutenberg controls are implemented by this plugin. The folder, shortcode, widget ID and text domain remain compatible with earlier installations.
 
@@ -135,9 +151,9 @@ The hourly event is registered through the WordPress scheduler and is restored i
 
 - The compatible direct endpoint `https://example.com/wp-json/onyx/polls/cron` runs only the Onyx expiration check. It does not service the other WordPress scheduled tasks. Its executions are recorded, but an overdue WP-Cron event still needs investigation. Poll Settings includes instructions and generic command examples; replace `https://example.com` with your WordPress site URL.
 
-## CSS Customizations
+## CSS customization
 
-You can do some customization by overriding some CSS variables inside your css file.
+Override these CSS variables in your theme stylesheet to customize the poll appearance.
 
 ```css
 .onyx-poll {
@@ -157,11 +173,11 @@ You can do some customization by overriding some CSS variables inside your css f
 }
 ```
 
-Maybe you will have to set the `font-family` and `font-size` for some elements to match your theme style.
+You may also need to set `font-family` and `font-size` on some elements to match your theme.
 
-If you need a more advanced attributes, the CSS source is located on `assets/css/onyx-poll.css`. You can use as a guide but **never** override the original files.
+For more customization options, refer to `assets/css/onyx-poll.css`. Add overrides to your theme instead of editing the plugin files, which are replaced during updates.
 
-## DATABASE, USER DATA AND LOGS
+## Database, user data, and logs
 
 Onyx Poll stores poll rules in `{prefix}onyx_polls` and answers, image references and vote counters in `{prefix}onyx_poll_answers`. It uses the actual WordPress table prefix, not a hard-coded `wp_`.
 
@@ -169,11 +185,11 @@ The total is always calculated from the answer counters. It is read-only in admi
 
 WordPress still stores poll titles and publication status as the `onyxpolls` post type. General settings live in the plugin's own `onyx_poll_settings` option. New poll data is never written to `wp_postmeta`.
 
-For privacy, ACF Onyx Poll **does not store** any user data like ip address, usernames etc...
+Onyx Poll does not store visitor IP addresses or usernames.
 
-The only things the plugin saves in the user's browser is some cookies to check the user choice for specific poll, if the modal was previously showed/closed and a timer. You can check the cookies by looking for `onyx_poll_limit_XX, onyx_poll_modal and onyx_poll_choice_XX`.
+Browser cookies remember answer choices, voting intervals, and modal dismissal: `onyx_poll_limit_XX`, `onyx_poll_modal`, and `onyx_poll_choice_XX`.
 
-## BROWSER SUPPORT
+## Browser support
 
 ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_24x24.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_24x24.png) | ![Edge](https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_24x24.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_24x24.png) | ![IE](https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_24x24.png)
 --- | --- | --- | --- | ---

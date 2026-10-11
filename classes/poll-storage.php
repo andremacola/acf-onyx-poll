@@ -177,10 +177,10 @@ class OnyxPollsStorage {
 		$wpdb->query('START TRANSACTION');
 		$poll = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . self::table() . ' WHERE poll_id=%d FOR UPDATE', $id), ARRAY_A);
 		if (!$poll || get_post_status($id) !== 'publish' || self::expired($poll)) {
-			return self::rollback(__('Non-existent or expired poll', 'acf-onyx-poll'));
+			return self::rollback(__('This poll does not exist or has expired.', 'acf-onyx-poll'));
 		}
 		$updated = $wpdb->query($wpdb->prepare('UPDATE ' . self::table(true) . ' SET votes=votes+1 WHERE poll_id=%d AND position=%d', $id, $position));
-		if ($updated !== 1) { return self::rollback(__('Invalid poll parameters', 'acf-onyx-poll')); }
+		if ($updated !== 1) { return self::rollback(__('Invalid poll parameters.', 'acf-onyx-poll')); }
 		$wpdb->query('COMMIT');
 		return true;
 	}
